@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Storage;
  * Features:
  * - Auto-generate sertifikat saat proyek completed
  * - Upload ke Supabase Storage
- * - Nomor sertifikat otomatis dengan format: 001/KKN/MHS/KARSA/XI/2024
+ * - Nomor sertifikat otomatis dengan format: 001/KKN/MHS/STUDENTGO/XI/2024
  *
  * path: app/Services/CertificateService.php
  */
@@ -84,7 +84,7 @@ class CertificateService
             }
 
             // Update project dengan info sertifikat
-            $fullCertificateNumber = "{$certificateNumber}/KKN/MHS/KARSA/XI/{$certificateYear}";
+            $fullCertificateNumber = "{$certificateNumber}/KKN/MHS/STUDENTGO/XI/{$certificateYear}";
             $project->update([
                 'certificate_path' => $uploadedPath,
                 'certificate_number' => $fullCertificateNumber,
@@ -124,7 +124,7 @@ class CertificateService
             return '001';
         }
 
-        // Extract nomor dari format "001/KKN/MHS/KARSA/XI/2024"
+        // Extract nomor dari format "001/KKN/MHS/STUDENTGO/XI/2024"
         $parts = explode('/', $lastProject->certificate_number);
         $lastNumber = intval($parts[0]);
 
@@ -178,76 +178,95 @@ class CertificateService
             throw new \Exception('Gagal load template image');
         }
 
-        // Konfigurasi posisi teks (sesuai dengan kode asli)
+        // Konfigurasi posisi teks untuk template Student Go (2000x1414)
+        // x = titik jangkar, align = left|center|right terhadap x, y = baseline
         $textConfig = [
             'no_sertifikat' => [
                 'text' => $data['no_sertifikat'],
-                'x' => 647,
-                'y' => 437,
-                'size' => 30,
+                'x' => 746,
+                'y' => 458,
+                'align' => 'right',
+                'size' => 28,
                 'font' => $fontRegular,
-                'color' => [30, 54, 83]
+                'color' => [34, 48, 45]
             ],
             'thn_sertifikat' => [
                 'text' => $data['thn_sertifikat'],
-                'x' => 1239,
-                'y' => 437,
-                'size' => 30,
+                'x' => 1244,
+                'y' => 458,
+                'size' => 28,
                 'font' => $fontRegular,
-                'color' => [30, 54, 83]
+                'color' => [34, 48, 45]
             ],
             'nama_penerima' => [
                 'text' => $data['nama_penerima'],
-                'x' => 'CENTER',
-                'y' => 760,
+                'x' => 1000,
+                'y' => 690,
+                'align' => 'center',
+                'max_width' => 1300,
                 'size' => 90,
                 'font' => $fontScript,
-                'color' => [225, 167, 48]  // Gold color
+                'color' => [13, 61, 51]  // hijau tua judul template
             ],
             'nim_penerima' => [
                 'text' => $data['nim_penerima'],
-                'x' => 930,
-                'y' => 859,
-                'size' => 36,
+                'x' => 792,
+                'y' => 831,
+                'size' => 34,
                 'font' => $fontRegular,
-                'color' => [30, 54, 83]
+                'color' => [34, 48, 45]
             ],
             'thn_laksana' => [
                 'text' => $data['thn_laksana'],
-                'x' => 1420,
-                'y' => 934,
-                'size' => 23,
+                'x' => 1204,
+                'y' => 917,
+                'align' => 'center',
+                'size' => 26,
                 'font' => $fontRegular,
-                'color' => [0, 0, 0]
+                'color' => [34, 48, 45]
             ],
             'tgl_laksana' => [
                 'text' => $data['tgl_laksana'],
-                'x' => 730,
-                'y' => 977,
-                'size' => 23,
+                'x' => 876,
+                'y' => 965,
+                'align' => 'right',
+                'max_width' => 620,
+                'size' => 26,
                 'font' => $fontRegular,
-                'color' => [0, 0, 0]
+                'color' => [34, 48, 45]
             ],
             'kades' => [
-                'text' => $data['kades'],
-                'x' => 320,
-                'y' => 1160,
-                'size' => 30,
+                'text' => mb_strtoupper($data['kades']),
+                'x' => 710,
+                'y' => 1198,
+                'align' => 'center',
+                'max_width' => 640,
+                'size' => 28,
                 'font' => $fontRegular,
-                'color' => [30, 54, 83]
+                'color' => [23, 41, 48]
             ]
         ];
 
         // Loop untuk menulis semua teks
         foreach ($textConfig as $key => $config) {
             $color = imagecolorallocate($image, $config['color'][0], $config['color'][1], $config['color'][2]);
+            $size = $config['size'];
 
-            // Hitung posisi X
-            if (strtoupper($config['x']) === 'CENTER') {
-                $bbox = imagettfbbox($config['size'], 0, $config['font'], $config['text']);
+            // Kecilkan font bila teks melebihi lebar maksimum
+            $bbox = imagettfbbox($size, 0, $config['font'], $config['text']);
+            $textWidth = $bbox[2] - $bbox[0];
+            if (isset($config['max_width']) && $textWidth > $config['max_width']) {
+                $size = $size * $config['max_width'] / $textWidth;
+                $bbox = imagettfbbox($size, 0, $config['font'], $config['text']);
                 $textWidth = $bbox[2] - $bbox[0];
-                $imageWidth = imagesx($image);
-                $posX = intval(($imageWidth - $textWidth) / 2);
+            }
+
+            // Hitung posisi X sesuai perataan
+            $align = $config['align'] ?? 'left';
+            if ($align === 'center') {
+                $posX = intval($config['x'] - $textWidth / 2);
+            } elseif ($align === 'right') {
+                $posX = intval($config['x'] - $textWidth);
             } else {
                 $posX = intval($config['x']);
             }
@@ -255,7 +274,7 @@ class CertificateService
             // Tulis teks ke image
             imagettftext(
                 $image,
-                $config['size'],
+                $size,
                 0,
                 $posX,
                 $config['y'],
