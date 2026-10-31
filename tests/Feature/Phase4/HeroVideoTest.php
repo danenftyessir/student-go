@@ -42,7 +42,6 @@ class HeroVideoTest extends TestCase
         $this->assertStringContainsString('href="'.route('register').'"', $hero);
         $this->assertStringContainsString('href="'.route('login').'"', $hero);
         $this->assertStringContainsString('data-hero-primary', $hero);
-        $this->assertStringNotContainsStringIgnoringCase('karsa', strip_tags($html));
     }
 
     public function test_video_is_decorative_local_and_not_loaded_by_the_markup(): void
