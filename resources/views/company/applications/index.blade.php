@@ -1,1128 +1,477 @@
 @extends('layouts.app')
 
-@section('title', 'Manajemen Lamaran - ' . $company->name)
-
-@push('styles')
-<style>
-    /* optimasi performa dengan GPU acceleration */
-    * {
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-    }
-
-    /* smooth scrolling native */
-    html {
-        scroll-behavior: smooth;
-    }
-
-    /* status badge colors */
-    .status-new { background-color: #3b82f6; }
-    .status-reviewing { background-color: #eab308; }
-    .status-shortlisted { background-color: #f97316; }
-    .status-interview { background-color: #a855f7; }
-    .status-offer { background-color: #22c55e; }
-    .status-hired { background-color: #10b981; }
-    .status-rejected { background-color: #ef4444; }
-
-    /* rating stars */
-    .star-rating {
-        display: inline-flex;
-        gap: 2px;
-    }
-
-    .star-rating .star {
-        cursor: pointer;
-        transition: transform 0.1s ease, color 0.1s ease;
-    }
-
-    .star-rating .star:hover {
-        transform: scale(1.2);
-    }
-
-    .star-rating .star.filled {
-        color: #f59e0b;
-    }
-
-    .star-rating .star.empty {
-        color: #d1d5db;
-    }
-
-    /* timeline styling */
-    .timeline-item {
-        position: relative;
-        padding-left: 24px;
-    }
-
-    .timeline-item::before {
-        content: '';
-        position: absolute;
-        left: 7px;
-        top: 24px;
-        bottom: -12px;
-        width: 2px;
-        background-color: #e5e7eb;
-    }
-
-    .timeline-item:last-child::before {
-        display: none;
-    }
-
-    .timeline-dot {
-        position: absolute;
-        left: 0;
-        top: 6px;
-        width: 16px;
-        height: 16px;
-        border-radius: 50%;
-        background-color: #3b82f6;
-        border: 2px solid #fff;
-        box-shadow: 0 0 0 2px #e5e7eb;
-    }
-
-    /* comparison modal grid */
-    .comparison-grid {
-        display: grid;
-        gap: 16px;
-    }
-
-    .comparison-grid.cols-2 { grid-template-columns: repeat(2, 1fr); }
-    .comparison-grid.cols-3 { grid-template-columns: repeat(3, 1fr); }
-
-    /* modal transitions */
-    .modal-backdrop {
-        transition: opacity 0.2s ease-out;
-    }
-
-    .modal-content {
-        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
-                    opacity 0.2s ease-out;
-    }
-
-    .modal-content.entering {
-        transform: scale(0.95) translateY(10px);
-        opacity: 0;
-    }
-
-    /* respek reduced motion */
-    @media (prefers-reduced-motion: reduce) {
-        *,
-        *::before,
-        *::after {
-            animation-duration: 0.01ms !important;
-            animation-iteration-count: 1 !important;
-            transition-duration: 0.01ms !important;
-        }
-
-        html {
-            scroll-behavior: auto;
-        }
-    }
-
-    /* skeleton loader */
-    .skeleton {
-        background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
-        background-size: 200% 100%;
-        animation: skeleton-loading 1.5s infinite;
-    }
-
-    @keyframes skeleton-loading {
-        0% { background-position: 200% 0; }
-        100% { background-position: -200% 0; }
-    }
-
-    /* toast notification */
-    .toast {
-        transform: translateX(100%);
-        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-
-    .toast.show {
-        transform: translateX(0);
-    }
-</style>
-@endpush
+@section('title', 'Lamaran')
 
 @section('content')
-<div class="min-h-screen bg-gray-50" x-data="applicationsKanban()" x-init="init()">
+@php
+    // phase 24: header + tab tahap (jumlah dari query controller) + filter berlabel + tabel 6 kolom dengan checkbox aksi massal.
+    // tahap = 7 nilai yang divalidasi controller (nilai lama pending/reviewed/accepted sudah digabung oleh JobApplication::statusesFor).
+    // endpoint tetap: POST /company/applications/bulk-update {application_ids, status}, /{id}/status, /{id}/rating, /{id}/notes.
+    use App\Support\StatusVocabulary;
 
-    <!-- toast notification -->
-    <div x-show="toast.show" x-cloak
-         :class="'toast fixed top-4 right-4 z-50 px-4 py-3 rounded-lg shadow-lg ' + (toast.type === 'success' ? 'bg-green-500 text-white' : 'bg-red-500 text-white')"
-         x-transition:enter="transition ease-out duration-300"
-         x-transition:enter-start="opacity-0 transform translate-x-full"
-         x-transition:enter-end="opacity-100 transform translate-x-0"
-         x-transition:leave="transition ease-in duration-200"
-         x-transition:leave-start="opacity-100 transform translate-x-0"
-         x-transition:leave-end="opacity-0 transform translate-x-full">
-        <div class="flex items-center gap-2">
-            <span x-text="toast.message"></span>
-            <button @click="toast.show = false" class="ml-2 hover:opacity-75">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
-                </svg>
-            </button>
+    $stageKeys = ['new', 'reviewing', 'shortlisted', 'interview', 'offer', 'hired', 'rejected'];
+    $stageLabels = collect($stageKeys)->mapWithKeys(fn ($s) => [$s => StatusVocabulary::label('job_application', $s)])->all();
+    $counts = collect($stageKeys)->mapWithKeys(fn ($s) => [$s => ($applicationsByStatus[$s] ?? collect())->count()])->all();
+    $total = $stats['total'] ?? array_sum($counts);
+    $tanggal = fn ($date) => $date ? \Illuminate\Support\Carbon::parse($date)->locale('id')->translatedFormat('j M Y') : '—';
+
+    $applications = collect($applicationsByStatus)
+        ->flatMap(fn ($apps, $stage) => collect($apps)->map(fn ($app) => ['stage' => $stage, 'app' => $app]))
+        ->sortByDesc(fn ($item) => $item['app']->created_at)
+        ->values();
+
+    // data baris untuk filter, dialog aksi dan perbandingan (hanya kolom yang sudah tampil di halaman lama)
+    $rows = $applications->map(fn ($item) => [
+        'id' => $item['app']->id,
+        'stage' => $item['stage'],
+        'job' => $item['app']->job_posting_id,
+        'date' => optional($item['app']->created_at)->toIso8601String(),
+        'dateLabel' => $tanggal($item['app']->created_at),
+        'name' => $item['app']->user->name ?? 'Tanpa nama',
+        'email' => $item['app']->user->email ?? '',
+        'position' => $item['app']->jobPosting->title ?? '—',
+        'rating' => (int) ($item['app']->rating ?? 0),
+        'notes' => $item['app']->notes ?? '',
+    ])->all();
+
+    // lowongan yang sedang difilter lewat ?job_posting_id= (tautan dari tabel lowongan)
+    $jobFilterId = request('job_posting_id');
+    $jobFilterTitle = $jobFilterId
+        ? ($jobPostings->firstWhere('id', (int) $jobFilterId)->title ?? optional($applications->first())['app']?->jobPosting?->title)
+        : null;
+    $ratingLabels = [1 => 'Sangat kurang', 2 => 'Kurang', 3 => 'Cukup', 4 => 'Baik', 5 => 'Sangat baik'];
+@endphp
+
+<div class="sg-container sg-co-apps" x-data="applicantPipeline(@js($rows), @js($stageLabels), @js(request('status')))">
+    <x-ui.page-header title="Lamaran" description="Pantau pelamar lowongan Anda per tahap dan pindahkan mereka ke tahap berikutnya.">
+        @if ($total > 0)
+            {{-- akun kosong: aksi ini ada di keadaan kosong (tidak dobel) --}}
+            <x-slot:actions>
+                <x-ui.button variant="secondary" :href="route('company.jobs.index')" icon="briefcase">Kelola lowongan</x-ui.button>
+            </x-slot:actions>
+        @endif
+    </x-ui.page-header>
+
+    @if ($jobFilterId)
+        <p class="sg-co-apps__scope">
+            Pelamar untuk lowongan <b>{{ $jobFilterTitle ?? '#' . $jobFilterId }}</b>.
+            <a href="{{ route('company.applications.index') }}">Tampilkan semua lowongan</a>
+        </p>
+    @endif
+
+    @if ($total === 0)
+        <div class="sg-co-apps__empty-page">
+            <x-ui.empty-state title="Belum ada pelamar" illustration="no-applications"
+                              description="Lamaran mahasiswa akan muncul di sini setelah lowongan Anda dibuka dan dilamar.">
+                <x-slot:action>
+                    <x-ui.button variant="secondary" :href="route('company.jobs.index')">Kelola lowongan</x-ui.button>
+                </x-slot:action>
+            </x-ui.empty-state>
         </div>
-    </div>
+    @else
+        <x-ui.summary label="Ringkasan lamaran" class="sg-co-apps__summary" :items="[
+            ['value' => $total, 'label' => 'lamaran'],
+            ['value' => $counts['new'] ?: null, 'label' => strtolower($stageLabels['new'])],
+            ['value' => $counts['interview'] ?: null, 'label' => strtolower($stageLabels['interview'])],
+            ['value' => $counts['hired'] ?: null, 'label' => strtolower($stageLabels['hired'])],
+        ]" />
 
-    <!-- header section -->
-    <div class="relative bg-cover bg-center text-white py-12 overflow-hidden" style="background-image: url('{{ asset('company3.jpg') }}');">
-        <div class="absolute inset-0 bg-black/50"></div>
+        {{-- tab tahap: menyaring tabel di halaman yang sama; jumlah = hasil query controller --}}
+        <div class="sg-tabs sg-co-apps__tabs" role="tablist" aria-label="Tahap lamaran" x-ref="tablist" @keydown="onTabKey($event)">
+            @foreach (['all' => 'Semua'] + $stageLabels as $key => $label)
+                <button type="button" role="tab" class="sg-tabs__tab" id="tahap-{{ $key }}-tab" data-tab="{{ $key }}" aria-controls="tahap-panel"
+                        aria-selected="{{ $key === 'all' ? 'true' : 'false' }}" tabindex="{{ $key === 'all' ? '0' : '-1' }}"
+                        :aria-selected="(stage === @js($key)).toString()" :tabindex="stage === @js($key) ? 0 : -1"
+                        @click="setStage(@js($key))">
+                    {{ $label }}
+                    <span class="sg-tabs__count">{{ number_format($key === 'all' ? $total : $counts[$key], 0, ',', '.') }}</span>
+                </button>
+            @endforeach
+        </div>
 
-        <div class="max-w-full mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
-
-                <!-- title dan stats -->
-                <div>
-                    <h1 class="text-3xl font-bold mb-2" style="font-family: 'Outfit', sans-serif; color: white !important;">Manajemen Lamaran</h1>
-                    <p class="mt-1 text-base text-blue-100">
-                        Total <span class="font-semibold text-white" x-text="totalApplications"></span> lamaran aktif
-                        <span x-show="selectedApplications.length > 0" class="ml-2 text-yellow-300">
-                            (<span x-text="selectedApplications.length"></span> dipilih)
-                        </span>
-                    </p>
-                </div>
-
-                <!-- actions -->
-                <div class="flex items-center gap-3 flex-wrap">
-
-                    <!-- compare button -->
-                    <button x-show="selectedApplications.length >= 2 && selectedApplications.length <= 3"
-                            @click="openComparisonModal()"
-                            class="inline-flex items-center px-4 py-2 bg-indigo-600 text-white rounded-lg text-sm font-medium hover:bg-indigo-700 transition-colors">
-                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
-                        </svg>
-                        Bandingkan Kandidat
-                    </button>
-
-                    <!-- bulk actions -->
-                    <div x-show="selectedApplications.length > 0" x-cloak class="relative" x-data="{ open: false }">
-                        <button @click="open = !open"
-                                class="inline-flex items-center px-4 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 bg-white hover:bg-gray-50">
-                            Aksi Massal
-                            <span class="ml-2 bg-primary-100 text-primary-700 px-2 py-0.5 rounded-full text-xs" x-text="selectedApplications.length"></span>
-                            <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
-                            </svg>
-                        </button>
-                        <div x-show="open" @click.away="open = false" x-cloak
-                             x-transition:enter="transition ease-out duration-100"
-                             x-transition:enter-start="opacity-0 scale-95"
-                             x-transition:enter-end="opacity-100 scale-100"
-                             x-transition:leave="transition ease-in duration-75"
-                             x-transition:leave-start="opacity-100 scale-100"
-                             x-transition:leave-end="opacity-0 scale-95"
-                             class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-200 py-1 z-50">
-                            <button @click="bulkUpdateStatus('shortlisted'); open = false" class="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
-                                Shortlist Semua
-                            </button>
-                            <button @click="bulkUpdateStatus('interview'); open = false" class="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
-                                Jadwalkan Interview
-                            </button>
-                            <button @click="bulkUpdateStatus('rejected'); open = false" class="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
-                                Tolak Semua
-                            </button>
-                        </div>
-                    </div>
-
-                    <!-- export csv button -->
-                    <button @click="exportSelected()" x-show="selectedApplications.length > 0" x-cloak
-                            class="inline-flex items-center px-4 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 bg-white hover:bg-gray-50">
-                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
-                        </svg>
-                        Export CSV
-                    </button>
-
-                    <!-- filter button -->
-                    <button @click="showFilters = !showFilters"
-                            :class="hasActiveFilters ? 'border-primary-500 text-primary-700' : 'border-gray-300 text-gray-700'"
-                            class="inline-flex items-center px-4 py-2 border rounded-lg text-sm font-medium bg-white hover:bg-gray-50">
-                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"/>
-                        </svg>
-                        Filter
-                        <span x-show="hasActiveFilters" class="ml-2 w-2 h-2 bg-primary-500 rounded-full"></span>
-                    </button>
-                </div>
+        <div id="tahap-panel" role="tabpanel" aria-labelledby="tahap-all-tab" :aria-labelledby="'tahap-' + stage + '-tab'" class="sg-co-apps__panel">
+            {{-- filter di sisi klien (sama seperti halaman lama): posisi, tanggal melamar, nama --}}
+            <div class="sg-co-apps__filters" role="search" aria-label="Filter lamaran">
+                <x-ui.field label="Posisi" for="filter-posisi">
+                    <x-ui.select name="filter_position" id="filter-posisi" :options="$jobPostings->pluck('title', 'id')->all()" placeholder="Semua posisi" x-model="filters.position" />
+                </x-ui.field>
+                <x-ui.field label="Tanggal melamar" for="filter-tanggal">
+                    <x-ui.select name="filter_date" id="filter-tanggal" :options="['today' => 'Hari ini', 'week' => '7 hari terakhir', 'month' => '30 hari terakhir']" placeholder="Semua waktu" x-model="filters.dateRange" />
+                </x-ui.field>
+                <x-ui.search name="filter_search" id="filter-nama" label="Cari nama kandidat" :hide-label="false" placeholder="Nama kandidat" x-model.debounce.200ms="filters.search" />
+                <x-ui.button variant="tertiary" class="sg-co-apps__reset" x-show="hasActiveFilters" x-cloak @click="resetFilters()">Atur ulang</x-ui.button>
             </div>
 
-            <!-- filter panel -->
-            <div x-show="showFilters" x-collapse x-cloak class="mt-4 p-6 bg-gray-50 border border-gray-200 rounded-xl">
-                <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
-                    <div>
-                        <label class="block text-sm font-semibold text-gray-800 mb-2">Posisi</label>
-                        <select x-model="filters.position" class="w-full px-4 py-2.5 bg-white border-2 border-gray-300 rounded-lg text-sm font-medium text-gray-900 shadow-sm focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-all cursor-pointer hover:border-gray-400">
-                            <option value="" class="text-gray-900">Semua Posisi</option>
-                            @foreach($jobPostings as $job)
-                                <option value="{{ $job->id }}" class="text-gray-900">{{ $job->title }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div>
-                        <label class="block text-sm font-semibold text-gray-800 mb-2">Tanggal Melamar</label>
-                        <select x-model="filters.dateRange" class="w-full px-4 py-2.5 bg-white border-2 border-gray-300 rounded-lg text-sm font-medium text-gray-900 shadow-sm focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-all cursor-pointer hover:border-gray-400">
-                            <option value="" class="text-gray-900">Semua Waktu</option>
-                            <option value="today" class="text-gray-900">Hari Ini</option>
-                            <option value="week" class="text-gray-900">Minggu Ini</option>
-                            <option value="month" class="text-gray-900">Bulan Ini</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label class="block text-sm font-semibold text-gray-800 mb-2">Cari Nama</label>
-                        <input type="text" x-model="filters.search" placeholder="Ketik nama kandidat..."
-                               class="w-full px-4 py-2.5 bg-white border-2 border-gray-300 rounded-lg text-sm font-medium text-gray-900 placeholder-gray-500 shadow-sm focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-all hover:border-gray-400">
-                    </div>
-                    <div class="flex items-end">
-                        <button @click="resetFilters()" class="w-full px-5 py-2.5 text-sm font-semibold text-gray-700 bg-white border-2 border-gray-300 rounded-lg hover:bg-gray-100 hover:border-gray-400 transition-all shadow-sm">
-                            Reset Filter
-                        </button>
-                    </div>
-                </div>
+            <div class="sg-co-apps__toolbar">
+                <label class="sg-check">
+                    <input type="checkbox" :checked="allSelected" x-effect="$el.indeterminate = someSelected" :disabled="visibleCount === 0" @change="toggleAll($event.target.checked)">
+                    <span>Pilih semua yang tampil</span>
+                </label>
+                <p class="sg-co-apps__count" aria-live="polite"><b x-text="visibleCount">{{ $total }}</b> pelamar ditampilkan</p>
             </div>
-        </div>
-    </div>
 
-    <!-- list view -->
-    <div class="max-w-full mx-auto px-4 sm:px-6 lg:px-8 py-6">
-        <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
-            <table class="min-w-full divide-y divide-gray-200">
-                <thead class="bg-gray-50">
-                    <tr>
-                        <th class="px-6 py-3 text-left">
-                            <input type="checkbox" @change="toggleSelectAll($event)"
-                                   class="rounded border-gray-300 text-primary-600 focus:ring-primary-500">
-                        </th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Kandidat</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Posisi</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Rating</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Tanggal</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Aksi</th>
+            <x-ui.table caption="Daftar pelamar" class="sg-co-apps__table">
+                <x-slot:head>
+                    <th scope="col" class="sg-co-apps__pick"><span class="sr-only">Pilih</span></th>
+                    <th scope="col">Kandidat</th>
+                    <th scope="col">Posisi</th>
+                    <th scope="col">Rating</th>
+                    <th scope="col">Tanggal melamar</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Aksi</th>
+                </x-slot:head>
+
+                @foreach ($applications as $item)
+                    @php($app = $item['app'])
+                    @php($name = $app->user->name ?? 'Tanpa nama')
+                    <tr data-application-id="{{ $app->id }}" x-show="shows({{ $app->id }})" :class="{ 'is-selected': isSelected({{ $app->id }}) }">
+                        <td data-label="Pilih" class="sg-co-apps__pick">
+                            <input type="checkbox" value="{{ $app->id }}" x-model="selected" aria-label="Pilih {{ $name }}">
+                        </td>
+                        <td data-label="Kandidat">
+                            <span class="sg-co-apps__person">
+                                <x-ui.avatar :name="$name" size="sm" decorative />
+                                <span class="sg-co-apps__who">
+                                    <a href="{{ route('company.applications.show', $app->id) }}" class="sg-table__primary">{{ $name }}</a>
+                                    @if ($app->user?->email)<span class="sg-table__meta">{{ $app->user->email }}</span>@endif
+                                </span>
+                            </span>
+                        </td>
+                        <td data-label="Posisi">{{ $app->jobPosting->title ?? '—' }}</td>
+                        <td data-label="Rating">
+                            @if ($app->rating)
+                                <span class="sg-co-apps__rating" role="img" aria-label="Rating {{ $app->rating }} dari 5">
+                                    <span class="sg-co-apps__rating-bars" aria-hidden="true">@for ($i = 1; $i <= 5; $i++)<i @class(['is-on' => $i <= $app->rating])></i>@endfor</span>
+                                    <span aria-hidden="true">{{ $app->rating }}/5</span>
+                                </span>
+                            @else
+                                <span class="sg-co-apps__muted">Belum dinilai</span>
+                            @endif
+                        </td>
+                        <td data-label="Tanggal melamar" class="sg-co-apps__date">{{ $tanggal($app->created_at) }}</td>
+                        {{-- badge dari tahap (nilai lama accepted = Direkrut, sama dengan tabnya) --}}
+                        <td data-label="Status"><x-ui.status domain="job_application" :value="$item['stage']" /></td>
+                        <td data-label="Aksi">
+                            <span class="sg-co-apps__actions">
+                                <x-ui.icon-button icon="eye" :label="'Lihat lamaran ' . $name" :href="route('company.applications.show', $app->id)" />
+                                <x-ui.button variant="tertiary" icon="clipboard-check" @click="openActions({{ $app->id }})" aria-label="Ubah tahap, rating atau catatan {{ $name }}">Tindak lanjut</x-ui.button>
+                            </span>
+                        </td>
                     </tr>
-                </thead>
-                <tbody class="bg-white divide-y divide-gray-200">
-                    <template x-for="application in allFilteredApplications" :key="application.id">
-                        <tr class="hover:bg-gray-50 transition-colors duration-150"
-                            :class="{'bg-blue-50': selectedApplications.includes(application.id)}">
-                            <td class="px-6 py-4">
-                                <input type="checkbox" :value="application.id" x-model="selectedApplications"
-                                       class="rounded border-gray-300 text-primary-600 focus:ring-primary-500">
-                            </td>
-                            <td class="px-6 py-4">
-                                <div class="flex items-center gap-3">
-                                    <template x-if="application.avatar_url">
-                                        <img :src="application.avatar_url"
-                                             :alt="application.name"
-                                             class="w-10 h-10 rounded-full object-cover">
-                                    </template>
-                                    <template x-if="!application.avatar_url">
-                                        <div class="w-10 h-10 rounded-full bg-gradient-to-br from-purple-500 to-indigo-600 flex items-center justify-center">
-                                            <span class="text-white text-sm font-bold" x-text="application.name ? (application.name.split(' ')[0]?.[0] + (application.name.split(' ').slice(-1)[0]?.[0] || '')).toUpperCase() : '?'"></span>
-                                        </div>
-                                    </template>
-                                    <div class="flex-1 min-w-0">
-                                        <span class="font-medium text-gray-900" x-text="application.name"></span>
-                                    </div>
+                @endforeach
+
+                {{-- keadaan kosong per tahap / per filter, di dalam tabel --}}
+                <tr class="sg-co-apps__empty-row" x-show="visibleCount === 0" x-cloak>
+                    <td colspan="7">
+                        <div class="sg-empty" x-show="!hasActiveFilters">
+                            <img src="{{ asset('assets/illustrations/empty-states/no-applications.svg') }}" alt="" width="160" height="120">
+                            <h2>Belum ada pelamar</h2>
+                            <p>Belum ada pelamar di tahap <span x-text="stageLabels[stage] || 'ini'"></span>.</p>
+                            <x-ui.button variant="secondary" :href="route('company.jobs.index')">Kelola lowongan</x-ui.button>
+                        </div>
+                        <div class="sg-empty" x-show="hasActiveFilters">
+                            <img src="{{ asset('assets/illustrations/empty-states/no-search-results.svg') }}" alt="" width="160" height="120">
+                            <h2>Tidak ada pelamar yang cocok</h2>
+                            <p>Tidak ada pelamar dengan posisi, tanggal atau nama ini di tahap yang dipilih.</p>
+                            <x-ui.button variant="secondary" @click="resetFilters()">Atur ulang filter</x-ui.button>
+                        </div>
+                    </td>
+                </tr>
+            </x-ui.table>
+        </div>
+
+        {{-- bilah aksi massal: hanya muncul bila ada lamaran yang dipilih --}}
+        <div class="sg-co-apps__bulk" x-show="selected.length > 0" x-cloak role="region" aria-label="Aksi massal">
+            <p class="sg-co-apps__bulk-text" aria-live="polite"><b x-text="selected.length"></b> lamaran dipilih</p>
+            <div class="sg-co-apps__bulk-actions">
+                <x-ui.button variant="secondary" @click="bulkUpdateStatus('shortlisted')" ::disabled="isLoading">Pindah ke {{ $stageLabels['shortlisted'] }}</x-ui.button>
+                <x-ui.button variant="secondary" @click="bulkUpdateStatus('interview')" ::disabled="isLoading">Pindah ke {{ $stageLabels['interview'] }}</x-ui.button>
+                <x-ui.button variant="danger" @click="bulkUpdateStatus('rejected')" ::disabled="isLoading">Tolak</x-ui.button>
+                <x-ui.button variant="tertiary" icon="users" x-show="selected.length >= 2 && selected.length <= 3" @click="openComparison()">Bandingkan</x-ui.button>
+                <x-ui.button variant="tertiary" icon="download" @click="exportSelected()">Ekspor CSV</x-ui.button>
+                <x-ui.button variant="tertiary" @click="selected = []">Batal pilih</x-ui.button>
+            </div>
+        </div>
+
+        {{-- dialog tindak lanjut: tahap, rating, catatan, wawancara (endpoint sama dengan halaman lama) --}}
+        <x-ui.modal id="aksi-pelamar" title="Tindak lanjut pelamar" class="sg-co-apps__dialog">
+            <template x-if="current">
+                <div class="sg-co-apps__dialog-body">
+                    <p class="sg-co-apps__dialog-who">
+                        <b x-text="current.name"></b>
+                        <span x-text="current.position"></span>
+                    </p>
+
+                    <x-ui.tablist :tabs="['status' => 'Tahap', 'rating' => 'Rating', 'notes' => 'Catatan', 'interview' => 'Wawancara']" label="Jenis tindak lanjut" prefix="aksi">
+                        <x-ui.tab-panel id="status" prefix="aksi" :active="true">
+                            <div class="sg-co-apps__form">
+                                <x-ui.field label="Pindahkan ke tahap" for="aksi-status">
+                                    <x-ui.select name="status" id="aksi-status" :options="$stageLabels" x-model="newStatus" />
+                                </x-ui.field>
+                                <x-ui.field label="Alasan penolakan (opsional)" for="aksi-alasan" x-show="newStatus === 'rejected'">
+                                    <x-ui.textarea name="rejection_reason" id="aksi-alasan" rows="3" maxlength="500" x-model="rejectionReason" />
+                                </x-ui.field>
+                                <x-ui.button @click="updateApplicationStatus()" ::disabled="isLoading">Simpan tahap</x-ui.button>
+                            </div>
+                        </x-ui.tab-panel>
+
+                        <x-ui.tab-panel id="rating" prefix="aksi">
+                            <fieldset class="sg-co-apps__form">
+                                <legend class="sg-label">Rating kandidat</legend>
+                                <div class="sg-co-apps__rating-choices">
+                                    @foreach ($ratingLabels as $value => $label)
+                                        <label class="sg-check">
+                                            <input type="radio" name="rating" value="{{ $value }}" x-model.number="tempRating">
+                                            <span>{{ $value }} · {{ $label }}</span>
+                                        </label>
+                                    @endforeach
                                 </div>
-                            </td>
-                            <td class="px-6 py-4 text-sm text-gray-500" x-text="application.position"></td>
-                            <td class="px-6 py-4">
-                                <div class="flex items-center gap-1">
-                                    <template x-for="i in 5" :key="i">
-                                        <svg class="w-4 h-4 cursor-pointer"
-                                             :class="i <= (application.rating || 0) ? 'text-yellow-400' : 'text-gray-300'"
-                                             fill="currentColor" viewBox="0 0 20 20"
-                                             @click="setRating(application, i)">
-                                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
-                                        </svg>
-                                    </template>
+                                <x-ui.button @click="saveRating()" ::disabled="isLoading || !tempRating">Simpan rating</x-ui.button>
+                            </fieldset>
+                        </x-ui.tab-panel>
+
+                        <x-ui.tab-panel id="notes" prefix="aksi">
+                            <div class="sg-co-apps__form">
+                                <x-ui.field label="Catatan internal" for="aksi-catatan" help="Catatan ini hanya terlihat oleh tim Anda.">
+                                    <x-ui.textarea name="notes" id="aksi-catatan" rows="5" maxlength="1000" help x-model="tempNotes" />
+                                </x-ui.field>
+                                <x-ui.button @click="saveNotes()" ::disabled="isLoading || !tempNotes.trim()">Simpan catatan</x-ui.button>
+                            </div>
+                        </x-ui.tab-panel>
+
+                        <x-ui.tab-panel id="interview" prefix="aksi">
+                            <div class="sg-co-apps__form">
+                                <div class="sg-co-apps__pair">
+                                    <x-ui.field label="Tanggal" for="aksi-tanggal">
+                                        <x-ui.input type="date" name="interview_date" id="aksi-tanggal" x-model="interviewDate" />
+                                    </x-ui.field>
+                                    <x-ui.field label="Waktu" for="aksi-waktu">
+                                        <x-ui.input type="time" name="interview_time" id="aksi-waktu" x-model="interviewTime" />
+                                    </x-ui.field>
                                 </div>
-                            </td>
-                            <td class="px-6 py-4 text-sm text-gray-500" x-text="formatDate(application.applied_date)"></td>
-                            <td class="px-6 py-4">
-                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium text-white"
-                                      :class="'status-' + application.status"
-                                      x-text="getStatusLabel(application.status)"></span>
-                            </td>
-                            <td class="px-6 py-4">
-                                <div class="flex items-center gap-3">
-                                    <a :href="'/company/applications/' + application.id"
-                                       class="text-sm font-medium text-primary-600 hover:text-primary-700">Profil</a>
-                                    <button @click="openQuickActions(application)"
-                                            class="text-sm font-medium text-gray-600 hover:text-gray-900">Aksi</button>
-                                </div>
-                            </td>
+                                <x-ui.field label="Jenis wawancara" for="aksi-jenis">
+                                    <x-ui.select name="interview_type" id="aksi-jenis" :options="['online' => 'Daring (panggilan video)', 'onsite' => 'Tatap muka (di kantor)', 'phone' => 'Telepon']" x-model="interviewType" />
+                                </x-ui.field>
+                                <x-ui.field label="Catatan wawancara" for="aksi-catatan-wawancara" help="Disimpan sebagai catatan internal (menggantikan catatan sebelumnya) dan tahap berubah menjadi Wawancara.">
+                                    <x-ui.textarea name="interview_notes" id="aksi-catatan-wawancara" rows="3" help placeholder="Tautan rapat atau alamat" x-model="interviewNotes" />
+                                </x-ui.field>
+                                <x-ui.button @click="scheduleInterview()" ::disabled="isLoading || !interviewDate || !interviewTime">Jadwalkan wawancara</x-ui.button>
+                            </div>
+                        </x-ui.tab-panel>
+                    </x-ui.tablist>
+                </div>
+            </template>
+        </x-ui.modal>
+
+        {{-- perbandingan 2-3 kandidat terpilih (fitur lama) --}}
+        <x-ui.modal id="banding-pelamar" title="Perbandingan kandidat" class="sg-co-apps__compare">
+            <div class="sg-table-wrap sg-co-apps__compare-table" role="region" aria-label="Perbandingan kandidat" tabindex="0">
+                <table class="sg-table">
+                    <caption class="sr-only">Perbandingan kandidat terpilih</caption>
+                    <thead>
+                        <tr>
+                            <th scope="col"><span class="sr-only">Kriteria</span></th>
+                            <template x-for="c in comparison" :key="c.id"><th scope="col" x-text="c.name"></th></template>
                         </tr>
-                    </template>
-                </tbody>
-            </table>
-        </div>
-    </div>
-
-    <!-- quick actions modal -->
-    <div x-show="quickActionsOpen" x-cloak
-         class="fixed inset-0 z-[60] overflow-y-auto"
-         @keydown.escape.window="quickActionsOpen = false">
-        <div class="flex items-center justify-center min-h-screen px-4">
-            <div class="fixed inset-0 bg-black/50 modal-backdrop z-[59]" @click="quickActionsOpen = false"></div>
-
-            <div class="relative z-[61] bg-white rounded-xl shadow-xl max-w-lg w-full p-6 modal-content"
-                 x-transition:enter="transition ease-out duration-300"
-                 x-transition:enter-start="opacity-0 transform scale-95"
-                 x-transition:enter-end="opacity-100 transform scale-100">
-
-                <div class="flex items-center justify-between mb-4">
-                    <h3 class="text-lg font-semibold text-gray-900">Aksi Kandidat</h3>
-                    <button @click="quickActionsOpen = false" class="text-gray-400 hover:text-gray-600">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
-                        </svg>
-                    </button>
-                </div>
-
-                <template x-if="selectedApplication">
-                    <div>
-                        <!-- kandidat info -->
-                        <div class="flex items-center gap-3 mb-6 p-4 bg-gray-50 rounded-lg">
-                            <template x-if="selectedApplication.avatar_url">
-                                <img :src="selectedApplication.avatar_url"
-                                     class="w-14 h-14 rounded-full object-cover">
-                            </template>
-                            <template x-if="!selectedApplication.avatar_url">
-                                <div class="w-14 h-14 rounded-full bg-gradient-to-br from-purple-500 to-indigo-600 flex items-center justify-center">
-                                    <span class="text-white text-xl font-bold" x-text="selectedApplication.name ? (selectedApplication.name.split(' ')[0]?.[0] + (selectedApplication.name.split(' ').slice(-1)[0]?.[0] || '')).toUpperCase() : '?'"></span>
-                                </div>
-                            </template>
-                            <div>
-                                <p class="font-medium text-gray-900" x-text="selectedApplication.name"></p>
-                                <p class="text-sm text-gray-500" x-text="selectedApplication.position"></p>
-                                <p class="text-xs text-gray-400" x-text="selectedApplication.email"></p>
-                            </div>
-                        </div>
-
-                        <!-- tabs -->
-                        <div class="flex border-b border-gray-200 mb-4">
-                            <button @click="quickActionTab = 'status'"
-                                    :class="quickActionTab === 'status' ? 'border-primary-500 text-primary-600' : 'border-transparent text-gray-500'"
-                                    class="px-4 py-2 text-sm font-medium border-b-2 -mb-px">
-                                Status
-                            </button>
-                            <button @click="quickActionTab = 'rating'"
-                                    :class="quickActionTab === 'rating' ? 'border-primary-500 text-primary-600' : 'border-transparent text-gray-500'"
-                                    class="px-4 py-2 text-sm font-medium border-b-2 -mb-px">
-                                Rating
-                            </button>
-                            <button @click="quickActionTab = 'notes'"
-                                    :class="quickActionTab === 'notes' ? 'border-primary-500 text-primary-600' : 'border-transparent text-gray-500'"
-                                    class="px-4 py-2 text-sm font-medium border-b-2 -mb-px">
-                                Catatan
-                            </button>
-                            <button @click="quickActionTab = 'interview'"
-                                    :class="quickActionTab === 'interview' ? 'border-primary-500 text-primary-600' : 'border-transparent text-gray-500'"
-                                    class="px-4 py-2 text-sm font-medium border-b-2 -mb-px">
-                                Interview
-                            </button>
-                        </div>
-
-                        <!-- status tab -->
-                        <div x-show="quickActionTab === 'status'" class="space-y-4">
-                            <label class="block text-sm font-medium text-gray-700">Ubah Status</label>
-                            <select x-model="newStatus" class="w-full rounded-lg border-gray-300 focus:ring-primary-500 focus:border-primary-500">
-                                <option value="new">Lamaran Baru</option>
-                                <option value="reviewing">Sedang Direview</option>
-                                <option value="shortlisted">Terpilih</option>
-                                <option value="interview">Interview</option>
-                                <option value="offer">Penawaran</option>
-                                <option value="hired">Diterima</option>
-                                <option value="rejected">Ditolak</option>
-                            </select>
-
-                            <!-- email template checkbox -->
-                            <div class="flex items-center gap-2">
-                                <input type="checkbox" x-model="sendEmailNotification" id="sendEmail"
-                                       class="rounded border-gray-300 text-primary-600 focus:ring-primary-500">
-                                <label for="sendEmail" class="text-sm text-gray-700">Kirim notifikasi email ke kandidat</label>
-                            </div>
-
-                            <!-- rejection reason -->
-                            <div x-show="newStatus === 'rejected'" class="space-y-2">
-                                <label class="block text-sm font-medium text-gray-700">Alasan Penolakan</label>
-                                <textarea x-model="rejectionReason" rows="3"
-                                          placeholder="Jelaskan alasan penolakan (opsional)..."
-                                          class="w-full rounded-lg border-gray-300 text-sm focus:ring-primary-500 focus:border-primary-500"></textarea>
-                            </div>
-
-                            <button @click="updateApplicationStatus()"
-                                    :disabled="isLoading"
-                                    class="w-full px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 disabled:opacity-50 disabled:cursor-not-allowed">
-                                <span x-show="!isLoading">Simpan Status</span>
-                                <span x-show="isLoading">Menyimpan...</span>
-                            </button>
-                        </div>
-
-                        <!-- rating tab -->
-                        <div x-show="quickActionTab === 'rating'" class="space-y-4">
-                            <label class="block text-sm font-medium text-gray-700">Beri Rating Kandidat</label>
-                            <div class="flex items-center justify-center gap-2 py-4">
-                                <template x-for="i in 5" :key="i">
-                                    <button @click="tempRating = i"
-                                            class="focus:outline-none transition-transform hover:scale-110">
-                                        <svg class="w-10 h-10"
-                                             :class="i <= tempRating ? 'text-yellow-400' : 'text-gray-300'"
-                                             fill="currentColor" viewBox="0 0 20 20">
-                                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
-                                        </svg>
-                                    </button>
-                                </template>
-                            </div>
-                            <p class="text-center text-sm text-gray-500" x-text="getRatingLabel(tempRating)"></p>
-                            <button @click="saveRating()"
-                                    :disabled="isLoading || tempRating === 0"
-                                    class="w-full px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 disabled:opacity-50 disabled:cursor-not-allowed">
-                                <span x-show="!isLoading">Simpan Rating</span>
-                                <span x-show="isLoading">Menyimpan...</span>
-                            </button>
-                        </div>
-
-                        <!-- notes tab -->
-                        <div x-show="quickActionTab === 'notes'" class="space-y-4">
-                            <label class="block text-sm font-medium text-gray-700">Catatan Internal</label>
-                            <textarea x-model="tempNotes" rows="5"
-                                      placeholder="Tambahkan catatan tentang kandidat ini..."
-                                      class="w-full rounded-lg border-gray-300 text-sm focus:ring-primary-500 focus:border-primary-500"></textarea>
-                            <p class="text-xs text-gray-400">Catatan ini hanya terlihat oleh tim Anda</p>
-                            <button @click="saveNotes()"
-                                    :disabled="isLoading"
-                                    class="w-full px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 disabled:opacity-50 disabled:cursor-not-allowed">
-                                <span x-show="!isLoading">Simpan Catatan</span>
-                                <span x-show="isLoading">Menyimpan...</span>
-                            </button>
-                        </div>
-
-                        <!-- interview tab -->
-                        <div x-show="quickActionTab === 'interview'" class="space-y-4">
-                            <label class="block text-sm font-medium text-gray-700">Jadwalkan Interview</label>
-                            <div class="grid grid-cols-2 gap-4">
-                                <div>
-                                    <label class="block text-xs text-gray-500 mb-1">Tanggal</label>
-                                    <input type="date" x-model="interviewDate"
-                                           class="w-full rounded-lg border-gray-300 text-sm focus:ring-primary-500 focus:border-primary-500">
-                                </div>
-                                <div>
-                                    <label class="block text-xs text-gray-500 mb-1">Waktu</label>
-                                    <input type="time" x-model="interviewTime"
-                                           class="w-full rounded-lg border-gray-300 text-sm focus:ring-primary-500 focus:border-primary-500">
-                                </div>
-                            </div>
-                            <div>
-                                <label class="block text-xs text-gray-500 mb-1">Tipe Interview</label>
-                                <select x-model="interviewType" class="w-full rounded-lg border-gray-300 text-sm focus:ring-primary-500 focus:border-primary-500">
-                                    <option value="online">Online (Video Call)</option>
-                                    <option value="onsite">Onsite (Di Kantor)</option>
-                                    <option value="phone">Phone Interview</option>
-                                </select>
-                            </div>
-                            <div>
-                                <label class="block text-xs text-gray-500 mb-1">Catatan Interview</label>
-                                <textarea x-model="interviewNotes" rows="3"
-                                          placeholder="Link meeting, alamat, atau catatan lainnya..."
-                                          class="w-full rounded-lg border-gray-300 text-sm focus:ring-primary-500 focus:border-primary-500"></textarea>
-                            </div>
-                            <div class="flex items-center gap-2">
-                                <input type="checkbox" x-model="sendInterviewEmail" id="sendInterviewEmail"
-                                       class="rounded border-gray-300 text-primary-600 focus:ring-primary-500">
-                                <label for="sendInterviewEmail" class="text-sm text-gray-700">Kirim undangan ke kandidat</label>
-                            </div>
-                            <button @click="scheduleInterview()"
-                                    :disabled="isLoading || !interviewDate || !interviewTime"
-                                    class="w-full px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 disabled:opacity-50 disabled:cursor-not-allowed">
-                                <span x-show="!isLoading">Jadwalkan Interview</span>
-                                <span x-show="isLoading">Menyimpan...</span>
-                            </button>
-                        </div>
-                    </div>
-                </template>
+                    </thead>
+                    <tbody>
+                        <tr><th scope="row">Posisi</th><template x-for="c in comparison" :key="c.id"><td x-text="c.position"></td></template></tr>
+                        <tr><th scope="row">Tahap</th><template x-for="c in comparison" :key="c.id"><td x-text="stageLabels[c.stage]"></td></template></tr>
+                        <tr><th scope="row">Rating</th><template x-for="c in comparison" :key="c.id"><td x-text="c.rating ? c.rating + '/5' : 'Belum dinilai'"></td></template></tr>
+                        <tr><th scope="row">Tanggal melamar</th><template x-for="c in comparison" :key="c.id"><td x-text="c.dateLabel"></td></template></tr>
+                        <tr><th scope="row">Email</th><template x-for="c in comparison" :key="c.id"><td x-text="c.email || '—'"></td></template></tr>
+                        <tr><th scope="row">Catatan</th><template x-for="c in comparison" :key="c.id"><td class="sg-co-apps__compare-notes" x-text="c.notes || '—'"></td></template></tr>
+                        <tr><th scope="row"><span class="sr-only">Tautan</span></th><template x-for="c in comparison" :key="c.id"><td><a :href="'{{ url('company/applications') }}/' + c.id">Lihat lamaran</a></td></template></tr>
+                    </tbody>
+                </table>
             </div>
-        </div>
-    </div>
-
-    <!-- timeline modal -->
-    <div x-show="timelineModalOpen" x-cloak
-         class="fixed inset-0 z-50 overflow-y-auto"
-         @keydown.escape.window="timelineModalOpen = false">
-        <div class="flex items-center justify-center min-h-screen px-4">
-            <div class="fixed inset-0 bg-black/50" @click="timelineModalOpen = false"></div>
-
-            <div class="relative bg-white rounded-xl shadow-xl max-w-md w-full p-6"
-                 x-transition:enter="transition ease-out duration-300"
-                 x-transition:enter-start="opacity-0 transform scale-95"
-                 x-transition:enter-end="opacity-100 transform scale-100">
-
-                <div class="flex items-center justify-between mb-4">
-                    <h3 class="text-lg font-semibold text-gray-900">Riwayat Aktivitas</h3>
-                    <button @click="timelineModalOpen = false" class="text-gray-400 hover:text-gray-600">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
-                        </svg>
-                    </button>
-                </div>
-
-                <template x-if="selectedApplication">
-                    <div>
-                        <div class="flex items-center gap-3 mb-6 p-3 bg-gray-50 rounded-lg">
-                            <template x-if="selectedApplication.avatar_url">
-                                <img :src="selectedApplication.avatar_url"
-                                     class="w-10 h-10 rounded-full object-cover">
-                            </template>
-                            <template x-if="!selectedApplication.avatar_url">
-                                <div class="w-10 h-10 rounded-full bg-gradient-to-br from-purple-500 to-indigo-600 flex items-center justify-center">
-                                    <span class="text-white text-sm font-bold" x-text="selectedApplication.name ? (selectedApplication.name.split(' ')[0]?.[0] + (selectedApplication.name.split(' ').slice(-1)[0]?.[0] || '')).toUpperCase() : '?'"></span>
-                                </div>
-                            </template>
-                            <div>
-                                <p class="font-medium text-gray-900" x-text="selectedApplication.name"></p>
-                                <p class="text-sm text-gray-500" x-text="selectedApplication.position"></p>
-                            </div>
-                        </div>
-
-                        <!-- timeline -->
-                        <div class="space-y-4 max-h-80 overflow-y-auto">
-                            <template x-for="(activity, index) in timelineActivities" :key="index">
-                                <div class="timeline-item">
-                                    <div class="timeline-dot" :style="'background-color: ' + activity.color"></div>
-                                    <div class="pb-4">
-                                        <p class="text-sm font-medium text-gray-900" x-text="activity.title"></p>
-                                        <p class="text-xs text-gray-500" x-text="activity.description"></p>
-                                        <p class="text-xs text-gray-400 mt-1" x-text="activity.date"></p>
-                                    </div>
-                                </div>
-                            </template>
-
-                            <div x-show="timelineActivities.length === 0" class="text-center py-8 text-gray-400">
-                                <p class="text-sm">Belum ada riwayat aktivitas</p>
-                            </div>
-                        </div>
-                    </div>
-                </template>
-            </div>
-        </div>
-    </div>
-
-    <!-- comparison modal -->
-    <div x-show="comparisonModalOpen" x-cloak
-         class="fixed inset-0 z-50 overflow-y-auto"
-         @keydown.escape.window="comparisonModalOpen = false">
-        <div class="flex items-center justify-center min-h-screen px-4 py-8">
-            <div class="fixed inset-0 bg-black/50" @click="comparisonModalOpen = false"></div>
-
-            <div class="relative bg-white rounded-xl shadow-xl max-w-6xl w-full p-6 max-h-[90vh] overflow-y-auto"
-                 x-transition:enter="transition ease-out duration-300"
-                 x-transition:enter-start="opacity-0 transform scale-95"
-                 x-transition:enter-end="opacity-100 transform scale-100">
-
-                <div class="flex items-center justify-between mb-6">
-                    <h3 class="text-lg font-semibold text-gray-900">Perbandingan Kandidat</h3>
-                    <button @click="comparisonModalOpen = false" class="text-gray-400 hover:text-gray-600">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
-                        </svg>
-                    </button>
-                </div>
-
-                <div class="comparison-grid" :class="'cols-' + comparisonCandidates.length">
-                    <template x-for="candidate in comparisonCandidates" :key="candidate.id">
-                        <div class="border border-gray-200 rounded-lg p-4">
-                            <!-- header -->
-                            <div class="text-center mb-4 pb-4 border-b border-gray-100">
-                                <template x-if="candidate.avatar_url">
-                                    <img :src="candidate.avatar_url"
-                                         class="w-20 h-20 rounded-full mx-auto mb-3 object-cover">
-                                </template>
-                                <template x-if="!candidate.avatar_url">
-                                    <div class="w-20 h-20 rounded-full bg-gradient-to-br from-purple-500 to-indigo-600 flex items-center justify-center mx-auto mb-3">
-                                        <span class="text-white text-2xl font-bold" x-text="candidate.name ? (candidate.name.split(' ')[0]?.[0] + (candidate.name.split(' ').slice(-1)[0]?.[0] || '')).toUpperCase() : '?'"></span>
-                                    </div>
-                                </template>
-                                <h4 class="font-semibold text-gray-900" x-text="candidate.name"></h4>
-                                <p class="text-sm text-gray-500" x-text="candidate.position"></p>
-                            </div>
-
-                            <!-- stats -->
-                            <div class="space-y-3">
-                                <div class="flex justify-between items-center">
-                                    <span class="text-sm text-gray-500">Rating</span>
-                                    <div class="flex items-center gap-1">
-                                        <template x-for="i in 5" :key="i">
-                                            <svg class="w-4 h-4" :class="i <= (candidate.rating || 0) ? 'text-yellow-400' : 'text-gray-300'" fill="currentColor" viewBox="0 0 20 20">
-                                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
-                                            </svg>
-                                        </template>
-                                    </div>
-                                </div>
-                                <div class="flex justify-between items-center">
-                                    <span class="text-sm text-gray-500">Status</span>
-                                    <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium text-white"
-                                          :class="'status-' + candidate.status"
-                                          x-text="getStatusLabel(candidate.status)"></span>
-                                </div>
-                                <div class="flex justify-between items-center">
-                                    <span class="text-sm text-gray-500">Tanggal Melamar</span>
-                                    <span class="text-sm text-gray-900" x-text="formatDate(candidate.applied_date)"></span>
-                                </div>
-                                <div x-show="candidate.email">
-                                    <span class="text-sm text-gray-500">Email</span>
-                                    <p class="text-sm text-gray-900 truncate" x-text="candidate.email"></p>
-                                </div>
-                            </div>
-
-                            <!-- notes preview -->
-                            <div x-show="candidate.notes" class="mt-4 pt-4 border-t border-gray-100">
-                                <p class="text-xs text-gray-500 mb-1">Catatan</p>
-                                <p class="text-sm text-gray-700 line-clamp-3" x-text="candidate.notes"></p>
-                            </div>
-
-                            <!-- action -->
-                            <div class="mt-4 pt-4 border-t border-gray-100">
-                                <a :href="'/company/applications/' + candidate.id"
-                                   class="block w-full text-center px-4 py-2 bg-primary-600 text-white rounded-lg text-sm hover:bg-primary-700">
-                                    Lihat Detail
-                                </a>
-                            </div>
-                        </div>
-                    </template>
-                </div>
-            </div>
-        </div>
-    </div>
-
+        </x-ui.modal>
+    @endif
 </div>
 @endsection
 
 @push('scripts')
 <script>
-function applicationsKanban() {
+function applicantPipeline(rows, stageLabels, initialStage) {
+    const FLASH_KEY = 'sg_co_apps_flash';
+    const csrf = () => document.querySelector('meta[name="csrf-token"]')?.content;
+    const byId = Object.fromEntries(rows.map((r) => [r.id, r]));
+
     return {
-        // state utama
-        showFilters: false,
-        selectedApplications: [],
+        rows,
+        stageLabels,
+        stage: 'all',
+        filters: { position: '', dateRange: '', search: '' },
+        selected: [],
         isLoading: false,
 
-        // toast notification
-        toast: {
-            show: false,
-            message: '',
-            type: 'success'
-        },
-
-        // modal states
-        quickActionsOpen: false,
-        timelineModalOpen: false,
-        comparisonModalOpen: false,
-
-        // selected application untuk modal
-        selectedApplication: null,
-        quickActionTab: 'status',
+        // dialog tindak lanjut
+        current: null,
         newStatus: '',
-        sendEmailNotification: true,
         rejectionReason: '',
-
-        // rating
         tempRating: 0,
-
-        // notes
         tempNotes: '',
-
-        // interview scheduling
         interviewDate: '',
         interviewTime: '',
         interviewType: 'online',
         interviewNotes: '',
-        sendInterviewEmail: true,
 
-        // timeline
-        timelineActivities: [],
+        comparison: [],
 
-        // comparison
-        comparisonCandidates: [],
+        init() {
+            // tab dari #tahap-… (bertahan setelah muat ulang) atau ?status= lama
+            const fromHash = location.hash.replace('#tahap-', '');
+            if (fromHash in stageLabels) this.stage = fromHash;
+            else if (initialStage && initialStage in stageLabels) this.stage = initialStage;
+            this.$watch('filters', () => this.prune(), { deep: true });
+
+            // pesan sukses setelah muat ulang
+            try {
+                const flash = sessionStorage.getItem(FLASH_KEY);
+                if (flash) {
+                    sessionStorage.removeItem(FLASH_KEY);
+                    this.$nextTick(() => window.showNotification?.(flash, 'success'));
+                }
+            } catch (e) {}
+        },
 
         // filter
-        filters: {
-            position: '',
-            dateRange: '',
-            search: ''
-        },
-
-        // data dari backend
-        columns: @json($applicationsByStatus ?? []),
-        applications: [],
-        totalApplications: {{ $stats['total'] ?? 0 }},
-
-        // inisialisasi
-        init() {
-            // flatten applications dari columns
-            this.flattenApplications();
-        },
-
-        flattenApplications() {
-            let apps = [];
-            Object.keys(this.columns).forEach(status => {
-                const columnApps = this.columns[status];
-                if (Array.isArray(columnApps)) {
-                    columnApps.forEach(app => {
-                        apps.push({
-                            ...app,
-                            id: app.id,
-                            name: app.user?.name || 'Unknown',
-                            email: app.user?.email || '',
-                            position: app.job_posting?.title || app.jobPosting?.title || 'Unknown Position',
-                            status: status,
-                            applied_date: app.created_at,
-                            avatar_url: app.user?.profile?.avatar_url || null,
-                            rating: app.rating || 0,
-                            notes: app.notes || ''
-                        });
-                    });
-                }
-            });
-            this.applications = apps;
-        },
-
-        // computed untuk filter
-        get hasActiveFilters() {
-            return this.filters.position || this.filters.dateRange || this.filters.search;
-        },
-
-        get allFilteredApplications() {
-            return this.applications.filter(app => this.matchesFilters(app));
-        },
-
-        matchesFilters(app) {
-            if (this.filters.position && app.job_posting_id != this.filters.position) return false;
-            if (this.filters.search && !app.name.toLowerCase().includes(this.filters.search.toLowerCase())) return false;
+        matches(row) {
+            if (this.stage !== 'all' && row.stage !== this.stage) return false;
+            if (this.filters.position && String(row.job) !== String(this.filters.position)) return false;
+            if (this.filters.search && !row.name.toLowerCase().includes(this.filters.search.trim().toLowerCase())) return false;
             if (this.filters.dateRange) {
-                const appDate = new Date(app.applied_date);
+                const applied = new Date(row.date);
                 const now = new Date();
-                if (this.filters.dateRange === 'today') {
-                    if (appDate.toDateString() !== now.toDateString()) return false;
-                } else if (this.filters.dateRange === 'week') {
-                    const weekAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
-                    if (appDate < weekAgo) return false;
-                } else if (this.filters.dateRange === 'month') {
-                    const monthAgo = new Date(now.getTime() - 30 * 24 * 60 * 60 * 1000);
-                    if (appDate < monthAgo) return false;
-                }
+                if (this.filters.dateRange === 'today' && applied.toDateString() !== now.toDateString()) return false;
+                if (this.filters.dateRange === 'week' && applied < new Date(now - 7 * 864e5)) return false;
+                if (this.filters.dateRange === 'month' && applied < new Date(now - 30 * 864e5)) return false;
             }
             return true;
         },
+        shows(id) { return this.matches(byId[id]); },
+        get visibleRows() { return this.rows.filter((r) => this.matches(r)); },
+        get visibleCount() { return this.visibleRows.length; },
+        get hasActiveFilters() { return !!(this.filters.position || this.filters.dateRange || this.filters.search.trim()); },
+        resetFilters() { this.filters = { position: '', dateRange: '', search: '' }; },
 
-        getStatusLabel(status) {
-            const labels = {
-                'new': 'Baru',
-                'reviewing': 'Direview',
-                'shortlisted': 'Terpilih',
-                'interview': 'Interview',
-                'offer': 'Penawaran',
-                'hired': 'Diterima',
-                'rejected': 'Ditolak'
-            };
-            return labels[status] || status;
+        // tab tahap
+        setStage(key) {
+            this.stage = key;
+            history.replaceState(null, '', key === 'all' ? location.pathname + location.search : '#tahap-' + key);
+            this.prune();
+        },
+        onTabKey(e) {
+            const tabs = [...this.$refs.tablist.querySelectorAll('[role="tab"]')];
+            const i = tabs.indexOf(document.activeElement);
+            const keys = { ArrowRight: i + 1, ArrowLeft: i - 1, Home: 0, End: tabs.length - 1 };
+            if (i === -1 || !(e.key in keys)) return;
+            e.preventDefault();
+            const next = tabs[(keys[e.key] + tabs.length) % tabs.length];
+            next.focus();
+            this.setStage(next.dataset.tab);
         },
 
-        getRatingLabel(rating) {
-            const labels = {
-                0: 'Pilih rating',
-                1: 'Sangat Kurang',
-                2: 'Kurang',
-                3: 'Cukup',
-                4: 'Baik',
-                5: 'Sangat Baik'
-            };
-            return labels[rating] || '';
+        // pilihan (yang tersembunyi oleh tab/filter tidak ikut aksi massal)
+        isSelected(id) { return this.selected.includes(String(id)); },
+        prune() {
+            const visible = new Set(this.visibleRows.map((r) => String(r.id)));
+            this.selected = this.selected.filter((id) => visible.has(id));
         },
+        get allSelected() { return this.visibleCount > 0 && this.selected.length === this.visibleCount; },
+        get someSelected() { return this.selected.length > 0 && !this.allSelected; },
+        toggleAll(checked) { this.selected = checked ? this.visibleRows.map((r) => String(r.id)) : []; },
 
-        formatDate(dateString) {
-            if (!dateString) return '-';
-            const date = new Date(dateString);
-            return date.toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' });
-        },
-
-        resetFilters() {
-            this.filters = { position: '', dateRange: '', search: '' };
-        },
-
-        toggleSelectAll(event) {
-            if (event.target.checked) {
-                this.selectedApplications = this.allFilteredApplications.map(a => a.id);
-            } else {
-                this.selectedApplications = [];
+        // permintaan ke endpoint lama
+        async post(url, body) {
+            this.isLoading = true;
+            try {
+                const response = await fetch(url, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json', 'X-CSRF-TOKEN': csrf(), 'Accept': 'application/json' },
+                    body: JSON.stringify(body),
+                });
+                return response.ok;
+            } catch (error) {
+                console.error('Gagal mengirim permintaan:', error);
+                return false;
+            } finally {
+                this.isLoading = false;
             }
         },
-
-        // toast helper
-        showToast(message, type = 'success') {
-            this.toast = { show: true, message, type };
-            setTimeout(() => {
-                this.toast.show = false;
-            }, 3000);
+        done(message) {
+            // muat ulang agar tab, jumlah dan badge kembali dari database
+            try { sessionStorage.setItem(FLASH_KEY, message); } catch (e) {}
+            location.reload();
         },
+        fail(message) { window.showNotification?.(message, 'error'); },
 
-        // modal handlers
-        openQuickActions(application) {
-            this.selectedApplication = application;
-            this.newStatus = application.status;
-            this.tempRating = application.rating || 0;
-            this.tempNotes = application.notes || '';
-            this.quickActionTab = 'status';
+        // dialog tindak lanjut
+        openActions(id) {
+            const row = byId[id];
+            this.current = row;
+            this.newStatus = row.stage;
             this.rejectionReason = '';
+            this.tempRating = row.rating || 0;
+            this.tempNotes = row.notes || '';
             this.interviewDate = '';
             this.interviewTime = '';
+            this.interviewType = 'online';
             this.interviewNotes = '';
-            this.quickActionsOpen = true;
+            this.$dispatch('sg-open-modal', 'aksi-pelamar');
         },
-
-        openTimelineModal(application) {
-            this.selectedApplication = application;
-            this.loadTimeline(application.id);
-            this.timelineModalOpen = true;
-        },
-
-        openComparisonModal() {
-            this.comparisonCandidates = this.applications.filter(app =>
-                this.selectedApplications.includes(app.id)
-            );
-            this.comparisonModalOpen = true;
-        },
-
-        // API calls
         async updateApplicationStatus() {
-            if (!this.selectedApplication) return;
-            this.isLoading = true;
-
-            try {
-                const response = await fetch(`/company/applications/${this.selectedApplication.id}/status`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
-                        'Accept': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        status: this.newStatus,
-                        send_email: this.sendEmailNotification,
-                        rejection_reason: this.rejectionReason
-                    })
-                });
-
-                if (response.ok) {
-                    // update local state
-                    const app = this.applications.find(a => a.id === this.selectedApplication.id);
-                    if (app) {
-                        app.status = this.newStatus;
-                    }
-
-                    this.quickActionsOpen = false;
-                    this.showToast('Status berhasil diperbarui');
-                } else {
-                    this.showToast('Gagal memperbarui status', 'error');
-                }
-            } catch (error) {
-                console.error('Error updating status:', error);
-                this.showToast('Terjadi kesalahan', 'error');
-            } finally {
-                this.isLoading = false;
-            }
+            const ok = await this.post(`/company/applications/${this.current.id}/status`, {
+                status: this.newStatus,
+                rejection_reason: this.rejectionReason,
+            });
+            ok ? this.done('Tahap lamaran diperbarui.') : this.fail('Tahap lamaran gagal diperbarui.');
         },
-
         async saveRating() {
-            if (!this.selectedApplication || this.tempRating === 0) return;
-            this.isLoading = true;
-
-            try {
-                const response = await fetch(`/company/applications/${this.selectedApplication.id}/rating`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
-                        'Accept': 'application/json'
-                    },
-                    body: JSON.stringify({ rating: this.tempRating })
-                });
-
-                if (response.ok) {
-                    const app = this.applications.find(a => a.id === this.selectedApplication.id);
-                    if (app) {
-                        app.rating = this.tempRating;
-                    }
-                    this.selectedApplication.rating = this.tempRating;
-                    this.showToast('Rating berhasil disimpan');
-                } else {
-                    this.showToast('Gagal menyimpan rating', 'error');
-                }
-            } catch (error) {
-                console.error('Error saving rating:', error);
-                this.showToast('Terjadi kesalahan', 'error');
-            } finally {
-                this.isLoading = false;
-            }
+            if (!this.tempRating) return;
+            const ok = await this.post(`/company/applications/${this.current.id}/rating`, { rating: this.tempRating });
+            ok ? this.done('Rating disimpan.') : this.fail('Rating gagal disimpan.');
         },
-
-        async setRating(application, rating) {
-            try {
-                const response = await fetch(`/company/applications/${application.id}/rating`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
-                        'Accept': 'application/json'
-                    },
-                    body: JSON.stringify({ rating: rating })
-                });
-
-                if (response.ok) {
-                    application.rating = rating;
-                    this.showToast('Rating berhasil disimpan');
-                }
-            } catch (error) {
-                console.error('Error saving rating:', error);
-            }
-        },
-
         async saveNotes() {
-            if (!this.selectedApplication) return;
-            this.isLoading = true;
-
-            try {
-                const response = await fetch(`/company/applications/${this.selectedApplication.id}/notes`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
-                        'Accept': 'application/json'
-                    },
-                    body: JSON.stringify({ notes: this.tempNotes })
-                });
-
-                if (response.ok) {
-                    const app = this.applications.find(a => a.id === this.selectedApplication.id);
-                    if (app) {
-                        app.notes = this.tempNotes;
-                    }
-                    this.selectedApplication.notes = this.tempNotes;
-                    this.showToast('Catatan berhasil disimpan');
-                } else {
-                    this.showToast('Gagal menyimpan catatan', 'error');
-                }
-            } catch (error) {
-                console.error('Error saving notes:', error);
-                this.showToast('Terjadi kesalahan', 'error');
-            } finally {
-                this.isLoading = false;
-            }
+            const ok = await this.post(`/company/applications/${this.current.id}/notes`, { notes: this.tempNotes });
+            ok ? this.done('Catatan disimpan.') : this.fail('Catatan gagal disimpan.');
         },
-
         async scheduleInterview() {
-            if (!this.selectedApplication || !this.interviewDate || !this.interviewTime) return;
-            this.isLoading = true;
-
-            try {
-                // update status ke interview
-                const response = await fetch(`/company/applications/${this.selectedApplication.id}/status`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
-                        'Accept': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        status: 'interview',
-                        notes: `Interview dijadwalkan: ${this.interviewDate} ${this.interviewTime} (${this.interviewType}). ${this.interviewNotes}`,
-                        send_email: this.sendInterviewEmail
-                    })
-                });
-
-                if (response.ok) {
-                    const app = this.applications.find(a => a.id === this.selectedApplication.id);
-                    if (app) {
-                        app.status = 'interview';
-                    }
-
-                    this.quickActionsOpen = false;
-                    this.showToast('Interview berhasil dijadwalkan');
-                } else {
-                    this.showToast('Gagal menjadwalkan interview', 'error');
-                }
-            } catch (error) {
-                console.error('Error scheduling interview:', error);
-                this.showToast('Terjadi kesalahan', 'error');
-            } finally {
-                this.isLoading = false;
-            }
+            if (!this.interviewDate || !this.interviewTime) return;
+            const ok = await this.post(`/company/applications/${this.current.id}/status`, {
+                status: 'interview',
+                notes: `Wawancara dijadwalkan: ${this.interviewDate} ${this.interviewTime} (${this.interviewType}). ${this.interviewNotes}`,
+            });
+            ok ? this.done('Wawancara dijadwalkan.') : this.fail('Wawancara gagal dijadwalkan.');
         },
 
-        async loadTimeline(applicationId) {
-            // simulasi data timeline - seharusnya dari API
-            this.timelineActivities = [
-                {
-                    title: 'Lamaran Diterima',
-                    description: 'Kandidat mengirimkan lamaran',
-                    date: this.formatDate(this.selectedApplication?.applied_date),
-                    color: '#3b82f6'
-                },
-                {
-                    title: 'Status Diperbarui',
-                    description: 'Status diubah menjadi ' + this.getStatusLabel(this.selectedApplication?.status),
-                    date: 'Baru saja',
-                    color: '#22c55e'
-                }
-            ];
-        },
-
+        // aksi massal
         async bulkUpdateStatus(status) {
-            if (this.selectedApplications.length === 0) return;
-            this.isLoading = true;
-
-            try {
-                const response = await fetch('/company/applications/bulk-update', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
-                        'Accept': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        application_ids: this.selectedApplications,
-                        status: status
-                    })
+            if (this.selected.length === 0) return;
+            const count = this.selected.length;
+            if (status === 'rejected') {
+                const yes = await window.sgConfirm({
+                    title: 'Tolak lamaran terpilih?',
+                    message: `${count} lamaran akan dipindahkan ke tahap ${stageLabels.rejected}.`,
+                    confirmLabel: 'Tolak',
+                    tone: 'danger',
                 });
-
-                if (response.ok) {
-                    // update local state
-                    this.selectedApplications.forEach(id => {
-                        const app = this.applications.find(a => a.id === id);
-                        if (app) {
-                            app.status = status;
-                        }
-                    });
-
-                    this.selectedApplications = [];
-                    this.showToast(`${this.selectedApplications.length} lamaran berhasil diperbarui`);
-                } else {
-                    this.showToast('Gagal memperbarui status', 'error');
-                }
-            } catch (error) {
-                console.error('Error bulk updating:', error);
-                this.showToast('Terjadi kesalahan', 'error');
-            } finally {
-                this.isLoading = false;
+                if (!yes) return;
             }
+            const ok = await this.post('/company/applications/bulk-update', {
+                application_ids: this.selected.map(Number),
+                status,
+            });
+            ok ? this.done(`${count} lamaran dipindahkan ke tahap ${stageLabels[status]}.`) : this.fail('Tahap lamaran gagal diperbarui.');
         },
-
+        openComparison() {
+            this.comparison = this.selected.map((id) => byId[id]).filter(Boolean);
+            this.$dispatch('sg-open-modal', 'banding-pelamar');
+        },
         exportSelected() {
-            const ids = this.selectedApplications.join(',');
-            window.location.href = `/company/applications/export?ids=${ids}`;
-        }
-    }
+            window.location.href = `/company/applications/export?ids=${this.selected.join(',')}`;
+        },
+    };
 }
 </script>
 @endpush

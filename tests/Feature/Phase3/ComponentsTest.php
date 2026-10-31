@@ -24,7 +24,9 @@ class ComponentsTest extends TestCase
         'milestone' => ['pending', 'in_progress', 'completed', 'delayed'],
         'report' => ['pending', 'reviewed', 'approved', 'revision_needed'],
         'document' => ['pending', 'approved', 'rejected'],
-        'verification' => ['pending_verification', 'verified', 'rejected', 'needs_review'],
+        // phase 20: + nilai instansi active/suspended (Institution::STATUS_*) dan status per dokumen verifikasi
+        'verification' => ['pending_verification', 'verified', 'rejected', 'needs_review', 'active', 'suspended'],
+        'verification_document' => ['approved', 'needs_review', 'rejected'],
         'job_posting' => ['draft', 'posted', 'closed', 'archived'],
         'friend' => ['pending', 'accepted', 'rejected', 'blocked'],
     ];
