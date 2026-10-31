@@ -1,0 +1,23 @@
+/*
+ * Student Go — Phase 26 (2026-10-31): error pages (resources/views/errors/*).
+ *
+ * One pattern for every code: status code, one heading, one sentence, 'Kembali' +
+ * 'Ke beranda', contact link. 4xx pages sit inside layouts.app; 500/503/5xx use
+ * errors/standalone.blade.php (auth header only, no session, auth or database).
+ * Existing tokens only: no new colour, font, radius or shadow; no illustration.
+ */
+
+.sg-error { padding: 3rem var(--sg-gutter) 4rem; }
+@media (min-width: 1024px) { .sg-error { padding-block: 5rem 6rem; } }
+.sg-error__panel { max-width: var(--sg-w-form, 36rem); margin-inline: auto; }
+.sg-error__code { margin: 0; font: 700 3rem/1 var(--font-sans); font-variant-numeric: tabular-nums; letter-spacing: -0.02em; color: var(--sg-brand); }
+@media (min-width: 640px) { .sg-error__code { font-size: 3.75rem; } }
+.sg-error__title { margin: 1rem 0 0; font-size: 1.5rem; line-height: 2rem; font-weight: 700; letter-spacing: -0.01em; color: var(--sg-text-primary); text-wrap: balance; }
+@media (min-width: 640px) { .sg-error__title { font-size: 1.875rem; line-height: 2.375rem; } }
+.sg-error__desc { margin: .75rem 0 0; font-size: 1rem; line-height: 1.625rem; color: var(--sg-text-secondary); }
+.sg-error__actions { display: flex; flex-wrap: wrap; gap: .75rem; margin-top: 2rem; }
+.sg-error__help { margin: 2rem 0 0; padding-top: 1.25rem; border-top: 1px solid var(--sg-border-default); font-size: .875rem; line-height: 1.25rem; color: var(--sg-text-secondary); }
+.sg-error__help a { color: var(--sg-text-link); font-weight: 600; text-decoration: underline; text-underline-offset: 2px; }
+
+/* templat mandiri (500/503): latar halaman penuh tanpa navbar dan footer */
+.sg-error-page { min-height: 100vh; background: var(--sg-surface-page); }

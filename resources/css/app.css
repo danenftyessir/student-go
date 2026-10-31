@@ -12,6 +12,7 @@
 @import './student-go/student-brief.css'; /* phase 9: detail masalah (brief) */
 @import './student-go/institution.css'; /* phase 17: ruang kerja instansi (dashboard) */
 @import './student-go/company.css'; /* phase 21: ruang kerja perusahaan (dashboard) */
+@import './student-go/errors.css'; /* phase 26: halaman galat 403/404/419/500/503 */
 @import './student-go/legacy-overrides.css';
 
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
