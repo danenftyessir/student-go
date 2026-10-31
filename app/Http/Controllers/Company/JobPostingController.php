@@ -466,7 +466,7 @@ class JobPostingController extends Controller
             if (request()->expectsJson() || request()->ajax()) {
                 return response()->json([
                     'success' => false,
-                    'message' => 'Gagal menghapus lowongan: ' . $e->getMessage()
+                    'message' => safe_error_message('Gagal menghapus lowongan: ', $e)
                 ], 500);
             }
 
