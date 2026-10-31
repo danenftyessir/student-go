@@ -12,6 +12,9 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
+        // percayai proxy railway agar url aset memakai https
+        $middleware->trustProxies(at: '*');
+
         $middleware->alias([
             'check.user.type' => \App\Http\Middleware\CheckUserType::class,
             'admin' => \App\Http\Middleware\AdminMiddleware::class,
