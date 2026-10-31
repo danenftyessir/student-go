@@ -1,0 +1,96 @@
+/* ════════════════════════════════════════════════════════════════════
+ * Homepage hero with a looping background video (AD-11, 2026-10-31).
+ * Pattern: full-window moving background, transparent header over it,
+ * one large white headline at the lower left.
+ * Kept in its own file (imported after components.css) so it can be
+ * reviewed apart from the Phase 4 revision. Tokens: tokens.css
+ * (--sg-on-media*, --sg-hero-*). One scrim for legibility only: no other
+ * gradient, no glass, no blur; motion is the 200ms poster fade, which the
+ * global reduced-motion rule turns off.
+ * ════════════════════════════════════════════════════════════════════ */
+
+.sg-hero {
+  position: relative; isolation: isolate; overflow: hidden;
+  display: flex;
+  min-height: clamp(560px, 100vh, 880px);
+  min-height: clamp(560px, 100svh, 880px);
+  background: var(--sg-hero-ground);
+  color: var(--sg-on-media);
+  --sg-focus: var(--sg-on-media);           /* 2px white ring, 2px offset (base rule) */
+}
+
+/* media: video underneath, poster on top until the video plays */
+.sg-hero__media, .sg-hero__scrim { position: absolute; inset: 0; }
+.sg-hero__media { z-index: -2; }
+.sg-hero__video, .sg-hero__poster {
+  position: absolute; inset: 0; width: 100%; height: 100%; max-width: none;
+  object-fit: cover; object-position: 70% 50%;   /* keep the archipelago in view on narrow desktops */
+}
+@media (max-width: 767px) { .sg-hero__video, .sg-hero__poster { object-position: 50% 50%; } }
+.sg-hero__poster { transition: opacity 200ms var(--ease-standard); }
+.sg-hero.has-video .sg-hero__poster { opacity: 0; }
+
+.sg-hero__scrim {
+  z-index: -1;
+  background:
+    linear-gradient(to top right, var(--sg-hero-scrim-deep), transparent 70%),
+    var(--sg-hero-scrim);
+}
+
+/* content: lower left, inside the normal container */
+.sg-hero__inner {
+  position: relative;
+  display: flex; flex-direction: column; justify-content: flex-end;
+  padding-top: 6rem;                                            /* clears the 4rem header */
+  padding-bottom: clamp(3rem, 9vh, 6rem);
+}
+.sg-hero__content { max-width: 52rem; }
+.sg-hero__title {
+  margin: 0; max-width: 20ch;
+  font: 700 clamp(2rem, 1.2rem + 3.2vw, 3.75rem)/1.08 var(--font-sans);
+  letter-spacing: -0.02em; text-wrap: balance;
+  color: var(--sg-on-media);
+}
+.sg-hero__lead {
+  margin: 1rem 0 0; max-width: 52ch;
+  font-size: clamp(1.125rem, 1.05rem + .25vw, 1.25rem); line-height: 1.6;
+  color: var(--sg-on-media-muted);
+}
+.sg-hero__actions { display: flex; flex-wrap: wrap; gap: .75rem; margin-top: 1.75rem; }
+.sg-hero__actions:empty { display: none; }
+
+/* actions: 48px tall; white primary with navy text, outlined secondary */
+.sg-hero .sg-hero__btn { min-height: 3rem; padding-inline: 1.25rem; }
+.sg-hero .sg-hero__btn--primary { background: var(--sg-on-media); color: var(--sg-hero-ink); border-color: var(--sg-on-media); }
+.sg-hero .sg-hero__btn--primary:hover { background: var(--color-brand-50); border-color: var(--color-brand-50); }
+.sg-hero .sg-hero__btn--secondary { background: transparent; color: var(--sg-on-media); border-color: var(--sg-on-media-line); }
+.sg-hero .sg-hero__btn--secondary:hover { background: var(--sg-on-media-hover); border-color: var(--sg-on-media); }
+
+.sg-hero__sentinel { position: absolute; left: 0; bottom: 0; width: 1px; height: 1px; pointer-events: none; }
+
+/* the block that used to open the page now follows the hero */
+@media (max-width: 639px) { .sg-home-intro { padding-top: 2.5rem; } }
+
+/* ── Header over the hero (home route only; hero-video.js removes .is-over-hero) ── */
+/* the header is fixed on this page: anchor jumps and keyboard focus scroll below it, never under it (WCAG 2.4.11) */
+html:has(.sg-header--hero) { scroll-padding-top: 5rem; }
+.sg-header--hero {
+  position: fixed; inset-inline: 0; top: 0;
+  transition: background-color var(--duration-state) var(--ease-standard), border-color var(--duration-state) var(--ease-standard);
+}
+/* specificity must beat .sg-header__brand img (display:block) or both logos show at once */
+.sg-header__brand .sg-header__logo-on-dark { display: none; }
+.sg-header--hero.is-over-hero:not(.is-menu-open) { background: transparent; border-bottom-color: transparent; }
+.sg-header--hero.is-over-hero:not(.is-menu-open) .sg-header__brand .sg-header__logo { display: none; }
+.sg-header--hero.is-over-hero:not(.is-menu-open) .sg-header__brand .sg-header__logo-on-dark { display: block; }
+.sg-header--hero.is-over-hero:not(.is-menu-open) :is(.sg-header__brand, .sg-nav__link, .sg-header__bar .sg-icon-btn, .sg-account__btn, .sg-header__desktop > .sg-btn--tertiary):not(.sg-overlay *) {
+  --sg-focus: var(--sg-on-media);
+  color: var(--sg-on-media);
+}
+.sg-header--hero.is-over-hero:not(.is-menu-open) .sg-nav__link:hover { border-bottom-color: var(--sg-on-media-line); }
+.sg-header--hero.is-over-hero:not(.is-menu-open) .sg-nav__link[aria-current="page"] { border-bottom-color: var(--sg-on-media); }
+.sg-header--hero.is-over-hero:not(.is-menu-open) :is(.sg-header__bar .sg-icon-btn, .sg-account__btn, .sg-header__desktop > .sg-btn--tertiary):not(.sg-overlay *):is(:hover, [aria-expanded="true"]) {
+  background: var(--sg-on-media-hover);
+}
+.sg-header--hero.is-over-hero:not(.is-menu-open) .sg-header__desktop > .sg-btn--primary { --sg-focus: var(--sg-on-media); background: var(--sg-on-media); color: var(--sg-hero-ink); }
+.sg-header--hero.is-over-hero:not(.is-menu-open) .sg-header__desktop > .sg-btn--primary:hover { background: var(--color-brand-50); }
