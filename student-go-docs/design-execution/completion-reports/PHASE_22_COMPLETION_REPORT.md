@@ -213,7 +213,7 @@ Not touched: `routes/web.php`, `routes/api.php`, middleware, models, migrations,
 | — | Console / network | PASS (Phase 22 pages) | 0 errors in 18 captures (before: one 404). In multi-page runs the shared notification dropdown can log 'gagal load notifikasi: Failed to fetch' when a navigation aborts its request: shell behaviour, not this phase. |
 | — | Automated suite | PASS | `php artisan test`: **185 passed, 2,058 assertions** (includes the parallel sessions' tests); Phase 22 alone 12 tests. Not run before the change in this session. After the change, before fixing it, 1 Phase 1 assertion failed as expected (section 8). |
 | — | Routes | PASS | `route:list` 203 routes = Phase 0/3 count; the 7 talent routes are unchanged. |
-| — | Assets | PASS | 37/38 Phase 0 hashes identical, 0 changed; missing `karsa-logo.png` was deleted by the user before Phase 4. |
+| — | Assets | PASS | 37/38 Phase 0 hashes identical, 0 changed; missing `student-go-logo.png` was deleted by the user before Phase 4. |
 | — | Browser interaction script | PASS | `reports/phase22/after/interaction_checks.json`: 29/29. |
 
 ## 11. CSV export comparison

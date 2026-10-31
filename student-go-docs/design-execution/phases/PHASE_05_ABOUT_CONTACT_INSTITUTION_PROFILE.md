@@ -39,7 +39,7 @@
 
 | Route pattern | Role | Audit status | Evidence | Notes |
 |---|---|---|---|---|
-| /about | Public | Inspected | OBSERVED; title VERIFIED | Full-screen 7-slide carousel, 'About Us' in English; <title> 'Laravel - Tentang Kami - Karsa' (VERIFIED). |
+| /about | Public | Inspected | OBSERVED; title VERIFIED | Full-screen 7-slide carousel, 'About Us' in English; <title> 'Laravel - Tentang Kami - Student Go' (VERIFIED). |
 | /contact | Public | Inspected | OBSERVED; title VERIFIED | <title> 'Laravel - Contact Us - Laravel' (VERIFIED). |
 | /institution/{id} | Anyone | Inspected (4), 79 fetched | OBSERVED; VERIFIED failing locally | On 2026-10-30 /institution/19 returns a QueryException (DB unreachable) (VERIFIED). 33 of 79 institutions have no problems (OBSERVED). |
 
@@ -55,7 +55,7 @@
 ## C. Existing implementation
 
 - [OBSERVED] About is a full-screen 7-slide carousel readable only through arrows; 'About Us' title in English; English feature list ('Real-Time Updates', 'Managed by Experts'); photos of real KKN field scenes (students on a truck, hand prints, KKN jackets) are the app's most authentic assets (audit G02).
-- [VERIFIED live] `<title>` of `/about` is 'Laravel - Tentang Kami - Karsa' and of `/contact` is 'Laravel - Contact Us - Laravel'; `<html lang="en">` on both; no forms and no inputs on either page.
+- [VERIFIED live] `<title>` of `/about` is 'Laravel - Tentang Kami - Student Go' and of `/contact` is 'Laravel - Contact Us - Laravel'; `<html lang="en">` on both; no forms and no inputs on either page.
 - [OBSERVED] Contact: one-screen hero with an aerial campus photo, three developer cards with broken photos, two channels (email + WhatsApp), no official service contact.
 - [OBSERVED] `/institution/{id}`: green banner header, five stat tiles, grid of problem cards with grey 'No Image' boxes; 79 institutions (1-79 render, 80+ are 404); 33 have no problems; names up to 76 characters truncated at about 25 characters on browse cards; email up to 51 characters overflowing grid cells on the logged-in profile.
 - [VERIFIED 2026-10-30] `/institution/19` currently returns a QueryException locally (database unreachable), so the page cannot be viewed with data until D-12 is resolved.
@@ -72,7 +72,7 @@
 | J6 (P1) | Photo heroes on About/Contact (200-370 px+ bands). | OBSERVED |
 | J8 (P1) | English headings ('About Us', 'Contact Us'). | OBSERVED; titles VERIFIED |
 | J12 / J18 / J19 | Institution page: 'No Image' placeholders; card grid for problems; long names clipped. | OBSERVED |
-| J20 (P2) | Titles contain 'Laravel'/'Karsa'. | VERIFIED |
+| J20 (P2) | Titles contain 'Laravel'/'Student Go'. | VERIFIED |
 
 ## E. Approved design direction
 

@@ -16,7 +16,7 @@ Written 2026-10-30 by a discovery-and-planning session. **Nothing was implemente
 
 ## 2. Executive summary
 
-- Student Go works end to end for three roles but does not read as one product: three names (Laravel/Karsa/KKN Go), four web-font families in three stacks, six competing accents, three header systems, four card anatomies (OBSERVED; titles and fonts re-VERIFIED).
+- Student Go works end to end for three roles but does not read as one product: three names (Laravel/Student Go/Student Go), four web-font families in three stacks, six competing accents, three header systems, four card anatomies (OBSERVED; titles and fonts re-VERIFIED).
 - The audit catalogued **59 route patterns** (13 public/shared, 21 student, 11 institution, 12 company, 1 admin, 1 JSON API) and **56 screens**. All are mapped to phases in `EXECUTION_ROADMAP.md`. Four record routes are INFERRED, `/admin/dashboard` is BLOCKED, and `/forgot-password` is now VERIFIED to exist but currently crashes (Vite manifest).
 - The audit's backlog has **38 items**: 4 P0 (J1-J4: identity, lists hiding records, guest-visible contact data, contradictory counts), 12 P1, 15 P2, 7 P3. P0 items are fixed first (Phase 1) because a design must not mask them.
 - **New on 2026-10-30 (VERIFIED):** on the local app the database is unreachable (Supabase pooler error 'tenant/user not found'), so every DB-backed page returns Laravel's debug page; static pages render. Debug mode is on and leaks stack traces. The front-end build is byte-for-byte the audit's (same hashed filenames), so the audit's front-end findings still apply. Framework facts leaked by the debug page: Laravel 13.7.0, PHP 8.3.24, PostgreSQL, Windows-style paths.
@@ -68,10 +68,10 @@ Source: audit section B (59 patterns) with the 2026-10-30 live notes. 'Phase' is
 | Route pattern | Role | Audit status | Evidence | Phase | Notes |
 |---|---|---|---|---|---|
 | / | Public | Inspected | OBSERVED; page VERIFIED live | 4 | Title 'Laravel - ...' (VERIFIED). Hard-coded stats 34/514/85+/120+ (VERIFIED). Hero Merriweather/Lora, 7-layer mesh, Leaflet map, AOS (OBSERVED; fonts and libs VERIFIED). |
-| /about | Public | Inspected | OBSERVED; title VERIFIED | 5 | Full-screen 7-slide carousel, 'About Us' in English; <title> 'Laravel - Tentang Kami - Karsa' (VERIFIED). |
+| /about | Public | Inspected | OBSERVED; title VERIFIED | 5 | Full-screen 7-slide carousel, 'About Us' in English; <title> 'Laravel - Tentang Kami - Student Go' (VERIFIED). |
 | /contact | Public | Inspected | OBSERVED; title VERIFIED | 5 | <title> 'Laravel - Contact Us - Laravel' (VERIFIED). |
-| /login | Guest | Inspected | OBSERVED; title VERIFIED | 6 | Split layout with invented stats; <title> 'Login - Karsa' (VERIFIED); lang id (VERIFIED). |
-| /register | Guest | Inspected | OBSERVED; title VERIFIED | 6 | Role picker; <title> 'Register - Karsa' (VERIFIED). |
+| /login | Guest | Inspected | OBSERVED; title VERIFIED | 6 | Split layout with invented stats; <title> 'Login - Student Go' (VERIFIED); lang id (VERIFIED). |
+| /register | Guest | Inspected | OBSERVED; title VERIFIED | 6 | Role picker; <title> 'Register - Student Go' (VERIFIED). |
 | /register/student | Guest | Inspected (audit); failing locally on 2026-10-30 | OBSERVED; local failure VERIFIED | 6 | 3 steps, 13 fields (OBSERVED). On 2026-10-30 it returns a QueryException on a `universities` query from app/Http/Controllers/Auth/RegisterController.php line 67 because the DB is unreachable (VERIFIED). |
 | /register/institution | Guest | Inspected | OBSERVED | 6 | 4 steps, 18 fields incl. KTP/NPWP uploads (OBSERVED). |
 | /register/company | Guest | Inspected | OBSERVED | 6 | No stepper, 17 fields, titled 'Daftar Sebagai Company' (OBSERVED). |
@@ -98,7 +98,7 @@ Source: audit section B (59 patterns) with the 2026-10-30 live notes. 'Phase' is
 | /student/profile | Student | Inspected | OBSERVED | 12 | — |
 | /student/profile/edit | Student | Inspected | OBSERVED | 12 | Name fields load empty (J5). |
 | /student/wishlist | Student | Inspected + measured (empty) | OBSERVED | 11 | — |
-| /student/chatbot | Student | Inspected | OBSERVED | 16 | KARA conversation list. |
+| /student/chatbot | Student | Inspected | OBSERVED | 16 | SAGO conversation list. |
 | /student/chatbot/create | Student | Fetched | OBSERVED | 16 | GET creates a record (J13). Do NOT open in discovery or tests without approval. Behaviour change in Phase 1 (D-25). |
 | /student/chatbot/{id} | Student | 1, 2 (created by audit); 3 redirects | OBSERVED | 16 | No h1 (J11). |
 | /institution/dashboard | Institution | Inspected | OBSERVED | 17 | — |
@@ -142,10 +142,10 @@ Source: audit section B (59 patterns) with the 2026-10-30 live notes. 'Phase' is
 | URL | Result | Evidence |
 |---|---|---|
 | `/` | 200; title 'Laravel - Platform Digital untuk Kuliah Kerja Nyata Berkelanjutan'; `lang="en"`; nav About Us/Contact/Login/Register | VERIFIED |
-| `/about` | 200; title 'Laravel - Tentang Kami - Karsa'; `lang="en"`; h1 'About Us'; no forms | VERIFIED |
+| `/about` | 200; title 'Laravel - Tentang Kami - Student Go'; `lang="en"`; h1 'About Us'; no forms | VERIFIED |
 | `/contact` | 200; title 'Laravel - Contact Us - Laravel'; `lang="en"`; h1 'Contact Us'; no forms | VERIFIED |
-| `/login` | 200; title 'Login - Karsa'; `lang="id"`; one form, three inputs; h1 'Connect. Collaborate. Create Impact.' | VERIFIED |
-| `/register` | 200; title 'Register - Karsa'; `lang="id"`; h1 'Bergabung dengan Karsa' | VERIFIED |
+| `/login` | 200; title 'Login - Student Go'; `lang="id"`; one form, three inputs; h1 'Connect. Collaborate. Create Impact.' | VERIFIED |
+| `/register` | 200; title 'Register - Student Go'; `lang="id"`; h1 'Bergabung dengan Student Go' | VERIFIED |
 | `/register/student` | 500 QueryException on a `universities` query (DB unreachable) | VERIFIED |
 | `/forgot-password` | 500 ViteException: 'Unable to locate file in Vite manifest: resources/css/auth-institution.css' from `layouts/auth.blade.php` | VERIFIED |
 | `/institution/19` | 500 QueryException (DB unreachable) | VERIFIED |
@@ -191,9 +191,9 @@ Measured on the compiled CSS and 25 rendered pages (OBSERVED, audit C): 12 text 
 
 **Existing in the app (Source A; full detail in `ASSET_INVENTORY.md` section 1)**
 
-- 27 files under `public/` were read through the running app (VERIFIED 2026-10-30): the logo `karsa-logo.png` (1430x566, 272 KB, drawn at 40 px), 21 photographs (seven genuine KKN field photographs at 4912x2760, landscapes and aerials of unknown origin, six corporate stock-style office images, a 1.7 MB gradient background `KARA-background.png`), two team portraits, an empty `favicon.ico` (0 bytes) and `robots.txt`. One more portrait is referenced by `/contact` but missing.
+- 27 files under `public/` were read through the running app (VERIFIED 2026-10-30): the logo `student-go-logo.png` (1430x566, 272 KB, drawn at 40 px), 21 photographs (seven genuine KKN field photographs at 4912x2760, landscapes and aerials of unknown origin, six corporate stock-style office images, a 1.7 MB gradient background `SAGO-background.png`), two team portraits, an empty `favicon.ico` (0 bytes) and `robots.txt`. One more portrait is referenced by `/contact` but missing.
 - Rendered guest pages reference: `/` logo + `hero-background.jpg`; `/about` logo + `mahasiswa-about.jpeg`, `about.jpg`, `handprints-about.jpeg`, `jaket-about.jpeg`; `/contact` logo + `contact.jpg` + three team portraits (two broken); `/login` logo + `login-register-view.jpg`; `/register` logo. Authenticated-page usage is OBSERVED (audit) or INFERRED (file names).
-- Weight: `about.jpg` 3.6 MB (7360x4912), `dashboard-student3.jpg` 3.3 MB, `KARA-background.png` 1.7 MB, the seven field photographs 0.4-1.2 MB each.
+- Weight: `about.jpg` 3.6 MB (7360x4912), `dashboard-student3.jpg` 3.3 MB, `SAGO-background.png` 1.7 MB, the seven field photographs 0.4-1.2 MB each.
 - No credit, licence or consent record exists for any of them (UNKNOWN; D-30).
 - Problem gallery: 310 images on remote Supabase storage, none load locally. Uploads (avatars, logos, verification documents) and certificate resources: location UNKNOWN / BLOCKED.
 - Icons: inline SVG outline set (Heroicons-like, 10-138 per page); Boxicons and Font Awesome loaded but nearly unused. Hand-drawn generic SVGs on the homepage (mock UI with star badge, flat building with round figures): markup in Blade.
@@ -289,7 +289,7 @@ Stage One is read-only. **Completed 2026-10-30 (Phase 0)** on branch `feat/stude
 | S1-27 | `.gitignore` (is `public/build` ignored? `vendor`? `node_modules`?) | Phase 2, safety rules | `.gitignore` | VERIFIED: `.gitignore` ignores `/vendor`, `/node_modules`, `/public/build`, `/public/hot`, `/public/storage`, `.env`, `.env.backup`, `.env.production`. |
 | S1-28 | README: how the app is started and tested on this machine (Windows?) | CLAUDE.md section 4 | README, scripts | VERIFIED: README has no run/test instructions; `composer.json` scripts `setup`, `dev`, `test`. Host is Windows 11 (Git Bash). App started with `php artisan serve` on 127.0.0.1:8000. |
 | S1-29 | List `public/` recursively with size and SHA-256 (excluding `build/` and `storage/`); diff against section 1 of this inventory. | Confirms the list is complete; adds files nobody named. | `find`, `sha256sum` | VERIFIED: 38 files in `public/` (excl. `build/`; `public/storage` link absent) with SHA-256 in `baseline/asset-hashes.txt`; identical before and after Phase 0. 10 files were missing from the inventory (added to ASSET_INVENTORY.md 1.5). |
-| S1-30 | For every file in `public/` (and every package asset to be used) search `resources/`, `app/`, `routes/`, `config/`, `database/` for its name. | Turns INFERRED usage into confirmed usage; finds unreferenced files. | `grep -RIn -F` | VERIFIED: references per file recorded in `ASSET_INVENTORY.md` section 1.5. Unreferenced: `KARA-background.png`, `reg-com-background.jpg`, `profile_13523124.jpeg` (referenced as `.jpg`), `profile_13523151.jpeg`, `favicon.ico`. |
+| S1-30 | For every file in `public/` (and every package asset to be used) search `resources/`, `app/`, `routes/`, `config/`, `database/` for its name. | Turns INFERRED usage into confirmed usage; finds unreferenced files. | `grep -RIn -F` | VERIFIED: references per file recorded in `ASSET_INVENTORY.md` section 1.5. Unreferenced: `SAGO-background.png`, `reg-com-background.jpg`, `profile_13523124.jpeg` (referenced as `.jpg`), `profile_13523151.jpeg`, `favicon.ico`. |
 | S1-31 | Find certificate templates, certificate fonts (Pinyon Script, Poppins) and the code that renders certificates; produce one sample certificate if safe. | Protected asset group (D-32); baseline for later comparison. | `grep -RInEi`, controllers, DomPDF config | VERIFIED: `public/assets/certificate/template.png`, `public/assets/certificate/fonts/PinyonScript-Regular.ttf`, `…/Poppins-Regular.ttf`, used by `app/Services/CertificateService.php:160-162` (GD `imagettftext`, PNG, uploaded to Supabase, path saved in `projects.certificate_path`); triggered from `Institution/ProjectManagementController` on completion and `php artisan certificates:generate-missing`. Sample rendered offline: `baseline/screenshots/certificate-sample-baseline.png` (2000x1414). Independent of website fonts. |
 | S1-32 | Find where student avatars, institution/company logos, verification documents, problem images are stored and how Blade renders them; check `public/storage` and `FILESYSTEM_DISK`. | Preservation and privacy (D-04, D-31). | `config/filesystems.php`, Blade | VERIFIED: uploads go through `App\Services\SupabaseStorageService` (profile photos `students/profiles/…`, institution/company logos, verification documents, KTP, NPWP, problem images, proposals, reports, certificates) to Supabase Storage; `storage/app/public|private` are empty locally; `public/storage` link absent. Avatars: `Student::getProfilePhotoUrlAttribute()` (`app/Models/Student.php:174-195`) → Supabase URL, local `storage/` URL, or **ui-avatars.com** with the student's name. |
 | S1-33 | Read `vite.config.js`, `resources/css/app.css`, `resources/js/app.js`, `package.json`; list `resources/css/` and explain every CSS file missing from the manifest. | Confirms CSS wiring (D-29) and the HTTP 500 cause. | — | VERIFIED: see S1-04/S1-05 and `VIEWS_AND_JS.md` section 2. |
@@ -309,7 +309,7 @@ Stage One is read-only. **Completed 2026-10-30 (Phase 0)** on branch `feat/stude
 | 5 | `/institution/reviews/create` is a page | The route is `/institution/reviews/create/{projectId}`; the bare URL is the `show` route with id `create` | Phases 1, 19 |
 | 6 | Audit's 59 route patterns | All 59 exist, plus 144 more routes (202 total), incl. `dev/login` (broken view), public `api/test-db`, `api/health`, duplicate `student/problems*`, unrouted `TalentController@show` | Phases 1, 8, 22, 26 |
 | 7 | Asset package photographs "not downloaded" | 60 WebP files under `student-go-assets/public/assets/photography/` and 61 originals (54 MB) under `student-go-assets/storage/app/asset-originals/` exist (created 2026-10-30 14:07); `assets-manifest.json` still says "not yet downloaded". The 111 hashed files match the manifest. | D-33, D-19, Phase 2 |
-| 8 | Product name in docs: Student Go | README and certificate say **Karsa** ("Platform Magang dan Rekrutmen Mahasiswa"); `APP_NAME` default 'Laravel' in titles | D-01 |
+| 8 | Product name in docs: Student Go | README and certificate say **Student Go** ("Platform Magang dan Rekrutmen Mahasiswa"); `APP_NAME` default 'Laravel' in titles | D-01 |
 | 9 | Static `public/css`, `public/js` assumed fine | `asset('css/browse-problems.css')`, `asset('css/friends.css')`, `asset('js/pages/browse-problems.js')` point to folders that do not exist (404) | Phases 8, 13 |
 | 10 | Homepage counters (J9) OBSERVED | Hard-coded in `HomeController.php:15-20` | Phase 4 |
 | 11 | Database: restore remote | The old project is gone. The user's new Supabase project was migrated and seeded on 2026-10-30, but the BPS-based region seeder is broken, so the data has 5 provinces / 22 regencies instead of the audit's spread. Problem images point to an empty bucket. | D-12, D-14, D-15 |
@@ -364,4 +364,4 @@ Facts above that Phase 1 changed (details: `reports/PHASE_01_REPORT.md`):
 - **Certificate templates and fonts (Pinyon Script, Poppins)**, uploaded avatars, logos and verification documents: location UNKNOWN / BLOCKED (D-32, D-31).
 - **Source C (`resources/`)** was not read; asset usage in Blade is inferred from rendered guest pages, built files and the audit.
 - The browser tool refused some script calls on 2026-10-30 ('Cookie/query string data'); facts were taken with narrower read-only probes instead.
-- Side effects of this session: none on the app. (The audit itself created two empty KARA conversations through a GET and inflated view counters; see audit G. Those remain for the user to delete if wanted.)
+- Side effects of this session: none on the app. (The audit itself created two empty SAGO conversations through a GET and inflated view counters; see audit G. Those remain for the user to delete if wanted.)

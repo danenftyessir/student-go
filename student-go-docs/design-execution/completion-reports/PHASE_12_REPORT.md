@@ -54,7 +54,7 @@ Not changed: controllers, requests, models, services, routes, `app.css` or any s
 
 ## 5. Copy (DRAFT, D-23 b)
 
-Section headings: Cerita pengalaman · Proyek selesai · Keterampilan · Dipakai dalam proyek selesai · Minat · Kontak · Tautan portofolio. Empty states: "Belum ada cerita / Tulis pengalaman KKN Anda: apa yang dikerjakan, bersama siapa, dan apa yang dipelajari. Cerita tampil di profil publik."; "Belum ada proyek selesai / Proyek muncul di sini setelah statusnya Selesai. Mulai dengan melamar masalah yang sesuai minat Anda." Contact note: "Email dan WhatsApp hanya terlihat oleh koneksi yang sudah diterima." Share text: "Lihat portofolio KKN saya di Student Go: {nama}" (was "…di Karsa", D-01). Edit help texts as in the view.
+Section headings: Cerita pengalaman · Proyek selesai · Keterampilan · Dipakai dalam proyek selesai · Minat · Kontak · Tautan portofolio. Empty states: "Belum ada cerita / Tulis pengalaman KKN Anda: apa yang dikerjakan, bersama siapa, dan apa yang dipelajari. Cerita tampil di profil publik."; "Belum ada proyek selesai / Proyek muncul di sini setelah statusnya Selesai. Mulai dengan melamar masalah yang sesuai minat Anda." Contact note: "Email dan WhatsApp hanya terlihat oleh koneksi yang sudah diterima." Share text: "Lihat portofolio KKN saya di Student Go: {nama}" (was "…di Student Go", D-01). Edit help texts as in the view.
 
 ## 6. Deviations and decisions for the user
 

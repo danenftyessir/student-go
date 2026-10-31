@@ -131,6 +131,11 @@ Overlap comparisons that touch this phase are in `ASSET_INVENTORY.md` section 11
 - Student profile photographs and uploads, institution/company logos, verification documents: never moved or re-encoded; never shown in a new public place (D-04, D-31).
 - Certificate templates and the Pinyon Script and Poppins fonts (and whatever generates certificates): UNKNOWN location (D-32). Do not remove, rename, re-encode or restyle them, and do not remove a Google Fonts link that a certificate view depends on.
 
+### H.6 Addendum 2026-11-01: certificate template and download (user request)
+
+- The user replaced the certificate template (D-32 answer of 2026-11-01). `public/assets/certificate/template.png` is now the Student Go design, `CertificateService` positions were re-fitted, and `tests/Feature/Phase11/CertificateTemplateTest.php` renders it offline (no DB, no upload).
+- `/student/projects`: a completed project that has `certificate_path` shows 'Sertifikat No. …' under its stage and an 'Unduh sertifikat' link (`document_url()`, `target="_blank" download`, the same pattern as the Phase 12 portfolio) next to the portfolio toggle. Nothing is shown when there is no certificate. No route, controller or query changed (`certificate_*` columns are already on the loaded `Project`).
+
 ## I. Dependencies
 
 - **Phases:** hard — Phase 3 (Shared Shell & Components); soft — Phase 10 (Applications), Phase 8 (Student Project Discovery).
