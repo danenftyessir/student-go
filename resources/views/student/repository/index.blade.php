@@ -32,7 +32,7 @@
         description="Laporan dan dokumentasi proyek KKN yang sudah selesai. Cari menurut judul, penulis atau kata kunci, lalu saring menurut SDG, provinsi dan tahun.">
         <x-slot:actions>
             <a href="{{ route('student.chatbot.index') }}" class="sg-btn sg-btn--secondary">
-                <x-icon name="message-square-text" size="sm" />Tanya KARA
+                <x-icon name="message-square-text" size="sm" />Tanya SAGO
             </a>
         </x-slot:actions>
     </x-ui.page-header>
