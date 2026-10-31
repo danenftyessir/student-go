@@ -101,7 +101,7 @@
 
 | Asset | Decision | What happens in this phase | Evidence |
 |---|---|---|---|
-| `karsa-logo.png` | Retain / Replace (conditional) | Follows Phase 3. | VERIFIED |
+| `student-go-logo.png` | Retain / Replace (conditional) | Follows Phase 3. | VERIFIED |
 
 ### H.2 Source B: custom package assets available for this phase
 

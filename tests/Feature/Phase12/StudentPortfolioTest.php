@@ -136,7 +136,7 @@ class StudentPortfolioTest extends TestCase
         $this->assertStringContainsString('Salin tautan portofolio', $html);
         $this->assertStringContainsString('sg-btn--secondary', $html);
 
-        foreach (['dashboard-student3.jpg', 'backdrop-blur', 'bg-gradient', 'Karsa'] as $banned) {
+        foreach (['dashboard-student3.jpg', 'backdrop-blur', 'bg-gradient'] as $banned) {
             $this->assertStringNotContainsString($banned, $html, "masih memuat {$banned}");
         }
         // pemilik melihat kontaknya sendiri

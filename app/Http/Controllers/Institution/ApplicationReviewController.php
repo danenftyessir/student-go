@@ -204,7 +204,7 @@ class ApplicationReviewController extends Controller
         } catch (\Exception $e) {
             DB::rollBack();
             
-            return back()->with('error', 'terjadi kesalahan: ' . $e->getMessage());
+            return back()->with('error', safe_error_message('terjadi kesalahan: ', $e));
         }
     }
 
@@ -251,7 +251,7 @@ class ApplicationReviewController extends Controller
         } catch (\Exception $e) {
             DB::rollBack();
             
-            return back()->with('error', 'terjadi kesalahan: ' . $e->getMessage());
+            return back()->with('error', safe_error_message('terjadi kesalahan: ', $e));
         }
     }
 
@@ -331,7 +331,7 @@ class ApplicationReviewController extends Controller
         } catch (\Exception $e) {
             DB::rollBack();
             
-            return back()->with('error', 'terjadi kesalahan: ' . $e->getMessage());
+            return back()->with('error', safe_error_message('terjadi kesalahan: ', $e));
         }
     }
 
@@ -479,7 +479,7 @@ class ApplicationReviewController extends Controller
         } catch (\Exception $e) {
             DB::rollBack();
             
-            return back()->with('error', 'terjadi kesalahan: ' . $e->getMessage());
+            return back()->with('error', safe_error_message('terjadi kesalahan: ', $e));
         }
     }
 }

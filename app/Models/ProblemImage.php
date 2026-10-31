@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * untuk menyimpan gambar-gambar problem/masalah
  * 
  * CATATAN PENTING: file gambar disimpan di Supabase Storage
- * - Bucket: "karsa storage"
+ * - Bucket: "sg-storage"
  * - Path: problems/FILENAME.jpg
  * - Akses: Public URL via supabase_url() helper
  * 

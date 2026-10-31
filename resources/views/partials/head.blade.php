@@ -1,8 +1,8 @@
 {{-- <head> bersama layouts.app dan layouts.auth (phase 3). pola judul: "Halaman — Student Go" (D-01) --}}
 @php
-    // akhiran merek lama yang ditulis halaman sendiri (" - Karsa", " - " . app.name) dibuang di sini, bukan di tiap view
+    // akhiran merek lama yang ditulis halaman sendiri (" - Laravel", " - " . app.name) dibuang di sini, bukan di tiap view
     $sgPageTitle = trim($__env->yieldContent('title'));
-    $sgPageTitle = trim(preg_replace('/\s*[-–—|]\s*(Karsa|Laravel|Student Go|'.preg_quote((string) config('app.name'), '/').')\s*$/iu', '', $sgPageTitle));
+    $sgPageTitle = trim(preg_replace('/\s*[-–—|]\s*(Laravel|Student Go|'.preg_quote((string) config('app.name'), '/').')\s*$/iu', '', $sgPageTitle));
 @endphp
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">

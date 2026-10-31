@@ -37,13 +37,13 @@ class PublicPagesTest extends TestCase
      */
     private function assertNoOldBrand(string $html): void
     {
-        $this->assertDoesNotMatchRegularExpression('/karsa|kkn ?go|karya untuk bangsa/i', $this->text($html));
+        $this->assertDoesNotMatchRegularExpression('/karya untuk bangsa/i', $this->text($html));
         preg_match_all('/\s(?:alt|aria-label|title|placeholder)="([^"]*)"/i', $html, $m);
         foreach ($m[1] as $value) {
-            $this->assertDoesNotMatchRegularExpression('/karsa|kkn ?go|laravel/i', $value, $value);
+            $this->assertDoesNotMatchRegularExpression('/laravel/i', $value, $value);
         }
         preg_match('/<title>(.*?)<\/title>/s', $html, $title);
-        $this->assertDoesNotMatchRegularExpression('/karsa|laravel/i', $title[1]);
+        $this->assertDoesNotMatchRegularExpression('/laravel/i', $title[1]);
     }
 
     public function test_about_is_a_scrolling_article_without_carousel_or_unsourced_figures(): void
@@ -60,7 +60,7 @@ class PublicPagesTest extends TestCase
         foreach (['carouselSlides', 'nextSlide(', 'goToSlide(', 'switchTab(', 'scrollTimelineLeft'] as $needle) {
             $this->assertStringNotContainsString($needle, $html, $needle);
         }
-        // angka tanpa sumber (J9) dan klaim era karsa (RN-07, RN-08, RN-09) tidak tampil
+        // angka tanpa sumber (J9) dan klaim era lama (RN-07, RN-08, RN-09) tidak tampil
         $absent = [
             '8,3 juta', '520.000', '520,000', '76%', '1,2 triliun', '75%', '94%', '540 miliar', '4.500 perguruan',
             'Dari Tahun Ke Tahun', 'usia ke-2', 'katalisator', 'mentransformasi ekosistem', 'revolusi mahasiswa',

@@ -12,10 +12,10 @@ use App\Models\Province;
 
 /*
 |--------------------------------------------------------------------------
-| API Routes - KKN-GO Platform
+| API Routes - Student Go Platform
 |--------------------------------------------------------------------------
 |
-| file ini berisi semua API routes untuk aplikasi KKN-GO
+| file ini berisi semua API routes untuk aplikasi Student Go
 | terutama untuk AJAX calls, validasi form, dan data loading
 |
 | CATATAN: Semua routes di sini otomatis mendapat prefix '/api/'

@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Log;
  * php artisan supabase:upload-problem-images --check
  * php artisan supabase:upload-problem-images --rebuild-db
  *
- * Gambar yang diupload akan disimpan di bucket "karsa-storage" dengan path: problems/FILENAME
+ * Gambar yang diupload akan disimpan di bucket "sg-storage" dengan path: problems/FILENAME
  */
 class UploadProblemImagesToSupabase extends Command
 {
@@ -42,7 +42,7 @@ class UploadProblemImagesToSupabase extends Command
         // Load config
         $this->projectId = config('services.supabase.project_id');
         $this->serviceKey = config('services.supabase.service_key');
-        $this->bucketName = config('services.supabase.bucket', 'karsa-storage');
+        $this->bucketName = config('services.supabase.bucket', 'sg-storage');
         $this->baseUrl = "https://{$this->projectId}.supabase.co/storage/v1";
 
         // Validasi konfigurasi
@@ -54,7 +54,7 @@ class UploadProblemImagesToSupabase extends Command
 
         // Cek apakah bucket accessible
         if (!$this->checkBucketAccess()) {
-            $this->error('❌ Bucket tidak accessible. Pastikan bucket "karsa-storage" sudah dibuat di Supabase Dashboard.');
+            $this->error('❌ Bucket tidak accessible. Pastikan bucket "sg-storage" sudah dibuat di Supabase Dashboard.');
             return 1;
         }
 

@@ -58,7 +58,7 @@ return [
         'anon_key' => env('SUPABASE_ANON_KEY'),
         'service_key' => env('SUPABASE_SERVICE_KEY'),
         'project_id' => env('SUPABASE_PROJECT_ID'),
-        'bucket' => env('SUPABASE_BUCKET', 'karsa-storage'),
+        'bucket' => env('SUPABASE_BUCKET', 'sg-storage'),
         'storage_url' => env('SUPABASE_URL') ? env('SUPABASE_URL') . '/storage/v1' : null,
     ],
 

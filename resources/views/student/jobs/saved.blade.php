@@ -1,220 +1,163 @@
+{{-- resources/views/student/jobs/saved.blade.php --}}
 @extends('layouts.app')
 
 @section('title', 'Lowongan Tersimpan')
 
+{{-- phase 15: baris yang sama dengan halaman lowongan (components/job-row). parameter tetap: folder, page.
+     hapus = POST student/jobs/{id}/toggle-save; ubah folder/catatan/pengingat = PUT student/jobs/{id}/update-saved.
+     jumlah dari controller ($totalSaved, $expiringCount). --}}
+
+@php
+    $currentFolder = request('folder');
+    $savedRows = $savedJobs->getCollection()->filter(fn ($saved) => $saved->jobPosting);
+@endphp
+
 @section('content')
-<div class="min-h-screen bg-gray-50" x-data="savedJobsPage()">
-    <!-- Header -->
-    <div class="bg-white border-b border-gray-200">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-                <div>
-                    <h1 class="text-2xl font-bold text-gray-900">Lowongan Tersimpan</h1>
-                    <p class="text-gray-600 mt-1">{{ $totalSaved }} lowongan disimpan</p>
-                </div>
+<div class="sg-container sg-browse" x-data="savedJobsPage()">
+    <x-ui.page-header
+        title="Lowongan Tersimpan"
+        description="Lowongan yang Anda simpan untuk dibaca atau dilamar nanti."
+        :back="route('student.jobs.index')"
+        back-label="Lowongan" />
 
-                @if($expiringCount > 0)
-                <div class="bg-amber-50 border border-amber-200 rounded-lg px-4 py-2">
-                    <span class="text-amber-700 text-sm">
-                        <x-icon name="clock" size="sm" class="inline-block align-middle mr-1" />
-                        {{ $expiringCount }} lowongan akan expired dalam 7 hari
-                    </span>
-                </div>
-                @endif
-            </div>
+    @if ($totalSaved > 0)
+        <x-ui.summary label="Ringkasan lowongan tersimpan" :items="[
+            ['value' => $totalSaved, 'label' => 'lowongan disimpan'],
+            ['value' => $expiringCount > 0 ? $expiringCount : null, 'label' => 'berakhir dalam 7 hari'],
+        ]" />
 
-            <!-- Filter by Folder -->
-            @if(count($folders) > 0)
-            <div class="mt-4 flex flex-wrap gap-2">
-                <a href="{{ route('student.jobs.saved') }}"
-                   class="px-3 py-1.5 rounded-full text-sm {{ !request('folder') ? 'bg-blue-600 text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200' }}">
-                    Semua
-                </a>
-                @foreach($folders as $folder)
-                <a href="{{ route('student.jobs.saved', ['folder' => $folder]) }}"
-                   class="px-3 py-1.5 rounded-full text-sm {{ request('folder') === $folder ? 'bg-blue-600 text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200' }}">
-                    {{ $folder }}
-                </a>
-                @endforeach
-            </div>
-            @endif
-        </div>
-    </div>
+        @if (count($folders) > 0)
+            {{-- folder sebagai tautan (?folder=…); folder aktif ditandai aria-current, centang dan huruf tebal --}}
+            <nav class="sg-browse__active" aria-label="Folder">
+                <ul class="sg-browse__chips">
+                    @foreach (collect([null])->merge($folders) as $folder)
+                        @php $isCurrent = $folder === null ? ! $currentFolder : $currentFolder === $folder; @endphp
+                        <li>
+                            <a href="{{ $folder === null ? route('student.jobs.saved') : route('student.jobs.saved', ['folder' => $folder]) }}"
+                               @class(['sg-browse-chip', 'font-semibold' => $isCurrent]) @if ($isCurrent) aria-current="page" @endif>
+                                @if ($isCurrent)<x-icon name="check" size="sm" />@endif{{ $folder ?? 'Semua' }}
+                            </a>
+                        </li>
+                    @endforeach
+                </ul>
+            </nav>
+        @endif
+    @endif
 
-    <!-- Content -->
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-        @if($savedJobs->count() > 0)
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            @foreach($savedJobs as $saved)
-            @php $job = $saved->jobPosting; @endphp
-            <div class="bg-white rounded-xl border border-gray-200 overflow-hidden hover:shadow-lg transition-shadow duration-200">
-                <div class="p-5">
-                    <!-- Company Info -->
-                    <div class="flex items-start gap-3 mb-4">
-                        <div class="w-12 h-12 rounded-lg flex items-center justify-center overflow-hidden">
-                            @if($job->company->logo_url)
-                                <img src="{{ $job->company->logo_url }}" alt="{{ $job->company->name }}" class="w-full h-full object-cover">
-                            @else
-                                <img src="{{ $job->company->avatar_svg }}" alt="{{ $job->company->name }}" class="w-full h-full object-cover">
-                            @endif
-                        </div>
-                        <div class="flex-1 min-w-0">
-                            <h3 class="font-semibold text-gray-900 truncate">{{ $job->title }}</h3>
-                            <p class="text-sm text-gray-600 truncate">{{ $job->company->name }}</p>
-                        </div>
-                        <button @click="removeSaved({{ $job->id }})" class="text-gray-400 hover:text-red-500" aria-label="Hapus dari lowongan tersimpan">
-                            <x-icon name="bookmark" class="text-blue-600" />
-                        </button>
-                    </div>
-
-                    <!-- Job Details -->
-                    <div class="space-y-2 mb-4">
-                        <div class="flex items-center text-sm text-gray-600">
-                            <x-icon name="map-pin" size="sm" class="mr-1 text-gray-400" />
-                            {{ $job->location ?? 'Remote' }}
-                        </div>
-                        <div class="flex items-center text-sm text-gray-600">
-                            <x-icon name="briefcase" size="sm" class="mr-1 text-gray-400" />
-                            {{ ucfirst(str_replace('_', ' ', $job->job_type)) }}
-                        </div>
-                        @if($job->salary_min || $job->salary_max)
-                        <div class="flex items-center text-sm text-gray-600">
-                            <span class="inline-block w-5" aria-hidden="true"></span><span class="sr-only">Gaji: </span>
-                            @if($job->salary_min && $job->salary_max)
-                            Rp {{ number_format($job->salary_min/1000000, 0) }} - {{ number_format($job->salary_max/1000000, 0) }} jt
-                            @else
-                            Rp {{ number_format(($job->salary_min ?? $job->salary_max)/1000000, 0) }} jt
-                            @endif
-                        </div>
-                        @endif
-                    </div>
-
-                    <!-- Folder & Notes -->
-                    @if($saved->folder)
-                    <div class="mb-3">
-                        <span class="inline-flex items-center px-2 py-1 rounded-full text-xs bg-blue-100 text-blue-700">
-                            <x-icon name="folder-open" size="sm" class="mr-1" />{{ $saved->folder }}
-                        </span>
-                    </div>
-                    @endif
-
-                    <!-- Expiry Warning -->
-                    @if($job->expires_at && $job->expires_at <= now()->addDays(7))
-                    <div class="mb-3 text-xs text-amber-600 bg-amber-50 rounded px-2 py-1">
-                        <x-icon name="triangle-alert" size="sm" class="inline-block align-middle mr-1" />
-                        Berakhir {{ $job->expires_at->diffForHumans() }}
-                    </div>
-                    @endif
-
-                    <!-- Actions -->
-                    <div class="flex gap-2">
-                        <a href="{{ route('student.jobs.show', $job->id) }}"
-                           class="flex-1 text-center px-4 py-2 bg-blue-600 text-white rounded-lg text-sm hover:bg-blue-700 transition">
-                            Lihat Detail
-                        </a>
-                        <button @click="openEditModal({{ json_encode($saved) }})"
-                                class="px-3 py-2 border border-gray-300 rounded-lg text-gray-600 hover:bg-gray-50" aria-label="Ubah folder dan catatan">
-                            <x-icon name="pencil" size="sm" />
-                        </button>
-                    </div>
-                </div>
-            </div>
-            @endforeach
-        </div>
-
-        <!-- Pagination -->
-        <div class="mt-8">
-            {{ $savedJobs->links() }}
-        </div>
+    <div class="sg-browse__main mt-4">
+        @if ($totalSaved === 0)
+            <x-ui.empty-state
+                title="Belum ada lowongan tersimpan"
+                description="Pilih “Simpan” pada lowongan yang menarik agar mudah ditemukan lagi di sini."
+                illustration="no-saved-projects"
+                class="sg-browse__empty">
+                <x-slot:action>
+                    <x-ui.button :href="route('student.jobs.index')">Cari Lowongan</x-ui.button>
+                </x-slot:action>
+            </x-ui.empty-state>
+        @elseif ($savedRows->isEmpty())
+            {{-- folder tanpa lowongan, atau nomor halaman di luar jangkauan --}}
+            <x-ui.empty-state
+                title="Tidak ada lowongan di sini"
+                description="{{ $currentFolder ? 'Folder “' . $currentFolder . '” tidak berisi lowongan pada halaman ini.' : 'Halaman ini tidak berisi lowongan tersimpan.' }}"
+                class="sg-browse__empty">
+                <x-slot:action>
+                    <x-ui.button variant="secondary" :href="route('student.jobs.saved')">Lihat semua tersimpan</x-ui.button>
+                </x-slot:action>
+            </x-ui.empty-state>
         @else
-        <div class="text-center py-16">
-            <div class="w-20 h-20 mx-auto bg-gray-100 rounded-full flex items-center justify-center mb-4">
-                <x-icon name="bookmark" size="lg" class="text-gray-400" />
-            </div>
-            <h3 class="text-lg font-medium text-gray-900 mb-2">Belum Ada Lowongan Tersimpan</h3>
-            <p class="text-gray-600 mb-6">Simpan lowongan yang menarik untuk dilihat nanti</p>
-            <a href="{{ route('student.jobs.index') }}" class="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
-                <x-icon name="search" size="sm" class="mr-2" />Cari Lowongan
-            </a>
-        </div>
+            <x-ui.table caption="Lowongan tersimpan, halaman {{ $savedJobs->currentPage() }}" class="sg-browse-table">
+                <x-slot:head>
+                    <th scope="col">Posisi</th>
+                    <th scope="col">Perusahaan</th>
+                    <th scope="col">Lokasi</th>
+                    <th scope="col" class="min-w-40">SDG</th>
+                    <th scope="col">Tenggat</th>
+                </x-slot:head>
+                @foreach ($savedRows as $saved)
+                    @include('student.jobs.components.job-row', ['job' => $saved->jobPosting, 'saved' => $saved])
+                @endforeach
+            </x-ui.table>
+
+            <x-ui.pagination :paginator="$savedJobs->withQueryString()" label="Halaman lowongan tersimpan" class="sg-browse__pager" />
         @endif
     </div>
 
-    <!-- Edit Modal -->
-    <div x-show="showEditModal" x-cloak class="fixed inset-0 z-50 overflow-y-auto" x-transition>
-        <div class="flex items-center justify-center min-h-screen px-4">
-            <div class="fixed inset-0 bg-black/50" @click="showEditModal = false"></div>
-            <div class="relative bg-white rounded-xl max-w-md w-full p-6">
-                <h3 class="text-lg font-semibold mb-4">Edit Bookmark</h3>
-                <div class="space-y-4">
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Folder</label>
-                        <input type="text" x-model="editData.folder" placeholder="Contoh: Prioritas, Magang"
-                               class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Catatan</label>
-                        <textarea x-model="editData.notes" rows="3" placeholder="Tambahkan catatan..."
-                                  class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"></textarea>
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Pengingat</label>
-                        <input type="datetime-local" x-model="editData.reminder_at"
-                               class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
-                    </div>
-                </div>
-                <div class="flex gap-3 mt-6">
-                    <button @click="showEditModal = false" class="flex-1 px-4 py-2 border border-gray-300 rounded-lg">Batal</button>
-                    <button @click="saveEdit()" class="flex-1 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">Simpan</button>
-                </div>
-            </div>
-        </div>
-    </div>
+    {{-- ubah folder, catatan dan pengingat (field sama seperti sebelumnya: folder, notes, reminder_at) --}}
+    <x-ui.modal id="saved-edit" title="Ubah catatan lowongan">
+        <form id="saved-edit-form" class="grid gap-4" @submit.prevent="saveEdit()">
+            <p class="m-0" x-text="editData.title"></p>
+            <x-ui.field label="Folder" for="saved-folder" help="Contoh: Prioritas, Magang">
+                <input type="text" id="saved-folder" class="sg-input" x-model="editData.folder" maxlength="100" aria-describedby="saved-folder-help">
+            </x-ui.field>
+            <x-ui.field label="Catatan" for="saved-notes">
+                <textarea id="saved-notes" class="sg-textarea" rows="3" x-model="editData.notes"></textarea>
+            </x-ui.field>
+            <x-ui.field label="Pengingat" for="saved-reminder">
+                <input type="datetime-local" id="saved-reminder" class="sg-input" x-model="editData.reminder_at">
+            </x-ui.field>
+            <p class="sg-error" x-show="error" x-cloak role="alert" x-text="error"></p>
+        </form>
+        <x-slot:footer>
+            <button type="button" class="sg-btn sg-btn--secondary" data-sg-close>Batal</button>
+            <button type="submit" form="saved-edit-form" class="sg-btn sg-btn--primary" :disabled="saving">Simpan</button>
+        </x-slot:footer>
+    </x-ui.modal>
 </div>
+@endsection
 
 @push('scripts')
 <script>
 function savedJobsPage() {
     return {
-        showEditModal: false,
-        editData: { job_id: null, folder: '', notes: '', reminder_at: '' },
+        editData: { job_id: null, title: '', folder: '', notes: '', reminder_at: '' },
+        saving: false,
+        error: '',
 
-        openEditModal(saved) {
-            this.editData = {
-                job_id: saved.job_posting_id,
-                folder: saved.folder || '',
-                notes: saved.notes || '',
-                reminder_at: saved.reminder_at || ''
-            };
-            this.showEditModal = true;
+        openEdit(data) {
+            this.editData = { ...data };
+            this.error = '';
+            this.$dispatch('sg-open-modal', 'saved-edit');
         },
 
         async saveEdit() {
+            this.saving = true;
+            this.error = '';
             try {
-                const res = await fetch(`/student/jobs/${this.editData.job_id}/update-saved`, {
+                const { title, ...payload } = this.editData;
+                const res = await fetch(`{{ url('student/jobs') }}/${payload.job_id}/update-saved`, {
                     method: 'PUT',
-                    headers: { 'Content-Type': 'application/json', 'X-CSRF-TOKEN': '{{ csrf_token() }}' },
-                    body: JSON.stringify(this.editData)
+                    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json', 'X-CSRF-TOKEN': '{{ csrf_token() }}' },
+                    body: JSON.stringify(payload)
                 });
-                if (res.ok) {
-                    this.showEditModal = false;
-                    window.location.reload();
-                }
-            } catch (e) { console.error(e); }
+                if (!res.ok) throw new Error(res.status);
+                window.location.reload();
+            } catch (e) {
+                this.error = 'Perubahan gagal disimpan. Coba lagi.';
+            } finally {
+                this.saving = false;
+            }
         },
 
-        async removeSaved(jobId) {
-            if (!confirm('Hapus dari bookmark?')) return;
+        async removeSaved(jobId, title) {
+            const ok = await window.sgConfirm({
+                title: 'Hapus dari tersimpan?',
+                message: `“${title}” akan dihapus dari lowongan tersimpan. Lowongannya sendiri tidak terhapus.`,
+                confirmLabel: 'Hapus'
+            });
+            if (!ok) return;
             try {
-                const res = await fetch(`/student/jobs/${jobId}/toggle-save`, {
+                const res = await fetch(`{{ url('student/jobs') }}/${jobId}/toggle-save`, {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json', 'X-CSRF-TOKEN': '{{ csrf_token() }}' }
+                    headers: { 'Accept': 'application/json', 'X-CSRF-TOKEN': '{{ csrf_token() }}' }
                 });
-                if (res.ok) window.location.reload();
-            } catch (e) { console.error(e); }
+                if (!res.ok) throw new Error(res.status);
+                window.location.reload();
+            } catch (e) {
+                window.showNotification?.('Lowongan gagal dihapus dari tersimpan. Coba lagi.', 'error');
+            }
         }
     }
 }
 </script>
 @endpush
-@endsection

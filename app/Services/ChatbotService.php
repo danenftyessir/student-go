@@ -257,7 +257,8 @@ class ChatbotService
             return [
                 'success' => false,
                 'message' => 'Maaf, terjadi kesalahan saat memproses pesan Anda. Silakan coba lagi.',
-                'error' => $e->getMessage(),
+                // D-25: detail exception hanya saat app.debug aktif (hasil ini dikirim ke browser)
+                'error' => config('app.debug') ? $e->getMessage() : 'Internal server error',
             ];
         }
     }
@@ -329,20 +330,20 @@ class ChatbotService
             'sara' => [
                 'Maaf, saya tidak dapat menjawab pertanyaan yang mengandung unsur SARA.',
                 'Mohon maaf, topik yang Anda tanyakan mengandung konten sensitif yang tidak dapat saya bahas.',
-                'Saya tidak dapat membantu dengan pertanyaan yang bersifat SARA. Silakan tanyakan hal lain terkait platform Karsa.',
+                'Saya tidak dapat membantu dengan pertanyaan yang bersifat SARA. Silakan tanyakan hal lain terkait platform Student Go.',
             ],
             'offensive' => [
                 'Maaf, saya tidak dapat merespons konten yang tidak pantas.',
-                'Mohon maaf, pertanyaan Anda mengandung konten yang tidak sesuai. Mari kita fokus pada topik Karsa.',
+                'Mohon maaf, pertanyaan Anda mengandung konten yang tidak sesuai. Mari kita fokus pada topik Student Go.',
             ],
             'personal' => [
-                'Maaf, saya tidak dapat menjawab pertanyaan yang bersifat pribadi. Saya fokus membantu informasi seputar platform Karsa.',
-                'Mohon maaf, pertanyaan pribadi di luar cakupan bantuan saya. Ada yang bisa saya bantu tentang Karsa?',
+                'Maaf, saya tidak dapat menjawab pertanyaan yang bersifat pribadi. Saya fokus membantu informasi seputar platform Student Go.',
+                'Mohon maaf, pertanyaan pribadi di luar cakupan bantuan saya. Ada yang bisa saya bantu tentang Student Go?',
             ],
             'off_topic' => [
-                'Maaf, pertanyaan tersebut di luar cakupan platform Karsa. Saya khusus membantu informasi seputar proyek KKN.',
-                'Saya fokus pada informasi terkait proyek dan dokumentasi Karsa. Untuk topik lain, saya belum bisa membantu.',
-                'Mohon maaf, saya hanya dapat membantu dengan pertanyaan seputar platform Karsa dan KKN.',
+                'Maaf, pertanyaan tersebut di luar cakupan platform Student Go. Saya khusus membantu informasi seputar proyek KKN.',
+                'Saya fokus pada informasi terkait proyek dan dokumentasi Student Go. Untuk topik lain, saya belum bisa membantu.',
+                'Mohon maaf, saya hanya dapat membantu dengan pertanyaan seputar platform Student Go dan KKN.',
             ],
         ];
 

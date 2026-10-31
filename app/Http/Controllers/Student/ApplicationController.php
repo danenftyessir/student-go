@@ -351,7 +351,7 @@ class ApplicationController extends Controller
             Log::error("=== END Application Store (FAILED) ===");
             
             // return error message yang jelas
-            $errorMessage = 'Terjadi kesalahan saat mengirim aplikasi: ' . $e->getMessage();
+            $errorMessage = safe_error_message('Terjadi kesalahan saat mengirim aplikasi: ', $e);
             
             return back()
                 ->withInput()

@@ -289,7 +289,7 @@ class ProblemController extends Controller
                 'message' => $e->getMessage(),
                 'trace' => $e->getTraceAsString()
             ]);
-            return back()->with('error', 'Terjadi kesalahan saat menyimpan problem: ' . $e->getMessage())->withInput();
+            return back()->with('error', safe_error_message('Terjadi kesalahan saat menyimpan problem: ', $e))->withInput();
         }
     }
     
@@ -617,7 +617,7 @@ class ProblemController extends Controller
                 'message' => $e->getMessage(),
                 'trace' => $e->getTraceAsString()
             ]);
-            return back()->with('error', 'Terjadi kesalahan saat memperbarui problem: ' . $e->getMessage())->withInput();
+            return back()->with('error', safe_error_message('Terjadi kesalahan saat memperbarui problem: ', $e))->withInput();
         }
     }
     

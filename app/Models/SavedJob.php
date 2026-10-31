@@ -24,15 +24,12 @@ class SavedJob extends Model
         'folder',
         'notes',
         'reminder_at',
-        'saved_at',
     ];
 
+    // tabel saved_jobs tidak punya kolom saved_at; waktu simpan = created_at (timestamps diisi eloquent)
     protected $casts = [
         'reminder_at' => 'datetime',
-        'saved_at' => 'datetime',
     ];
-
-    public $timestamps = false;
 
     /**
      * relasi ke user

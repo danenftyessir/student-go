@@ -38,8 +38,8 @@
 
 | Route pattern | Role | Audit status | Evidence | Notes |
 |---|---|---|---|---|
-| /login | Guest | Inspected | OBSERVED; title VERIFIED | Split layout with invented stats; <title> 'Login - Karsa' (VERIFIED); lang id (VERIFIED). |
-| /register | Guest | Inspected | OBSERVED; title VERIFIED | Role picker; <title> 'Register - Karsa' (VERIFIED). |
+| /login | Guest | Inspected | OBSERVED; title VERIFIED | Split layout with invented stats; <title> 'Login - Student Go' (VERIFIED); lang id (VERIFIED). |
+| /register | Guest | Inspected | OBSERVED; title VERIFIED | Role picker; <title> 'Register - Student Go' (VERIFIED). |
 | /register/student | Guest | Inspected (audit); failing locally on 2026-10-30 | OBSERVED; local failure VERIFIED | 3 steps, 13 fields (OBSERVED). On 2026-10-30 it returns a QueryException on a `universities` query from app/Http/Controllers/Auth/RegisterController.php line 67 because the DB is unreachable (VERIFIED). |
 | /register/institution | Guest | Inspected | OBSERVED | 4 steps, 18 fields incl. KTP/NPWP uploads (OBSERVED). |
 | /register/company | Guest | Inspected | OBSERVED | No stepper, 17 fields, titled 'Daftar Sebagai Company' (OBSERVED). |
@@ -59,7 +59,7 @@
 
 ## C. Existing implementation
 
-- [VERIFIED live] `/login` title 'Login - Karsa', `lang="id"`, one form with 3 inputs; h1 'Connect. Collaborate. Create Impact.'. `/register` title 'Register - Karsa', h1 'Bergabung dengan Karsa'.
+- [VERIFIED live] `/login` title 'Login - Student Go', `lang="id"`, one form with 3 inputs; h1 'Connect. Collaborate. Create Impact.'. `/register` title 'Register - Student Go', h1 'Bergabung dengan Student Go'.
 - [OBSERVED] Login: split layout, left photo of a village with overlay and fabricated stats ('500+ Active Projects, 50+ Universities, 10.000+ Students, 200+ Institutions'; reality 77 problems, 700 students, 79 institutions); English 'Welcome Back!', 'Sign In'; no web font requested (system fallback); password show/hide toggle and required markers are good and kept.
 - [OBSERVED] Three different registration layouts: student = yellow 3-step card on a photo, institution = dark 4-step card on a photo, company = one long card on a light-blue background titled 'Daftar Sebagai Company'; back links read 'Kembali Ke Beranda', 'Back', 'Kembali'.
 - [VERIFIED 2026-10-30] `/register/student` currently returns a QueryException: a `universities` query in `app/Http/Controllers/Auth/RegisterController.php` line 67 fails because the database is unreachable. `/forgot-password` returns the ViteException above.
@@ -143,8 +143,8 @@
 | Asset | Decision | What happens in this phase | Evidence |
 |---|---|---|---|
 | `login-register-view.jpg` | Replace (usage) / Retain (file) | Auth screens stop using it as a background; the file stays. | VERIFIED (`/login`); other auth pages BLOCKED |
-| `karsa-logo.png` | Retain / Replace (conditional) | Follows Phase 3. | VERIFIED |
-| `KARA-background.png` | Retain | Not an auth asset; untouched. | INFERRED |
+| `student-go-logo.png` | Retain / Replace (conditional) | Follows Phase 3. | VERIFIED |
+| `SAGO-background.png` | Retain | Not an auth asset; untouched. | INFERRED |
 
 ### H.2 Source B: custom package assets available for this phase
 

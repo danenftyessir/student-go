@@ -120,6 +120,26 @@ class ProjectsWishlistTest extends TestCase
         $this->assertStringContainsString('/toggle-portfolio', $this->actingAs($this->student->user)->get('/student/projects')->getContent());
         $this->actingAs($this->student->user)->postJson(route('student.projects.toggle-portfolio', $id))
             ->assertOk()->assertJson(['success' => true, 'is_visible' => false]);
+        $this->assertStringNotContainsString('Unduh sertifikat', $main);
+        $this->assertStringNotContainsString('Sertifikat No.', $main);
+    }
+
+    public function test_completed_project_with_certificate_shows_number_and_download(): void
+    {
+        $id = $this->project('completed', 100);
+        DB::table('projects')->where('id', $id)->update([
+            'certificate_path' => 'certificates/1/sertifikat.png',
+            'certificate_number' => '007/KKN/MHS/STUDENTGO/XI/2026',
+            'certificate_generated_at' => now(),
+        ]);
+
+        $main = $this->main('/student/projects');
+
+        $this->assertStringContainsString('Sertifikat No. 007/KKN/MHS/STUDENTGO/XI/2026', $main);
+        // href dari document_url(); di tes konfigurasi supabase kosong, jadi yang diuji elemen dan atributnya
+        $this->assertMatchesRegularExpression('/<a href="[^"]*" target="_blank" download class="sg-btn sg-btn--secondary whitespace-nowrap">/', $main);
+        $this->assertStringContainsString('Unduh sertifikat<span class="sr-only"> Pemberdayaan Ekonomi Desa</span>', $main);
+        $this->assertStringContainsString('data-portfolio-toggle="'.$id.'"', $main);
     }
 
     public function test_filter_with_no_match_keeps_filter_and_reset(): void

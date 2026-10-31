@@ -175,7 +175,7 @@ The phase is COMPLETE only if every box can be checked with evidence in the phas
 - [ ] The form inventory diff against the baseline is empty (or every difference is approved).
 - [ ] The project's tests pass with counts no lower than baseline.
 - [ ] Guardrail violation counts are 0 for hero images on task pages, gradients on controls, pill buttons, shadows outside overlays, emoji icons, English UI words (except proper names), media placeholder tiles and marketing counters.
-- [ ] No request is made to AOS, Boxicons, Font Awesome or removed Google Font families; no page title contains 'Laravel' or 'Karsa' (unless D-01 says Karsa).
+- [ ] No request is made to AOS, Boxicons, Font Awesome or removed Google Font families; no page title contains 'Laravel' or 'Student Go' (unless D-01 says Student Go).
 - [ ] Every photograph used has caption, credit, alt text and an entry in `ASSET_SOURCES.md`; every package asset in use matches the manifest hash.
 - [ ] Phase 27 evidence is attached; real-device checks are done or recorded BLOCKED.
 - [ ] The tracker, CLAUDE.md, DISCOVERY_REPORT.md and DECISIONS are consistent with the final state.

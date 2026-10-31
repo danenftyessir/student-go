@@ -1,11 +1,11 @@
-# PHASE 16 — KARA Chatbot & Notifications
+# PHASE 16 — SAGO Chatbot & Notifications
 
 > Source of truth for status is `student-go-docs/design-execution/PHASE_TRACKER.md`. This file is the work order for exactly one phase. Read `CLAUDE.md` and `student-go-docs/design-execution/EXECUTION_ROADMAP.md` first, execute only this phase, update the tracker, report, then stop.
 > Evidence labels: VERIFIED / OBSERVED / INFERRED / UNKNOWN / BLOCKED (definitions in `DISCOVERY_REPORT.md` section 1).
 
 | Field | Value |
 |---|---|
-| Phase | 16 — KARA Chatbot & Notifications |
+| Phase | 16 — SAGO Chatbot & Notifications |
 | Group | Student role |
 | Hard dependencies (must be COMPLETE) | Phase 1 (Critical Fixes & Data Integrity), Phase 3 (Shared Shell & Components) |
 | Soft dependencies (recommended first) | none |
@@ -17,7 +17,7 @@
 
 ## A. Phase overview
 
-**Goal.** Standard two-column chat for KARA with a real h1, a send icon that does not look like a warning, and a notifications inbox with icons by type instead of emoji and labelled filters; the same notification page serves all three roles.
+**Goal.** Standard two-column chat for SAGO with a real h1, a send icon that does not look like a warning, and a notifications inbox with icons by type instead of emoji and labelled filters; the same notification page serves all three roles.
 
 **In scope**
 
@@ -34,7 +34,7 @@
 | Route pattern | Role | Audit status | Evidence | Notes |
 |---|---|---|---|---|
 | /notifications | All roles | Inspected | OBSERVED | Same page for 3 roles (S22, I10, C09). Emoji in titles; filter selects unlabelled. |
-| /student/chatbot | Student | Inspected | OBSERVED | KARA conversation list. |
+| /student/chatbot | Student | Inspected | OBSERVED | SAGO conversation list. |
 | /student/chatbot/create | Student | Fetched | OBSERVED | GET creates a record (J13). Do NOT open in discovery or tests without approval. Behaviour change in Phase 1 (D-25). |
 | /student/chatbot/{id} | Student | 1, 2 (created by audit); 3 redirects | OBSERVED | No h1 (J11). |
 
@@ -42,8 +42,8 @@
 
 | ID | Page | URL | Keep (audit) | Design direction (audit) | Backlog |
 |---|---|---|---|---|---|
-| S20 | KARA — daftar percakapan | /student/chatbot | Konsep percakapan tersimpan. | Tata letak chat dua kolom: riwayat di kiri, percakapan di kanan, contoh pertanyaan saat kosong. | J6, J8, J13 (GET create) |
-| S21 | KARA — percakapan | /student/chatbot/1 | Header panel dengan tombol kembali, arsip, hapus; penghitung karakter. | Layout chat standar dengan riwayat di sidebar. | J11, J37 |
+| S20 | SAGO — daftar percakapan | /student/chatbot | Konsep percakapan tersimpan. | Tata letak chat dua kolom: riwayat di kiri, percakapan di kanan, contoh pertanyaan saat kosong. | J6, J8, J13 (GET create) |
+| S21 | SAGO — percakapan | /student/chatbot/1 | Header panel dengan tombol kembali, arsip, hapus; penghitung karakter. | Layout chat standar dengan riwayat di sidebar. | J11, J37 |
 | S22 | Notifikasi (mahasiswa) | /notifications | Filter status/tipe dan aksi tandai/hapus. | Pusat notifikasi bergaya inbox; dropdown lonceng di navigasi menampilkan 5 terbaru. | J11, J26, J38 |
 | I10 | Notifikasi (institusi) | /notifications | Tombol “Tandai Semua Dibaca”. | Sama dengan S22. | J26, J38 |
 | C09 | Notifikasi (perusahaan) | /notifications | Empty state. | Sama dengan S22. | J9 |
@@ -54,7 +54,7 @@
 - [OBSERVED] Notifications: emoji in titles ('Laporan Disetujui' with a check emoji, 'Masalah Baru Dipublikasikan' with a megaphone), three stat tiles over a three-item list, a pink 'Hapus yang Sudah Dibaca' button, an unlabelled filter select; opening the page does not mark items as read.
 - [OBSERVED] Seed notification content (milestone, weekly report approved, project started) does not match account state (J38).
 
-**Repository facts for this phase: UNKNOWN until Stage One.** Locate and record in `DISCOVERY_REPORT.md` section 12 before editing: chatbot controller and model (create/store/archive/delete), the KARA message transport, notifications controller, notification types and payloads, the bell API.
+**Repository facts for this phase: UNKNOWN until Stage One.** Locate and record in `DISCOVERY_REPORT.md` section 12 before editing: chatbot controller and model (create/store/archive/delete), the SAGO message transport, notifications controller, notification types and payloads, the bell API.
 
 ## D. Problems found (audit findings)
 
@@ -76,7 +76,7 @@
 
 **Proposed for this phase** (audit sections I and L, adapted; status PROPOSED until the user approves the gating decisions)
 
-- Chat: history list left, conversation right, example questions in the empty state, a real h1 ('KARA' plus conversation title), send icon from the shared set. Notifications: inbox with type icons, grouped by date, filters with visible labels (status, type), 'Tandai semua dibaca' as secondary action and 'Hapus yang sudah dibaca' as outline-danger with confirmation.
+- Chat: history list left, conversation right, example questions in the empty state, a real h1 ('SAGO' plus conversation title), send icon from the shared set. Notifications: inbox with type icons, grouped by date, filters with visible labels (status, type), 'Tandai semua dibaca' as secondary action and 'Hapus yang sudah dibaca' as outline-danger with confirmation.
 
 **Guardrails that bind this phase** (audit section H, numbered as in `EXECUTION_ROADMAP.md`): 1, 2, 3, 6, 7, 8, 9.
 
@@ -115,7 +115,7 @@
 
 | Asset | Decision | What happens in this phase | Evidence |
 |---|---|---|---|
-| `KARA-background.png` | Replace (usage) / Retain (file) | Drop the gradient background; use a flat surface or `contour-field.svg`. File stays until D-01 settles the assistant's name and look. | INFERRED |
+| `SAGO-background.png` | Replace (usage) / Retain (file) | Drop the gradient background; use a flat surface or `contour-field.svg`. File stays until D-01 settles the assistant's name and look. | INFERRED |
 | Notification content and avatars | Retain | Unchanged. | OBSERVED |
 
 ### H.2 Source B: custom package assets available for this phase

@@ -208,7 +208,7 @@ class ProjectManagementController extends Controller
 
             return response()->json([
                 'success' => false,
-                'message' => 'Terjadi kesalahan: ' . $e->getMessage()
+                'message' => safe_error_message('Terjadi kesalahan: ', $e)
             ], 500);
         }
     }

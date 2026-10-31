@@ -43,7 +43,7 @@ No route is owned by this phase; it works on shared files and every route (see s
 
 - [VERIFIED live] Tailwind default theme; the page loads Google Fonts twice (Inter, Outfit, Lora, Merriweather families loaded: Inter 400/500/600/700/900, Outfit 600/700, Lora 400, Merriweather 700), plus CDN CSS/JS (Font Awesome 6.5.1, Leaflet 1.9.4, AOS 2.3.1, Boxicons 2.1.4, Alpine 3.13.3).
 - [OBSERVED] No design system: Tailwind 4.1.16 default theme, 4 font families in 3 stacks, 6 competing accents, `bg-primary-*` classes that resolve to nothing, 12 text sizes, 7 radius values, 5 shadow levels, gradients on controls (audit C).
-- [OBSERVED] Logo `karsa-logo.png` is 1430x566 px and 272 KB rendered at 40 px; favicon.ico is 0 KB.
+- [OBSERVED] Logo `student-go-logo.png` is 1430x566 px and 272 KB rendered at 40 px; favicon.ico is 0 KB.
 - [VERIFIED live] `/` has no `<link rel=icon>`.
 - [DONE earlier, not yet in the app] `student-go-assets` package: tokens and components CSS (compiles in isolation), 96 SVGs, 71 Lucide icons + sprite, fonts with OFL licences, 60 license-checked photo records, downloader v1.2, style guide, manifest with hashes.
 
@@ -56,7 +56,7 @@ No route is owned by this phase; it works on shared files and every route (see s
 | J15 (P2) | Typography split across 4 families and 3 stacks. | OBSERVED; fonts VERIFIED |
 | J16 (P2) | Six competing accents; undefined `primary` class; difficulty uses status colours. | OBSERVED |
 | J17 (P2) | Duplicated components: 3 header kinds, 4 placeholders, 3 uploads, 3 paginators, 4 card anatomies, 3 registration layouts. | OBSERVED |
-| J20 (P2) | Naming leftovers (title 'Laravel', logo 'Karsa', default favicon, privacy link '#'). | OBSERVED; titles and '#' VERIFIED |
+| J20 (P2) | Naming leftovers (title 'Laravel', logo 'Student Go', default favicon, privacy link '#'). | OBSERVED; titles and '#' VERIFIED |
 | J23 (P2) | Decorative motion without reduced-motion support. | OBSERVED |
 | J24 (P2) | Unused/heavy assets: Boxicons, Font Awesome, empty JS bundle, 272 KB PNG logo. | OBSERVED; CDN tags VERIFIED |
 | J10 / J11 (P1) | Contrast failures (footer 3.67:1, 'Hubungkan' 4.12:1, green numbers 3.08:1) and no `:focus-visible` rules; tokens must make these impossible. | OBSERVED |
@@ -126,7 +126,7 @@ No route is owned by this phase; it works on shared files and every route (see s
 |---|---|---|---|
 | Google Fonts (Inter, Outfit, Merriweather, Lora), Font Awesome, Boxicons, AOS (CDN libraries) | Deprecate | Not files in `public/`. Stop loading them only in Phase 3 when the layouts are rebuilt (D-20); this phase only prepares the replacement. | VERIFIED on `/` |
 | Certificate fonts Pinyon Script and Poppins | Retain | Not part of `fonts.css`. If they are served from `public/fonts` or `storage`, they stay; if a certificate view loads them from Google Fonts, that link stays when the site-wide links are removed. | UNKNOWN / BLOCKED |
-| `karsa-logo.png`, `favicon.ico` and all photographs | Retain | Untouched in this phase. | VERIFIED |
+| `student-go-logo.png`, `favicon.ico` and all photographs | Retain | Untouched in this phase. | VERIFIED |
 
 ### H.2 Source B: custom package assets available for this phase
 

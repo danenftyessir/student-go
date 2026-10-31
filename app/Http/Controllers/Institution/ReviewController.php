@@ -168,7 +168,7 @@ class ReviewController extends Controller
 
         } catch (\Exception $e) {
             return back()->withInput()
-                       ->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
+                       ->with('error', safe_error_message('Terjadi kesalahan: ', $e));
         }
     }
 
@@ -256,7 +256,7 @@ class ReviewController extends Controller
 
         } catch (\Exception $e) {
             return back()->withInput()
-                       ->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
+                       ->with('error', safe_error_message('Terjadi kesalahan: ', $e));
         }
     }
 }

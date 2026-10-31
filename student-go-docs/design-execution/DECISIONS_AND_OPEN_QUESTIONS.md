@@ -24,13 +24,13 @@ Every row was OPEN at planning time; Phase 0 (2026-10-30) recorded answers for D
 ### D-01 — Product name, wordmark and assistant name
 
 - **Status:** ANSWERED (2026-10-30)
-- **Question:** Which name does the product carry in every user-facing place: logo, <title>, APP_NAME, footer, emails, and the KARA assistant?
-- **Why it matters (evidence):** The app shows three names at once: 'Laravel' in tab titles (VERIFIED), 'Karsa' in the logo, auth titles and footer copy (VERIFIED on /login, /register, /about), and 'KKN Go' (OBSERVED). The brief and the asset package use 'Student Go'.
+- **Question:** Which name does the product carry in every user-facing place: logo, <title>, APP_NAME, footer, emails, and the SAGO assistant?
+- **Why it matters (evidence):** The app shows three names at once: 'Laravel' in tab titles (VERIFIED), 'Student Go' in the logo, auth titles and footer copy (VERIFIED on /login, /register, /about), and 'Student Go' (OBSERVED). The brief and the asset package use 'Student Go'.
 - **Options:**
-  - (a) Student Go everywhere; keep the assistant name KARA.
+  - (a) Student Go everywhere; keep the assistant name SAGO.
   - (b) Student Go everywhere; rename the assistant.
-  - (c) Keep Karsa as the product name.
-- **Recommendation (not approved):** (a), pending the user's confirmation that KARA stays as the assistant name.
+  - (c) Keep Student Go as the product name.
+- **Recommendation (not approved):** (a), pending the user's confirmation that SAGO stays as the assistant name.
 - **Gates phases:** 2, 3, 4, 5, 6, 16, 26
 - **Source:** Audit J20, K; live titles
 - ANSWER (2026-10-30): option (b) — **Student Go** everywhere; the assistant gets a **new name** (not yet chosen; decided in Phase 16). Phase 2 only integrated the Student Go brand files; titles, `APP_NAME` and the layout logo change in Phase 3 (shell).
@@ -209,7 +209,7 @@ Every row was OPEN at planning time; Phase 0 (2026-10-30) recorded answers for D
 - **Recommendation (not approved):** (a), plus verify with real images once available.
 - **Gates phases:** 8, 9
 - **Source:** Audit J12, G
-- ANSWER (2026-10-31, Phase 8 session): option (b), as **dev seed images** in remote storage. The user: the old Supabase images were not kept; upload images from `public/` to Supabase Storage, in a bucket named **`sg-storage`** (not 'karsa-storage'). Done: a public bucket `sg-storage` was created in the new Supabase project (it had none); 92 objects were uploaded to the exact paths already stored in `problem_images.image_path` (`problems/masalah-desa-NN.jpg|.jpeg`; 220 rows, 77 problems; **database unchanged**). Source: the 37 catalogue photographs marked `available` in `student-go-docs/design-system/photo-review.json` (Unsplash/Pexels, no identifiable people), converted to JPEG ≤ 1600 px q82, photo `(NN-1) mod 37`, so each is reused 2–3 times and **does not match the problem's content**. KKN photographs with people (D-30) were not used. `.env`: only `SUPABASE_BUCKET` changed (to `sg-storage`). Mapping and HTTP results: `reports/phase8/seed-images-upload-log.json` (92 × 200). Layouts still collapse the image when a record is absent or fails (option a's fallback is kept). Real problem photographs replace these when institutions upload them.
+- ANSWER (2026-10-31, Phase 8 session): option (b), as **dev seed images** in remote storage. The user: the old Supabase images were not kept; upload images from `public/` to Supabase Storage, in a bucket named **`sg-storage`** (not 'sg-storage'). Done: a public bucket `sg-storage` was created in the new Supabase project (it had none); 92 objects were uploaded to the exact paths already stored in `problem_images.image_path` (`problems/masalah-desa-NN.jpg|.jpeg`; 220 rows, 77 problems; **database unchanged**). Source: the 37 catalogue photographs marked `available` in `student-go-docs/design-system/photo-review.json` (Unsplash/Pexels, no identifiable people), converted to JPEG ≤ 1600 px q82, photo `(NN-1) mod 37`, so each is reused 2–3 times and **does not match the problem's content**. KKN photographs with people (D-30) were not used. `.env`: only `SUPABASE_BUCKET` changed (to `sg-storage`). Mapping and HTTP results: `reports/phase8/seed-images-upload-log.json` (92 × 200). Layouts still collapse the image when a record is absent or fails (option a's fallback is kept). Real problem photographs replace these when institutions upload them.
 
 ### D-15 — Placeholder region data
 
@@ -256,15 +256,15 @@ Every row was OPEN at planning time; Phase 0 (2026-10-30) recorded answers for D
 
 - **Status:** ANSWERED (2026-10-30)
 - **Question:** Is the redrawn original Student Go wordmark/symbol approved, or is the user supplying one?
-- **Why it matters (evidence):** The current logo is `karsa-logo.png`, 1430x566 px, 272 KB, labelled Karsa (VERIFIED live 2026-10-30). The audit recommends keeping the slate-indigo equity (about #405080). Under AD-09 the PNG is retained and stays live until this decision and D-01 are answered; it is never deleted by a phase.
+- **Why it matters (evidence):** The current logo is `student-go-logo.png`, 1430x566 px, 272 KB, labelled Student Go (VERIFIED live 2026-10-30). The audit recommends keeping the slate-indigo equity (about #405080). Under AD-09 the PNG is retained and stays live until this decision and D-01 are answered; it is never deleted by a phase.
 - **Options:**
   - (a) Use the package's SVG wordmark/symbol (only valid if D-01 picks Student Go).
   - (b) User supplies the mark.
-  - (c) Keep the Karsa mark: produce an optimised SVG or 2x PNG of it instead of the package wordmark.
-- **Recommendation (not approved):** Follow D-01. If Student Go: (a) unless the user has an existing Student Go logo. If Karsa: (c). In both cases `karsa-logo.png` stays in place until a later phase authorises removal from templates.
+  - (c) Keep the Student Go mark: produce an optimised SVG or 2x PNG of it instead of the package wordmark.
+- **Recommendation (not approved):** Follow D-01. If Student Go: (a) unless the user has an existing Student Go logo. If Student Go: (c). In both cases `student-go-logo.png` stays in place until a later phase authorises removal from templates.
 - **Gates phases:** 2, 3, 4
 - **Source:** Audit I, J20, J24
-- ANSWER (2026-10-30): option (a) — the package SVG wordmark/symbol (follows D-01 = Student Go). `karsa-logo.png` stays on disk and stays in the layout until Phase 3.
+- ANSWER (2026-10-30): option (a) — the package SVG wordmark/symbol (follows D-01 = Student Go). `student-go-logo.png` stays on disk and stays in the layout until Phase 3.
 
 ### D-19 — Documentary photography
 
@@ -341,7 +341,7 @@ Every row was OPEN at planning time; Phase 0 (2026-10-30) recorded answers for D
 - **Source:** Audit D1, J9, J20, M
 - NOTE (2026-10-30, Phase 3): still OPEN. Per the Phase 3 work order (task 3.5) the footer's 'Kebijakan Privasi' link, which pointed to `#`, is hidden until a privacy page exists; no copy was written.
 - ANSWER (2026-10-31, Phase 4, homepage only): option (b) — Claude drafts Indonesian homepage copy from verifiable product facts only, marked DRAFT in the Phase 4 report for the user's approval. No tagline, history, impact claim or testimonial. About/Contact/privacy copy stays OPEN.
-- ANSWER (2026-10-31, Phase 5 pre-check, About): option (b) — Claude drafts neutral Indonesian About copy from verifiable product facts only, marked DRAFT in the Phase 5 report. The Karsa-era mission line (RN-07), the 'Dari Tahun ke Tahun' heading (RN-08), the founding story, age, growth and SDG impact claims (RN-09) and every unsourced figure are **not published** (also the About part of D-37). Contact: the user will supply the photos and the contact details; Contact copy waits for them. FAQ: Claude drafts from product facts, DRAFT. Privacy copy stays OPEN.
+- ANSWER (2026-10-31, Phase 5 pre-check, About): option (b) — Claude drafts neutral Indonesian About copy from verifiable product facts only, marked DRAFT in the Phase 5 report. The Student Go-era mission line (RN-07), the 'Dari Tahun ke Tahun' heading (RN-08), the founding story, age, growth and SDG impact claims (RN-09) and every unsourced figure are **not published** (also the About part of D-37). Contact: the user will supply the photos and the contact details; Contact copy waits for them. FAQ: Claude drafts from product facts, DRAFT. Privacy copy stays OPEN.
 - ANSWER (2026-10-31, Phase 5 session, Contact): the user supplied the contact channels: **email only**, M. Abizzar Gamadrian (13523155@std.stei.itb.ac.id), Danendra Shafi Athallah (13523136@std.stei.itb.ac.id), Kenzie Raffa Ardhana (18223127@std.stei.itb.ac.id); no WhatsApp, no roles. Contact copy (RN-11/RN-12) and the FAQ were drafted from product facts and are DRAFT in `reports/PHASE_05_REPORT.md` §5, as is the About copy. Privacy copy stays OPEN.
 - ANSWER (2026-10-31, Phase 6, auth pages): option (b) — Claude drafts the Indonesian copy for login, role chooser, the three registrations, password reset and email verification from product facts only (validation rules, the documents the form really asks for); no promise about how long verification takes (D-09 stays OPEN). Marked DRAFT in `completion-reports/PHASE_06_COMPLETION_REPORT.md`.
 
@@ -470,6 +470,7 @@ Every row was OPEN at planning time; Phase 0 (2026-10-30) recorded answers for D
 - **Gates phases:** 0, 2, 3, 12
 - **Source:** User message 2026-10-30
 - ANSWER (2026-10-30): option (a) done. `public/assets/certificate/template.png`, `public/assets/certificate/fonts/PinyonScript-Regular.ttf`, `public/assets/certificate/fonts/Poppins-Regular.ttf`; rendered by `app/Services/CertificateService.php` (GD, fonts by file path) and stored in Supabase. Protected group; baseline sample in `baseline/screenshots/certificate-sample-baseline.png`. See ASSET_INVENTORY.md 1.5.
+- ANSWER (2026-11-01, user): the certificate template is replaced by the user's Student Go design (`Sertifikat_Penghargaan_Student_Go.pptx (2).png`). The user chose: copy it to `template.png`; erase the printed name 'DRS. BUDIYAN SETYONO' so the institution's `pic_name` is written there (upper case); `CertificateService` text positions re-fitted to the new layout; fonts (Poppins, Pinyon Script) unchanged; certificates already stored in Supabase are not regenerated. Phase 11 now shows the certificate number and a download link on `/student/projects`. See ASSET_INVENTORY.md 'Certificate template update'.
 
 ### D-33 — Whether to download the 60 catalogue photographs at all
 
@@ -565,7 +566,7 @@ Every row was OPEN at planning time; Phase 0 (2026-10-30) recorded answers for D
 | 13 | Friends | D-02, D-03, D-04, D-31 |
 | 14 | Repository | D-02, D-05, D-26 |
 | 15 | Jobs | D-07, D-13, D-02 |
-| 16 | KARA Chatbot & Notifications | D-01, D-25 |
+| 16 | SAGO Chatbot & Notifications | D-01, D-25 |
 | 17 | Institution Dashboard | D-09, D-10, D-13, D-21 |
 | 18 | Institution Project Management | D-02, D-15, D-26, D-13 |
 | 19 | Institution Review & Monitoring | D-02, D-13, D-25, D-26 |
@@ -590,9 +591,9 @@ Every row was OPEN at planning time; Phase 0 (2026-10-30) recorded answers for D
 
 ### Note on D-37 (2026-10-31, Phase 4)
 
-`CONTENT_RENAME_INVENTORY.md` (copied to this folder on 2026-10-31 at the user's request) refers to D-36…D-40 for naming questions; in this file D-36 is the talent-export question, and D-37…D-40 have no entry yet. For the homepage the user decided RN-02 directly: the Karsa tagline 'Karya Untuk Bangsa' is removed and no replacement tagline is written. The rest of D-37 (About history and claims) is for Phase 5.
+`CONTENT_RENAME_INVENTORY.md` (copied to this folder on 2026-10-31 at the user's request) refers to D-36…D-40 for naming questions; in this file D-36 is the talent-export question, and D-37…D-40 have no entry yet. For the homepage the user decided RN-02 directly: the Student Go tagline 'Karya Untuk Bangsa' is removed and no replacement tagline is written. The rest of D-37 (About history and claims) is for Phase 5.
 
-ANSWER (2026-10-31, Phase 5 pre-check, About): the Karsa-era narrative is not carried over: no mission sentence, history heading, founding story, age or impact claim is published on About; Claude drafts neutral copy from product facts, marked DRAFT for approval.
+ANSWER (2026-10-31, Phase 5 pre-check, About): the Student Go-era narrative is not carried over: no mission sentence, history heading, founding story, age or impact claim is published on About; Claude drafts neutral copy from product facts, marked DRAFT for approval.
 
 OUTCOME (2026-10-31, Phase 5): applied. RN-07, RN-08 and RN-09 were removed, not renamed; About publishes product facts only (DRAFT). A sentence saying the team are ITB students was drafted and withdrawn before completion (inferred from email domains, not approved). D-37 stays open only if the user wants a mission, history or impact text: supply the wording and sources.
 
@@ -606,7 +607,7 @@ Asked in the Phase 6 session because they change behaviour, not only presentatio
 - **RN-16 / D-38 (consent label of the `terms` checkbox on `/register/student`): ANSWERED.** 'Saya menyetujui syarat dan ketentuan serta kebijakan privasi Student Go.' without links (the Terms and Privacy pages do not exist; the old links pointed to `#`). Checkbox `id`/`name` `terms` unchanged. Links are added when the pages exist.
 - **RN-17 / D-39 (example passwords in the password-rules block): ANSWERED.** Remove every example password; show only the rules (min. 8 characters, upper and lower case, a number, a symbol), checked live while typing.
 - **Success state after institution/company registration: ANSWERED.** Replace the blocking `alert()` with an in-page status panel that shows the server's message and offers 'Masuk' and 'Ke beranda' (the JSON `redirect_url`). JSON responses and server redirects are unchanged.
-- **RN-24 / D-40 (product name in auth emails and auth flash messages): ANSWERED (2026-10-31, Phase 6).** The user: 'rubah jadi student go'. 'Karsa' → 'Student Go' in the subjects of `VerifyEmailMail`, `InstitutionRegistered`, `InstitutionApproved`, `InstitutionRejected`, in the three institution email views (the tagline 'Karya Untuk Bangsa' removed, as RN-02; the header subtitle now reads 'Platform Digital untuk Kuliah Kerja Nyata'), and in the flash/JSON messages of `RegisterController` (student) and `EmailVerificationController`. Not changed: `APP_URL` (`karsa.railway.app` in email links; `.env`/deploy), `MAIL_FROM_NAME` and the default Laravel password-reset email (English, header from `APP_NAME`), and 'Karsa' outside authentication (chatbot, storage bucket name, certificate service under D-32).
+- **RN-24 / D-40 (product name in auth emails and auth flash messages): ANSWERED (2026-10-31, Phase 6).** The user: 'rubah jadi student go'. 'Student Go' → 'Student Go' in the subjects of `VerifyEmailMail`, `InstitutionRegistered`, `InstitutionApproved`, `InstitutionRejected`, in the three institution email views (the tagline 'Karya Untuk Bangsa' removed, as RN-02; the header subtitle now reads 'Platform Digital untuk Kuliah Kerja Nyata'), and in the flash/JSON messages of `RegisterController` (student) and `EmailVerificationController`. Not changed: `APP_URL` (`student-go.railway.app` in email links; `.env`/deploy), `MAIL_FROM_NAME` and the default Laravel password-reset email (English, header from `APP_NAME`), and 'Student Go' outside authentication (chatbot, storage bucket name, certificate service under D-32).
 
 ### Note on Phase 17 data fixes (2026-10-31)
 

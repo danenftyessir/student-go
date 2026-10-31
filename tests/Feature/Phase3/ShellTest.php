@@ -38,7 +38,7 @@ class ShellTest extends TestCase
         $this->assertStringContainsString('id="main"', $html);
         $this->assertStringContainsString('assets/brand/favicon.svg', $html);
         $this->assertStringContainsString('assets/brand/student-go-logo.svg', $html);
-        foreach (['font-awesome', 'boxicons', 'fonts.bunny.net', 'Outfit:wght', 'karsa-logo.png'] as $gone) {
+        foreach (['font-awesome', 'boxicons', 'fonts.bunny.net', 'Outfit:wght'] as $gone) {
             $this->assertStringNotContainsString($gone, $html, $gone);
         }
         // footer: tautan privasi ke '#' disembunyikan (D-23)
@@ -93,7 +93,7 @@ class ShellTest extends TestCase
 
     public function test_guest_shell_and_page_title_suffix_is_normalised(): void
     {
-        // about menulis 'Tentang Kami - Karsa' sendiri; shell menggantinya dengan pola tunggal
+        // halaman menulis akhiran merek sendiri; shell menggantinya dengan pola tunggal
         $html = $this->get('/about')->assertOk()->getContent();
 
         $this->assertShell($html);

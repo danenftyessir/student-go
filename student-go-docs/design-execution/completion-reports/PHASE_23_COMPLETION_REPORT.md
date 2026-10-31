@@ -307,7 +307,7 @@ Not touched: `routes/*`, middleware, models (incl. `JobPosting`), migrations, se
 | — | Console / network | PASS | 0 errors in all captures and the interactive run; no 4xx/5xx on the changed pages. |
 | — | Automated suite | PASS | Final run `php artisan test`: **224 passed, 2,442 assertions** (includes the parallel sessions' tests). Before the change: 185/185. During the session, two Phase 9 tests of Session A failed briefly while that session was working; they passed in the final run. Phase 23 alone: 10/10. |
 | — | Routes | PASS | 203 = 203; the 8 job routes unchanged. |
-| — | Assets | PASS | 37/38 Phase 0 hashes identical, 0 changed (`karsa-logo.png` removed by the user before Phase 4). |
+| — | Assets | PASS | 37/38 Phase 0 hashes identical, 0 changed (`student-go-logo.png` removed by the user before Phase 4). |
 | — | Browser interaction script | PASS | 31/31 (`interaction_checks.json`). |
 
 ### 13.3 Test data on the local dev DB

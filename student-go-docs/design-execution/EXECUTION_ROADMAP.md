@@ -53,7 +53,7 @@ A presentation-layer design of Student Go with a hybrid direction (AD-04): 'Ruan
 | 13 | [Friends](phases/PHASE_13_FRIENDS.md) | Student role | 1, 3 | 12 | D-02, D-03, D-04, D-31 | M |
 | 14 | [Repository](phases/PHASE_14_REPOSITORY.md) | Student role | 1, 3 | 2 | D-02, D-05, D-26 | M |
 | 15 | [Jobs](phases/PHASE_15_JOBS.md) | Student role | 3 | 8 | D-07, D-13, D-02 | S |
-| 16 | [KARA Chatbot & Notifications](phases/PHASE_16_KARA_AND_NOTIFICATIONS.md) | Student role | 1, 3 | — | D-01, D-25 | M |
+| 16 | [SAGO Chatbot & Notifications](phases/PHASE_16_SAGO_AND_NOTIFICATIONS.md) | Student role | 1, 3 | — | D-01, D-25 | M |
 | 17 | [Institution Dashboard](phases/PHASE_17_INSTITUTION_DASHBOARD.md) | Institution role | 3 | 1 | D-09, D-10, D-13, D-21 | S |
 | 18 | [Institution Project Management](phases/PHASE_18_INSTITUTION_PROJECT_MANAGEMENT.md) | Institution role | 3 | 1, 17 | D-02, D-15, D-26, D-13 | L |
 | 19 | [Institution Review & Monitoring](phases/PHASE_19_INSTITUTION_REVIEW_MONITORING.md) | Institution role | 3 | 1, 18 | D-02, D-13, D-25, D-26 | L |
@@ -193,8 +193,8 @@ All 56 catalogued screens (audit section L, 91 screenshots) are assigned to a ph
 | S17 | Wishlist Saya | /student/wishlist | Phase 11 |
 | S18 | Profil Saya (mahasiswa) | /student/profile | Phase 12 |
 | S19 | Edit Profil (mahasiswa) | /student/profile/edit | Phase 12 |
-| S20 | KARA — daftar percakapan | /student/chatbot | Phase 16 |
-| S21 | KARA — percakapan | /student/chatbot/1 | Phase 16 |
+| S20 | SAGO — daftar percakapan | /student/chatbot | Phase 16 |
+| S21 | SAGO — percakapan | /student/chatbot/1 | Phase 16 |
 | S22 | Notifikasi (mahasiswa) | /notifications | Phase 16 |
 | S23 | Profil publik mahasiswa | /profile/juliasuryanto1000 | Phase 12 |
 | S24 | Profil publik instansi (#19, punya masalah) | /institution/19 | Phase 5 |
@@ -248,7 +248,7 @@ Every backlog item has a primary phase and the phases that touch it. P0 items ar
 | J17 | P2 | Duplicated components | 3 | 6, 10, 11, 15, 16, 18, 19, 20, 22, 23, 24, 25 |
 | J18 | P2 | Card grids where users compare | 8 | 10, 13, 14, 15, 18, 19, 22 |
 | J19 | P2 | Overflow and truncation with real content | 8 | 5, 9, 20 |
-| J20 | P2 | Naming leftovers (Laravel, Karsa, favicon, '#') | 2 | 3, 4, 5 |
+| J20 | P2 | Naming leftovers (Laravel, Student Go, favicon, '#') | 2 | 3, 4, 5 |
 | J21 | P2 | Long forms, native upload inputs | 18 | 20 |
 | J22 | P2 | Conflicting talent search patterns | 22 | 1 (counts) |
 | J23 | P2 | Decorative motion without reduced-motion | 2 | 3, 4, 27 |
@@ -265,7 +265,7 @@ Every backlog item has a primary phase and the phases that touch it. P0 items ar
 | J34 | P2 | About is a 7-slide carousel | 5 | — |
 | J35 | P2 | Contact has no official channel; broken team photos | 5 | — |
 | J36 | P3 | Duplicate related documents | 14 | — |
-| J37 | P3 | KARA send icon looks like a warning | 16 | 3 |
+| J37 | P3 | SAGO send icon looks like a warning | 16 | 3 |
 | J38 | P2 | Seed notifications inconsistent with account state | 16 | 0 (D-13) |
 
 ## 9. Guardrails (audit section H, binding on every page phase)
@@ -320,7 +320,7 @@ Every phase file now has a section H with five parts: H.1 existing `public/` ass
 | A-01 | Two of three team portraits on `/contact` are broken: `/profile_13523124.jpg` does not exist (the file is `.jpeg`) and `/profile_18223127.jpg` is missing | VERIFIED 2026-10-30 | 5 | D-31 |
 | A-02 | Team portrait file names embed student ID numbers on a public page | VERIFIED | 5 | D-31 |
 | A-03 | Every SVG, PNG and the style guide in the custom package carries an embedded C2PA block (about 7.7 KB per SVG) | VERIFIED (package read) | 2 | D-35 |
-| A-04 | Heavy originals: `about.jpg` 3.6 MB (7360x4912), `dashboard-student3.jpg` 3.3 MB, `KARA-background.png` 1.7 MB, seven 4912x2760 photographs of 0.4-1.2 MB | VERIFIED (byte and pixel sizes) | 4, 5, 16 | D-34 |
+| A-04 | Heavy originals: `about.jpg` 3.6 MB (7360x4912), `dashboard-student3.jpg` 3.3 MB, `SAGO-background.png` 1.7 MB, seven 4912x2760 photographs of 0.4-1.2 MB | VERIFIED (byte and pixel sizes) | 4, 5, 16 | D-34 |
 | A-05 | The Vite manifest lacks `resources/css/auth-institution.css`, which breaks `/forgot-password` (HTTP 500); `/register/institution` and `/register/company` also return 500 locally with a cause not established in this pass | VERIFIED (500 on all three; Vite cause verified for `/forgot-password` only) | 0 (S1-04), 6 | D-29 |
 | A-06 | No source, licence or consent record exists for any existing photograph | UNKNOWN (no record found) | 4, 5 | D-30 |
 | A-07 | The package's CSS is at `resources/css/student-go/`, not under `public/`; INTEGRATION.md instructs removing the logo and photo heroes, which conflicts with AD-09 | VERIFIED | 2 | D-29, ASSET_INVENTORY.md section 13 |

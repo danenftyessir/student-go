@@ -47,7 +47,10 @@ class NotificationController extends Controller
             'read' => Notification::where('user_id', $user->id)->read()->count(),
         ];
 
-        return view('notifications.index', compact('notifications', 'stats'));
+        // phase 16: opsi filter tipe = tipe yang benar-benar dimiliki pengguna (parameter type tetap)
+        $types = Notification::where('user_id', $user->id)->distinct()->pluck('type');
+
+        return view('notifications.index', compact('notifications', 'stats', 'types'));
     }
 
     /**
