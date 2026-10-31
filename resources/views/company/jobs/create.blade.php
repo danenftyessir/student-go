@@ -13,6 +13,7 @@
         'formData' => $hasOld ? [
             'title' => (string) old('title', ''), 'department' => (string) old('department', ''),
             'location' => (string) old('location', ''), 'job_type' => (string) old('job_type', ''),
+            'job_category_id' => (string) old('job_category_id', ''),
             'salary_range' => (string) old('salary_range', ''), 'description' => (string) old('description', ''),
             'responsibilities' => (string) old('responsibilities', ''), 'qualifications' => (string) old('qualifications', ''),
             'skills' => array_values((array) old('skills', [])), 'sdg_alignment' => array_values(array_map('strval', (array) old('sdg_alignment', []))),
@@ -24,7 +25,7 @@
     $sdgLabels = collect($sdgOptions)->pluck('name', 'id')->all();
 @endphp
 
-<div class="sg-container sg-co-wizard" x-data="jobWizard(@js($initial), @js($jobTypes), @js($sdgLabels))">
+<div class="sg-container sg-co-wizard" x-data="jobWizard(@js($initial), @js($jobTypes), @js($sdgLabels), @js($categories))">
     <x-ui.page-header title="Pasang lowongan" description="Lima langkah: detail, deskripsi, keahlian, SDG dan kriteria dampak."
                       :back="route('company.jobs.index')" back-label="Kembali ke Lowongan">
         <x-slot:actions>
@@ -93,7 +94,20 @@
                         <p id="job-type-error" class="sg-error" x-show="errors.job_type" x-cloak><x-icon name="circle-alert" size="sm" /><span x-text="errors.job_type"></span></p>
                     </div>
 
-                    <div class="sg-field sg-co-wizard__wide">
+                    <div class="sg-field">
+                        <label for="job-category" class="sg-label">Kategori <span class="sg-co-wizard__optional">(opsional)</span></label>
+                        <select id="job-category" class="sg-select" x-model="formData.job_category_id" @change="touch('job_category_id')"
+                                aria-describedby="job-category-help job-category-error" :aria-invalid="errors.job_category_id ? 'true' : null" :data-touched="errors.job_category_id ? '' : null">
+                            <option value="">Tanpa kategori</option>
+                            @foreach ($categories as $id => $name)
+                                <option value="{{ $id }}">{{ $name }}</option>
+                            @endforeach
+                        </select>
+                        <p id="job-category-help" class="sg-help">Dipakai untuk filter di daftar lowongan.</p>
+                        <p id="job-category-error" class="sg-error" x-show="errors.job_category_id" x-cloak><x-icon name="circle-alert" size="sm" /><span x-text="errors.job_category_id"></span></p>
+                    </div>
+
+                    <div class="sg-field">
                         <label for="job-location" class="sg-label" data-required>Lokasi</label>
                         <input id="job-location" type="text" class="sg-input" maxlength="255" autocomplete="off"
                                x-model="formData.location" @blur="touch('location')" aria-describedby="job-location-error"
@@ -246,9 +260,9 @@
 
 @push('scripts')
 <script>
-function jobWizard(initial, jobTypes, sdgLabels) {
+function jobWizard(initial, jobTypes, sdgLabels, categories) {
     const EMPTY = () => ({
-        title: '', department: '', location: '', job_type: '', salary_range: '',
+        title: '', department: '', location: '', job_type: '', job_category_id: '', salary_range: '',
         description: '', responsibilities: '', qualifications: '',
         skills: [], sdg_alignment: [], impact_metrics: '', success_criteria: '',
     });
@@ -260,6 +274,7 @@ function jobWizard(initial, jobTypes, sdgLabels) {
         department: [required('Departemen'), max(100)],
         location: [required('Lokasi'), max(255)],
         job_type: [(v) => v ? '' : 'Pilih tipe pekerjaan.', max(50)],
+        job_category_id: [(v) => !v || categories[v] ? '' : 'Pilih kategori dari daftar.'],
         salary_range: [max(255)],
         description: [required('Deskripsi pekerjaan')],
         responsibilities: [required('Tanggung jawab')],
@@ -267,7 +282,7 @@ function jobWizard(initial, jobTypes, sdgLabels) {
         skills: [(v) => (v && v.length) ? '' : 'Pilih minimal satu keahlian.'],
     };
     const STEP_FIELDS = [
-        ['title', 'department', 'job_type', 'location', 'salary_range'],
+        ['title', 'department', 'job_type', 'job_category_id', 'location', 'salary_range'],
         ['description', 'responsibilities', 'qualifications'],
         ['skills'],
         ['sdg_alignment'],
@@ -275,7 +290,7 @@ function jobWizard(initial, jobTypes, sdgLabels) {
     ];
     // field -> elemen yang menerima fokus saat galat
     const FIELD_TARGETS = {
-        title: '#job-title', department: '#job-department', job_type: '#job-type', location: '#job-location',
+        title: '#job-title', department: '#job-department', job_type: '#job-type', job_category_id: '#job-category', location: '#job-location',
         salary_range: '#job-salary', description: '#job-description', responsibilities: '#job-responsibilities',
         qualifications: '#job-qualifications', skills: '.sg-co-wizard__checks--skills input',
     };
@@ -288,6 +303,7 @@ function jobWizard(initial, jobTypes, sdgLabels) {
         errors: {},
         jobTypes,
         sdgLabels,
+        categories,
         submitting: false,
         autoSaving: false,
         lastSaved: '',
@@ -372,6 +388,10 @@ function jobWizard(initial, jobTypes, sdgLabels) {
                 this.currentStep--;
                 this.focusStep(this.currentStep);
             }
+        },
+
+        categoryLabel() {
+            return this.categories[this.formData.job_category_id] || '';
         },
 
         jobTypeLabel() {

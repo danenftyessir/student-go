@@ -151,8 +151,12 @@ class JobPostingController extends Controller
         // daftar SDG untuk alignment: nama bahasa indonesia dari sdg_label() (phase 23; id tetap 1-17)
         $sdgOptions = collect(range(1, 17))->map(fn ($id) => ['id' => $id, 'name' => 'SDG ' . $id . ' · ' . sdg_label($id)])->all();
 
+        // kategori lowongan (bug fix: wizard sebelumnya tidak punya field kategori)
+        $categories = JobCategory::orderBy('name')->pluck('name', 'id')->all();
+
         return view('company.jobs.create', compact(
             'company',
+            'categories',
             'departments',
             'jobTypes',
             'availableSkills',
@@ -188,8 +192,8 @@ class JobPostingController extends Controller
         $user = Auth::user();
         $company = $user->company;
 
-        // Generate slug dari title
-        $slug = Str::slug($validated['title']);
+        // Generate slug dari title (unik, termasuk lowongan yang sudah dihapus; bug fix: judul sama -> HTTP 500)
+        $slug = $this->uniqueSlug($validated['title']);
 
         // phase 23: rentang gaji teks dari wizard (opsional) -> salary_min/salary_max/currency/period
         $salary = $this->parseSalaryRange($validated['salary_range'] ?? null);
@@ -211,8 +215,8 @@ class JobPostingController extends Controller
             'responsibilities' => $validated['responsibilities'],
             'qualifications' => $validated['qualifications'],
             'benefits' => $validated['benefits'] ?? null,
-            'skills' => json_encode($validated['skills']),
-            'sdg_alignment' => isset($validated['sdg_alignment']) ? json_encode($validated['sdg_alignment']) : null,
+            'skills' => array_values($validated['skills']),
+            'sdg_alignment' => isset($validated['sdg_alignment']) ? array_values($validated['sdg_alignment']) : null,
             'impact_metrics' => $validated['impact_metrics'] ?? null,
             'success_criteria' => $validated['success_criteria'] ?? null,
             'status' => $validated['status'] ?? 'posted',
@@ -235,8 +239,8 @@ class JobPostingController extends Controller
             ->where('company_id', $company->id)
             ->firstOrFail();
 
-        // Increment views count
-        $jobPosting->incrementViews();
+        // views tidak ditambah di sini: halaman ini hanya dibuka pemilik lowongan;
+        // kunjungan mahasiswa tetap dihitung oleh Student\JobController::show
 
         // IMPLEMENTED: Ambil recent applicants dari Supabase
         $recentApplicants = $jobPosting->jobApplications()
@@ -404,19 +408,20 @@ class JobPostingController extends Controller
         $updateData = [
             'job_category_id' => $validated['job_category_id'] ?? null,
             'title' => $validated['title'],
-            'slug' => Str::slug($validated['title']),
+            'slug' => $this->uniqueSlug($validated['title'], $jobPosting->id),
             'department' => $validated['department'],
             'location' => $validated['location'],
             'job_type' => $validated['job_type'],
-            'salary_min' => $validated['salary_min'] ?? null,
-            'salary_max' => $validated['salary_max'] ?? null,
-            'salary_currency' => $validated['salary_currency'] ?? 'USD',
+            // gaji hanya ditimpa bila dikirim (form edit tidak mengirimnya; sebelumnya setiap edit menghapus gaji)
+            'salary_min' => $request->has('salary_min') ? ($validated['salary_min'] ?? null) : $jobPosting->salary_min,
+            'salary_max' => $request->has('salary_max') ? ($validated['salary_max'] ?? null) : $jobPosting->salary_max,
+            'salary_currency' => $request->has('salary_currency') ? ($validated['salary_currency'] ?? 'IDR') : $jobPosting->salary_currency,
             'description' => $validated['description'],
             'responsibilities' => $validated['responsibilities'],
             'qualifications' => $validated['qualifications'],
             'benefits' => $validated['benefits'] ?? null,
-            'skills' => json_encode($validated['skills']),
-            'sdg_alignment' => isset($validated['sdg_alignment']) ? json_encode($validated['sdg_alignment']) : null,
+            'skills' => array_values($validated['skills']),
+            'sdg_alignment' => isset($validated['sdg_alignment']) ? array_values($validated['sdg_alignment']) : null,
             'impact_metrics' => $validated['impact_metrics'] ?? null,
             'success_criteria' => $validated['success_criteria'] ?? null,
             'status' => $validated['status'] ?? $jobPosting->status,
@@ -489,11 +494,31 @@ class JobPostingController extends Controller
 
         $jobPosting->update([
             'linkedin_url' => $validated['linkedin_url'] ?? null,
-            'required_sdgs' => isset($validated['sdg_goals']) ? json_encode($validated['sdg_goals']) : null,
+            'required_sdgs' => isset($validated['sdg_goals']) ? array_map('intval', array_values($validated['sdg_goals'])) : null,
         ]);
 
         return redirect()->route('company.jobs.show', $id)
             ->with('success', 'LinkedIn reference dan SDG requirements berhasil diperbarui!');
+    }
+
+    /**
+     * slug unik dari judul: 'judul', lalu 'judul-2', 'judul-3', … (lowongan yang sudah dihapus ikut dihitung karena
+     * kolom slug unik di database). $ignoreId = lowongan yang sedang diubah.
+     */
+    private function uniqueSlug(string $title, ?int $ignoreId = null): string
+    {
+        $base = Str::limit(Str::slug($title), 240, '') ?: 'lowongan';
+        $slug = $base;
+        $n = 2;
+
+        while (JobPosting::withTrashed()
+            ->where('slug', $slug)
+            ->when($ignoreId, fn ($query) => $query->where('id', '!=', $ignoreId))
+            ->exists()) {
+            $slug = $base . '-' . $n++;
+        }
+
+        return $slug;
     }
 
     /**

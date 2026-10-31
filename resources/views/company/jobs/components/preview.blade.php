@@ -8,6 +8,7 @@
     <ul class="sg-co-preview__facts">
         <li x-show="formData.location.trim()"><x-icon name="map-pin" size="sm" /><span x-text="formData.location"></span></li>
         <li x-show="formData.job_type"><x-icon name="briefcase" size="sm" /><span x-text="jobTypeLabel()"></span></li>
+        <li x-show="categoryLabel()"><x-icon name="folder-open" size="sm" /><span x-text="categoryLabel()"></span></li>
         <li x-show="formData.department.trim()"><x-icon name="building-2" size="sm" /><span x-text="formData.department"></span></li>
         <li x-show="formData.salary_range.trim()"><x-icon name="clipboard-list" size="sm" /><span x-text="formData.salary_range"></span></li>
     </ul>
