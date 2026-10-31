@@ -1,0 +1,270 @@
+/*
+ * Student Go — company workspace.
+ *
+ * Phase 21 (2026-10-31): dashboard perusahaan (/company/dashboard) sebagai antrean kerja.
+ * Existing tokens and components only (no new colour, font, radius or shadow).
+ * Borders and dividers group content; no cards, no tiles, no motion.
+ * Prefix: .sg-co-  (phases 22-25 append their own sections below)
+ */
+
+.sg-co-dash { padding-bottom: 3rem; }
+
+/* summary line + two tertiary shortcuts (replaces the stat tiles, trend chips and four quick-action tiles) */
+.sg-co-dash__bar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .5rem 1.5rem; margin-bottom: 2rem; }
+.sg-co-dash__shortcuts { display: flex; flex-wrap: wrap; gap: .25rem; margin-inline-start: -.5rem; }
+@media (min-width: 640px) { .sg-co-dash__shortcuts { margin-inline-start: auto; } }
+
+/* queue: main column (stages, recent applications, active jobs, chart) + side column (saved and newest talents) */
+.sg-co-dash__grid { display: grid; gap: 2.5rem; }
+@media (min-width: 1024px) {
+  .sg-co-dash__grid { grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); gap: 3rem; }
+  .sg-co-dash__grid--single { grid-template-columns: minmax(0, 1fr); }
+}
+.sg-co-dash__col { display: grid; gap: 2.5rem; align-content: start; min-width: 0; }
+.sg-co-dash__col .sg-empty { margin-block: 1.5rem; }
+.sg-co-dash__col .sg-empty p { text-wrap: pretty; }
+
+.sg-co-dash__head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: .25rem 1rem; margin-bottom: .75rem; }
+.sg-co-dash__head h2 { margin: 0; font-size: 1rem; line-height: 1.5rem; font-weight: 600; color: var(--sg-text-primary); }
+.sg-co-dash__more { display: inline-block; padding-block: .25rem; font-size: .875rem; line-height: 1.25rem; font-weight: 600; color: var(--sg-text-link); text-decoration: none; }
+.sg-co-dash__more:hover { text-decoration: underline; }
+.sg-co-dash__note { margin: -.25rem 0 .75rem; font-size: .75rem; line-height: 1rem; color: var(--sg-text-tertiary); }
+
+/* applicants by stage: one bordered strip, dividers between stages; wraps to two or three per row on phones */
+.sg-co-dash__stages { display: flex; flex-wrap: wrap; margin: 0; padding: 0; list-style: none; border: 1px solid var(--sg-border-default); border-radius: var(--sg-radius-panel); overflow: hidden; }
+/* dividers on every item; the outer edges are pulled under the frame, so the lines stay right when the strip wraps */
+.sg-co-dash__stages li { flex: 1 1 7rem; display: grid; gap: .125rem; margin: 0 0 -1px -1px; padding: .75rem 1rem; border-left: 1px solid var(--sg-border-default); border-bottom: 1px solid var(--sg-border-default); }
+.sg-co-dash__stage-count { font-size: 1.25rem; line-height: 1.75rem; font-weight: 600; color: var(--sg-text-primary); font-variant-numeric: tabular-nums; }
+.sg-co-dash__stage-label { font-size: .875rem; line-height: 1.25rem; color: var(--sg-text-secondary); }
+
+/* record rows: long names and titles wrap instead of truncating */
+.sg-co-dash .sg-list__title, .sg-co-dash .sg-list__meta { overflow-wrap: anywhere; }
+.sg-co-dash__detail { margin: .25rem 0 0; font-size: .75rem; line-height: 1rem; color: var(--sg-text-tertiary); }
+
+/* chart: fixed height, no animation; values also in a screen-reader table */
+.sg-co-dash__chart { margin: 0; }
+.sg-co-dash__canvas { position: relative; height: 14rem; }
+.sg-co-dash__chart figcaption { margin: .5rem 0 0; }
+
+/* first run: the company journey as a numbered list (adapted from workflows/company-journey.svg) */
+.sg-co-dash__steps-title { margin: 0 0 .75rem; font-size: 1rem; line-height: 1.5rem; font-weight: 600; color: var(--sg-text-primary); }
+.sg-co-dash__steps { display: grid; gap: 1rem; margin: 0; padding: 0; list-style: none; counter-reset: sg-co-step; }
+@media (min-width: 768px) { .sg-co-dash__steps { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.25rem 2rem; } }
+.sg-co-dash__steps li { counter-increment: sg-co-step; padding-top: .75rem; border-top: 2px solid var(--sg-brand); }
+.sg-co-dash__steps li::before { content: counter(sg-co-step, decimal-leading-zero); display: block; margin-bottom: .25rem; font-size: .75rem; line-height: 1rem; font-weight: 600; letter-spacing: .06em; color: var(--sg-text-tertiary); font-variant-numeric: tabular-nums; }
+.sg-co-dash__steps a { font-weight: 600; color: var(--sg-text-link); text-decoration: none; }
+.sg-co-dash__steps a:hover { text-decoration: underline; }
+.sg-co-dash__steps p { margin: .25rem 0 0; font-size: .875rem; line-height: 1.25rem; color: var(--sg-text-secondary); }
+
+/* ─────────────────────────────────────────────────────────────────────────────
+ * Phase 22 (2026-10-31): talent directory (/company/talents), saved talents (/company/talents/saved)
+ * and compare (/company/talents/compare). Filter rail left from 768px (the shared filter bar becomes a
+ * column there; below 768px it keeps its drawer), divider-separated people list, one pager.
+ * The compare bar is the only elevated element (a sticky bar, guardrail 4).
+ * ───────────────────────────────────────────────────────────────────────────── */
+
+.sg-co-talents, .sg-co-saved { padding-bottom: 6rem; }   /* room for the compare bar */
+
+.sg-co-talents__layout { display: grid; gap: 1.5rem; align-items: start; }
+@media (min-width: 768px) { .sg-co-talents__layout { grid-template-columns: 15rem minmax(0, 1fr); gap: 2rem; } }
+@media (min-width: 1024px) { .sg-co-talents__layout { grid-template-columns: 16.5rem minmax(0, 1fr); gap: 2.5rem; } }
+
+/* rail: the shared filter bar stacked as one column (only from 768px; the drawer rules below 768px stay untouched) */
+@media (min-width: 768px) {
+  .sg-co-talents__rail .sg-filter-bar { flex-direction: column; flex-wrap: nowrap; align-items: stretch; gap: 1rem; }
+  .sg-co-talents__rail .sg-filter-bar__search { flex: none; }
+  .sg-co-talents__rail .sg-filter-bar__body { flex-direction: column; flex-wrap: nowrap; align-items: stretch; gap: 1rem; }
+  .sg-co-talents__rail .sg-filter-bar__body > .sg-field { flex: none; }
+  .sg-co-talents__rail .sg-filter-bar__foot { flex-wrap: wrap; padding-top: 1rem; border-top: 1px solid var(--sg-border-default); }
+}
+.sg-co-talents__group { border-bottom: 1px solid var(--sg-border-default); padding-bottom: .5rem; }
+.sg-co-talents__group > summary { display: list-item; padding-block: .5rem; cursor: pointer; font-size: .875rem; line-height: 1.25rem; font-weight: 500; color: var(--sg-text-primary); }
+.sg-co-talents__group-count { font-weight: 400; color: var(--sg-text-secondary); }
+.sg-co-talents__checks { margin-top: .25rem; gap: .25rem; }
+.sg-co-talents__checks > legend { margin-bottom: .25rem; font-size: .75rem; line-height: 1rem; font-weight: 400; color: var(--sg-text-tertiary); }
+.sg-co-talents__group-note { margin: .25rem 0 0; font-size: .75rem; line-height: 1rem; color: var(--sg-text-tertiary); }
+
+/* result head: honest count + the rule that limits the pool */
+.sg-co-talents__results { min-width: 0; }
+.sg-co-talents__head { margin-bottom: 1rem; }
+.sg-co-talents__head h2 { margin: 0; font-size: 1.125rem; line-height: 1.75rem; font-weight: 600; color: var(--sg-text-primary); font-variant-numeric: tabular-nums; }
+.sg-co-talents__rule { margin: .125rem 0 0; font-size: .875rem; line-height: 1.25rem; color: var(--sg-text-secondary); }
+
+/* saved searches (browser-local, existing feature) */
+.sg-co-talents__searches { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem 1rem; margin-bottom: 1rem; }
+.sg-co-talents__search-list { display: flex; flex-wrap: wrap; gap: .25rem .75rem; margin: 0; padding: 0; list-style: none; }
+.sg-co-talents__search-list li { display: inline-flex; align-items: center; }
+.sg-co-talents__search-link { font-size: .875rem; line-height: 1.25rem; font-weight: 500; color: var(--sg-text-link); text-decoration: none; overflow-wrap: anywhere; }
+.sg-co-talents__search-link:hover { text-decoration: underline; }
+.sg-co-talents__search-remove { width: 2rem; height: 2rem; }
+.sg-co-talents__search-save { display: flex; flex-wrap: wrap; gap: .5rem; width: 100%; }
+.sg-co-talents__search-save .sg-input { flex: 1 1 14rem; min-width: 0; }
+
+/* people rows */
+.sg-co-talents__list .sg-list__title, .sg-co-talents__list .sg-list__meta,
+.sg-co-saved__list .sg-list__title, .sg-co-saved__list .sg-list__meta { overflow-wrap: anywhere; }
+.sg-co-talents__facts { display: flex; flex-wrap: wrap; gap: .125rem 1rem; margin: .25rem 0 0; font-size: .875rem; line-height: 1.25rem; color: var(--sg-text-secondary); }
+.sg-co-talents__facts > span { display: inline-flex; align-items: center; gap: .25rem; }
+.sg-co-talents__facts .sg-icon { color: var(--sg-text-tertiary); }
+.sg-co-talents__chips { display: flex; flex-wrap: wrap; gap: .25rem; margin: .5rem 0 0; padding: 0; list-style: none; }
+.sg-co-talents__chips .sg-chip { overflow-wrap: anywhere; }
+.sg-co-talents__list .sg-list__end { gap: .75rem; }
+.sg-co-talents__pick { align-items: center; white-space: nowrap; }
+.sg-co-talents__save[aria-pressed="true"] { color: var(--sg-text-link); border-color: var(--color-brand-300); background: var(--sg-brand-tint); }
+.sg-co-talents__pager { margin-top: 1.5rem; }
+
+/* compare bar: appears only while talents are picked */
+.sg-co-talents__compare { position: fixed; z-index: 60; inset-inline: 0; bottom: 0; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .5rem 1rem;
+  padding: .75rem var(--sg-gutter) calc(.75rem + env(safe-area-inset-bottom, 0px)); background: var(--sg-surface-raised); border-top: 1px solid var(--sg-border-default); box-shadow: var(--shadow-overlay); }
+.sg-co-talents__compare-text { flex: 1 1 16rem; min-width: 0; margin: 0; font-size: .875rem; line-height: 1.25rem; color: var(--sg-text-secondary); overflow-wrap: anywhere; }
+.sg-co-talents__compare-text b { color: var(--sg-text-primary); font-variant-numeric: tabular-nums; }
+.sg-co-talents__compare-actions { display: flex; gap: .5rem; }
+
+/* saved talents: folders left, list right; folders wrap above the list below 768px */
+.sg-co-saved__layout { display: grid; gap: 1.5rem; align-items: start; }
+@media (min-width: 768px) { .sg-co-saved__layout { grid-template-columns: 14rem minmax(0, 1fr); gap: 2rem; } }
+.sg-co-saved__folders-title { margin: 0 0 .5rem; font-size: .75rem; line-height: 1rem; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; color: var(--sg-text-tertiary); }
+.sg-co-saved__folders ul { display: flex; flex-wrap: wrap; gap: .25rem; margin: 0; padding: 0; list-style: none; }
+@media (min-width: 768px) { .sg-co-saved__folders ul { flex-direction: column; flex-wrap: nowrap; } }
+.sg-co-saved__folder { display: flex; align-items: center; justify-content: space-between; gap: .75rem; width: 100%; min-height: 2.25rem; padding: .375rem .75rem; font: inherit; font-size: .875rem; line-height: 1.25rem; text-align: left; color: var(--sg-text-secondary); background: transparent; border: 1px solid var(--sg-border-default); border-radius: var(--sg-radius-control); cursor: pointer; transition: background-color var(--duration-state) var(--ease-standard); }
+@media (min-width: 768px) { .sg-co-saved__folder { border-color: transparent; } }
+@media (pointer: coarse) { .sg-co-saved__folder { min-height: 2.75rem; } }
+.sg-co-saved__folder:hover { background: var(--color-gray-50); }
+.sg-co-saved__folder[aria-pressed="true"] { font-weight: 600; color: var(--sg-text-primary); background: var(--color-gray-100); border-color: var(--sg-border-default); }
+.sg-co-saved__folder > span:first-child { overflow-wrap: anywhere; }
+.sg-co-saved__folder-count { font-variant-numeric: tabular-nums; color: var(--sg-text-tertiary); }
+.sg-co-saved__folders-note { margin: .75rem 0 0; font-size: .75rem; line-height: 1rem; color: var(--sg-text-tertiary); }
+
+.sg-co-saved__main { min-width: 0; }
+.sg-co-saved__head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .5rem 1rem; margin-bottom: 1rem; }
+.sg-co-saved__head h2 { margin: 0; font-size: 1.125rem; line-height: 1.75rem; font-weight: 600; color: var(--sg-text-primary); font-variant-numeric: tabular-nums; }
+.sg-co-saved__search { flex: 0 1 20rem; min-width: 0; }
+.sg-co-saved__search .sg-input { width: 100%; }
+.sg-co-saved__pick { display: inline-flex; align-items: center; justify-content: center; flex: none; width: 1.5rem; min-height: 2.5rem; cursor: pointer; }
+.sg-co-saved__pick input { width: 1rem; height: 1rem; margin: 0; accent-color: var(--sg-brand); cursor: pointer; }
+@media (pointer: coarse) { .sg-co-saved__pick { width: 2.75rem; min-height: 2.75rem; } .sg-co-saved__pick input { width: 1.25rem; height: 1.25rem; } }
+.sg-co-saved__note { margin-top: .5rem; padding: .375rem 0 .375rem .75rem; border-left: 2px solid var(--sg-border-default); }
+.sg-co-saved__note p { margin: 0; font-size: .875rem; line-height: 1.25rem; color: var(--sg-text-primary); overflow-wrap: anywhere; white-space: pre-line; }
+.sg-co-saved__note .sg-co-saved__note-label { font-size: .75rem; line-height: 1rem; font-weight: 600; color: var(--sg-text-tertiary); }
+
+/* compare page: one horizontal scroll container at every width (2-3 people + criteria do not stack) */
+.sg-co-compare { padding-bottom: 3rem; }
+.sg-co-compare__table.sg-table-wrap { position: relative; overflow-x: auto; border: 1px solid var(--sg-border-default); }   /* relative: sr-only labels stay inside the scroller */
+.sg-co-compare__table .sg-table { min-width: 36rem; }
+.sg-co-compare__table tbody th { padding: .75rem; text-align: left; vertical-align: top; white-space: nowrap; font-size: .875rem; line-height: 1.25rem; font-weight: 500; color: var(--sg-text-secondary); background: var(--color-gray-50); border-bottom: 1px solid var(--sg-border-default); }
+.sg-co-compare__table tbody tr:last-child th { border-bottom: 0; }
+.sg-co-compare__person { display: inline-flex; align-items: center; gap: .5rem; font-size: .875rem; line-height: 1.25rem; font-weight: 600; color: var(--sg-text-primary); }
+.sg-co-compare__ok { display: inline-flex; align-items: center; gap: .25rem; color: var(--color-success-700); }
+.sg-co-compare__bio { min-width: 12rem; white-space: pre-line; }
+.sg-co-compare__actions { display: flex; flex-wrap: wrap; gap: .5rem; }
+
+/* ─────────────────────────────────────────────────────────────────────────────
+ * Phase 23 (2026-10-31): job table (/company/jobs), five-step wizard (/company/jobs/create)
+ * with a preview rail (D-26 approved for this item), job record page (/company/jobs/{id}).
+ * Existing tokens only; borders and dividers group content; no motion beyond the shared components.
+ * ───────────────────────────────────────────────────────────────────────────── */
+
+/* job table: summary, status tabs, labelled filters, 7-column table (stacks below 640px) */
+.sg-co-jobs { padding-bottom: 3rem; }
+.sg-co-jobs__summary { margin-bottom: 1rem; }
+.sg-co-jobs__tabs { margin-bottom: 1rem; }
+.sg-co-jobs__filters { margin-bottom: 1.25rem; }
+.sg-co-jobs__table .sg-table__primary { overflow-wrap: anywhere; }
+.sg-co-jobs__actions { display: inline-flex; align-items: center; gap: .125rem; margin-inline-start: -.5rem; }
+.sg-co-jobs__delete { display: contents; }
+.sg-co-jobs__danger { color: var(--color-danger-700); }
+.sg-co-jobs__danger:hover { background: var(--color-danger-50); }
+@media (min-width: 640px) { .sg-co-jobs__table thead th:last-child { width: 1%; } }
+/* empty state inside the table: one full-width cell, also when rows stack */
+.sg-co-jobs__empty-row:hover { background: transparent !important; }
+.sg-co-jobs__empty-row td { display: block; padding: 0; }
+@media (min-width: 640px) { .sg-co-jobs__empty-row td { display: table-cell; } }
+.sg-co-jobs__empty-row td::before { content: none !important; }
+.sg-co-jobs__empty-row .sg-empty { margin-block: 2rem; }
+.sg-co-jobs__pager { margin-top: 1.25rem; }
+
+/* wizard: form + preview rail from 1024px */
+.sg-co-wizard { padding-bottom: 3rem; }
+.sg-co-wizard__draft { min-height: 1.25rem; margin: -.5rem 0 1rem; font-size: .75rem; line-height: 1rem; color: var(--sg-text-tertiary); }
+.sg-co-wizard__layout { display: grid; gap: 2rem; align-items: start; }
+@media (min-width: 1024px) { .sg-co-wizard__layout { grid-template-columns: minmax(0, 1fr) 20rem; gap: 2.5rem; } }
+@media (min-width: 1366px) { .sg-co-wizard__layout { grid-template-columns: minmax(0, 1fr) 22rem; } }
+.sg-co-wizard__form { min-width: 0; display: grid; gap: 1.5rem; padding: 1.25rem; background: var(--sg-surface-raised); border: 1px solid var(--sg-border-default); border-radius: var(--sg-radius-panel); }
+@media (min-width: 640px) { .sg-co-wizard__form { padding: 1.5rem; } }
+.sg-co-wizard__stepper { padding-bottom: 1.25rem; border-bottom: 1px solid var(--sg-border-default); }
+.sg-co-wizard__issues { display: flex; align-items: flex-start; gap: .5rem; padding: .625rem .75rem; font-size: .875rem; line-height: 1.25rem; color: var(--color-danger-700); background: var(--color-danger-50); border: 1px solid var(--color-danger-600); border-radius: var(--sg-radius-control); }
+.sg-co-wizard__issues .sg-icon { flex: none; margin-top: .125rem; }
+.sg-co-wizard__issues p { margin: 0; }
+.sg-co-wizard__issue-link { padding: 0; font: inherit; font-weight: 600; color: inherit; text-decoration: underline; background: none; border: 0; cursor: pointer; }
+.sg-co-wizard__step h2 { margin: 0 0 1.25rem; font-size: 1.125rem; line-height: 1.75rem; font-weight: 600; color: var(--sg-text-primary); }
+.sg-co-wizard__step h2:focus { outline: none; }
+.sg-co-wizard__step h2:focus-visible { outline: 2px solid var(--sg-focus); outline-offset: 2px; }
+.sg-co-wizard__grid { display: grid; gap: 1.25rem; align-items: start; }
+.sg-co-wizard__grid > .sg-field { align-content: start; }
+@media (min-width: 640px) { .sg-co-wizard__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } .sg-co-wizard__wide { grid-column: 1 / -1; } }
+.sg-co-wizard__stack { display: grid; gap: 1.25rem; }
+.sg-co-wizard__optional { font-weight: 400; color: var(--sg-text-tertiary); }
+.sg-co-wizard__checks { display: grid; gap: .25rem 1rem; margin-top: .25rem; }
+@media (min-width: 640px) { .sg-co-wizard__checks { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (min-width: 768px) { .sg-co-wizard__checks--skills { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.sg-co-wizard__checks .sg-check { padding-block: .25rem; }
+.sg-co-wizard__publish-note { margin: 1.25rem 0 0; font-size: .875rem; line-height: 1.25rem; color: var(--sg-text-secondary); }
+.sg-co-wizard__nav { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: .5rem; padding-top: 1.25rem; border-top: 1px solid var(--sg-border-default); }
+@media (max-width: 639px) { .sg-co-wizard__nav > .sg-btn { flex: 1 1 auto; } }
+.sg-co-wizard__rail { display: none; }
+@media (min-width: 1024px) {
+  .sg-co-wizard__rail { display: block; position: sticky; top: calc(var(--sg-header-h, 4rem) + 1rem); max-height: calc(100vh - 6rem); overflow-y: auto; }
+  .sg-co-wizard__preview-btn { display: none; }
+}
+.sg-co-wizard__template-row { display: flex; flex-wrap: wrap; gap: .5rem; }
+.sg-co-wizard__template-row .sg-input { flex: 1 1 12rem; min-width: 0; }
+.sg-co-wizard__template-title { margin: 1.25rem 0 .5rem; font-size: .875rem; line-height: 1.25rem; font-weight: 600; color: var(--sg-text-primary); }
+
+/* preview of the posting as students will see it (rail and modal) */
+.sg-co-preview { display: grid; gap: .75rem; padding: 1.25rem; border: 1px solid var(--sg-border-default); border-radius: var(--sg-radius-panel); background: var(--sg-surface-raised); }
+.sg-co-wizard__rail .sg-co-preview { border-top: 2px solid var(--sg-brand); }
+dialog .sg-co-preview { padding: 0; border: 0; }
+.sg-co-preview__eyebrow { margin: 0; font-size: .75rem; line-height: 1rem; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; color: var(--sg-text-tertiary); }
+.sg-co-preview__title { margin: 0; font-size: 1.125rem; line-height: 1.5rem; font-weight: 600; color: var(--sg-text-primary); overflow-wrap: anywhere; }
+.sg-co-preview__title.is-empty { color: var(--sg-text-tertiary); }
+.sg-co-preview__company { margin: -.5rem 0 0; font-size: .875rem; line-height: 1.25rem; color: var(--sg-text-secondary); overflow-wrap: anywhere; }
+.sg-co-preview__facts { display: grid; gap: .25rem; margin: 0; padding: 0; list-style: none; font-size: .875rem; line-height: 1.25rem; color: var(--sg-text-secondary); }
+.sg-co-preview__facts li { display: flex; align-items: flex-start; gap: .375rem; overflow-wrap: anywhere; }
+.sg-co-preview__facts .sg-icon { flex: none; margin-top: .125rem; color: var(--sg-text-tertiary); }
+.sg-co-preview__part { padding-top: .75rem; border-top: 1px solid var(--sg-border-default); }
+.sg-co-preview__part h3 { margin: 0 0 .25rem; font-size: .75rem; line-height: 1rem; font-weight: 600; color: var(--sg-text-tertiary); }
+.sg-co-preview__part p { display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden; margin: 0; font-size: .875rem; line-height: 1.25rem; color: var(--sg-text-primary); white-space: pre-line; overflow-wrap: anywhere; }
+dialog .sg-co-preview__part p { display: block; -webkit-line-clamp: none; }
+.sg-co-preview__chips { display: flex; flex-wrap: wrap; gap: .25rem; margin: 0; padding: 0; list-style: none; }
+.sg-co-preview__note { margin: 0; padding-top: .75rem; border-top: 1px solid var(--sg-border-default); font-size: .75rem; line-height: 1rem; color: var(--sg-text-tertiary); }
+
+/* job record page: content + facts rail */
+.sg-co-job { padding-bottom: 3rem; }
+.sg-co-job__meta { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem 1rem; margin: 0 0 1.5rem; font-size: .875rem; line-height: 1.25rem; color: var(--sg-text-secondary); }
+.sg-co-job__layout { display: grid; gap: 2.5rem; align-items: start; }
+@media (min-width: 1024px) { .sg-co-job__layout { grid-template-columns: minmax(0, 1fr) 20rem; gap: 3rem; } }
+.sg-co-job__content, .sg-co-job__rail { display: grid; gap: 2rem; min-width: 0; align-content: start; }
+.sg-co-job__content h2, .sg-co-job__rail h2 { margin: 0 0 .75rem; font-size: 1rem; line-height: 1.5rem; font-weight: 600; color: var(--sg-text-primary); }
+.sg-co-job__content section + section { padding-top: 2rem; border-top: 1px solid var(--sg-border-default); }
+.sg-co-job__text { margin: 0; font-size: 1rem; line-height: 1.625; color: var(--sg-text-primary); white-space: pre-line; overflow-wrap: anywhere; max-width: var(--sg-w-reading, 42rem); }
+.sg-co-job__bullets { display: grid; gap: .375rem; margin: 0; padding-left: 1.25rem; font-size: 1rem; line-height: 1.5rem; color: var(--sg-text-primary); max-width: var(--sg-w-reading, 42rem); }
+.sg-co-job__bullets li { overflow-wrap: anywhere; }
+.sg-co-job__chips { display: flex; flex-wrap: wrap; gap: .375rem; margin: 0; padding: 0; list-style: none; }
+.sg-co-job__chips .sg-chip { font-size: .875rem; line-height: 1.25rem; overflow-wrap: anywhere; }
+.sg-co-job__muted { margin: 0; font-size: .875rem; line-height: 1.25rem; color: var(--sg-text-tertiary); }
+.sg-co-job__impact dd { white-space: pre-line; overflow-wrap: anywhere; }
+.sg-co-job__rail > section { padding: 1.25rem; border: 1px solid var(--sg-border-default); border-radius: var(--sg-radius-panel); background: var(--sg-surface-raised); }
+.sg-co-job__rail dd { overflow-wrap: anywhere; }
+.sg-co-job__stages { display: grid; margin: 0 0 1rem; padding: 0; list-style: none; border-top: 1px solid var(--sg-border-default); }
+.sg-co-job__stages li { display: flex; justify-content: space-between; gap: 1rem; padding-block: .5rem; border-bottom: 1px solid var(--sg-border-default); font-size: .875rem; line-height: 1.25rem; color: var(--sg-text-secondary); }
+.sg-co-job__stages b { color: var(--sg-text-primary); font-variant-numeric: tabular-nums; }
+.sg-co-job__subhead { margin: 0 0 .25rem; font-size: .75rem; line-height: 1rem; font-weight: 600; color: var(--sg-text-tertiary); }
+.sg-co-job__recent { margin-bottom: .75rem; }
+.sg-co-job__recent > li { padding-block: .625rem; }
+.sg-co-job__recent .sg-list__end { width: auto; }
+.sg-co-job__link { color: var(--sg-text-link); text-decoration: none; overflow-wrap: anywhere; }
+.sg-co-job__link:hover { text-decoration: underline; }
+.sg-co-job__reference-btn { margin-top: 1rem; }
+.sg-co-job__reference-form { display: grid; gap: 1.25rem; }
+.sg-co-job__sdg-checks { display: grid; gap: .25rem 1rem; }
+@media (min-width: 640px) { .sg-co-job__sdg-checks { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
