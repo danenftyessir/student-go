@@ -1,0 +1,74 @@
+/*
+ * Student Go — Phase 7 (2026-10-31): student dashboard (/student/dashboard).
+ *
+ * Imported by app.css after auth.css (its own file, like public-pages.css and
+ * auth.css, so it never collides with edits to the shared component file or
+ * with the parallel institution/company dashboard work). Existing tokens only:
+ * no new colour, font, radius or shadow. Workbench layer: the work queue is the
+ * one bordered panel, everything else is divided lists and a table; no photo,
+ * no tiles, no chart (D-10, D-21). Documented in COMPONENT_INVENTORY.md section 9.
+ */
+
+.sg-dash { padding-bottom: 4rem; }
+
+/* main column (queue, projects, applications) + rail (recommendations, network).
+   dom order is header, queue, rail, projects, applications, so keyboard order is header → queue → recommendations. */
+.sg-dash__grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 2rem; }
+@media (min-width: 1024px) {
+  .sg-dash__grid { grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); grid-template-rows: auto auto 1fr; column-gap: 2.5rem; align-items: start; }
+  .sg-dash__grid > * { grid-column: 1; }
+  .sg-dash__grid > .sg-dash__rail { grid-column: 2; grid-row: 1 / span 3; }
+}
+
+.sg-dash__h2 { margin: 0; font: 600 1rem/1.5rem var(--font-sans); color: var(--sg-text-primary); }
+.sg-dash__head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .25rem 1rem; margin-bottom: .5rem; }
+.sg-dash__more { display: inline-flex; align-items: center; min-height: 1.5rem; font: 500 .875rem/1.25rem var(--font-sans); color: var(--sg-text-link); text-decoration: none; }
+.sg-dash__more:hover { text-decoration: underline; }
+@media (pointer: coarse) { .sg-dash__more { min-height: 2.75rem; } }
+.sg-dash__none { margin: 0; padding-block: .75rem; font-size: .875rem; line-height: 1.25rem; color: var(--sg-text-secondary); }
+
+/* ── Langkah berikutnya: the page's one panel ── */
+.sg-dash__queue { background: var(--sg-surface-raised); border: 1px solid var(--sg-border-default); border-radius: var(--sg-radius-panel); padding: 1rem 1rem .25rem; }
+@media (min-width: 640px) { .sg-dash__queue { padding-inline: 1.25rem; } }
+.sg-dash__queue > .sg-dash__h2 { margin-bottom: .25rem; }
+.sg-dash-queue { border-top: 0; }
+.sg-dash-queue > li:last-child { border-bottom: 0; }
+.sg-dash-queue__item { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: .5rem .875rem; align-items: start; }
+@media (min-width: 640px) { .sg-dash-queue__item { grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; } }
+.sg-dash-queue__icon { display: grid; place-items: center; width: 2.25rem; height: 2.25rem; border-radius: var(--sg-radius-control); background: var(--sg-surface-sunken); color: var(--sg-text-secondary); }
+.sg-dash-queue__main { min-width: 0; }
+.sg-dash-queue__kicker { margin: 0 0 .125rem; font: 600 .75rem/1rem var(--font-sans); letter-spacing: .04em; text-transform: uppercase; color: var(--sg-brand); }
+.sg-dash-queue__title { margin: 0; font: 600 .9375rem/1.375rem var(--font-sans); color: var(--sg-text-primary); overflow-wrap: anywhere; }
+.sg-dash-queue__meta { margin: .125rem 0 0; font-size: .875rem; line-height: 1.25rem; color: var(--sg-text-secondary); overflow-wrap: anywhere; }
+.sg-dash-queue__meta time { font-variant-numeric: tabular-nums; }
+.sg-dash-queue__end { grid-column: 2; display: flex; flex-wrap: wrap; align-items: center; gap: .5rem; }
+@media (min-width: 640px) { .sg-dash-queue__end { grid-column: 3; justify-content: flex-end; } }
+.sg-dash-queue__end form { margin: 0; }
+
+/* ── Rail: recommendations as rows, network as one summary line ── */
+.sg-dash__rail { display: grid; gap: 2rem; align-content: start; }
+.sg-dash-reco__item { display: grid; gap: .125rem; }
+.sg-dash-reco__title { margin: 0; font: 600 .9375rem/1.375rem var(--font-sans); color: var(--sg-text-primary); overflow-wrap: anywhere; text-wrap: pretty; }
+.sg-dash-reco__meta { display: flex; gap: .25rem; align-items: flex-start; margin: 0; font-size: .875rem; line-height: 1.25rem; color: var(--sg-text-secondary); overflow-wrap: anywhere; }
+.sg-dash-reco__meta .sg-icon { margin-top: .125rem; color: var(--sg-text-tertiary); }
+.sg-dash-reco__foot { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .25rem .5rem; margin-top: .375rem; }
+.sg-dash-reco__deadline { font-size: .75rem; line-height: 1rem; color: var(--sg-text-tertiary); font-variant-numeric: tabular-nums; }
+.sg-dash__network .sg-summary { margin-block: .25rem .25rem; }
+
+/* ── Proyek berjalan: rows with a slim progress bar (milestones done / total) ── */
+.sg-dash-project { display: grid; gap: .5rem 1.5rem; }
+@media (min-width: 640px) { .sg-dash-project { grid-template-columns: minmax(0, 1fr) 12rem; align-items: center; } }
+.sg-dash-project__main { min-width: 0; }
+.sg-dash-project__title { margin: 0; font: 600 .9375rem/1.375rem var(--font-sans); overflow-wrap: anywhere; }
+.sg-dash-project__title a { display: inline-block; min-height: 1.5rem; color: var(--sg-text-primary); text-decoration: none; }
+.sg-dash-project__title a:hover { color: var(--sg-text-link); text-decoration: underline; }
+.sg-dash-project__progress { display: flex; align-items: center; gap: .75rem; font-size: .875rem; line-height: 1.25rem; color: var(--sg-text-secondary); font-variant-numeric: tabular-nums; }
+.sg-dash-project__progress progress { flex: 1; height: .375rem; appearance: none; border: 0; border-radius: var(--radius-sm); background: var(--color-gray-200); overflow: hidden; }
+.sg-dash-project__progress progress::-webkit-progress-bar { background: var(--color-gray-200); }
+.sg-dash-project__progress progress::-webkit-progress-value { background: var(--sg-brand); }
+.sg-dash-project__progress progress::-moz-progress-bar { background: var(--sg-brand); }
+
+/* ── Lamaran terbaru: shared table on a white ground; empty state in a dashed frame ── */
+@media (min-width: 640px) { .sg-dash__apps .sg-table-wrap { background: var(--sg-surface-raised); } }
+.sg-dash__apps .sg-table a { display: inline-block; min-height: 1.5rem; }
+.sg-dash__empty { max-width: none; margin: 0; padding: 2rem 1rem; border: 1px dashed var(--sg-border-strong); border-radius: var(--sg-radius-panel); }
