@@ -152,7 +152,7 @@ class InstitutionReviewController extends Controller
             ]);
 
             return redirect()->back()
-                ->with('error', 'Gagal menyetujui institution. Error: ' . $e->getMessage());
+                ->with('error', safe_error_message('Gagal menyetujui institution. Error: ', $e));
         }
     }
 
@@ -199,7 +199,7 @@ class InstitutionReviewController extends Controller
             ]);
 
             return redirect()->back()
-                ->with('error', 'Gagal menolak institution. Error: ' . $e->getMessage());
+                ->with('error', safe_error_message('Gagal menolak institution. Error: ', $e));
         }
     }
 

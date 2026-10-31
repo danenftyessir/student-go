@@ -243,7 +243,7 @@ class RegisterController extends Controller
             
             return back()
                 ->withInput()
-                ->with('error', 'Terjadi kesalahan saat registrasi. Silakan coba lagi. Error: ' . $e->getMessage());
+                ->with('error', safe_error_message('Terjadi kesalahan saat registrasi. Silakan coba lagi. Error: ', $e));
         }
     }
 
@@ -429,7 +429,7 @@ class RegisterController extends Controller
                 return response()->json([
                     'success' => false,
                     'message' => 'Terjadi Kesalahan Saat Registrasi. Silakan Coba Lagi.',
-                    'errors' => $e->getMessage() 
+                    'errors' => config('app.debug') ? $e->getMessage() : 'Internal server error'
                 ], 500);
             }
             
@@ -601,7 +601,7 @@ class RegisterController extends Controller
 
             return back()
                 ->withInput()
-                ->with('error', 'Terjadi kesalahan saat registrasi. Silakan coba lagi. Error: ' . $e->getMessage());
+                ->with('error', safe_error_message('Terjadi kesalahan saat registrasi. Silakan coba lagi. Error: ', $e));
         }
     }
 
