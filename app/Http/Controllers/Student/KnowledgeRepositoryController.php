@@ -207,9 +207,12 @@ class KnowledgeRepositoryController extends Controller
                     });
                 }
             })
-            ->with(['uploader.student', 'province'])
-            ->limit(4)
+            ->with(['uploader.student', 'province', 'regency'])
+            ->limit(24)
             ->get();
+
+        // satu entri per judul, judul yang sama dengan dokumen ini tidak ikut (J36)
+        $relatedDocuments = \App\Support\RepositoryFormat::uniqueRelated($relatedDocuments, $document->title, 4);
 
         return view('student.repository.show', compact('document', 'relatedDocuments'));
     }
