@@ -364,7 +364,7 @@ class JobPostingKKNSeeder extends Seeder
                 'salary_period' => 'monthly',
                 'department' => 'Economic Empowerment',
                 'description' => "Mendampingi UMKM lokal untuk mengembangkan branding, packaging, dan strategi bisnis. Membantu UMKM naik kelas dari produk rumahan menjadi produk yang marketable.",
-                'responsibilities' => "- Assessment bisnis UMKM (produk, target market, kompetitor)\n- Membantu redesign packaging dan branding UMKM\n- Membuat business plan dan pricing strategy\n- Training digital marketing dan social media untuk UMKM\n- Membantu akses ke marketplace atau koperasi\n- Monitoring sales dan feedback pelanggan",
+                'responsibilities' => "- Assessment bisnis UMKM (produk, target market, kompetitor)\n- Membantu desain ulang kemasan dan branding UMKM\n- Membuat business plan dan pricing strategy\n- Training digital marketing dan social media untuk UMKM\n- Membantu akses ke marketplace atau koperasi\n- Monitoring sales dan feedback pelanggan",
                 'qualifications' => "WAJIB:\n- Portfolio branding atau business development projects\n- Skill: business analysis, marketing strategy, branding design\n- Komunikatif dan persuasif dalam mentoring UMKM\n- Sabar dan empati terhadap pelaku usaha kecil\n\nDINILAI PLUS:\n- Pengalaman berbisnis sendiri atau di startup\n- Portfolio packaging design atau brand identity\n- Skill desain grafis (Canva, Photoshop, Illustrator)\n- Pemahaman tentang marketplace dan e-commerce",
                 'skills' => ['Business Development', 'Branding', 'Marketing Strategy', 'Packaging Design', 'Digital Marketing', 'Mentoring', 'Financial Planning'],
                 'sdg_goals' => [1, 8, 10],
