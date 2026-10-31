@@ -1,0 +1,491 @@
+{
+ "reviewed": "2026-10-30",
+ "method": "Preliminary visual review by the Phase 2 agent on contact sheets (thumbnails, about 400 px wide). This is not the human review D-19 requires: the user confirms or overrides each decision before any photograph is placed. No photograph is placed in any page in Phase 2.",
+ "decisions": {
+  "available": "no people, or people not identifiable",
+  "available-with-care": "identifiable adults: editorial use only, never captioned as Student Go users, no quote or endorsement",
+  "held": "not to be placed until the user decides (minors, or a single identifiable portrait)"
+ },
+ "photos": [
+  {
+   "n": 1,
+   "path": "/assets/photography/homepage/purwojati-banyumas-rice-fields.webp",
+   "catalogue_people": "unknown",
+   "observed_people": "none-visible",
+   "decision": "available",
+   "note": ""
+  },
+  {
+   "n": 2,
+   "path": "/assets/photography/homepage/flooded-rice-paddies-farmers-aerial.webp",
+   "catalogue_people": "unknown",
+   "observed_people": "distant-not-identifiable",
+   "decision": "available",
+   "note": "People are small, silhouetted, turned away or blurred"
+  },
+  {
+   "n": 3,
+   "path": "/assets/photography/about/jatiluwih-bali-rice-planting.webp",
+   "catalogue_people": "unknown",
+   "observed_people": "distant-not-identifiable",
+   "decision": "available",
+   "note": "People are small, silhouetted, turned away or blurred"
+  },
+  {
+   "n": 4,
+   "path": "/assets/photography/about/aceh-rice-field-farmer.webp",
+   "catalogue_people": "unknown",
+   "observed_people": "distant-not-identifiable",
+   "decision": "available",
+   "note": "People are small, silhouetted, turned away or blurred"
+  },
+  {
+   "n": 5,
+   "path": "/assets/photography/about/pati-farmers-breakfast-in-field.webp",
+   "catalogue_people": "unknown",
+   "observed_people": "identifiable-adults",
+   "decision": "available-with-care",
+   "note": "Four identifiable women, faces partly covered"
+  },
+  {
+   "n": 6,
+   "path": "/assets/photography/about/tegalwaru-west-java-aerial-rice-fields.webp",
+   "catalogue_people": "unknown",
+   "observed_people": "none-visible",
+   "decision": "available",
+   "note": ""
+  },
+  {
+   "n": 7,
+   "path": "/assets/photography/library/komunitas/jawa-barat-community-park-cleanup.webp",
+   "catalogue_people": "unknown",
+   "observed_people": "identifiable-adults",
+   "decision": "available-with-care",
+   "note": "Identifiable adults in a community clean-up"
+  },
+  {
+   "n": 8,
+   "path": "/assets/photography/library/pesisir/ntb-mangrove-reforestation-volunteer.webp",
+   "catalogue_people": "one",
+   "observed_people": "minors",
+   "decision": "held",
+   "note": "The subject appears to be a teenager; the catalogue says \"one\". Found in this review."
+  },
+  {
+   "n": 9,
+   "path": "/assets/photography/library/pesisir/jawa-barat-planting-mangroves-adult-and-child.webp",
+   "catalogue_people": "minors",
+   "observed_people": "minors",
+   "decision": "held",
+   "note": "Child pictured with an adult (catalogue: minors)."
+  },
+  {
+   "n": 10,
+   "path": "/assets/photography/library/pendidikan/pandeglang-classroom-teacher-and-students.webp",
+   "catalogue_people": "minors",
+   "observed_people": "minors",
+   "decision": "held",
+   "note": "School pupils (catalogue: minors)."
+  },
+  {
+   "n": 11,
+   "path": "/assets/photography/library/pendidikan/pandeglang-classroom-lesson.webp",
+   "catalogue_people": "minors",
+   "observed_people": "minors",
+   "decision": "held",
+   "note": "School pupils (catalogue: minors)."
+  },
+  {
+   "n": 12,
+   "path": "/assets/photography/library/pendidikan/pandeglang-students-learning.webp",
+   "catalogue_people": "minors",
+   "observed_people": "minors",
+   "decision": "held",
+   "note": "School pupils (catalogue: minors)."
+  },
+  {
+   "n": 13,
+   "path": "/assets/photography/library/pendidikan/yogyakarta-graduate-in-university-corridor.webp",
+   "catalogue_people": "one",
+   "observed_people": "one-identifiable",
+   "decision": "held",
+   "note": "Single posed portrait of an identifiable graduate; easily misread as a Student Go user or testimonial."
+  },
+  {
+   "n": 14,
+   "path": "/assets/photography/library/pertanian/central-java-farmer-terraced-fields.webp",
+   "catalogue_people": "one",
+   "observed_people": "distant-not-identifiable",
+   "decision": "available",
+   "note": "People are small, silhouetted, turned away or blurred"
+  },
+  {
+   "n": 15,
+   "path": "/assets/photography/library/pertanian/west-java-elderly-farmers-harvest-rice.webp",
+   "catalogue_people": "adults",
+   "observed_people": "distant-not-identifiable",
+   "decision": "available",
+   "note": "People are small, silhouetted, turned away or blurred"
+  },
+  {
+   "n": 16,
+   "path": "/assets/photography/library/pertanian/yogyakarta-farmer-planting-rice.webp",
+   "catalogue_people": "one",
+   "observed_people": "distant-not-identifiable",
+   "decision": "available",
+   "note": "People are small, silhouetted, turned away or blurred"
+  },
+  {
+   "n": 17,
+   "path": "/assets/photography/library/pertanian/bali-aerial-tractor-plowing-rice-field.webp",
+   "catalogue_people": "one",
+   "observed_people": "distant-not-identifiable",
+   "decision": "available",
+   "note": "People are small, silhouetted, turned away or blurred"
+  },
+  {
+   "n": 18,
+   "path": "/assets/photography/library/pertanian/bali-farmers-picking-chili.webp",
+   "catalogue_people": "adults",
+   "observed_people": "identifiable-adults",
+   "decision": "available-with-care",
+   "note": "Identifiable adult farmers (close)"
+  },
+  {
+   "n": 19,
+   "path": "/assets/photography/library/pertanian/tomohon-cabbage-field-farmers.webp",
+   "catalogue_people": "adults",
+   "observed_people": "identifiable-adults",
+   "decision": "available-with-care",
+   "note": "Adult farmers, mid-distance"
+  },
+  {
+   "n": 20,
+   "path": "/assets/photography/library/pertanian/tangerang-farmers-packing-vegetables.webp",
+   "catalogue_people": "adults",
+   "observed_people": "identifiable-adults",
+   "decision": "available-with-care",
+   "note": "Identifiable adult farmers"
+  },
+  {
+   "n": 21,
+   "path": "/assets/photography/library/pertanian/east-java-woman-harvesting-tobacco.webp",
+   "catalogue_people": "one",
+   "observed_people": "minors",
+   "decision": "held",
+   "note": "A small child is visible bottom-left; the catalogue says \"one\". Found in this review."
+  },
+  {
+   "n": 22,
+   "path": "/assets/photography/library/pertanian/west-java-drone-cropland-near-forest.webp",
+   "catalogue_people": "none",
+   "observed_people": "none-visible",
+   "decision": "available",
+   "note": ""
+  },
+  {
+   "n": 23,
+   "path": "/assets/photography/library/pertanian/bali-rice-terraces-lone-farmer.webp",
+   "catalogue_people": "one",
+   "observed_people": "distant-not-identifiable",
+   "decision": "available",
+   "note": "People are small, silhouetted, turned away or blurred"
+  },
+  {
+   "n": 24,
+   "path": "/assets/photography/homepage/bengkulu-aerial-rice-terraces-sunset.webp",
+   "catalogue_people": "none",
+   "observed_people": "none-visible",
+   "decision": "available",
+   "note": ""
+  },
+  {
+   "n": 25,
+   "path": "/assets/photography/library/pertanian/central-java-farmer-casting-net-in-paddy.webp",
+   "catalogue_people": "one",
+   "observed_people": "distant-not-identifiable",
+   "decision": "available",
+   "note": "People are small, silhouetted, turned away or blurred"
+  },
+  {
+   "n": 26,
+   "path": "/assets/photography/library/pesisir/west-java-fisherman-mending-nets.webp",
+   "catalogue_people": "one",
+   "observed_people": "identifiable-adults",
+   "decision": "available-with-care",
+   "note": "Identifiable fisherman (face partly visible)"
+  },
+  {
+   "n": 27,
+   "path": "/assets/photography/library/pesisir/phinisi-boats-in-harbor.webp",
+   "catalogue_people": "one",
+   "observed_people": "distant-not-identifiable",
+   "decision": "available",
+   "note": "People are small, silhouetted, turned away or blurred"
+  },
+  {
+   "n": 28,
+   "path": "/assets/photography/library/pesisir/bangka-belitung-fisherman-casting-net-sunrise.webp",
+   "catalogue_people": "one",
+   "observed_people": "distant-not-identifiable",
+   "decision": "available",
+   "note": "People are small, silhouetted, turned away or blurred"
+  },
+  {
+   "n": 29,
+   "path": "/assets/photography/library/pesisir/west-sumatra-fisherman-net-from-canoe.webp",
+   "catalogue_people": "one",
+   "observed_people": "distant-not-identifiable",
+   "decision": "available",
+   "note": "People are small, silhouetted, turned away or blurred"
+  },
+  {
+   "n": 30,
+   "path": "/assets/photography/library/pasar/jakarta-fish-market-sorting.webp",
+   "catalogue_people": "one",
+   "observed_people": "identifiable-adults",
+   "decision": "available-with-care",
+   "note": "Identifiable fish vendor"
+  },
+  {
+   "n": 31,
+   "path": "/assets/photography/library/pasar/ntb-fish-market.webp",
+   "catalogue_people": "unknown",
+   "observed_people": "distant-not-identifiable",
+   "decision": "available",
+   "note": "People are small, silhouetted, turned away or blurred"
+  },
+  {
+   "n": 32,
+   "path": "/assets/photography/library/pasar/flores-local-market.webp",
+   "catalogue_people": "unknown",
+   "observed_people": "identifiable-adults",
+   "decision": "available-with-care",
+   "note": "Identifiable vendor in foreground, crowd behind"
+  },
+  {
+   "n": 33,
+   "path": "/assets/photography/library/pasar/banjarmasin-floating-market.webp",
+   "catalogue_people": "adults",
+   "observed_people": "distant-not-identifiable",
+   "decision": "available",
+   "note": "People are small, silhouetted, turned away or blurred"
+  },
+  {
+   "n": 34,
+   "path": "/assets/photography/library/pasar/west-java-traditional-market.webp",
+   "catalogue_people": "unknown",
+   "observed_people": "identifiable-adults",
+   "decision": "available-with-care",
+   "note": "Identifiable vendors and shoppers"
+  },
+  {
+   "n": 35,
+   "path": "/assets/photography/library/pasar/pontianak-women-selling-at-market.webp",
+   "catalogue_people": "adults",
+   "observed_people": "identifiable-adults",
+   "decision": "available-with-care",
+   "note": "Identifiable vendors (close)"
+  },
+  {
+   "n": 36,
+   "path": "/assets/photography/library/pasar/banten-elderly-women-at-market.webp",
+   "catalogue_people": "adults",
+   "observed_people": "identifiable-adults",
+   "decision": "available-with-care",
+   "note": "Identifiable elderly women (close)"
+  },
+  {
+   "n": 37,
+   "path": "/assets/photography/library/pasar/banten-street-market-shoppers.webp",
+   "catalogue_people": "adults",
+   "observed_people": "identifiable-adults",
+   "decision": "available-with-care",
+   "note": "Identifiable shoppers"
+  },
+  {
+   "n": 38,
+   "path": "/assets/photography/library/pendidikan/high-school-students-in-classroom.webp",
+   "catalogue_people": "minors",
+   "observed_people": "minors",
+   "decision": "held",
+   "note": "Identifiable pupil in foreground (catalogue: minors)."
+  },
+  {
+   "n": 39,
+   "path": "/assets/photography/library/pendidikan/jawa-barat-student-with-tablet-on-campus.webp",
+   "catalogue_people": "one",
+   "observed_people": "one-identifiable",
+   "decision": "held",
+   "note": "Posed portrait of an identifiable young person with a tablet; strong implied-endorsement risk."
+  },
+  {
+   "n": 40,
+   "path": "/assets/photography/homepage/maluku-islands-aerial.webp",
+   "catalogue_people": "none",
+   "observed_people": "none-visible",
+   "decision": "available",
+   "note": ""
+  },
+  {
+   "n": 41,
+   "path": "/assets/photography/library/pesisir/banda-neira-woman-drying-fish.webp",
+   "catalogue_people": "one",
+   "observed_people": "identifiable-adults",
+   "decision": "available-with-care",
+   "note": "Identifiable woman drying fish"
+  },
+  {
+   "n": 42,
+   "path": "/assets/photography/library/pesisir/north-maluku-boats-on-beach-aerial.webp",
+   "catalogue_people": "none",
+   "observed_people": "none-visible",
+   "decision": "available",
+   "note": ""
+  },
+  {
+   "n": 43,
+   "path": "/assets/photography/library/desa/waigeo-barat-coastal-huts-aerial.webp",
+   "catalogue_people": "none",
+   "observed_people": "none-visible",
+   "decision": "available",
+   "note": ""
+  },
+  {
+   "n": 44,
+   "path": "/assets/photography/library/desa/papua-harbor-boats-and-locals.webp",
+   "catalogue_people": "unknown",
+   "observed_people": "identifiable-adults",
+   "decision": "available-with-care",
+   "note": "Distant crowd at a harbour; may include children; check at full size before use"
+  },
+  {
+   "n": 45,
+   "path": "/assets/photography/library/desa/papua-island-landscape.webp",
+   "catalogue_people": "none",
+   "observed_people": "none-visible",
+   "decision": "available",
+   "note": ""
+  },
+  {
+   "n": 46,
+   "path": "/assets/photography/library/desa/southeast-sulawesi-stilt-houses-by-river.webp",
+   "catalogue_people": "none",
+   "observed_people": "none-visible",
+   "decision": "available",
+   "note": ""
+  },
+  {
+   "n": 47,
+   "path": "/assets/photography/homepage/cirebon-aerial-village-red-roofs.webp",
+   "catalogue_people": "none",
+   "observed_people": "none-visible",
+   "decision": "available",
+   "note": ""
+  },
+  {
+   "n": 48,
+   "path": "/assets/photography/library/desa/penglipuran-village-path.webp",
+   "catalogue_people": "unknown",
+   "observed_people": "distant-not-identifiable",
+   "decision": "available",
+   "note": "People are small, silhouetted, turned away or blurred"
+  },
+  {
+   "n": 49,
+   "path": "/assets/photography/library/desa/rural-road-house-and-mountain.webp",
+   "catalogue_people": "unknown",
+   "observed_people": "none-visible",
+   "decision": "available",
+   "note": ""
+  },
+  {
+   "n": 50,
+   "path": "/assets/photography/homepage/kutai-kartanegara-aerial-town-and-river.webp",
+   "catalogue_people": "none",
+   "observed_people": "none-visible",
+   "decision": "available",
+   "note": ""
+  },
+  {
+   "n": 51,
+   "path": "/assets/photography/library/pertanian/sidemen-bali-rice-terraces-at-dawn.webp",
+   "catalogue_people": "one",
+   "observed_people": "distant-not-identifiable",
+   "decision": "available",
+   "note": "People are small, silhouetted, turned away or blurred"
+  },
+  {
+   "n": 52,
+   "path": "/assets/photography/library/pertanian/bali-woman-working-in-rice-field.webp",
+   "catalogue_people": "one",
+   "observed_people": "distant-not-identifiable",
+   "decision": "available",
+   "note": "People are small, silhouetted, turned away or blurred"
+  },
+  {
+   "n": 53,
+   "path": "/assets/photography/library/pendidikan/universitas-indonesia-graduation-flags.webp",
+   "catalogue_people": "one",
+   "observed_people": "distant-not-identifiable",
+   "decision": "available",
+   "note": "People are small, silhouetted, turned away or blurred"
+  },
+  {
+   "n": 54,
+   "path": "/assets/photography/library/pasar/surakarta-market-shoppers.webp",
+   "catalogue_people": "adults",
+   "observed_people": "distant-not-identifiable",
+   "decision": "available",
+   "note": "People are small, silhouetted, turned away or blurred"
+  },
+  {
+   "n": 55,
+   "path": "/assets/photography/library/pendidikan/umy-graduates-in-red-gowns.webp",
+   "catalogue_people": "adults",
+   "observed_people": "distant-not-identifiable",
+   "decision": "available",
+   "note": "People are small, silhouetted, turned away or blurred"
+  },
+  {
+   "n": 56,
+   "path": "/assets/photography/library/pesisir/gili-gede-mangroves-on-shore.webp",
+   "catalogue_people": "none",
+   "observed_people": "none-visible",
+   "decision": "available",
+   "note": ""
+  },
+  {
+   "n": 57,
+   "path": "/assets/photography/library/pesisir/batam-beach-litter-in-tree-roots.webp",
+   "catalogue_people": "none",
+   "observed_people": "none-visible",
+   "decision": "available",
+   "note": ""
+  },
+  {
+   "n": 58,
+   "path": "/assets/photography/library/pesisir/bontang-wooden-dock-and-mangroves.webp",
+   "catalogue_people": "none",
+   "observed_people": "none-visible",
+   "decision": "available",
+   "note": ""
+  },
+  {
+   "n": 59,
+   "path": "/assets/photography/library/pesisir/komodo-boats-on-water.webp",
+   "catalogue_people": "none",
+   "observed_people": "none-visible",
+   "decision": "available",
+   "note": ""
+  },
+  {
+   "n": 60,
+   "path": "/assets/photography/library/desa/kebumen-three-cyclists-across-field.webp",
+   "catalogue_people": "adults",
+   "observed_people": "distant-not-identifiable",
+   "decision": "available",
+   "note": "People are small, silhouetted, turned away or blurred"
+  }
+ ]
+}

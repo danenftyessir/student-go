@@ -1,0 +1,1067 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="csrf-token" content="">
+<meta name="sg-sprite" content="http://127.0.0.1:8000/assets/icons/ui/sprite.svg">
+
+<title>Galeri Komponen — Student Go</title>
+
+<link rel="icon" href="http://127.0.0.1:8000/assets/brand/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="http://127.0.0.1:8000/assets/brand/favicon.ico" sizes="32x32">
+<link rel="apple-touch-icon" href="http://127.0.0.1:8000/assets/brand/apple-touch-icon.png">
+
+
+<link rel="preload" as="font" type="font/woff2" crossorigin href="http://127.0.0.1:8000/assets/fonts/plus-jakarta-sans/PlusJakartaSans-latin-wght.woff2">
+
+
+<link rel="preload" as="style" href="http://127.0.0.1:8000/build/assets/app-BgxEh_nY.css" /><link rel="modulepreload" as="script" href="http://127.0.0.1:8000/build/assets/app-BB6BGh2L.js" /><link rel="stylesheet" href="http://127.0.0.1:8000/build/assets/app-BgxEh_nY.css" /><script type="module" src="http://127.0.0.1:8000/build/assets/app-BB6BGh2L.js"></script><script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.3/dist/cdn.min.js"></script>
+    </head>
+<body class="font-sans antialiased">
+    <a href="#main" class="sg-skip">Lewati ke konten utama</a>
+
+    <div class="min-h-screen bg-gray-50">
+        <header class="sg-header" x-data="sgMobileNav" @keydown.escape="close(true)">
+    <div class="sg-container sg-header__bar">
+        <a href="http://127.0.0.1:8000" class="sg-header__brand" aria-label="Student Go, ke beranda">
+            <img src="http://127.0.0.1:8000/assets/brand/student-go-logo.svg" alt="" width="132" height="28">
+        </a>
+
+                    <nav class="sg-nav" aria-label="Navigasi utama">
+                <ul class="sg-nav__list">
+                                            <li>
+                            <a href="http://127.0.0.1:8000/about" class="sg-nav__link" >Tentang Kami</a>
+                        </li>
+                                            <li>
+                            <a href="http://127.0.0.1:8000/contact" class="sg-nav__link" >Kontak</a>
+                        </li>
+                                    </ul>
+            </nav>
+        
+        <div class="sg-header__end">
+                            <div class="sg-header__desktop">
+                    <a href="http://127.0.0.1:8000/login" class="sg-btn sg-btn--tertiary">Masuk</a>
+                    <a href="http://127.0.0.1:8000/register" class="sg-btn sg-btn--primary">Daftar</a>
+                </div>
+            
+            <button type="button" class="sg-icon-btn sg-header__toggle" x-ref="toggle" @click="toggle()"
+                    aria-expanded="false" :aria-expanded="open.toString()" aria-controls="sg-mobile-nav"
+                    aria-label="Buka menu" :aria-label="open ? 'Tutup menu' : 'Buka menu'">
+                <svg class="sg-icon" x-show="! open"  aria-hidden="true"  focusable="false"><use href="http://127.0.0.1:8000/assets/icons/ui/sprite.svg#menu"></use></svg>
+                <svg class="sg-icon" x-show="open" x-cloak="x-cloak"  aria-hidden="true"  focusable="false"><use href="http://127.0.0.1:8000/assets/icons/ui/sprite.svg#x"></use></svg>
+            </button>
+        </div>
+    </div>
+
+    
+    <div id="sg-mobile-nav" class="sg-mobile-nav" x-show="open" x-cloak>
+        
+                    <nav aria-label="Navigasi utama (seluler)">
+                <ul class="sg-mobile-nav__section">
+                                            <li>
+                            <a href="http://127.0.0.1:8000/about" class="sg-mobile-nav__link" >Tentang Kami</a>
+                        </li>
+                                            <li>
+                            <a href="http://127.0.0.1:8000/contact" class="sg-mobile-nav__link" >Kontak</a>
+                        </li>
+                                    </ul>
+            </nav>
+        
+                    <div class="sg-mobile-nav__actions">
+                <a href="http://127.0.0.1:8000/login" class="sg-btn sg-btn--secondary sg-btn--lg">Masuk</a>
+                <a href="http://127.0.0.1:8000/register" class="sg-btn sg-btn--primary sg-btn--lg">Daftar</a>
+            </div>
+            </div>
+</header>
+
+        <main id="main" tabindex="-1" class="sg-main">
+            <div class="sg-container pb-16">
+    <header class="sg-page-header">
+            <nav class="sg-breadcrumb sg-page-header__crumbs" aria-label="Jejak navigasi">
+    <ol>
+                    <li>
+                                    <a href="http://127.0.0.1:8000/__sg-gallery">Dokumentasi</a>
+                            </li>
+                    <li>
+                                    <span aria-current="page">Galeri Komponen</span>
+                            </li>
+            </ol>
+</nav>
+        <h1>Galeri Komponen</h1>
+            <p class="sg-page-header__desc">Setiap komponen bersama Student Go dalam setiap keadaannya (Phase 3).</p>
+                <div class="sg-page-header__actions"><button type="button" class="sg-btn sg-btn--secondary"  >
+                    <svg class="sg-icon sg-icon--sm"  aria-hidden="true"  focusable="false"><use href="http://127.0.0.1:8000/assets/icons/ui/sprite.svg#download"></use></svg>
+                Sekunder
+            </button>
+            <button type="button" class="sg-btn sg-btn--primary"  >
+                    <svg class="sg-icon sg-icon--sm"  aria-hidden="true"  focusable="false"><use href="http://127.0.0.1:8000/assets/icons/ui/sprite.svg#plus"></use></svg>
+                Aksi utama
+            </button></div>
+    </header>
+
+    <div class="grid gap-10">
+        <section id="g-buttons" aria-labelledby="h-buttons" class="grid gap-3">
+            <h2 id="h-buttons" class="text-xl">Tombol</h2>
+            <div class="flex flex-wrap gap-2">
+                <button type="button" class="sg-btn sg-btn--primary"  >
+                Primer
+            </button>
+                <button type="button" class="sg-btn sg-btn--secondary"  >
+                Sekunder
+            </button>
+                <button type="button" class="sg-btn sg-btn--tertiary"  >
+                Tersier
+            </button>
+                <button type="button" class="sg-btn sg-btn--danger"  >
+                    <svg class="sg-icon sg-icon--sm"  aria-hidden="true"  focusable="false"><use href="http://127.0.0.1:8000/assets/icons/ui/sprite.svg#trash-2"></use></svg>
+                Hapus
+            </button>
+                <button type="button" class="sg-btn sg-btn--danger-solid"  >
+                Hapus permanen
+            </button>
+                <button type="button" class="sg-btn sg-btn--primary sg-btn--lg"  >
+                Besar
+        <svg class="sg-icon sg-icon--sm"  aria-hidden="true"  focusable="false"><use href="http://127.0.0.1:8000/assets/icons/ui/sprite.svg#arrow-right"></use></svg>
+    </button>
+                <button type="button" class="sg-btn sg-btn--primary" disabled >
+                Nonaktif
+            </button>
+                <button type="button" class="sg-btn sg-btn--primary" disabled  data-loading aria-busy="true" >
+                    <span class="sg-spinner" aria-hidden="true"></span>
+                Menyimpan…
+            </button>
+                <a href="#g-forms" class="sg-btn sg-btn--secondary">
+                Tautan
+            </a>
+                <button type="button" aria-label="Ubah" class="sg-icon-btn sg-icon-btn--bordered"><svg class="sg-icon"  aria-hidden="true"  focusable="false"><use href="http://127.0.0.1:8000/assets/icons/ui/sprite.svg#pencil"></use></svg>
+</button>
+                <button type="button" aria-label="Hapus" class="sg-icon-btn"><svg class="sg-icon"  aria-hidden="true"  focusable="false"><use href="http://127.0.0.1:8000/assets/icons/ui/sprite.svg#trash-2"></use></svg>
+</button>
+            </div>
+        </section>
+
+        <section id="g-forms" aria-labelledby="h-forms" class="grid gap-4 max-w-2xl">
+            <h2 id="h-forms" class="text-xl">Formulir</h2>
+            <div class="sg-alert"  data-tone="danger"  role="alert">
+    <svg class="sg-icon"  aria-hidden="true"  focusable="false"><use href="http://127.0.0.1:8000/assets/icons/ui/sprite.svg#circle-alert"></use></svg>
+    <div class="sg-alert__body">
+        <p class="sg-alert__title">Periksa kembali isian berikut</p>        <ul>
+                            <li>Format email tidak valid.</li>
+                            <li>Berkas harus berformat PDF.</li>
+                            <li>Pilih salah satu peran.</li>
+                    </ul>
+    </div>
+</div>
+            <div class="sg-field">
+            <label class="sg-label"  for="nama"   data-required >Nama instansi</label>
+        <input type="text" name="nama" id="nama"
+     value="Dinas Sosial Pemberdayaan Perempuan Dan Perlindungan Anak Kabupaten Sidoarjo"     class="sg-input" required="required"
+     aria-describedby="nama-help"     >
+            <p class="sg-help" id="nama-help">Nama resmi sesuai dokumen.</p>
+        </div>
+            <div class="sg-field">
+            <label class="sg-label"  for="email_error"   data-required >Email</label>
+        <input type="email" name="email_error" id="email_error"
+     value="fatimah.azzahra.nurhidayati@students.itb-ganesha.id"     class="sg-input" required="required"
+     aria-describedby="email_error-error"      aria-invalid="true" data-touched >
+                <p class="sg-error" id="email_error-error"><svg class="sg-icon sg-icon--sm"  aria-hidden="true"  focusable="false"><use href="http://127.0.0.1:8000/assets/icons/ui/sprite.svg#circle-alert"></use></svg>
+Format email tidak valid.</p>
+    </div>
+            <div class="sg-field">
+            <label class="sg-label"  for="nonaktif"  >Nonaktif</label>
+        <input type="text" name="nonaktif" id="nonaktif"
+     value="Tidak dapat diubah"     class="sg-input" disabled="disabled"
+        >
+        </div>
+            <div class="sg-field">
+            <label class="sg-label"  for="deskripsi"  >Deskripsi</label>
+        <textarea name="deskripsi" id="deskripsi" rows="4"
+    class="sg-textarea"
+        >Paragraf panjang untuk menguji pembungkusan teks pada textarea.</textarea>
+        </div>
+            <div class="sg-field">
+            <label class="sg-label"  for="status"  >Status</label>
+        <select name="status" id="status"
+    class="sg-select"
+        >
+            <option value="">Semua status</option>
+                <option value="pending" >Menunggu</option>
+            <option value="reviewed" selected>Ditinjau</option>
+            <option value="accepted" >Diterima</option>
+            <option value="rejected" >Ditolak</option>
+        
+</select>
+        </div>
+            <div class="sg-field">
+    <label for="search-q" class="sg-label sr-only">Cari dokumen</label>
+    <div class="sg-search">
+        <svg class="sg-icon sg-icon--sm"  aria-hidden="true"  focusable="false"><use href="http://127.0.0.1:8000/assets/icons/ui/sprite.svg#search"></use></svg>
+        <input type="search" name="q" id="search-q" class="sg-input"  value=""              placeholder="Cari judul, instansi, atau wilayah"  >
+    </div>
+</div>
+            <fieldset class="sg-fieldset"  aria-invalid="true" >
+    <legend  class="sg-label" data-required >Peran</legend>
+    <label class="sg-check" for="peran_error-student">
+    <input type="radio" name="peran_error" id="peran_error-student" value="student"  >
+    <span>Mahasiswa</span>
+</label>
+                <label class="sg-check" for="peran_error-institution">
+    <input type="radio" name="peran_error" id="peran_error-institution" value="institution"  >
+    <span>Instansi</span>
+</label>
+                <label class="sg-check" for="peran_error-company">
+    <input type="radio" name="peran_error" id="peran_error-company" value="company"  disabled="disabled">
+    <span>Perusahaan</span>
+</label>
+        <p class="sg-error"><svg class="sg-icon sg-icon--sm"  aria-hidden="true"  focusable="false"><use href="http://127.0.0.1:8000/assets/icons/ui/sprite.svg#circle-alert"></use></svg>
+Pilih salah satu peran.</p></fieldset>
+            <fieldset class="sg-fieldset" >
+    <legend >Notifikasi</legend>
+    <label class="sg-check" for="notif-email">
+    <input type="checkbox" name="notif[]" id="notif-email" value="email" checked >
+    <span>Kirim ringkasan lewat email</span>
+</label>
+                <label class="sg-check" for="notif-wa">
+    <input type="checkbox" name="notif[]" id="notif-wa" value="wa"  >
+    <span>Teks panjang: Dinas Sosial Pemberdayaan Perempuan Dan Perlindungan Anak Kabupaten Sidoarjo</span>
+</label>
+        </fieldset>
+            <div class="sg-field"
+     x-data="sgUpload({ multiple: false, accept: '.pdf', maxSize: 5242880 })">
+    <span class="sg-label" id="proposal-label"  data-required >Proposal</span>
+
+    <label class="sg-dropzone" for="proposal"            :data-dragover="drag ? '' : null" :data-invalid="error || false ? '' : null"
+           @dragover.prevent="drag = true" @dragleave.prevent="drag = false" @drop.prevent="onDrop($event)">
+        <svg class="sg-icon sg-icon--lg"  aria-hidden="true"  focusable="false"><use href="http://127.0.0.1:8000/assets/icons/ui/sprite.svg#upload"></use></svg>
+        <span><strong>Pilih berkas</strong> atau tarik ke sini</span>
+                    <span class="sg-help" id="proposal-help">PDF, maks. 5 MB</span>
+                <input type="file" class="sr-only" name="proposal" id="proposal" x-ref="input" @change="sync()"
+               aria-labelledby="proposal-label"
+                aria-describedby="proposal-help"                 accept=".pdf"                                required                >
+    </label>
+
+            <p class="sg-help">Berkas saat ini:
+                            proposal-lama.pdf
+                    </p>
+    
+    <ul class="sg-file-list" x-show="files.length > 0" x-cloak aria-label="Berkas terpilih">
+        <template x-for="(file, index) in files" :key="file.name + index">
+            <li class="sg-file-chip">
+                <svg class="sg-icon sg-icon--sm"  aria-hidden="true"  focusable="false"><use href="http://127.0.0.1:8000/assets/icons/ui/sprite.svg#file-text"></use></svg>
+                <span class="sg-file-chip__name" x-text="file.name" :title="file.name"></span>
+                <span class="sg-file-chip__meta" x-text="file.size"></span>
+                <button type="button" class="sg-icon-btn" @click="remove(index)" :aria-label="'Hapus ' + file.name"><svg class="sg-icon sg-icon--sm"  aria-hidden="true"  focusable="false"><use href="http://127.0.0.1:8000/assets/icons/ui/sprite.svg#x"></use></svg>
+</button>
+            </li>
+        </template>
+    </ul>
+
+    <p class="sg-error" x-show="error" x-cloak role="alert"><svg class="sg-icon sg-icon--sm"  aria-hidden="true"  focusable="false"><use href="http://127.0.0.1:8000/assets/icons/ui/sprite.svg#circle-alert"></use></svg>
+<span x-text="error"></span></p>
+    </div>
+            <div class="sg-field"
+     x-data="sgUpload({ multiple: true, accept: '.pdf,.docx', maxSize: null })">
+    <span class="sg-label" id="dokumen_error-label" >Dokumen pendukung (galat server)</span>
+
+    <label class="sg-dropzone" for="dokumen_error"  data-invalid            :data-dragover="drag ? '' : null" :data-invalid="error || true ? '' : null"
+           @dragover.prevent="drag = true" @dragleave.prevent="drag = false" @drop.prevent="onDrop($event)">
+        <svg class="sg-icon sg-icon--lg"  aria-hidden="true"  focusable="false"><use href="http://127.0.0.1:8000/assets/icons/ui/sprite.svg#upload"></use></svg>
+        <span><strong>Pilih berkas</strong> atau tarik ke sini</span>
+                    <span class="sg-help" id="dokumen_error-help">PDF atau DOCX, boleh lebih dari satu</span>
+                <input type="file" class="sr-only" name="dokumen_error" id="dokumen_error" x-ref="input" @change="sync()"
+               aria-labelledby="dokumen_error-label"
+                aria-describedby="dokumen_error-help dokumen_error-error"                 accept=".pdf,.docx"                 multiple                                aria-invalid="true" >
+    </label>
+
+    
+    <ul class="sg-file-list" x-show="files.length > 0" x-cloak aria-label="Berkas terpilih">
+        <template x-for="(file, index) in files" :key="file.name + index">
+            <li class="sg-file-chip">
+                <svg class="sg-icon sg-icon--sm"  aria-hidden="true"  focusable="false"><use href="http://127.0.0.1:8000/assets/icons/ui/sprite.svg#file-text"></use></svg>
+                <span class="sg-file-chip__name" x-text="file.name" :title="file.name"></span>
+                <span class="sg-file-chip__meta" x-text="file.size"></span>
+                <button type="button" class="sg-icon-btn" @click="remove(index)" :aria-label="'Hapus ' + file.name"><svg class="sg-icon sg-icon--sm"  aria-hidden="true"  focusable="false"><use href="http://127.0.0.1:8000/assets/icons/ui/sprite.svg#x"></use></svg>
+</button>
+            </li>
+        </template>
+    </ul>
+
+    <p class="sg-error" x-show="error" x-cloak role="alert"><svg class="sg-icon sg-icon--sm"  aria-hidden="true"  focusable="false"><use href="http://127.0.0.1:8000/assets/icons/ui/sprite.svg#circle-alert"></use></svg>
+<span x-text="error"></span></p>
+            <p class="sg-error" id="dokumen_error-error"><svg class="sg-icon sg-icon--sm"  aria-hidden="true"  focusable="false"><use href="http://127.0.0.1:8000/assets/icons/ui/sprite.svg#circle-alert"></use></svg>
+Berkas harus berformat PDF.</p>
+    </div>
+        </section>
+
+        <section id="g-feedback" aria-labelledby="h-feedback" class="grid gap-3 max-w-2xl">
+            <h2 id="h-feedback" class="text-xl">Umpan balik</h2>
+            <div class="sg-alert"  role="status">
+    <svg class="sg-icon"  aria-hidden="true"  focusable="false"><use href="http://127.0.0.1:8000/assets/icons/ui/sprite.svg#info"></use></svg>
+    <div class="sg-alert__body">
+                Informasi: data wilayah memakai 5 provinsi contoh.
+    </div>
+</div>
+            <div class="sg-alert"  data-tone="success"  role="status">
+    <svg class="sg-icon"  aria-hidden="true"  focusable="false"><use href="http://127.0.0.1:8000/assets/icons/ui/sprite.svg#circle-check"></use></svg>
+    <div class="sg-alert__body">
+        <p class="sg-alert__title">Tersimpan</p>        Profil berhasil diperbarui.
+    </div>
+</div>
+            <div class="sg-alert"  data-tone="warning"  role="status">
+    <svg class="sg-icon"  aria-hidden="true"  focusable="false"><use href="http://127.0.0.1:8000/assets/icons/ui/sprite.svg#triangle-alert"></use></svg>
+    <div class="sg-alert__body">
+                Batas pendaftaran tinggal 3 hari.
+    </div>
+</div>
+            <div class="sg-alert"  data-tone="danger"  role="alert">
+    <svg class="sg-icon"  aria-hidden="true"  focusable="false"><use href="http://127.0.0.1:8000/assets/icons/ui/sprite.svg#circle-alert"></use></svg>
+    <div class="sg-alert__body">
+        <p class="sg-alert__title">Gagal mengunggah</p>        Ukuran berkas melebihi 5 MB.
+    </div>
+</div>
+            <div class="flex flex-wrap gap-2">
+                <button type="button" class="sg-btn sg-btn--secondary" id="toast-success" onclick="showNotification('Lamaran berhasil dikirim.', 'success')"  >
+                Toast sukses
+            </button>
+                <button type="button" class="sg-btn sg-btn--secondary" id="toast-error" onclick="showNotification('Gagal menyimpan. Coba lagi.', 'error')"  >
+                Toast galat
+            </button>
+                <button type="button" class="sg-btn sg-btn--secondary" data-sg-open="g-modal" id="open-modal"  >
+                Buka modal
+            </button>
+                <button type="button" class="sg-btn sg-btn--secondary" data-sg-open="g-drawer" id="open-drawer"  >
+                Buka drawer
+            </button>
+            </div>
+            <form id="g-confirm-form" method="GET" action="http://127.0.0.1:8000/__sg-gallery-submit" data-sg-confirm="Dokumen ini akan dihapus dari repositori." data-sg-confirm-title="Hapus dokumen?" data-sg-confirm-label="Hapus">
+                <input type="hidden" name="dokumen" value="160">
+                <button type="submit" class="sg-btn sg-btn--danger" name="aksi" value="hapus"  >
+                    <svg class="sg-icon sg-icon--sm"  aria-hidden="true"  focusable="false"><use href="http://127.0.0.1:8000/assets/icons/ui/sprite.svg#trash-2"></use></svg>
+                Hapus dengan konfirmasi
+            </button>
+            </form>
+            <span class="sg-loading" role="status"><span class="sg-spinner" aria-hidden="true"></span>Memuat…</span>
+            <div class="grid gap-2" role="status" aria-label="Memuat daftar">
+        <span class="sg-skeleton sg-skeleton--title"></span>
+                    <span class="sg-skeleton" style="width: 100%;"></span>
+                    <span class="sg-skeleton" style="width: 85%;"></span>
+                    <span class="sg-skeleton" style="width: 70%;"></span>
+            </div>
+        </section>
+
+        <dialog id="g-modal" class="sg-dialog" aria-labelledby="g-modal-title">
+    <div class="sg-dialog__head">
+        <h2 id="g-modal-title">Ubah catatan</h2>
+        <button type="button" class="sg-icon-btn" data-sg-close aria-label="Tutup"><svg class="sg-icon"  aria-hidden="true"  focusable="false"><use href="http://127.0.0.1:8000/assets/icons/ui/sprite.svg#x"></use></svg>
+</button>
+    </div>
+    <div class="sg-dialog__body">
+        <div class="sg-field">
+            <label class="sg-label"  for="catatan"  >Catatan</label>
+        <textarea name="catatan" id="catatan" rows="4"
+    class="sg-textarea"
+        ></textarea>
+        </div>
+    </div>
+            <div class="sg-dialog__foot"><button type="button" class="sg-btn sg-btn--secondary" data-sg-close="data-sg-close"  >
+                Batal
+            </button>
+                <button type="button" class="sg-btn sg-btn--primary" data-sg-close="data-sg-close"  >
+                Simpan
+            </button></div>
+    </dialog>
+        <dialog id="g-drawer" class="sg-dialog sg-drawer" aria-labelledby="g-drawer-title">
+    <div class="sg-dialog__head">
+        <h2 id="g-drawer-title">Filter</h2>
+        <button type="button" class="sg-icon-btn" data-sg-close aria-label="Tutup"><svg class="sg-icon"  aria-hidden="true"  focusable="false"><use href="http://127.0.0.1:8000/assets/icons/ui/sprite.svg#x"></use></svg>
+</button>
+    </div>
+    <div class="sg-dialog__body">
+        <p>Isi drawer samping.</p>
+    </div>
+    </dialog>
+
+        <section id="g-data" aria-labelledby="h-data" class="grid gap-4">
+            <h2 id="h-data" class="text-xl">Data</h2>
+            <ul class="sg-summary" aria-label="Ringkasan">
+                    <li><b>77</b> masalah</li>
+                    <li><b>1.250</b> dokumen</li>
+            </ul>
+            <div class="flex flex-wrap gap-2">
+                <span class="sg-status"  data-value="pending">
+    <svg class="sg-icon sg-icon--sm"  aria-hidden="true"  focusable="false"><use href="http://127.0.0.1:8000/assets/icons/ui/sprite.svg#hourglass"></use></svg>
+Menunggu
+</span>
+<span class="sg-status"  data-tone="info"  data-value="reviewed">
+    <svg class="sg-icon sg-icon--sm"  aria-hidden="true"  focusable="false"><use href="http://127.0.0.1:8000/assets/icons/ui/sprite.svg#eye"></use></svg>
+Ditinjau
+</span>
+<span class="sg-status"  data-tone="success"  data-value="accepted">
+    <svg class="sg-icon sg-icon--sm"  aria-hidden="true"  focusable="false"><use href="http://127.0.0.1:8000/assets/icons/ui/sprite.svg#circle-check"></use></svg>
+Diterima
+</span>
+<span class="sg-status"  data-tone="danger"  data-value="rejected">
+    <svg class="sg-icon sg-icon--sm"  aria-hidden="true"  focusable="false"><use href="http://127.0.0.1:8000/assets/icons/ui/sprite.svg#circle-x"></use></svg>
+Ditolak
+</span>
+                <span class="sg-status"  data-tone="muted"  data-value="cancelled">
+    <svg class="sg-icon sg-icon--sm"  aria-hidden="true"  focusable="false"><use href="http://127.0.0.1:8000/assets/icons/ui/sprite.svg#circle-dashed"></use></svg>
+Dibatalkan
+</span>
+            </div>
+            <div class="flex flex-wrap gap-2" id="g-status-all">
+                                    <span class="sg-status"  data-value="pending">
+    <svg class="sg-icon sg-icon--sm"  aria-hidden="true"  focusable="false"><use href="http://127.0.0.1:8000/assets/icons/ui/sprite.svg#hourglass"></use></svg>
+Menunggu
+</span>
+<span class="sg-status"  data-tone="info"  data-value="reviewed">
+    <svg class="sg-icon sg-icon--sm"  aria-hidden="true"  focusable="false"><use href="http://127.0.0.1:8000/assets/icons/ui/sprite.svg#eye"></use></svg>
+Ditinjau
+</span>
+<span class="sg-status"  data-tone="success"  data-value="accepted">
+    <svg class="sg-icon sg-icon--sm"  aria-hidden="true"  focusable="false"><use href="http://127.0.0.1:8000/assets/icons/ui/sprite.svg#circle-check"></use></svg>
+Diterima
+</span>
+<span class="sg-status"  data-tone="danger"  data-value="rejected">
+    <svg class="sg-icon sg-icon--sm"  aria-hidden="true"  focusable="false"><use href="http://127.0.0.1:8000/assets/icons/ui/sprite.svg#circle-x"></use></svg>
+Ditolak
+</span>
+                                    <span class="sg-status"  data-value="pending">
+    <svg class="sg-icon sg-icon--sm"  aria-hidden="true"  focusable="false"><use href="http://127.0.0.1:8000/assets/icons/ui/sprite.svg#hourglass"></use></svg>
+Menunggu
+</span>
+<span class="sg-status"  data-tone="info"  data-value="reviewed">
+    <svg class="sg-icon sg-icon--sm"  aria-hidden="true"  focusable="false"><use href="http://127.0.0.1:8000/assets/icons/ui/sprite.svg#eye"></use></svg>
+Ditinjau
+</span>
+<span class="sg-status"  data-tone="info"  data-value="shortlisted">
+    <svg class="sg-icon sg-icon--sm"  aria-hidden="true"  focusable="false"><use href="http://127.0.0.1:8000/assets/icons/ui/sprite.svg#user-check"></use></svg>
+Terpilih
+</span>
+<span class="sg-status"  data-tone="success"  data-value="accepted">
+    <svg class="sg-icon sg-icon--sm"  aria-hidden="true"  focusable="false"><use href="http://127.0.0.1:8000/assets/icons/ui/sprite.svg#circle-check"></use></svg>
+Diterima
+</span>
+<span class="sg-status"  data-tone="danger"  data-value="rejected">
+    <svg class="sg-icon sg-icon--sm"  aria-hidden="true"  focusable="false"><use href="http://127.0.0.1:8000/assets/icons/ui/sprite.svg#circle-x"></use></svg>
+Ditolak
+</span>
+                                    <span class="sg-status"  data-value="draft">
+    <svg class="sg-icon sg-icon--sm"  aria-hidden="true"  focusable="false"><use href="http://127.0.0.1:8000/assets/icons/ui/sprite.svg#pencil"></use></svg>
+Draf
+</span>
+<span class="sg-status"  data-tone="success"  data-value="open">
+    <svg class="sg-icon sg-icon--sm"  aria-hidden="true"  focusable="false"><use href="http://127.0.0.1:8000/assets/icons/ui/sprite.svg#send"></use></svg>
+Dibuka
+</span>
+<span class="sg-status"  data-tone="info"  data-value="in_progress">
+    <svg class="sg-icon sg-icon--sm"  aria-hidden="true"  focusable="false"><use href="http://127.0.0.1:8000/assets/icons/ui/sprite.svg#refresh-cw"></use></svg>
+Berjalan
+</span>
+<span class="sg-status"  data-tone="success"  data-value="completed">
+    <svg class="sg-icon sg-icon--sm"  aria-hidden="true"  focusable="false"><use href="http://127.0.0.1:8000/assets/icons/ui/sprite.svg#check"></use></svg>
+Selesai
+</span>
+<span class="sg-status"  data-tone="muted"  data-value="closed">
+    <svg class="sg-icon sg-icon--sm"  aria-hidden="true"  focusable="false"><use href="http://127.0.0.1:8000/assets/icons/ui/sprite.svg#lock"></use></svg>
+Ditutup
+</span>
+                                    <span class="sg-status"  data-tone="info"  data-value="active">
+    <svg class="sg-icon sg-icon--sm"  aria-hidden="true"  focusable="false"><use href="http://127.0.0.1:8000/assets/icons/ui/sprite.svg#refresh-cw"></use></svg>
+Berjalan
+</span>
+<span class="sg-status"  data-tone="warning"  data-value="on_hold">
+    <svg class="sg-icon sg-icon--sm"  aria-hidden="true"  focusable="false"><use href="http://127.0.0.1:8000/assets/icons/ui/sprite.svg#clock"></use></svg>
+Ditunda
+</span>
+<span class="sg-status"  data-tone="success"  data-value="completed">
+    <svg class="sg-icon sg-icon--sm"  aria-hidden="true"  focusable="false"><use href="http://127.0.0.1:8000/assets/icons/ui/sprite.svg#check"></use></svg>
+Selesai
+</span>
+<span class="sg-status"  data-tone="muted"  data-value="cancelled">
+    <svg class="sg-icon sg-icon--sm"  aria-hidden="true"  focusable="false"><use href="http://127.0.0.1:8000/assets/icons/ui/sprite.svg#circle-dashed"></use></svg>
+Dibatalkan
+</span>
+                                    <span class="sg-status"  data-value="pending">
+    <svg class="sg-icon sg-icon--sm"  aria-hidden="true"  focusable="false"><use href="http://127.0.0.1:8000/assets/icons/ui/sprite.svg#hourglass"></use></svg>
+Menunggu
+</span>
+<span class="sg-status"  data-tone="info"  data-value="in_progress">
+    <svg class="sg-icon sg-icon--sm"  aria-hidden="true"  focusable="false"><use href="http://127.0.0.1:8000/assets/icons/ui/sprite.svg#refresh-cw"></use></svg>
+Berjalan
+</span>
+<span class="sg-status"  data-tone="success"  data-value="completed">
+    <svg class="sg-icon sg-icon--sm"  aria-hidden="true"  focusable="false"><use href="http://127.0.0.1:8000/assets/icons/ui/sprite.svg#check"></use></svg>
+Selesai
+</span>
+<span class="sg-status"  data-tone="warning"  data-value="delayed">
+    <svg class="sg-icon sg-icon--sm"  aria-hidden="true"  focusable="false"><use href="http://127.0.0.1:8000/assets/icons/ui/sprite.svg#triangle-alert"></use></svg>
+Terlambat
+</span>
+                                    <span class="sg-status"  data-value="pending">
+    <svg class="sg-icon sg-icon--sm"  aria-hidden="true"  focusable="false"><use href="http://127.0.0.1:8000/assets/icons/ui/sprite.svg#hourglass"></use></svg>
+Menunggu
+</span>
+<span class="sg-status"  data-tone="info"  data-value="reviewed">
+    <svg class="sg-icon sg-icon--sm"  aria-hidden="true"  focusable="false"><use href="http://127.0.0.1:8000/assets/icons/ui/sprite.svg#eye"></use></svg>
+Ditinjau
+</span>
+<span class="sg-status"  data-tone="success"  data-value="approved">
+    <svg class="sg-icon sg-icon--sm"  aria-hidden="true"  focusable="false"><use href="http://127.0.0.1:8000/assets/icons/ui/sprite.svg#circle-check"></use></svg>
+Disetujui
+</span>
+<span class="sg-status"  data-tone="warning"  data-value="revision_needed">
+    <svg class="sg-icon sg-icon--sm"  aria-hidden="true"  focusable="false"><use href="http://127.0.0.1:8000/assets/icons/ui/sprite.svg#circle-alert"></use></svg>
+Perlu Revisi
+</span>
+                                    <span class="sg-status"  data-value="pending">
+    <svg class="sg-icon sg-icon--sm"  aria-hidden="true"  focusable="false"><use href="http://127.0.0.1:8000/assets/icons/ui/sprite.svg#hourglass"></use></svg>
+Menunggu
+</span>
+<span class="sg-status"  data-tone="success"  data-value="approved">
+    <svg class="sg-icon sg-icon--sm"  aria-hidden="true"  focusable="false"><use href="http://127.0.0.1:8000/assets/icons/ui/sprite.svg#circle-check"></use></svg>
+Disetujui
+</span>
+<span class="sg-status"  data-tone="danger"  data-value="rejected">
+    <svg class="sg-icon sg-icon--sm"  aria-hidden="true"  focusable="false"><use href="http://127.0.0.1:8000/assets/icons/ui/sprite.svg#circle-x"></use></svg>
+Ditolak
+</span>
+                                    <span class="sg-status"  data-value="pending_verification">
+    <svg class="sg-icon sg-icon--sm"  aria-hidden="true"  focusable="false"><use href="http://127.0.0.1:8000/assets/icons/ui/sprite.svg#hourglass"></use></svg>
+Menunggu Verifikasi
+</span>
+<span class="sg-status"  data-tone="success"  data-value="verified">
+    <svg class="sg-icon sg-icon--sm"  aria-hidden="true"  focusable="false"><use href="http://127.0.0.1:8000/assets/icons/ui/sprite.svg#badge-check"></use></svg>
+Terverifikasi
+</span>
+<span class="sg-status"  data-tone="danger"  data-value="rejected">
+    <svg class="sg-icon sg-icon--sm"  aria-hidden="true"  focusable="false"><use href="http://127.0.0.1:8000/assets/icons/ui/sprite.svg#circle-x"></use></svg>
+Ditolak
+</span>
+<span class="sg-status"  data-tone="warning"  data-value="needs_review">
+    <svg class="sg-icon sg-icon--sm"  aria-hidden="true"  focusable="false"><use href="http://127.0.0.1:8000/assets/icons/ui/sprite.svg#circle-alert"></use></svg>
+Perlu Ditinjau
+</span>
+                                    <span class="sg-status"  data-value="draft">
+    <svg class="sg-icon sg-icon--sm"  aria-hidden="true"  focusable="false"><use href="http://127.0.0.1:8000/assets/icons/ui/sprite.svg#pencil"></use></svg>
+Draf
+</span>
+<span class="sg-status"  data-tone="success"  data-value="posted">
+    <svg class="sg-icon sg-icon--sm"  aria-hidden="true"  focusable="false"><use href="http://127.0.0.1:8000/assets/icons/ui/sprite.svg#send"></use></svg>
+Dibuka
+</span>
+<span class="sg-status"  data-tone="muted"  data-value="closed">
+    <svg class="sg-icon sg-icon--sm"  aria-hidden="true"  focusable="false"><use href="http://127.0.0.1:8000/assets/icons/ui/sprite.svg#lock"></use></svg>
+Ditutup
+</span>
+<span class="sg-status"  data-tone="muted"  data-value="archived">
+    <svg class="sg-icon sg-icon--sm"  aria-hidden="true"  focusable="false"><use href="http://127.0.0.1:8000/assets/icons/ui/sprite.svg#folder-open"></use></svg>
+Diarsipkan
+</span>
+                                    <span class="sg-status"  data-value="pending">
+    <svg class="sg-icon sg-icon--sm"  aria-hidden="true"  focusable="false"><use href="http://127.0.0.1:8000/assets/icons/ui/sprite.svg#hourglass"></use></svg>
+Menunggu
+</span>
+<span class="sg-status"  data-tone="success"  data-value="accepted">
+    <svg class="sg-icon sg-icon--sm"  aria-hidden="true"  focusable="false"><use href="http://127.0.0.1:8000/assets/icons/ui/sprite.svg#user-check"></use></svg>
+Terhubung
+</span>
+<span class="sg-status"  data-tone="danger"  data-value="rejected">
+    <svg class="sg-icon sg-icon--sm"  aria-hidden="true"  focusable="false"><use href="http://127.0.0.1:8000/assets/icons/ui/sprite.svg#circle-x"></use></svg>
+Ditolak
+</span>
+<span class="sg-status"  data-tone="danger"  data-value="blocked">
+    <svg class="sg-icon sg-icon--sm"  aria-hidden="true"  focusable="false"><use href="http://127.0.0.1:8000/assets/icons/ui/sprite.svg#lock"></use></svg>
+Diblokir
+</span>
+                            </div>
+            <div class="flex flex-wrap gap-2">
+                <span class="sg-chip"><svg class="sg-icon sg-icon--sm"  aria-hidden="true"  focusable="false"><use href="http://127.0.0.1:8000/assets/icons/ui/sprite.svg#target"></use></svg>
+SDG 6 · Air Bersih dan Sanitasi Layak</span>
+                <span class="sg-chip">Pertanian</span>
+                <span class="sg-role"><svg class="sg-icon"  aria-hidden="true"  focusable="false"><use href="http://127.0.0.1:8000/assets/icons/ui/sprite.svg#graduation-cap"></use></svg>
+Mahasiswa</span>
+<span class="sg-role"><svg class="sg-icon"  aria-hidden="true"  focusable="false"><use href="http://127.0.0.1:8000/assets/icons/ui/sprite.svg#building-2"></use></svg>
+Instansi</span>
+<span class="sg-role"><svg class="sg-icon"  aria-hidden="true"  focusable="false"><use href="http://127.0.0.1:8000/assets/icons/ui/sprite.svg#briefcase"></use></svg>
+Perusahaan</span>
+            </div>
+
+            <nav  aria-label="Filter status">
+    <ul class="sg-tabs">
+                    <li>
+                <a href="http://127.0.0.1:8000/__sg-gallery" class="sg-tabs__tab"  aria-current="page" >
+                    Semua
+                                            <span class="sg-tabs__count">77</span>
+                                    </a>
+            </li>
+                    <li>
+                <a href="http://127.0.0.1:8000/__sg-gallery?status=pending" class="sg-tabs__tab" >
+                    Menunggu
+                                            <span class="sg-tabs__count">12</span>
+                                    </a>
+            </li>
+                    <li>
+                <a href="http://127.0.0.1:8000/__sg-gallery?status=accepted" class="sg-tabs__tab" >
+                    Diterima
+                                            <span class="sg-tabs__count">3</span>
+                                    </a>
+            </li>
+            </ul>
+</nav>
+
+            <div class="sg-table-wrap" role="region" aria-label="Dokumen repositori (contoh)" tabindex="0">
+    <table class="sg-table sg-table--stack">
+        <caption class="sr-only">Dokumen repositori (contoh)</caption>
+                    <thead>
+                <tr><th scope="col">Judul</th><th scope="col">Instansi</th><th scope="col">Kontak</th><th scope="col">Status</th><th scope="col" class="sg-num">Unduhan</th></tr>
+            </thead>
+                <tbody>
+            <tr>
+                        <td data-label="Judul"><a href="#">Kajian Pengelolaan Air Bersih Berbasis Masyarakat di Desa Pesisir</a><span class="sg-table__meta">PDF · 1,4 MB</span></td>
+                        <td data-label="Instansi">Dinas Sosial Pemberdayaan Perempuan Dan Perlindungan Anak Kabupaten Sidoarjo</td>
+                        <td data-label="Kontak">fatimah.azzahra.nurhidayati@students.itb-ganesha.id</td>
+                        <td data-label="Status"><span class="sg-status"  data-tone="success"  data-value="approved">
+    <svg class="sg-icon sg-icon--sm"  aria-hidden="true"  focusable="false"><use href="http://127.0.0.1:8000/assets/icons/ui/sprite.svg#circle-check"></use></svg>
+Disetujui
+</span>
+</td>
+                        <td data-label="Unduhan" class="sg-num">1.250</td>
+                    </tr>
+                                    <tr>
+                        <td data-label="Judul"><a href="#">Profil Desa Wisata</a><span class="sg-table__meta">PDF · 1,4 MB</span></td>
+                        <td data-label="Instansi">Pemkab Bantul</td>
+                        <td data-label="Kontak">desa@bantul.go.id</td>
+                        <td data-label="Status"><span class="sg-status"  data-value="pending">
+    <svg class="sg-icon sg-icon--sm"  aria-hidden="true"  focusable="false"><use href="http://127.0.0.1:8000/assets/icons/ui/sprite.svg#hourglass"></use></svg>
+Menunggu
+</span>
+</td>
+                        <td data-label="Unduhan" class="sg-num">8</td>
+                    </tr>
+        </tbody>
+    </table>
+</div>
+
+            <ul class="sg-list"  aria-label="Anggota jaringan (contoh)" >
+    <li >
+    <div class="sg-list__row">
+        <span class="sg-avatar"
+    data-initials="FW"       aria-hidden="true"  >
+            FW
+    </span>
+        <div class="sg-list__main">
+            <p class="sg-list__title">
+                                    <a href="#" class="hover:underline">Farah Wibowo</a>
+                            </p>
+            <p class="sg-list__meta">fatimah.azzahra.nurhidayati@students.itb-ganesha.id</p>            
+        </div>
+                    <div class="sg-list__end"><span class="sg-status"  data-tone="success"  data-value="accepted">
+    <svg class="sg-icon sg-icon--sm"  aria-hidden="true"  focusable="false"><use href="http://127.0.0.1:8000/assets/icons/ui/sprite.svg#user-check"></use></svg>
+Terhubung
+</span></div>
+            </div>
+</li>
+                <li >
+    <div class="sg-list__row">
+        <span class="sg-avatar sg-avatar--square"
+    data-initials="DS"       aria-hidden="true"  >
+            DS
+    </span>
+        <div class="sg-list__main">
+            <p class="sg-list__title">
+                                    Dinas Sosial Pemberdayaan Perempuan Dan Perlindungan Anak Kabupaten Sidoarjo
+                            </p>
+            <p class="sg-list__meta">Instansi · Jawa Timur</p>            
+        </div>
+                    <div class="sg-list__end"><button type="button" class="sg-btn sg-btn--secondary"  >
+                Lihat
+            </button></div>
+            </div>
+</li>
+</ul>
+
+            <div id="g-pagination" class="grid gap-3">
+                <div class="sg-pagination">
+                    <p class="sg-pagination__info">Menampilkan 21–40 dari 77</p>
+                            <nav aria-label="Navigasi halaman">
+                <ul class="sg-pagination__list">
+                    <li>
+                                                    <a class="sg-pagination__link" href="http://127.0.0.1:8000/__sg-gallery?search=air&amp;page=1" rel="prev"><svg class="sg-icon sg-icon--sm"  aria-hidden="true"  focusable="false"><use href="http://127.0.0.1:8000/assets/icons/ui/sprite.svg#chevron-left"></use></svg>
+Sebelumnya</a>
+                                            </li>
+                                                                        <li class="sg-pagination__page"><a class="sg-pagination__link" href="http://127.0.0.1:8000/__sg-gallery?search=air&amp;page=1"><span class="sr-only">Halaman </span>1</a></li>
+                                                                                                <li class="sg-pagination__page"><span class="sg-pagination__link" aria-current="page"><span class="sr-only">Halaman </span>2</span></li>
+                                                                                                <li class="sg-pagination__page"><a class="sg-pagination__link" href="http://127.0.0.1:8000/__sg-gallery?search=air&amp;page=3"><span class="sr-only">Halaman </span>3</a></li>
+                                                                                                <li class="sg-pagination__page"><a class="sg-pagination__link" href="http://127.0.0.1:8000/__sg-gallery?search=air&amp;page=4"><span class="sr-only">Halaman </span>4</a></li>
+                                                                                        <li class="sg-pagination__info sm:hidden self-center px-1">Halaman 2 dari 4</li>
+                                        <li>
+                                                    <a class="sg-pagination__link" href="http://127.0.0.1:8000/__sg-gallery?search=air&amp;page=3" rel="next">Berikutnya<svg class="sg-icon sg-icon--sm"  aria-hidden="true"  focusable="false"><use href="http://127.0.0.1:8000/assets/icons/ui/sprite.svg#chevron-right"></use></svg>
+</a>
+                                            </li>
+                </ul>
+            </nav>
+            </div>
+                <div class="sg-pagination">
+                    <p class="sg-pagination__info">Menampilkan 1–20 dari 77</p>
+                            <nav aria-label="Navigasi halaman">
+                <ul class="sg-pagination__list">
+                    <li>
+                                                    <span class="sg-pagination__link" aria-disabled="true"><svg class="sg-icon sg-icon--sm"  aria-hidden="true"  focusable="false"><use href="http://127.0.0.1:8000/assets/icons/ui/sprite.svg#chevron-left"></use></svg>
+Sebelumnya</span>
+                                            </li>
+                                                                        <li class="sg-pagination__page"><span class="sg-pagination__link" aria-current="page"><span class="sr-only">Halaman </span>1</span></li>
+                                                                                                <li class="sg-pagination__page"><a class="sg-pagination__link" href="http://127.0.0.1:8000/__sg-gallery?page=2"><span class="sr-only">Halaman </span>2</a></li>
+                                                                                                <li class="sg-pagination__page"><span class="sg-pagination__gap" aria-hidden="true">…</span></li>
+                                                                                                <li class="sg-pagination__page"><a class="sg-pagination__link" href="http://127.0.0.1:8000/__sg-gallery?page=4"><span class="sr-only">Halaman </span>4</a></li>
+                                                                                        <li class="sg-pagination__info sm:hidden self-center px-1">Halaman 1 dari 4</li>
+                                        <li>
+                                                    <a class="sg-pagination__link" href="http://127.0.0.1:8000/__sg-gallery?page=2" rel="next">Berikutnya<svg class="sg-icon sg-icon--sm"  aria-hidden="true"  focusable="false"><use href="http://127.0.0.1:8000/assets/icons/ui/sprite.svg#chevron-right"></use></svg>
+</a>
+                                            </li>
+                </ul>
+            </nav>
+            </div>
+            </div>
+
+            <form method="GET" action="http://127.0.0.1:8000/__sg-gallery-submit" role="search" class="sg-filter-bar"
+      x-data="sgFilterBar" @keydown.escape="close()">
+            <div class="sg-field sg-filter-bar__search">
+    <label for="search-search" class="sg-label sr-only">Cari</label>
+    <div class="sg-search">
+        <svg class="sg-icon sg-icon--sm"  aria-hidden="true"  focusable="false"><use href="http://127.0.0.1:8000/assets/icons/ui/sprite.svg#search"></use></svg>
+        <input type="search" name="search" id="search-search" class="sg-input"              placeholder="Cari masalah"  >
+    </div>
+</div>
+    
+    <button type="button" class="sg-btn sg-btn--secondary sg-filter-bar__toggle" x-ref="toggle" @click="show()"
+            aria-expanded="false" :aria-expanded="open.toString()" aria-controls="g-filter-panel">
+        <svg class="sg-icon sg-icon--sm"  aria-hidden="true"  focusable="false"><use href="http://127.0.0.1:8000/assets/icons/ui/sprite.svg#list-filter"></use></svg>
+Filter
+        <span class="sg-tabs__count">(1 aktif)</span>    </button>
+
+    <div class="sg-filter-bar__backdrop" :data-open="open ? '' : null" @click="close()" aria-hidden="true"></div>
+    <div class="sg-filter-bar__panel" id="g-filter-panel" x-ref="panel" :data-open="open ? '' : null"
+         :role="open ? 'dialog' : null" :aria-modal="open ? 'true' : null" aria-labelledby="g-filter-title">
+        <div class="sg-filter-bar__drawer-head">
+            <h2 id="g-filter-title">Filter</h2>
+            <button type="button" class="sg-icon-btn" @click="close()" aria-label="Tutup filter"><svg class="sg-icon"  aria-hidden="true"  focusable="false"><use href="http://127.0.0.1:8000/assets/icons/ui/sprite.svg#x"></use></svg>
+</button>
+        </div>
+        <div class="sg-filter-bar__body">
+            <div class="sg-field">
+            <label class="sg-label"  for="province_id"  >Provinsi</label>
+        <select name="province_id" id="province_id"
+    class="sg-select"
+        >
+            <option value="">Semua provinsi</option>
+                <option value="31" >DKI Jakarta</option>
+            <option value="32" >Jawa Barat</option>
+            <option value="35" >Jawa Timur</option>
+        
+</select>
+        </div>
+                <div class="sg-field">
+            <label class="sg-label"  for="f-status"  >Status</label>
+        <select name="status" id="f-status"
+    class="sg-select"
+        >
+            <option value="">Semua status</option>
+                <option value="open" selected>Dibuka</option>
+            <option value="closed" >Ditutup</option>
+        
+</select>
+        </div>
+        </div>
+        <div class="sg-filter-bar__foot">
+            <button type="submit" class="sg-btn sg-btn--primary">Terapkan</button>
+                            <a href="http://127.0.0.1:8000/__sg-gallery" class="sg-btn sg-btn--tertiary">Atur ulang</a>
+                    </div>
+    </div>
+</form>
+
+            <div class="grid gap-6 sm:grid-cols-2">
+                <dl class="sg-dl">
+                        <div>
+                <dt>Instansi</dt>
+                <dd>Dinas Sosial Pemberdayaan Perempuan Dan Perlindungan Anak Kabupaten Sidoarjo</dd>
+            </div>
+                                <div>
+                <dt>Lokasi</dt>
+                <dd>Kabupaten Sidoarjo, Jawa Timur</dd>
+            </div>
+                                <div>
+                <dt>Kuota</dt>
+                <dd>4 mahasiswa</dd>
+            </div>
+                            
+</dl>
+                <dl class="sg-dl sg-dl--inline">
+                        <div>
+                <dt>Tenggat</dt>
+                <dd>12 Desember 2026</dd>
+            </div>
+                                <div>
+                <dt>Durasi</dt>
+                <dd>6 minggu</dd>
+            </div>
+                
+</dl>
+            </div>
+
+            <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3" id="g-cards">
+                <article class="sg-card">
+            <div class="sg-card__media sg-media">
+            <img src="http://127.0.0.1:8000/assets/illustrations/workflows/project-status.svg" alt="Diagram status proyek" loading="lazy" data-optional onerror="this.closest('.sg-media').hidden = true">
+        </div>
+        <div class="sg-card__body">
+        <h3 class="sg-card__title">
+            <a href="#">Kajian Pengelolaan Air Bersih Berbasis Masyarakat di Desa Pesisir</a>        </h3>
+        <p class="text-sm text-gray-600">Dinas Sosial Pemberdayaan Perempuan Dan Perlindungan Anak Kabupaten Sidoarjo</p>
+    </div>
+            <div class="sg-card__foot"><span class="sg-status"  data-tone="success"  data-value="open">
+    <svg class="sg-icon sg-icon--sm"  aria-hidden="true"  focusable="false"><use href="http://127.0.0.1:8000/assets/icons/ui/sprite.svg#send"></use></svg>
+Dibuka
+</span></div>
+    </article>
+                <article class="sg-card">
+            <div class="sg-card__media sg-media">
+            <img src="http://127.0.0.1:8000/assets/tidak-ada.jpg" alt="" loading="lazy" data-optional onerror="this.closest('.sg-media').hidden = true">
+        </div>
+        <div class="sg-card__body">
+        <h3 class="sg-card__title">
+            Gambar gagal dimuat (area media disembunyikan)        </h3>
+        <p class="text-sm text-gray-600">Tanpa placeholder.</p>
+    </div>
+    </article>
+            </div>
+        </section>
+
+        <section id="g-complex" aria-labelledby="h-complex" class="grid gap-4">
+            <h2 id="h-complex" class="text-xl">Komponen kompleks</h2>
+            <div class="sg-stepper" role="group" aria-label="Kemajuan pengisian">
+    <p class="sg-stepper__label" aria-live="polite"
+       >
+        Langkah 2 dari 4 · Data diri
+    </p>
+    <ol class="sg-stepper__track" aria-hidden="true">
+                                <li  data-state="done"                  ></li>
+                                <li   aria-current="step"                 ></li>
+                                <li                  ></li>
+                                <li                  ></li>
+            </ol>
+    <ol class="sg-stepper__labels">
+                                <li                 >Akun</li>
+                                <li  aria-current="step"                 >Data diri</li>
+                                <li                 >Akademik</li>
+                                <li                 >Selesai</li>
+            </ol>
+</div>
+            <div x-data="{ step: 1 }" class="grid gap-2" id="g-stepper-live">
+                <div class="sg-stepper" role="group" aria-label="Kemajuan pengisian">
+    <p class="sg-stepper__label" aria-live="polite"
+        x-text="'Langkah ' + (step) + ' dari 3 · ' + (JSON.parse('[\u0022Akun\u0022,\u0022Data instansi\u0022,\u0022Verifikasi\u0022]')[(step) - 1] ?? '')" >
+        Langkah 1 dari 3 · Akun
+    </p>
+    <ol class="sg-stepper__track" aria-hidden="true">
+                                <li   aria-current="step"                  :data-state="(step) > 1 ? 'done' : null" :aria-current="(step) === 1 ? 'step' : null" ></li>
+                                <li                   :data-state="(step) > 2 ? 'done' : null" :aria-current="(step) === 2 ? 'step' : null" ></li>
+                                <li                   :data-state="(step) > 3 ? 'done' : null" :aria-current="(step) === 3 ? 'step' : null" ></li>
+            </ol>
+    <ol class="sg-stepper__labels">
+                                <li  aria-current="step"                  :aria-current="(step) === 1 ? 'step' : null" >Akun</li>
+                                <li                  :aria-current="(step) === 2 ? 'step' : null" >Data instansi</li>
+                                <li                  :aria-current="(step) === 3 ? 'step' : null" >Verifikasi</li>
+            </ol>
+</div>
+                <div class="flex gap-2">
+                    <button type="button" class="sg-btn sg-btn--secondary" @click="step = Math.max(1, step - 1)" id="step-prev"  >
+                Sebelumnya
+            </button>
+                    <button type="button" class="sg-btn sg-btn--primary" @click="step = Math.min(3, step + 1)" id="step-next"  >
+                Berikutnya
+            </button>
+                </div>
+            </div>
+
+            <div  x-data="sgTabs('ringkasan')">
+    <div class="sg-tabs" role="tablist" aria-label="Detail proyek" x-ref="tablist" @keydown="onKeydown($event)">
+                    <button type="button" role="tab" class="sg-tabs__tab" data-tab="ringkasan"
+                    id="gt-ringkasan-tab" aria-controls="gt-ringkasan-panel"
+                    aria-selected="true"
+                    tabindex="0"
+                    :aria-selected="(selected === 'ringkasan').toString()"
+                    :tabindex="selected === 'ringkasan' ? 0 : -1"
+                    @click="select('ringkasan')">Ringkasan</button>
+                    <button type="button" role="tab" class="sg-tabs__tab" data-tab="dokumen"
+                    id="gt-dokumen-tab" aria-controls="gt-dokumen-panel"
+                    aria-selected="false"
+                    tabindex="-1"
+                    :aria-selected="(selected === 'dokumen').toString()"
+                    :tabindex="selected === 'dokumen' ? 0 : -1"
+                    @click="select('dokumen')">Dokumen</button>
+                    <button type="button" role="tab" class="sg-tabs__tab" data-tab="ulasan"
+                    id="gt-ulasan-tab" aria-controls="gt-ulasan-panel"
+                    aria-selected="false"
+                    tabindex="-1"
+                    :aria-selected="(selected === 'ulasan').toString()"
+                    :tabindex="selected === 'ulasan' ? 0 : -1"
+                    @click="select('ulasan')">Ulasan</button>
+            </div>
+    <div class="sg-tabpanel" role="tabpanel" id="gt-ringkasan-panel"
+     aria-labelledby="gt-ringkasan-tab" tabindex="0"
+     x-show="selected === 'ringkasan'" >
+    Ringkasan proyek.
+</div>
+                <div class="sg-tabpanel" role="tabpanel" id="gt-dokumen-panel"
+     aria-labelledby="gt-dokumen-tab" tabindex="0"
+     x-show="selected === 'dokumen'"  x-cloak >
+    Daftar dokumen.
+</div>
+                <div class="sg-tabpanel" role="tabpanel" id="gt-ulasan-panel"
+     aria-labelledby="gt-ulasan-tab" tabindex="0"
+     x-show="selected === 'ulasan'"  x-cloak >
+    Ulasan instansi.
+</div>
+</div>
+
+            <div class="flex flex-wrap items-center gap-3" id="g-avatars">
+                <span class="sg-avatar sg-avatar--xs"
+    data-initials="FW"  data-label="Farah Wibowo"       role="img" aria-label="Farah Wibowo"  >
+            FW
+    </span>
+                <span class="sg-avatar sg-avatar--sm"
+    data-initials="FW"  data-label="Farah Wibowo"       role="img" aria-label="Farah Wibowo"  >
+            FW
+    </span>
+                <span class="sg-avatar"
+    data-initials="FW"  data-label="Farah Wibowo"       role="img" aria-label="Farah Wibowo"  >
+            FW
+    </span>
+                <span class="sg-avatar sg-avatar--lg"
+    data-initials="FW"  data-label="Farah Wibowo"     >
+            <img src="http://127.0.0.1:8000/assets/foto-tidak-ada.jpg" alt="Farah Wibowo" loading="lazy" decoding="async">
+    </span>
+                <span class="sg-avatar sg-avatar--xl sg-avatar--square"
+    data-initials="DS"  data-label="Dinas Sosial Pemberdayaan Perempuan Dan Perlindungan Anak Kabupaten Sidoarjo"       role="img" aria-label="Dinas Sosial Pemberdayaan Perempuan Dan Perlindungan Anak Kabupaten Sidoarjo"  >
+            DS
+    </span>
+            </div>
+
+            <div class="sg-dropdown" x-data="sgDisclosure" @keydown.escape.stop="close(true)" @click.outside="close()"
+     @focusout="onFocusOut($event)" @keydown.arrow-down="move($event, 1)" @keydown.arrow-up="move($event, -1)">
+    <button type="button" class="sg-btn sg-btn--secondary" x-ref="trigger" @click="toggle()"
+            aria-expanded="false" :aria-expanded="open.toString()" aria-controls="g-dropdown">
+                    Aksi lainnya<svg class="sg-icon sg-icon--sm sg-chevron"  aria-hidden="true"  focusable="false"><use href="http://127.0.0.1:8000/assets/icons/ui/sprite.svg#chevron-down"></use></svg>
+            </button>
+    <div id="g-dropdown" class="sg-overlay sg-menu" x-ref="panel" x-show="open" x-cloak>
+        <ul class="sg-menu__list">
+                    <li><a href="#" class="sg-menu__item" >
+        <svg class="sg-icon sg-icon--sm"  aria-hidden="true"  focusable="false"><use href="http://127.0.0.1:8000/assets/icons/ui/sprite.svg#pencil"></use></svg>
+        <span>Ubah</span>
+    </a>
+</li>
+                    <li><a href="#" class="sg-menu__item" >
+        <svg class="sg-icon sg-icon--sm"  aria-hidden="true"  focusable="false"><use href="http://127.0.0.1:8000/assets/icons/ui/sprite.svg#copy"></use></svg>
+        <span>Duplikat</span>
+    </a>
+</li>
+                </ul>
+                <hr class="sg-menu__sep">
+                <button type="button" class="sg-menu__item sg-menu__item--danger">
+        <svg class="sg-icon sg-icon--sm"  aria-hidden="true"  focusable="false"><use href="http://127.0.0.1:8000/assets/icons/ui/sprite.svg#trash-2"></use></svg>
+        <span>Hapus</span>
+    </button>
+    </div>
+</div>
+
+            <div class="grid gap-6 sm:grid-cols-2">
+                <div class="sg-empty">
+            <img src="http://127.0.0.1:8000/assets/illustrations/empty-states/no-applications.svg" alt="" width="160" height="120">
+        <h2>Belum ada lamaran</h2>
+    <p>Telusuri masalah dari instansi dan ajukan lamaran pertama Anda.</p>    
+            <a href="#" class="sg-btn sg-btn--primary">
+                Telusuri Masalah
+            </a>
+    </div>
+                <div class="sg-empty">
+            <img src="http://127.0.0.1:8000/assets/illustrations/empty-states/no-search-results.svg" alt="" width="160" height="120">
+        <h2>Tidak ada hasil</h2>
+    <p>Ubah kata kunci atau atur ulang filter.</p>    
+    </div>
+                <div class="sg-empty">
+            <img src="http://127.0.0.1:8000/assets/illustrations/empty-states/no-documents.svg" alt="" width="160" height="120">
+        <h2>Belum ada dokumen</h2>
+        
+    </div>
+                <div class="sg-empty">
+            <img src="http://127.0.0.1:8000/assets/illustrations/empty-states/no-saved-projects.svg" alt="" width="160" height="120">
+        <h2>Wishlist kosong</h2>
+        
+    </div>
+                <div class="sg-empty">
+            <img src="http://127.0.0.1:8000/assets/illustrations/empty-states/no-notifications.svg" alt="" width="160" height="120">
+        <h2>Belum ada notifikasi</h2>
+        
+    </div>
+            </div>
+        </section>
+    </div>
+</div>
+        </main>
+
+        <footer class="sg-on-dark sg-footer">
+    <div class="sg-container">
+        <div class="sg-footer__top">
+            <div>
+                <a href="http://127.0.0.1:8000" class="sg-footer__brand inline-block" aria-label="Student Go, ke beranda">
+                    <img src="http://127.0.0.1:8000/assets/brand/student-go-logo-on-dark.svg" alt="" width="132" height="28">
+                </a>
+                <p class="sg-footer__tagline">
+                    Platform digital yang menghubungkan mahasiswa dengan instansi untuk program Kuliah Kerja Nyata berkelanjutan.
+                </p>
+            </div>
+
+            <nav class="sg-footer__nav" aria-label="Tautan kaki halaman">
+                <h2>Jelajahi</h2>
+                <ul>
+                    <li><a href="http://127.0.0.1:8000">Beranda</a></li>
+                    <li><a href="http://127.0.0.1:8000/about">Tentang Kami</a></li>
+                    <li><a href="http://127.0.0.1:8000/contact">Kontak</a></li>
+                </ul>
+            </nav>
+        </div>
+
+        <p class="sg-footer__legal">
+            Hak cipta © 2026. Seluruh hak cipta dilindungi undang-undang dan terdaftar pada Direktorat Jendral Kekayaan Intelektual Republik Indonesia.
+        </p>
+    </div>
+</footer>
+    </div>
+
+    
+    <button type="button" id="scroll-to-top" class="sg-btn sg-btn--secondary sg-btn--icon sg-scrolltop" aria-label="Kembali ke atas" hidden>
+        <svg class="sg-icon"  aria-hidden="true"  focusable="false"><use href="http://127.0.0.1:8000/assets/icons/ui/sprite.svg#chevron-up"></use></svg>
+    </button>
+
+    
+    <div id="notification-container" class="sg-toasts" aria-live="polite"></div>
+        <script type="application/json" id="sg-flash">[]</script>
+    <dialog id="sg-confirm" class="sg-dialog" aria-labelledby="sg-confirm-title" aria-describedby="sg-confirm-message">
+    <form method="dialog">
+        <div class="sg-dialog__head">
+            <h2 id="sg-confirm-title" data-sg-confirm-title>Konfirmasi tindakan</h2>
+        </div>
+        <div class="sg-dialog__body">
+            <p id="sg-confirm-message" data-sg-confirm-message></p>
+        </div>
+        <div class="sg-dialog__foot">
+            <button type="submit" value="cancel" class="sg-btn sg-btn--secondary" data-sg-confirm-cancel>Batal</button>
+            <button type="submit" value="confirm" class="sg-btn sg-btn--danger-solid" data-sg-confirm-ok>Ya, lanjutkan</button>
+        </div>
+    </form>
+</dialog>
+
+    </body>
+</html>
