@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $this->command->info('==========================================');
-        $this->command->info('   SEEDING DATABASE KKN-GO');
+        $this->command->info('   SEEDING DATABASE STUDENT GO');
         $this->command->info('==========================================');
         $this->command->newLine();
 

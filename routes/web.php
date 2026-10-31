@@ -35,10 +35,10 @@ use App\Http\Controllers\Company\JobApplicationController as CompanyJobApplicati
 
 /*
 |--------------------------------------------------------------------------
-| Web Routes - KKN-GO Platform
+| Web Routes - Student Go Platform
 |--------------------------------------------------------------------------
 |
-| file ini berisi semua routing untuk aplikasi KKN-GO
+| file ini berisi semua routing untuk aplikasi Student Go
 | 
 */
 

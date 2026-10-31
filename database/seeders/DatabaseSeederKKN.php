@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 
 /**
- * DATABASE SEEDER untuk Karsa SYSTEM
+ * DATABASE SEEDER untuk Student Go SYSTEM
  *
  * Master seeder yang menjalankan semua seeders dengan urutan yang benar
  * untuk sistem Lapangku dengan fokus KKN field-based jobs
@@ -19,7 +19,7 @@ class DatabaseSeederKKN extends Seeder
     {
         $this->command->info('');
         $this->command->info('🚀 ============================================');
-        $this->command->info('🚀   LAPANGKU Karsa DATABASE SEEDER');
+        $this->command->info('🚀   LAPANGKU Student Go DATABASE SEEDER');
         $this->command->info('🚀 ============================================');
         $this->command->info('');
 
