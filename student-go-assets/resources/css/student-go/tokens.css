@@ -1,0 +1,162 @@
+/*
+ * Student Go — design tokens (Tailwind CSS v4 @theme + semantic CSS variables)
+ *
+ * Direction: "Ruang Kerja" (workbench) as the foundation, with a restrained
+ * "Catatan Lapangan" (field notes) editorial layer.  See docs/DESIGN_SYSTEM.md.
+ *
+ * MIGRATION SAFETY
+ * This file does NOT reset Tailwind's default palette, so un-migrated pages keep
+ * working. It re-tunes `gray-*` (fixes the audit's low-contrast gray-400/500 text),
+ * defines `brand-*` and `primary-*` (the audit found `bg-primary-600` used 25x with
+ * no definition), and collapses the large radii. When every page has been migrated,
+ * add `--color-*: initial;` at the very top of @theme to drop the default palette.
+ *
+ * Contrast ratios (measured, WCAG 2.x) are listed in docs/DESIGN_SYSTEM.md.
+ */
+
+@theme {
+  /* ── Typography ─────────────────────────────────────────────── */
+  --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-serif: "Source Serif 4", ui-serif, Georgia, "Times New Roman", serif;
+
+  /* 9-step scale (px size / px line-height). Nothing above 30px inside the app. */
+  --text-xs: 0.75rem;          /* 12 / 16  meta, captions — never body text      */
+  --text-xs--line-height: 1rem;
+  --text-sm: 0.875rem;         /* 14 / 20  dense UI, table cells                 */
+  --text-sm--line-height: 1.25rem;
+  --text-base: 1rem;           /* 16 / 24  body, form input                      */
+  --text-base--line-height: 1.5rem;
+  --text-lg: 1.125rem;         /* 18 / 28  lead paragraph                        */
+  --text-lg--line-height: 1.75rem;
+  --text-xl: 1.25rem;          /* 20 / 28  section heading                       */
+  --text-xl--line-height: 1.75rem;
+  --text-2xl: 1.5rem;          /* 24 / 32  page heading                          */
+  --text-2xl--line-height: 2rem;
+  --text-3xl: 1.875rem;        /* 30 / 36  dashboard greeting, marketing h2      */
+  --text-3xl--line-height: 2.25rem;
+  --text-4xl: 2.25rem;         /* 36 / 44  marketing only                        */
+  --text-4xl--line-height: 2.75rem;
+  --text-5xl: 3rem;            /* 48 / 56  marketing only                        */
+  --text-5xl--line-height: 3.5rem;
+  --tracking-tight: -0.01em;   /* use on 24px and above                          */
+
+  /* ── Brand: slate-indigo, derived from the existing logo (#405080) ── */
+  --color-brand-50:  #f3f5fa;
+  --color-brand-100: #e6eaf4;
+  --color-brand-200: #cdd5e9;
+  --color-brand-300: #a9b6d6;
+  --color-brand-400: #7f8fbc;
+  --color-brand-500: #5b6da0;
+  --color-brand-600: #405080;  /* primary: buttons, links, selected nav, focus ring */
+  --color-brand-700: #344168;
+  --color-brand-800: #293350;
+  --color-brand-900: #1f263c;
+
+  /* Fixes the undefined bg-primary-600/700 classes found in the audit */
+  --color-primary-50:  var(--color-brand-50);
+  --color-primary-100: var(--color-brand-100);
+  --color-primary-200: var(--color-brand-200);
+  --color-primary-300: var(--color-brand-300);
+  --color-primary-400: var(--color-brand-400);
+  --color-primary-500: var(--color-brand-500);
+  --color-primary-600: var(--color-brand-600);
+  --color-primary-700: var(--color-brand-700);
+  --color-primary-800: var(--color-brand-800);
+  --color-primary-900: var(--color-brand-900);
+
+  /* ── Neutrals: one cool-gray ramp, mapped to roles (overrides gray-*) ── */
+  --color-gray-50:  #f4f5f8;   /* surface-sunken / page wash                     */
+  --color-gray-100: #eceef2;
+  --color-gray-200: #dfe2e8;   /* decorative dividers                            */
+  --color-gray-300: #c9cdd6;   /* button outlines                                */
+  --color-gray-400: #7c8494;   /* input borders (3.76:1) — NOT for text          */
+  --color-gray-500: #5f6778;   /* text-tertiary (5.68:1 on white)                */
+  --color-gray-600: #4b5262;   /* text-secondary (7.83:1)                        */
+  --color-gray-700: #373d4a;
+  --color-gray-800: #252a35;
+  --color-gray-900: #1b2236;   /* text-primary (15.81:1), slightly navy          */
+
+  /* ── Earth accent: editorial surfaces only (markers, captions, pins) ── */
+  --color-earth-50:  #fbf3ee;
+  --color-earth-100: #f4e2d6;
+  --color-earth-300: #d9a587;
+  --color-earth-600: #9a4f28;  /* 5.96:1 on white                                */
+  --color-earth-700: #7d3e1d;
+
+  /* ── Semantic: each text color pairs with its tint at >= 4.5:1 ── */
+  --color-success-50: #e9f6ef;  --color-success-600: #1b7a4b;  --color-success-700: #14633d;
+  --color-warning-50: #fff4dc;  --color-warning-600: #9a5f00;  --color-warning-700: #7a4a00;
+  --color-danger-50:  #fdecea;  --color-danger-600:  #b42318;  --color-danger-700:  #a3201a;
+  --color-info-50:    #e8f1fb;  --color-info-600:    #1d5fa8;  --color-info-700:    #1a528f;
+
+  /* ── Radius: controls 6px, panels 8px, full only for avatars + status pills ── */
+  --radius-xs: 2px;
+  --radius-sm: 4px;
+  --radius-md: 6px;     /* controls */
+  --radius-lg: 8px;     /* panels   */
+  --radius-xl: 8px;     /* migration shim: the audit found 7 radius values */
+  --radius-2xl: 8px;
+  --radius-3xl: 8px;
+
+  /* ── Elevation: overlays only (menus, dialogs, toasts, sticky bars) ── */
+  --shadow-overlay: 0 8px 24px -4px rgb(27 34 54 / 0.16), 0 2px 6px -2px rgb(27 34 54 / 0.12);
+
+  /* ── Motion ── */
+  --ease-standard: cubic-bezier(0.2, 0, 0, 1);
+  --duration-state: 150ms;      /* state changes only: max 150–200ms */
+}
+
+/* ── Semantic variables (what components consume) ───────────────────── */
+:root {
+  color-scheme: light;
+
+  --sg-surface-page: #ffffff;
+  --sg-surface-raised: #ffffff;
+  --sg-surface-sunken: var(--color-gray-50);
+
+  --sg-text-primary: var(--color-gray-900);
+  --sg-text-secondary: var(--color-gray-600);  /* >= 7:1  */
+  --sg-text-tertiary: var(--color-gray-500);   /* >= 4.5:1 */
+  --sg-text-on-brand: #ffffff;
+  --sg-text-link: var(--color-brand-700);
+
+  --sg-border-default: var(--color-gray-200);  /* dividers, panels            */
+  --sg-border-strong: var(--color-gray-300);   /* button outlines             */
+  --sg-border-control: var(--color-gray-400);  /* inputs: WCAG 1.4.11 >= 3:1  */
+
+  --sg-brand: var(--color-brand-600);
+  --sg-brand-hover: var(--color-brand-700);
+  --sg-brand-active: var(--color-brand-800);
+  --sg-brand-tint: var(--color-brand-50);
+  --sg-focus: var(--color-brand-600);
+
+  --sg-earth: var(--color-earth-600);
+  --sg-earth-tint: var(--color-earth-50);
+
+  /* One status vocabulary: Menunggu · Ditinjau · Diterima · Ditolak · Dibatalkan */
+  --sg-status-menunggu-bg: var(--color-gray-100);    --sg-status-menunggu-fg: var(--color-gray-700);
+  --sg-status-ditinjau-bg: var(--color-info-50);     --sg-status-ditinjau-fg: var(--color-info-700);
+  --sg-status-diterima-bg: var(--color-success-50);  --sg-status-diterima-fg: var(--color-success-700);
+  --sg-status-ditolak-bg: var(--color-danger-50);    --sg-status-ditolak-fg: var(--color-danger-700);
+  --sg-status-dibatalkan-bg: var(--color-gray-100);  --sg-status-dibatalkan-fg: var(--color-gray-600);
+
+  --sg-radius-control: var(--radius-md);
+  --sg-radius-panel: var(--radius-lg);
+
+  /* Layout widths (audit I): workspace 1200, reading column 720, forms 640–720 */
+  --sg-w-workspace: 75rem;
+  --sg-w-reading: 45rem;
+  --sg-w-form: 42rem;
+  --sg-gutter: 1rem;           /* mobile; 1.5rem tablet; 2rem desktop (see components.css) */
+}
+
+/* Dark surfaces (auth side panel, footer) — logo + text pairings verified in docs */
+.sg-on-dark {
+  --sg-surface-page: #171c2e;
+  --sg-text-primary: #f4f6fb;
+  --sg-text-secondary: #c9d1ec;
+  --sg-text-link: #aeb9dd;
+  --sg-border-default: #2b3350;
+  color: var(--sg-text-primary);
+  background: var(--sg-surface-page);
+}
