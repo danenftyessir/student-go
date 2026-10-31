@@ -1,0 +1,1868 @@
+{
+  "generated": "2026-10-30",
+  "project": "Student Go visual design (asset package)",
+  "license_summaries": {
+    "Unsplash License": "Commercial and non-commercial use; no permission or attribution required (credit appreciated); may not compile images into a competing service. Source: https://unsplash.com/license",
+    "Pexels License": "Free for commercial use, attribution not required; do not depict identifiable people in a bad light; do not sell unmodified copies; do not imply endorsement by people or brands shown; no redistribution on other stock platforms; not for use as a trademark. Source: https://www.pexels.com/license/"
+  },
+  "groups": [
+    {
+      "id": "brand",
+      "kind": "original-svg",
+      "creator": "Student Go design (generated)",
+      "license": "Original work created for Student Go in this design (no third-party rights).",
+      "notes": "Wordmark outlines were converted from Plus Jakarta Sans Bold (SIL OFL 1.1) glyph shapes; the OFL permits use of the font's output.",
+      "files": [
+        {
+          "path": "public/assets/brand/apple-touch-icon.png",
+          "bytes": 11033,
+          "sha256": "a4a05b329933e09dde52fb1a6976aad40d190695421ea188b01306196020d951"
+        },
+        {
+          "path": "public/assets/brand/favicon.ico",
+          "bytes": 1438,
+          "sha256": "3768a2c37ec14877fad00a2409abe450d4e78459ed6e2069e826d513621a0deb"
+        },
+        {
+          "path": "public/assets/brand/favicon.svg",
+          "bytes": 8250,
+          "sha256": "46489582d419ea962a09c87f58451ba867e13312a12482659c70ea7bacd5376b"
+        },
+        {
+          "path": "public/assets/brand/student-go-logo-on-dark.svg",
+          "bytes": 13168,
+          "sha256": "feb698c0695a8148e94b8a1c325572f7fb8679cc3eca412aaf526e3966ac8fab"
+        },
+        {
+          "path": "public/assets/brand/student-go-logo.svg",
+          "bytes": 13168,
+          "sha256": "e3dbd0c2e1f3d7805808c620562b7177afedf92afe58cabe25e347fda4f5fc03"
+        },
+        {
+          "path": "public/assets/brand/student-go-symbol-on-dark.svg",
+          "bytes": 8258,
+          "sha256": "3cf76e70da9302110e72b782597c87573b35971b1e38d7c59ae432ad6d9ededd"
+        },
+        {
+          "path": "public/assets/brand/student-go-symbol.svg",
+          "bytes": 8258,
+          "sha256": "440d6c32be50e2863156e6f224a94922c856fc9608ace65400e2b34f9d5d999f"
+        }
+      ]
+    },
+    {
+      "id": "empty-states",
+      "kind": "original-svg",
+      "creator": "Student Go design (generated)",
+      "license": "Original work created for Student Go in this design (no third-party rights).",
+      "files": [
+        {
+          "path": "public/assets/illustrations/empty-states/no-applications.svg",
+          "bytes": 8889,
+          "sha256": "bb0bfab3684bab5bde391d57d1ad6ce451416de047e8b9acceb7255adf175312"
+        },
+        {
+          "path": "public/assets/illustrations/empty-states/no-documents.svg",
+          "bytes": 8950,
+          "sha256": "e76d487c9467f1916725f21df11aa81174f657a170351996587fd7cf2121d14c"
+        },
+        {
+          "path": "public/assets/illustrations/empty-states/no-notifications.svg",
+          "bytes": 9096,
+          "sha256": "11f182b4b9c4499795bdd2096674cf77c6c91a36d20900af7f129c526cbd6281"
+        },
+        {
+          "path": "public/assets/illustrations/empty-states/no-saved-projects.svg",
+          "bytes": 9004,
+          "sha256": "e8cd63ad2f6273db1f12929177814ef5d1a1402c38f717fee5e34db08c79b4ab"
+        },
+        {
+          "path": "public/assets/illustrations/empty-states/no-search-results.svg",
+          "bytes": 8982,
+          "sha256": "1a63c50fd1ce3db1c0aadfd0d90b3ebb074bbf5aac2fc87fcef12dd8dd3a6d61"
+        }
+      ]
+    },
+    {
+      "id": "workflows",
+      "kind": "original-svg",
+      "creator": "Student Go design (generated)",
+      "license": "Original work created for Student Go in this design (no third-party rights).",
+      "notes": "Step labels derive from routes and statuses documented in the design audit; confirm against the application's real routes.",
+      "files": [
+        {
+          "path": "public/assets/illustrations/workflows/company-journey-vertical.svg",
+          "bytes": 9932,
+          "sha256": "fdda0b063d27ea3618c431dd280e3099238c512fa7dbb40871b02b8b15ed3bed"
+        },
+        {
+          "path": "public/assets/illustrations/workflows/company-journey.svg",
+          "bytes": 10032,
+          "sha256": "396e136be0cd64b14b04befd43c7b9a0f07c1959f3b03230eacc9f8a741f301f"
+        },
+        {
+          "path": "public/assets/illustrations/workflows/institution-journey-vertical.svg",
+          "bytes": 10354,
+          "sha256": "58135efbb3c5c15ec548ffc2425614a94077736c8c129df5857318f8629f20ee"
+        },
+        {
+          "path": "public/assets/illustrations/workflows/institution-journey.svg",
+          "bytes": 10729,
+          "sha256": "df8e17bdee55711e500658aa2f24987f4b5b82bad676cd202365a63a31ed1ec4"
+        },
+        {
+          "path": "public/assets/illustrations/workflows/project-status-vertical.svg",
+          "bytes": 9903,
+          "sha256": "8fc6bca7ec24ed6835d1d24b5e07a3811c270e95ba544918012bd3e54b362c91"
+        },
+        {
+          "path": "public/assets/illustrations/workflows/project-status.svg",
+          "bytes": 10090,
+          "sha256": "e08770c61639ef2dc57ed048e6b175c674d4e1a97693a8f0221e4f9cbc098211"
+        },
+        {
+          "path": "public/assets/illustrations/workflows/student-journey-vertical.svg",
+          "bytes": 10421,
+          "sha256": "8bb9a48231e83c58d7ba1df5a8b76f1b0450f54c6aacbb6ac93a300bb92ea28a"
+        },
+        {
+          "path": "public/assets/illustrations/workflows/student-journey.svg",
+          "bytes": 10883,
+          "sha256": "1bbb97e33d1368ae516292a1af87d57074767bd3f369e10ce342ccb074602fbe"
+        }
+      ]
+    },
+    {
+      "id": "geographic",
+      "kind": "derived-from-public-domain-data",
+      "creator": "Student Go design (generated)",
+      "license": "Public domain source data (Natural Earth); drawing is original work.",
+      "source": "Natural Earth admin-0 countries 1:50m via npm package world-atlas@2.0.2 (ISC packaging)",
+      "source_url": "https://www.naturalearthdata.com/about/terms-of-use/",
+      "files": [
+        {
+          "path": "public/assets/illustrations/geographic/indonesia-outline.svg",
+          "bytes": 34698,
+          "sha256": "332873fb68b87acb6d086bd795ece8f203c329d78023caaac56857ecf363fc48"
+        },
+        {
+          "path": "public/assets/illustrations/geographic/indonesia-regions.svg",
+          "bytes": 36699,
+          "sha256": "df49b8a1cb325af47faa7a672eb4970d92132c3c95f2dcf088f6e6fb52cf15ab"
+        }
+      ]
+    },
+    {
+      "id": "motifs",
+      "kind": "original-svg",
+      "creator": "Student Go design (generated)",
+      "license": "Original work created for Student Go in this design (no third-party rights).",
+      "notes": "contour-field.svg is procedurally generated from a synthetic terrain (no real survey data).",
+      "files": [
+        {
+          "path": "public/assets/illustrations/motifs/contour-field.svg",
+          "bytes": 54566,
+          "sha256": "006e351728c8241a8b8a8ed3cba8f0607d71d2dcaa7f6ef4eb459680cbf009ae"
+        },
+        {
+          "path": "public/assets/illustrations/motifs/map-pin-selected.svg",
+          "bytes": 8126,
+          "sha256": "5c9cf3e96cdfce0536b92fc15af630f7a467767c5b1df8989ae35ef49b4378ca"
+        },
+        {
+          "path": "public/assets/illustrations/motifs/map-pin.svg",
+          "bytes": 8126,
+          "sha256": "7672423460a286015742676a79a825f90425c11cf6a6db452f59244b779cd096"
+        },
+        {
+          "path": "public/assets/illustrations/motifs/survey-marks.svg",
+          "bytes": 8006,
+          "sha256": "294ea757e25e716a178f32e9e79608855795b4cc0d20868b8698c554ef7c9e19"
+        }
+      ]
+    },
+    {
+      "id": "icons-ui",
+      "kind": "open-source-icons",
+      "creator": "Lucide Icons and Contributors",
+      "license": "ISC (LICENSE-lucide.txt; portions derived from Feather, MIT, included in that file)",
+      "source": "lucide-static@1.64.0 (npm)",
+      "source_url": "https://lucide.dev/",
+      "notes": "71 icons, stroke-width normalised from 2 to 1.5 and attributes simplified. Sprite and icons.json are build outputs.",
+      "files": [
+        {
+          "path": "public/assets/icons/ui/LICENSE-lucide.txt",
+          "bytes": 3208,
+          "sha256": "b495047bd93a9b06913511076f504daba17d5bbeb3e0650f3bb53a4220329c57"
+        },
+        {
+          "path": "public/assets/icons/ui/arrow-left.svg",
+          "bytes": 8038,
+          "sha256": "5b987f772386bfdd0919c1b8a3154660898294038d6c4154ab2c272c2540f46b"
+        },
+        {
+          "path": "public/assets/icons/ui/arrow-right.svg",
+          "bytes": 8037,
+          "sha256": "296ccfe29efda19657311aa511dfbef6231bc8dd0e89ccd0e91be20ac2a0957e"
+        },
+        {
+          "path": "public/assets/icons/ui/arrow-up-right.svg",
+          "bytes": 8036,
+          "sha256": "c7422da1c11c5199d424c4afd26c288c7490ef980d06224bb3859e8960ca1430"
+        },
+        {
+          "path": "public/assets/icons/ui/award.svg",
+          "bytes": 8152,
+          "sha256": "8efcf0f6c34f0f1299ae43426e414a65ddb709e8c211c1c1f5ff0e2304a0db13"
+        },
+        {
+          "path": "public/assets/icons/ui/badge-check.svg",
+          "bytes": 8193,
+          "sha256": "2a45dcc392a01c4549915ea325565a1aad50d028015beb6481a8b13ed7c16c9f"
+        },
+        {
+          "path": "public/assets/icons/ui/bell.svg",
+          "bytes": 8169,
+          "sha256": "9fb9a9181527307f5a6842947f77dbf67a32f2755f157d229b09926c82c0d5f8"
+        },
+        {
+          "path": "public/assets/icons/ui/book-open.svg",
+          "bytes": 8163,
+          "sha256": "c97a1754c6769b3351f7ba65f617934c49a2e5bad32ab91a179e34b44366b0ee"
+        },
+        {
+          "path": "public/assets/icons/ui/bookmark.svg",
+          "bytes": 8118,
+          "sha256": "6738317a7d4ded7ef2b38eca5e029fcd65ecb1c6adc2897c5b0684e559e20959"
+        },
+        {
+          "path": "public/assets/icons/ui/briefcase.svg",
+          "bytes": 8095,
+          "sha256": "7804d7d97366b48aafcf6782e993a0612216fb010a640c9e13ce93db84dcc0d7"
+        },
+        {
+          "path": "public/assets/icons/ui/building-2.svg",
+          "bytes": 8217,
+          "sha256": "7b94fefc829990e07468e3949c333426497b8047510505760df2947a93064bd7"
+        },
+        {
+          "path": "public/assets/icons/ui/calendar.svg",
+          "bytes": 8105,
+          "sha256": "c2f1125f9762233bb4608efefad47494967b429dabd49c85d9d170aee1c1185b"
+        },
+        {
+          "path": "public/assets/icons/ui/check.svg",
+          "bytes": 8015,
+          "sha256": "e9a6c8bf01d3c81bfca4801894d9233d526df0990728a9a7b365bfb4e0fe1243"
+        },
+        {
+          "path": "public/assets/icons/ui/chevron-down.svg",
+          "bytes": 8012,
+          "sha256": "46bfabb9ff0e698ce8e7581b2de790ce0ac18ab58e6b548c8b91e685e222261e"
+        },
+        {
+          "path": "public/assets/icons/ui/chevron-left.svg",
+          "bytes": 8014,
+          "sha256": "f0e0e672dcd40c504c44389aa49acb8f5eee73ef2e111dc9f5cd0361d6c29a70"
+        },
+        {
+          "path": "public/assets/icons/ui/chevron-right.svg",
+          "bytes": 8013,
+          "sha256": "4d3fd6b7841cd7e5690122fd0f39c2b5a18bb01d14e83a2e04282c77b162afc7"
+        },
+        {
+          "path": "public/assets/icons/ui/chevron-up.svg",
+          "bytes": 8014,
+          "sha256": "ddf6911643a2829c4c33ac0c6e541d8b0286c7982fdc2343a0627543b002b438"
+        },
+        {
+          "path": "public/assets/icons/ui/circle-alert.svg",
+          "bytes": 8108,
+          "sha256": "27f5ab9972579ae7692b2cf8b035b698e92813bc0162c63d5cc9ffd7ca37e9be"
+        },
+        {
+          "path": "public/assets/icons/ui/circle-check.svg",
+          "bytes": 8054,
+          "sha256": "84915e46f1a6606de54a5444e21611485565fa20c44228ba8231075280ebdf78"
+        },
+        {
+          "path": "public/assets/icons/ui/circle-dashed.svg",
+          "bytes": 8366,
+          "sha256": "9b2bd459fae0b0a0c2b5706824df21e57753837283d41ab519525c76d49669cc"
+        },
+        {
+          "path": "public/assets/icons/ui/circle-help.svg",
+          "bytes": 8098,
+          "sha256": "469ccbcf57af7d277d596b131a8cdb81d3f6daf7d416e83265efe8f751bd4e7e"
+        },
+        {
+          "path": "public/assets/icons/ui/circle-x.svg",
+          "bytes": 8069,
+          "sha256": "c555e105e98e2357ef4e13ccff157f0a9d019d980888726e1631bfe7d175cf86"
+        },
+        {
+          "path": "public/assets/icons/ui/clipboard-check.svg",
+          "bytes": 8159,
+          "sha256": "9e811aadf24b11fe6a8fab8b5f23a2dd5753f11b9117fb341adfcd7188e41b84"
+        },
+        {
+          "path": "public/assets/icons/ui/clipboard-list.svg",
+          "bytes": 8228,
+          "sha256": "60d587caf2245749bb164a07771a2c6ff8d767f68cc1c120ae039406433495bd"
+        },
+        {
+          "path": "public/assets/icons/ui/clock.svg",
+          "bytes": 8047,
+          "sha256": "806b89fec070dea1cbdeb35026b0883cf921469a1fed801d6da77ba2f2848de4"
+        },
+        {
+          "path": "public/assets/icons/ui/copy.svg",
+          "bytes": 8115,
+          "sha256": "3509ef7a8c087d17c4288377ce4e185e0b995f6b8d5a474559d315ad739a3f36"
+        },
+        {
+          "path": "public/assets/icons/ui/download.svg",
+          "bytes": 8094,
+          "sha256": "9794ecee189f482083b7081a30d85ee45e8b86d0c0d33cca68c87c5b56cd49ab"
+        },
+        {
+          "path": "public/assets/icons/ui/droplets.svg",
+          "bytes": 8248,
+          "sha256": "f29e0503acaf7054f91d3585bda62a1b0c87d63a66b24b67017f1280417568f2"
+        },
+        {
+          "path": "public/assets/icons/ui/ellipsis.svg",
+          "bytes": 8088,
+          "sha256": "e0c834b85bdc2a7742f9ef842f2410cc311045327f91017a2ebd3cd529f29190"
+        },
+        {
+          "path": "public/assets/icons/ui/external-link.svg",
+          "bytes": 8108,
+          "sha256": "e2e167a4a55440637257f46eac670a7c2b643a0826ff79ae577ca49625e2ea7f"
+        },
+        {
+          "path": "public/assets/icons/ui/eye-off.svg",
+          "bytes": 8280,
+          "sha256": "360c097894baef4f99bdfb96bed2268b9c935da5c683162f2ced92fd8b9ae365"
+        },
+        {
+          "path": "public/assets/icons/ui/eye.svg",
+          "bytes": 8136,
+          "sha256": "f6f803185dacbf4990969de37c8b21a3accb2b85e26ff0e0920fb3311768628a"
+        },
+        {
+          "path": "public/assets/icons/ui/file-text.svg",
+          "bytes": 8220,
+          "sha256": "05457e18d7278a6a6323e44ed4e4f2615a034c0e107d936da1d265c7ed129d05"
+        },
+        {
+          "path": "public/assets/icons/ui/folder-open.svg",
+          "bytes": 8177,
+          "sha256": "f4900cd8dab06665533d34b74fa2cf5c9f916e1e2c754fbc5e80b76495a6d6d7"
+        },
+        {
+          "path": "public/assets/icons/ui/globe.svg",
+          "bytes": 8107,
+          "sha256": "6fab0270f6181a17951db887985a68440be091d12871d9b0e91dc4ec383edaf3"
+        },
+        {
+          "path": "public/assets/icons/ui/graduation-cap.svg",
+          "bytes": 8188,
+          "sha256": "dbd535aa098e35c1d6b451769da51e62718810f8ecf8b2fd3d1faafdee44ae1b"
+        },
+        {
+          "path": "public/assets/icons/ui/hourglass.svg",
+          "bytes": 8208,
+          "sha256": "aa29cdb3af3387dadcb2c9e09d22f340ed7ec8f52b3266f0cb183854a2af1203"
+        },
+        {
+          "path": "public/assets/icons/ui/house.svg",
+          "bytes": 8159,
+          "sha256": "cca7372971b80a145e254a414cb40728a48bc7130258b8ffd34401d3164b4eb9"
+        },
+        {
+          "path": "public/assets/icons/ui/icons.json",
+          "bytes": 1940,
+          "sha256": "b8565aa11f86b7a3de24aed7aff9a7d25ea302ef06ac64bc166445dbfb56df3e"
+        },
+        {
+          "path": "public/assets/icons/ui/image.svg",
+          "bytes": 8134,
+          "sha256": "14af91d5c2232739fdfb19718235960ee353764948322265b7d040c74694bf07"
+        },
+        {
+          "path": "public/assets/icons/ui/info.svg",
+          "bytes": 8070,
+          "sha256": "023e6444c2819fda982c2ccc214749920b1da191a1b9e735ac3da3639fee8ea5"
+        },
+        {
+          "path": "public/assets/icons/ui/layout-grid.svg",
+          "bytes": 8192,
+          "sha256": "99f2f92b2dec8e7c345be0b5f077612254201cd76e401580da60704ef747de19"
+        },
+        {
+          "path": "public/assets/icons/ui/layout-list.svg",
+          "bytes": 8181,
+          "sha256": "8ec38bf3056425f78f19d5d00cab3b21172ff347ff549ed4d15dcf4f1816bafd"
+        },
+        {
+          "path": "public/assets/icons/ui/lightbulb.svg",
+          "bytes": 8147,
+          "sha256": "432311cc12d7e57682c07391b737d24185ffd4e3e5b44f7f916033ea8261a584"
+        },
+        {
+          "path": "public/assets/icons/ui/link.svg",
+          "bytes": 8135,
+          "sha256": "547a15ab876662a90fd36b45f67281a96448850601a82c4ad8a1857a7840632d"
+        },
+        {
+          "path": "public/assets/icons/ui/list-filter.svg",
+          "bytes": 8054,
+          "sha256": "e8108d58472e4731bca9041c40d7c3c8136c38abe5878ac71946457a1987e3d0"
+        },
+        {
+          "path": "public/assets/icons/ui/loader-circle.svg",
+          "bytes": 8027,
+          "sha256": "0e0d8a2b2d87265e9aed807575f6b49d950abffbe35b1c73db7b75fc5cd36da2"
+        },
+        {
+          "path": "public/assets/icons/ui/lock.svg",
+          "bytes": 8085,
+          "sha256": "8b554eec4f3e7a9c1cf5fe0b077324464cf5164a9bdc2ddd38d32e36ce4f457c"
+        },
+        {
+          "path": "public/assets/icons/ui/log-in.svg",
+          "bytes": 8095,
+          "sha256": "e2b38ed2c737736ea538888d3d9805478f981912b61c0e4ac6ca58d0f700bbf3"
+        },
+        {
+          "path": "public/assets/icons/ui/log-out.svg",
+          "bytes": 8093,
+          "sha256": "a06542ac1175b496334dbcd54579807aba16e5690c4add6b766ee0fcf41d34b9"
+        },
+        {
+          "path": "public/assets/icons/ui/mail.svg",
+          "bytes": 8092,
+          "sha256": "7c46dc2c21be4d27057a66c42d0cf9efce8d28cd494177f29a48ef05dbadf8f1"
+        },
+        {
+          "path": "public/assets/icons/ui/map-pin.svg",
+          "bytes": 8135,
+          "sha256": "f2e08bc380e5d151cb86c0e1af846f7e194f01fae3d7b809d144fe1a0f6e6686"
+        },
+        {
+          "path": "public/assets/icons/ui/map.svg",
+          "bytes": 8292,
+          "sha256": "af30acabe0377aacc3ac5553e0f3d678749f94beb82c89a347c5f3d555a06b2b"
+        },
+        {
+          "path": "public/assets/icons/ui/menu.svg",
+          "bytes": 8055,
+          "sha256": "aebb3c3d13631f7754505592a0a4d7241e8d3d58d754894f0fd7b514cc2d9de9"
+        },
+        {
+          "path": "public/assets/icons/ui/message-square-text.svg",
+          "bytes": 8184,
+          "sha256": "d265b9e7f53e3c08afc74d8d216a95c07e2af28e3106d5bfff33278a6b19ab10"
+        },
+        {
+          "path": "public/assets/icons/ui/pencil.svg",
+          "bytes": 8153,
+          "sha256": "34a72aa56c842e61796588d2722d4757377bf7ad010422f9d445e2e7a3ac94f9"
+        },
+        {
+          "path": "public/assets/icons/ui/phone.svg",
+          "bytes": 8213,
+          "sha256": "59e6a8fc8525c9c25f78b67a9ddc4596d4fcee0fb8551d2ae42d42598532d093"
+        },
+        {
+          "path": "public/assets/icons/ui/plus.svg",
+          "bytes": 8032,
+          "sha256": "dd1ad2d3f2b454982cbf12cec968dbce0625dc5ecedd540a435be555251a01c4"
+        },
+        {
+          "path": "public/assets/icons/ui/refresh-cw.svg",
+          "bytes": 8168,
+          "sha256": "31b58d01ff595f527bb828a807ee95e11d9abed5bb229056cab804eff5d04ea0"
+        },
+        {
+          "path": "public/assets/icons/ui/search.svg",
+          "bytes": 8051,
+          "sha256": "636a686573daba1838c0c035fa857d71e2b57a9d4038d6c8b5d283cb7d6cf49a"
+        },
+        {
+          "path": "public/assets/icons/ui/send.svg",
+          "bytes": 8169,
+          "sha256": "52a539b61ec25beced2f59f3bb0818a1203e0764ecad2ced74a207ad0668ef91"
+        },
+        {
+          "path": "public/assets/icons/ui/settings.svg",
+          "bytes": 8362,
+          "sha256": "938b5f71c9f674d1c9c96f9d9083104637f3bc955af5cb83ade6d50f3ac63436"
+        },
+        {
+          "path": "public/assets/icons/ui/shield-check.svg",
+          "bytes": 8191,
+          "sha256": "426239ac795fe83ff1541fcbf8fdf05cff21a332ad9d263d8a393758fd4c57c3"
+        },
+        {
+          "path": "public/assets/icons/ui/sprite.svg",
+          "bytes": 28324,
+          "sha256": "e6e3cc8fb79b026bcecdab2835260a1cc9b0aa03d27301f2b747b9d809715094"
+        },
+        {
+          "path": "public/assets/icons/ui/sprout.svg",
+          "bytes": 8173,
+          "sha256": "342363f6bc1ac58e404d6bf461794856cf13cd2f4476d5dbbc60517f8b95b5e6"
+        },
+        {
+          "path": "public/assets/icons/ui/target.svg",
+          "bytes": 8090,
+          "sha256": "6515db2f3348dd3d109550c9400c59ec01a50054f20757ea84556a539f37af4a"
+        },
+        {
+          "path": "public/assets/icons/ui/trash-2.svg",
+          "bytes": 8165,
+          "sha256": "0e97acd35d813d3ed9bb2f958136e958dcfde0e2c2551c9bbe5a1df4adb6018e"
+        },
+        {
+          "path": "public/assets/icons/ui/triangle-alert.svg",
+          "bytes": 8121,
+          "sha256": "3d1ca8f7c76e648a781a6455ca96458106552156fa76cd6a13103a570b9108bf"
+        },
+        {
+          "path": "public/assets/icons/ui/upload.svg",
+          "bytes": 8094,
+          "sha256": "fa469b5438c3eeef0d9d75732bbfaad97f1af4906c71d62a7630bdb5cb2b1267"
+        },
+        {
+          "path": "public/assets/icons/ui/user-check.svg",
+          "bytes": 8104,
+          "sha256": "1807931cccb167d900daab4498748c58dd229e171d27b841238a3612ec83a093"
+        },
+        {
+          "path": "public/assets/icons/ui/user-plus.svg",
+          "bytes": 8159,
+          "sha256": "0c9a4ccf1c188367d91867a3cbb07afa1f940ad060a18cf5e2ceb44148bb5907"
+        },
+        {
+          "path": "public/assets/icons/ui/user.svg",
+          "bytes": 8075,
+          "sha256": "284fe5baba6a273086986a08d36fa4482afbbdefbf43548a5deff328053bea03"
+        },
+        {
+          "path": "public/assets/icons/ui/users.svg",
+          "bytes": 8159,
+          "sha256": "db70f100554c0d40f2f401bef2d090e2084f4aae8f9a6a13797c6a58b89ebc26"
+        },
+        {
+          "path": "public/assets/icons/ui/x.svg",
+          "bytes": 8036,
+          "sha256": "ad99fd7c34418e68d70ce2538376821268d34de1827b7263ec1ec177d23c9766"
+        }
+      ]
+    },
+    {
+      "id": "font-plus-jakarta-sans",
+      "kind": "open-source-font",
+      "creator": "The Plus Jakarta Sans Project Authors (Tokotype)",
+      "license": "SIL Open Font License 1.1 (OFL.txt)",
+      "source": "@fontsource-variable/plus-jakarta-sans (npm), from google/fonts",
+      "source_url": "https://github.com/tokotype/PlusJakartaSans",
+      "files": [
+        {
+          "path": "public/assets/fonts/plus-jakarta-sans/OFL.txt",
+          "bytes": 4534,
+          "sha256": "e07fd1167c2aaaa6fb965dd66e1e73b13c9c95b76b2d648b6e938780f30b37af"
+        },
+        {
+          "path": "public/assets/fonts/plus-jakarta-sans/PlusJakartaSans-latin-ext-wght.woff2",
+          "bytes": 21728,
+          "sha256": "38e3b8fd8045048eb311d90170a4429ed2c8f405852dc3d91b5af8452758703f"
+        },
+        {
+          "path": "public/assets/fonts/plus-jakarta-sans/PlusJakartaSans-latin-wght.woff2",
+          "bytes": 27348,
+          "sha256": "153fc85b70298beeb1d61a5f723331649e7f23bb77302a66e61cb3e2fbdb5e79"
+        }
+      ]
+    },
+    {
+      "id": "font-source-serif-4",
+      "kind": "open-source-font",
+      "creator": "Adobe Systems Incorporated (Source Serif 4)",
+      "license": "SIL Open Font License 1.1 (OFL.txt)",
+      "source": "@fontsource-variable/source-serif-4 (npm), from google/fonts",
+      "source_url": "https://fonts.google.com/specimen/Source+Serif+4",
+      "files": [
+        {
+          "path": "public/assets/fonts/source-serif-4/OFL.txt",
+          "bytes": 4314,
+          "sha256": "18aabf190848725e2576eefb5c29ba06aac1029d02132252a7f312eac2e50cf3"
+        },
+        {
+          "path": "public/assets/fonts/source-serif-4/SourceSerif4-latin-wght.woff2",
+          "bytes": 50936,
+          "sha256": "382475f38242c52d42a3e5ff8dc69b5d73f10d0d21e4550b5fe232984688779a"
+        }
+      ]
+    },
+    {
+      "id": "css",
+      "kind": "original-code",
+      "creator": "Student Go design",
+      "license": "Original work created for Student Go in this design (no third-party rights).",
+      "files": [
+        {
+          "path": "resources/css/student-go/components.css",
+          "bytes": 17189,
+          "sha256": "8a4604afee15b505c49ff6e23118f41c0876f59ab60494032b3c488175010452"
+        },
+        {
+          "path": "resources/css/student-go/fonts.css",
+          "bytes": 2146,
+          "sha256": "7a60e8704f3978a56604fc3aa945a267e38c5cb58646dbb5d8499cbd3bde4d63"
+        },
+        {
+          "path": "resources/css/student-go/tokens.css",
+          "bytes": 7867,
+          "sha256": "95da8e793d23fb2eba49c5d8a574b0f10517f965ee512ec2f6ba2ac2082bac51"
+        }
+      ]
+    },
+    {
+      "id": "scripts",
+      "kind": "original-code",
+      "creator": "Student Go design",
+      "license": "Original work created for Student Go in this design (no third-party rights).",
+      "files": [
+        {
+          "path": "scripts/fetch-photos.php",
+          "bytes": 17174,
+          "sha256": "4e08517c2eead3ae24d115cebbe955a57016744404d603db875ede25f29d00d0"
+        },
+        {
+          "path": "scripts/fetch-photos.sh",
+          "bytes": 345,
+          "sha256": "6e67d556dde71f536f6d889140cc28170ce1fef872cabf517b8584c9802a0972"
+        }
+      ]
+    },
+    {
+      "id": "photo-catalog",
+      "kind": "data",
+      "creator": "Student Go design",
+      "license": "Original work created for Student Go in this design (no third-party rights).",
+      "notes": "One record per photograph; each was opened on its own source page. Held-back items and reasons are in the same file.",
+      "files": [
+        {
+          "path": "docs/photo-catalog.json",
+          "bytes": 72377,
+          "sha256": "54365c9e411c09869048f74cacb337d3fcc93055dda9c975ee6237438e9169f6"
+        }
+      ]
+    }
+  ],
+  "photos": [
+    {
+      "local_path": "public/assets/photography/homepage/purwojati-banyumas-rice-fields.webp",
+      "status": "license verified on source page; not yet downloaded; visual review pending",
+      "source": "Unsplash",
+      "source_url": "https://unsplash.com/photos/WClKJ2cW99Y",
+      "title": "Peaceful Green Rice Fields in Purwojati Village, Banyumas",
+      "creator": "Mufid Majnun",
+      "creator_url": "https://unsplash.com/@mufidpwt",
+      "license": "Unsplash License",
+      "license_url": "https://unsplash.com/license",
+      "attribution_required": false,
+      "attribution_courtesy": "Foto: Mufid Majnun / Unsplash",
+      "location_per_source_page": "Purwojati Village, Banyumas, Indonesia",
+      "download_urls": [
+        "https://images.unsplash.com/photo-1737772425116-ee0fe724ed98?fm=jpg&q=85&w=2400",
+        "https://unsplash.com/photos/WClKJ2cW99Y/download?force=true"
+      ],
+      "people_per_source_page": "unknown",
+      "notes": "Landscape; no people expected (confirm visually)."
+    },
+    {
+      "local_path": "public/assets/photography/homepage/flooded-rice-paddies-farmers-aerial.webp",
+      "status": "license verified on source page; not yet downloaded; visual review pending",
+      "source": "Unsplash",
+      "source_url": "https://unsplash.com/photos/farmers-working-in-flooded-rice-paddies-surrounded-by-palm-trees-azdSLacrFMA",
+      "title": "Farmers working in flooded rice paddies surrounded by palm trees",
+      "creator": "Jan Hildebrand",
+      "creator_url": "https://unsplash.com/@hildi_",
+      "license": "Unsplash License",
+      "license_url": "https://unsplash.com/license",
+      "attribution_required": false,
+      "attribution_courtesy": "Foto: Jan Hildebrand / Unsplash",
+      "location_per_source_page": "Indonesia (page lists 'Indonesien')",
+      "download_urls": [
+        "https://images.unsplash.com/photo-1778582622087-7f871700a376?fm=jpg&q=85&w=2400",
+        "https://unsplash.com/photos/azdSLacrFMA/download?force=true"
+      ],
+      "people_per_source_page": "unknown",
+      "notes": "Drone view; published 2026-05-12."
+    },
+    {
+      "local_path": "public/assets/photography/about/jatiluwih-bali-rice-planting.webp",
+      "status": "license verified on source page; not yet downloaded; visual review pending",
+      "source": "Unsplash",
+      "source_url": "https://unsplash.com/photos/person-planting-rice-on-field-during-daytime-I-8e7wx2hao",
+      "title": "person planting rice on field during daytime",
+      "creator": "Shayan Ghiasvand",
+      "creator_url": "https://unsplash.com/@shayangh96",
+      "license": "Unsplash License",
+      "license_url": "https://unsplash.com/license",
+      "attribution_required": false,
+      "attribution_courtesy": "Foto: Shayan Ghiasvand / Unsplash",
+      "location_per_source_page": "Jatiluwih Rice Terraces, Tabanan Regency, Bali, Indonesia",
+      "download_urls": [
+        "https://images.unsplash.com/photo-1572908721147-0a9eb395762d?fm=jpg&q=85&w=2400",
+        "https://unsplash.com/photos/I-8e7wx2hao/download?force=true"
+      ],
+      "people_per_source_page": "unknown",
+      "notes": "Whether the person is identifiable cannot be determined from the page text; check the image."
+    },
+    {
+      "local_path": "public/assets/photography/about/aceh-rice-field-farmer.webp",
+      "status": "license verified on source page; not yet downloaded; visual review pending",
+      "source": "Unsplash",
+      "source_url": "https://unsplash.com/photos/person-farming-on-rice-field-a7n65pmnJ4Q",
+      "title": "person farming on rice field",
+      "creator": "Sandy Zebua",
+      "creator_url": "https://unsplash.com/@sandyzebua",
+      "license": "Unsplash License",
+      "license_url": "https://unsplash.com/license",
+      "attribution_required": false,
+      "attribution_courtesy": "Foto: Sandy Zebua / Unsplash",
+      "location_per_source_page": "Aceh, Indonesia",
+      "download_urls": [
+        "https://images.unsplash.com/photo-1520052203542-d3095f1b6cf0?fm=jpg&q=85&w=2400",
+        "https://unsplash.com/photos/a7n65pmnJ4Q/download?force=true"
+      ],
+      "people_per_source_page": "unknown",
+      "notes": "Whether the person is identifiable cannot be determined from the page text; check the image."
+    },
+    {
+      "local_path": "public/assets/photography/about/pati-farmers-breakfast-in-field.webp",
+      "status": "license verified on source page; not yet downloaded; visual review pending",
+      "source": "Unsplash",
+      "source_url": "https://unsplash.com/photos/a-group-of-women-sitting-in-a-field-W8_OxCsSuHg",
+      "title": "a group of women sitting in a field (caption: 'Sarapan')",
+      "creator": "Redicul Pict",
+      "creator_url": "https://unsplash.com/@rdcl",
+      "license": "Unsplash License",
+      "license_url": "https://unsplash.com/license",
+      "attribution_required": false,
+      "attribution_courtesy": "Foto: Redicul Pict / Unsplash",
+      "location_per_source_page": "Pohijo, Pati Regency, Central Java, Indonesia",
+      "download_urls": [
+        "https://images.unsplash.com/photo-1662099892237-2d71585b3012?fm=jpg&q=85&w=2400",
+        "https://unsplash.com/photos/W8_OxCsSuHg/download?force=true"
+      ],
+      "people_per_source_page": "unknown",
+      "notes": "Caption on source page: farmers having breakfast in the fields while planting rice. Page heading and caption differ slightly on who is shown; check the image."
+    },
+    {
+      "local_path": "public/assets/photography/about/tegalwaru-west-java-aerial-rice-fields.webp",
+      "status": "license verified on source page; not yet downloaded; visual review pending",
+      "source": "Pexels",
+      "source_url": "https://www.pexels.com/photo/2015589",
+      "title": "Aerial View of Landscape",
+      "creator": "Tom Fisk",
+      "creator_url": "https://www.pexels.com/@tomfisk/",
+      "license": "Pexels License",
+      "license_url": "https://www.pexels.com/license/",
+      "attribution_required": false,
+      "attribution_courtesy": "Foto: Tom Fisk / Pexels",
+      "location_per_source_page": "Tegalwaru, Jawa Barat, Indonesia",
+      "download_urls": [
+        "https://images.pexels.com/photos/2015589/pexels-photo-2015589.jpeg?auto=compress&cs=tinysrgb&w=2400",
+        "https://images.pexels.com/photos/2015589/pexels-photo-2015589.jpeg?cs=srgb&dl=pexels-tomfisk-2015589.jpg&fm=jpg"
+      ],
+      "people_per_source_page": "unknown",
+      "notes": "Source image 5496x7200 (portrait); crop intentionally. Creator profile URL is inferred from the download filename (tomfisk); confirm on the page."
+    },
+    {
+      "local_path": "public/assets/photography/library/komunitas/jawa-barat-community-park-cleanup.webp",
+      "status": "license verified on source page; not yet downloaded; visual review pending",
+      "source": "Pexels",
+      "source_url": "https://www.pexels.com/photo/community-cleanup-effort-in-jawa-barat-37595624/",
+      "title": "Community Cleanup Effort in Jawa Barat",
+      "creator": "May umaran",
+      "creator_url": "https://www.pexels.com/@may-umaran-2157785843/",
+      "license": "Pexels License",
+      "license_url": "https://www.pexels.com/license/",
+      "attribution_required": false,
+      "attribution_courtesy": "Foto: May umaran / Pexels",
+      "location_per_source_page": "Jawa Barat, Indonesia",
+      "download_urls": [
+        "https://images.pexels.com/photos/37595624/pexels-photo-37595624.jpeg?auto=compress&cs=tinysrgb&w=2400",
+        "https://images.pexels.com/photos/37595624/pexels-photo-37595624.jpeg?cs=srgb&dl=pexels-may-umaran-2157785843-37595624.jpg&fm=jpg"
+      ],
+      "people_per_source_page": "unknown",
+      "notes": ""
+    },
+    {
+      "local_path": "public/assets/photography/library/pesisir/ntb-mangrove-reforestation-volunteer.webp",
+      "status": "license verified on source page; not yet downloaded; visual review pending",
+      "source": "Pexels",
+      "source_url": "https://www.pexels.com/photo/man-volunteering-in-mangrove-reforestation-35623102/",
+      "title": "Man Volunteering in Mangrove Reforestation",
+      "creator": "ADollarForCoral",
+      "creator_url": "https://www.pexels.com/@adollarforcoral-2158729554/",
+      "license": "Pexels License",
+      "license_url": "https://www.pexels.com/license/",
+      "attribution_required": false,
+      "attribution_courtesy": "Foto: ADollarForCoral / Pexels",
+      "location_per_source_page": "Nusa Tenggara Barat, Indonesia",
+      "download_urls": [
+        "https://images.pexels.com/photos/35623102/pexels-photo-35623102.jpeg?auto=compress&cs=tinysrgb&w=2400",
+        "https://images.pexels.com/photos/35623102/pexels-photo-35623102.jpeg?cs=srgb&dl=pexels-adollarforcoral-2158729554-35623102.jpg&fm=jpg"
+      ],
+      "people_per_source_page": "one",
+      "notes": "Page keyword tags do not match the photo; ignore them."
+    },
+    {
+      "local_path": "public/assets/photography/library/pesisir/jawa-barat-planting-mangroves-adult-and-child.webp",
+      "status": "license verified on source page; not yet downloaded; visual review pending",
+      "source": "Pexels",
+      "source_url": "https://www.pexels.com/photo/father-and-son-planting-mangroves-in-indonesia-35861397/",
+      "title": "Father and Son Planting Mangroves in Indonesia",
+      "creator": "Noel Snpr",
+      "creator_url": "https://www.pexels.com/@noel-snpr-2148726663/",
+      "license": "Pexels License",
+      "license_url": "https://www.pexels.com/license/",
+      "attribution_required": false,
+      "attribution_courtesy": "Foto: Noel Snpr / Pexels",
+      "location_per_source_page": "Jawa Barat, Indonesia",
+      "download_urls": [
+        "https://images.pexels.com/photos/35861397/pexels-photo-35861397.jpeg?auto=compress&cs=tinysrgb&w=2400",
+        "https://images.pexels.com/photos/35861397/pexels-photo-35861397.jpeg?cs=srgb&dl=pexels-noel-snpr-2148726663-35861397.jpg&fm=jpg"
+      ],
+      "people_per_source_page": "minors",
+      "notes": "A child is pictured. Do not use as a testimonial or ad; keep out of prominent placements."
+    },
+    {
+      "local_path": "public/assets/photography/library/pendidikan/pandeglang-classroom-teacher-and-students.webp",
+      "status": "license verified on source page; not yet downloaded; visual review pending",
+      "source": "Pexels",
+      "source_url": "https://www.pexels.com/photo/indonesian-classroom-scene-with-teacher-and-students-35548841/",
+      "title": "Indonesian Classroom Scene with Teacher and Students",
+      "creator": "el jusuf",
+      "creator_url": "https://www.pexels.com/@pamanjoe/",
+      "license": "Pexels License",
+      "license_url": "https://www.pexels.com/license/",
+      "attribution_required": false,
+      "attribution_courtesy": "Foto: el jusuf / Pexels",
+      "location_per_source_page": "Pandeglang, Banten, Indonesia",
+      "download_urls": [
+        "https://images.pexels.com/photos/35548841/pexels-photo-35548841.jpeg?auto=compress&cs=tinysrgb&w=2400",
+        "https://images.pexels.com/photos/35548841/pexels-photo-35548841.jpeg?cs=srgb&dl=pexels-pamanjoe-35548841.jpg&fm=jpg"
+      ],
+      "people_per_source_page": "minors",
+      "notes": "School pupils are pictured. Do not imply they endorse Student Go."
+    },
+    {
+      "local_path": "public/assets/photography/library/pendidikan/pandeglang-classroom-lesson.webp",
+      "status": "license verified on source page; not yet downloaded; visual review pending",
+      "source": "Pexels",
+      "source_url": "https://www.pexels.com/photo/indonesian-classroom-with-students-and-teacher-35548842/",
+      "title": "Indonesian Classroom with Students and Teacher",
+      "creator": "el jusuf",
+      "creator_url": "https://www.pexels.com/@pamanjoe/",
+      "license": "Pexels License",
+      "license_url": "https://www.pexels.com/license/",
+      "attribution_required": false,
+      "attribution_courtesy": "Foto: el jusuf / Pexels",
+      "location_per_source_page": "Pandeglang, Banten, Indonesia",
+      "download_urls": [
+        "https://images.pexels.com/photos/35548842/pexels-photo-35548842.jpeg?auto=compress&cs=tinysrgb&w=2400",
+        "https://images.pexels.com/photos/35548842/pexels-photo-35548842.jpeg?cs=srgb&dl=pexels-pamanjoe-35548842.jpg&fm=jpg"
+      ],
+      "people_per_source_page": "minors",
+      "notes": "School pupils are pictured. Do not imply they endorse Student Go."
+    },
+    {
+      "local_path": "public/assets/photography/library/pendidikan/pandeglang-students-learning.webp",
+      "status": "license verified on source page; not yet downloaded; visual review pending",
+      "source": "Pexels",
+      "source_url": "https://www.pexels.com/photo/students-learning-in-a-classroom-in-indonesia-35548840/",
+      "title": "Students Learning in a Classroom in Indonesia",
+      "creator": "el jusuf",
+      "creator_url": "https://www.pexels.com/@pamanjoe/",
+      "license": "Pexels License",
+      "license_url": "https://www.pexels.com/license/",
+      "attribution_required": false,
+      "attribution_courtesy": "Foto: el jusuf / Pexels",
+      "location_per_source_page": "Pandeglang, Banten, Indonesia",
+      "download_urls": [
+        "https://images.pexels.com/photos/35548840/pexels-photo-35548840.jpeg?auto=compress&cs=tinysrgb&w=2400",
+        "https://images.pexels.com/photos/35548840/pexels-photo-35548840.jpeg?cs=srgb&dl=pexels-pamanjoe-35548840.jpg&fm=jpg"
+      ],
+      "people_per_source_page": "minors",
+      "notes": "School pupils are pictured. Do not imply they endorse Student Go."
+    },
+    {
+      "local_path": "public/assets/photography/library/pendidikan/yogyakarta-graduate-in-university-corridor.webp",
+      "status": "license verified on source page; not yet downloaded; visual review pending",
+      "source": "Pexels",
+      "source_url": "https://www.pexels.com/photo/southeast-asian-graduate-smiling-in-corridor-33767807/",
+      "title": "Southeast Asian Graduate Smiling in Corridor",
+      "creator": "Yazid N",
+      "creator_url": "https://www.pexels.com/@mzynasx/",
+      "license": "Pexels License",
+      "license_url": "https://www.pexels.com/license/",
+      "attribution_required": false,
+      "attribution_courtesy": "Foto: Yazid N / Pexels",
+      "location_per_source_page": "Yogyakarta, Indonesia",
+      "download_urls": [
+        "https://images.pexels.com/photos/33767807/pexels-photo-33767807.jpeg?auto=compress&cs=tinysrgb&w=2400",
+        "https://images.pexels.com/photos/33767807/pexels-photo-33767807.jpeg?cs=srgb&dl=pexels-mzynasx-33767807.jpg&fm=jpg"
+      ],
+      "people_per_source_page": "one",
+      "notes": "Photographer asks for credit on the page; the courtesy line below already gives it. Identifiable person."
+    },
+    {
+      "local_path": "public/assets/photography/library/pertanian/central-java-farmer-terraced-fields.webp",
+      "status": "license verified on source page; not yet downloaded; visual review pending",
+      "source": "Pexels",
+      "source_url": "https://www.pexels.com/photo/farmer-working-in-central-java-agricultural-fields-34033925/",
+      "title": "Farmer Working in Central Java Agricultural Fields",
+      "creator": "Ruyat Supriazi",
+      "creator_url": "https://www.pexels.com/@ruyat-supriazi-2154700906/",
+      "license": "Pexels License",
+      "license_url": "https://www.pexels.com/license/",
+      "attribution_required": false,
+      "attribution_courtesy": "Foto: Ruyat Supriazi / Pexels",
+      "location_per_source_page": "Central Java, Indonesia",
+      "download_urls": [
+        "https://images.pexels.com/photos/34033925/pexels-photo-34033925.jpeg?auto=compress&cs=tinysrgb&w=2400",
+        "https://images.pexels.com/photos/34033925/pexels-photo-34033925.jpeg?cs=srgb&dl=pexels-ruyat-supriazi-2154700906-34033925.jpg&fm=jpg"
+      ],
+      "people_per_source_page": "one",
+      "notes": ""
+    },
+    {
+      "local_path": "public/assets/photography/library/pertanian/west-java-elderly-farmers-harvest-rice.webp",
+      "status": "license verified on source page; not yet downloaded; visual review pending",
+      "source": "Pexels",
+      "source_url": "https://www.pexels.com/photo/farmers-harvesting-rice-in-west-java-field-33691398/",
+      "title": "Farmers Harvesting Rice in West Java Field",
+      "creator": "Ruyat Supriazi",
+      "creator_url": "https://www.pexels.com/@ruyat-supriazi-2154700906/",
+      "license": "Pexels License",
+      "license_url": "https://www.pexels.com/license/",
+      "attribution_required": false,
+      "attribution_courtesy": "Foto: Ruyat Supriazi / Pexels",
+      "location_per_source_page": "West Java, Indonesia",
+      "download_urls": [
+        "https://images.pexels.com/photos/33691398/pexels-photo-33691398.jpeg?auto=compress&cs=tinysrgb&w=2400",
+        "https://images.pexels.com/photos/33691398/pexels-photo-33691398.jpeg?cs=srgb&dl=pexels-ruyat-supriazi-2154700906-33691398.jpg&fm=jpg"
+      ],
+      "people_per_source_page": "adults",
+      "notes": ""
+    },
+    {
+      "local_path": "public/assets/photography/library/pertanian/yogyakarta-farmer-planting-rice.webp",
+      "status": "license verified on source page; not yet downloaded; visual review pending",
+      "source": "Pexels",
+      "source_url": "https://www.pexels.com/photo/indonesian-farmer-planting-rice-in-jogja-field-35544010/",
+      "title": "Indonesian Farmer Planting Rice in Jogja Field",
+      "creator": "Suryo Patriandito",
+      "creator_url": "https://www.pexels.com/@suryo-patriandito-2158032438/",
+      "license": "Pexels License",
+      "license_url": "https://www.pexels.com/license/",
+      "attribution_required": false,
+      "attribution_courtesy": "Foto: Suryo Patriandito / Pexels",
+      "location_per_source_page": "Yogyakarta, Indonesia",
+      "download_urls": [
+        "https://images.pexels.com/photos/35544010/pexels-photo-35544010.jpeg?auto=compress&cs=tinysrgb&w=2400",
+        "https://images.pexels.com/photos/35544010/pexels-photo-35544010.jpeg?cs=srgb&dl=pexels-suryo-patriandito-2158032438-35544010.jpg&fm=jpg"
+      ],
+      "people_per_source_page": "one",
+      "notes": ""
+    },
+    {
+      "local_path": "public/assets/photography/library/pertanian/bali-aerial-tractor-plowing-rice-field.webp",
+      "status": "license verified on source page; not yet downloaded; visual review pending",
+      "source": "Pexels",
+      "source_url": "https://www.pexels.com/photo/aerial-view-of-farmer-plowing-rice-field-in-bali-35343779/",
+      "title": "Aerial View of Farmer Plowing Rice Field in Bali",
+      "creator": "Tom Fisk",
+      "creator_url": "https://www.pexels.com/@tomfisk/",
+      "license": "Pexels License",
+      "license_url": "https://www.pexels.com/license/",
+      "attribution_required": false,
+      "attribution_courtesy": "Foto: Tom Fisk / Pexels",
+      "location_per_source_page": "Bali, Indonesia",
+      "download_urls": [
+        "https://images.pexels.com/photos/35343779/pexels-photo-35343779.jpeg?auto=compress&cs=tinysrgb&w=2400",
+        "https://images.pexels.com/photos/35343779/pexels-photo-35343779.jpeg?cs=srgb&dl=pexels-tomfisk-35343779.jpg&fm=jpg"
+      ],
+      "people_per_source_page": "one",
+      "notes": ""
+    },
+    {
+      "local_path": "public/assets/photography/library/pertanian/bali-farmers-picking-chili.webp",
+      "status": "license verified on source page; not yet downloaded; visual review pending",
+      "source": "Pexels",
+      "source_url": "https://www.pexels.com/photo/farmers-picking-chili-in-a-farm-12470180/",
+      "title": "Farmers harvesting chilis under sunny skies in Bali",
+      "creator": "Danang DKW",
+      "creator_url": "https://www.pexels.com/@danangdkw/",
+      "license": "Pexels License",
+      "license_url": "https://www.pexels.com/license/",
+      "attribution_required": false,
+      "attribution_courtesy": "Foto: Danang DKW / Pexels",
+      "location_per_source_page": "Bali, Indonesia",
+      "download_urls": [
+        "https://images.pexels.com/photos/12470180/pexels-photo-12470180.jpeg?auto=compress&cs=tinysrgb&w=2400",
+        "https://images.pexels.com/photos/12470180/pexels-photo-12470180.jpeg?cs=srgb&dl=pexels-danangdkw-12470180.jpg&fm=jpg"
+      ],
+      "people_per_source_page": "adults",
+      "notes": ""
+    },
+    {
+      "local_path": "public/assets/photography/library/pertanian/tomohon-cabbage-field-farmers.webp",
+      "status": "license verified on source page; not yet downloaded; visual review pending",
+      "source": "Pexels",
+      "source_url": "https://www.pexels.com/photo/woman-working-on-rural-field-16560054/",
+      "title": "Woman Working on Rural Field",
+      "creator": "Ronny Buol",
+      "creator_url": "https://www.pexels.com/@ronnybuol/",
+      "license": "Pexels License",
+      "license_url": "https://www.pexels.com/license/",
+      "attribution_required": false,
+      "attribution_courtesy": "Foto: Ronny Buol / Pexels",
+      "location_per_source_page": "Tomohon, North Sulawesi, Indonesia",
+      "download_urls": [
+        "https://images.pexels.com/photos/16560054/pexels-photo-16560054.jpeg?auto=compress&cs=tinysrgb&w=2400",
+        "https://images.pexels.com/photos/16560054/pexels-photo-16560054.jpeg?cs=srgb&dl=pexels-ronnybuol-16560054.jpg&fm=jpg"
+      ],
+      "people_per_source_page": "adults",
+      "notes": ""
+    },
+    {
+      "local_path": "public/assets/photography/library/pertanian/tangerang-farmers-packing-vegetables.webp",
+      "status": "license verified on source page; not yet downloaded; visual review pending",
+      "source": "Pexels",
+      "source_url": "https://www.pexels.com/photo/farmers-working-on-field-26690966/",
+      "title": "Farmers Working on Field",
+      "creator": "Deden R",
+      "creator_url": "https://www.pexels.com/@ddnrs/",
+      "license": "Pexels License",
+      "license_url": "https://www.pexels.com/license/",
+      "attribution_required": false,
+      "attribution_courtesy": "Foto: Deden R / Pexels",
+      "location_per_source_page": "Tangerang, Banten, Indonesia",
+      "download_urls": [
+        "https://images.pexels.com/photos/26690966/pexels-photo-26690966.jpeg?auto=compress&cs=tinysrgb&w=2400",
+        "https://images.pexels.com/photos/26690966/pexels-photo-26690966.jpeg?cs=srgb&dl=pexels-ddnrs-26690966.jpg&fm=jpg"
+      ],
+      "people_per_source_page": "adults",
+      "notes": ""
+    },
+    {
+      "local_path": "public/assets/photography/library/pertanian/east-java-woman-harvesting-tobacco.webp",
+      "status": "license verified on source page; not yet downloaded; visual review pending",
+      "source": "Pexels",
+      "source_url": "https://www.pexels.com/photo/traditional-farming-in-east-java-with-tobacco-plants-30733459/",
+      "title": "Traditional Farming in East Java with Tobacco Plants",
+      "creator": "setengah lima sore",
+      "creator_url": "https://www.pexels.com/@setengah-lima-sore-1061582751/",
+      "license": "Pexels License",
+      "license_url": "https://www.pexels.com/license/",
+      "attribution_required": false,
+      "attribution_courtesy": "Foto: setengah lima sore / Pexels",
+      "location_per_source_page": "East Java, Indonesia",
+      "download_urls": [
+        "https://images.pexels.com/photos/30733459/pexels-photo-30733459.jpeg?auto=compress&cs=tinysrgb&w=2400",
+        "https://images.pexels.com/photos/30733459/pexels-photo-30733459.jpeg?cs=srgb&dl=pexels-setengah-lima-sore-1061582751-30733459.jpg&fm=jpg"
+      ],
+      "people_per_source_page": "one",
+      "notes": ""
+    },
+    {
+      "local_path": "public/assets/photography/library/pertanian/west-java-drone-cropland-near-forest.webp",
+      "status": "license verified on source page; not yet downloaded; visual review pending",
+      "source": "Pexels",
+      "source_url": "https://www.pexels.com/photo/groomed-paddy-plantation-near-tropical-forest-in-sunlight-6135322/",
+      "title": "Groomed paddy plantation near tropical forest in sunlight",
+      "creator": "Tom Fisk",
+      "creator_url": "https://www.pexels.com/@tomfisk/",
+      "license": "Pexels License",
+      "license_url": "https://www.pexels.com/license/",
+      "attribution_required": false,
+      "attribution_courtesy": "Foto: Tom Fisk / Pexels",
+      "location_per_source_page": "West Java, Indonesia",
+      "download_urls": [
+        "https://images.pexels.com/photos/6135322/pexels-photo-6135322.jpeg?auto=compress&cs=tinysrgb&w=2400",
+        "https://images.pexels.com/photos/6135322/pexels-photo-6135322.jpeg?cs=srgb&dl=pexels-tomfisk-6135322.jpg&fm=jpg"
+      ],
+      "people_per_source_page": "none",
+      "notes": "Page description calls the crop a banana plantation; the title says paddy."
+    },
+    {
+      "local_path": "public/assets/photography/library/pertanian/bali-rice-terraces-lone-farmer.webp",
+      "status": "license verified on source page; not yet downloaded; visual review pending",
+      "source": "Pexels",
+      "source_url": "https://www.pexels.com/photo/serene-rice-terraces-of-bali-indonesia-29989220/",
+      "title": "Serene Rice Terraces of Bali, Indonesia",
+      "creator": "Stijn Dijkstra",
+      "creator_url": "https://www.pexels.com/@stijn-dijkstra-1306815/",
+      "license": "Pexels License",
+      "license_url": "https://www.pexels.com/license/",
+      "attribution_required": false,
+      "attribution_courtesy": "Foto: Stijn Dijkstra / Pexels",
+      "location_per_source_page": "Bali, Indonesia",
+      "download_urls": [
+        "https://images.pexels.com/photos/29989220/pexels-photo-29989220.jpeg?auto=compress&cs=tinysrgb&w=2400",
+        "https://images.pexels.com/photos/29989220/pexels-photo-29989220.jpeg?cs=srgb&dl=pexels-stijn-dijkstra-1306815-29989220.jpg&fm=jpg"
+      ],
+      "people_per_source_page": "one",
+      "notes": ""
+    },
+    {
+      "local_path": "public/assets/photography/homepage/bengkulu-aerial-rice-terraces-sunset.webp",
+      "status": "license verified on source page; not yet downloaded; visual review pending",
+      "source": "Pexels",
+      "source_url": "https://www.pexels.com/photo/aerial-view-of-lush-rice-terraces-in-bengkulu-39072482/",
+      "title": "Aerial View of Lush Rice Terraces in Bengkulu",
+      "creator": "Rahmad Himawan",
+      "creator_url": "https://www.pexels.com/@rahmadhimawan/",
+      "license": "Pexels License",
+      "license_url": "https://www.pexels.com/license/",
+      "attribution_required": false,
+      "attribution_courtesy": "Foto: Rahmad Himawan / Pexels",
+      "location_per_source_page": "Bengkulu, Indonesia",
+      "download_urls": [
+        "https://images.pexels.com/photos/39072482/pexels-photo-39072482.jpeg?auto=compress&cs=tinysrgb&w=2400",
+        "https://images.pexels.com/photos/39072482/pexels-photo-39072482.jpeg?cs=srgb&dl=pexels-rahmadhimawan-39072482.jpg&fm=jpg"
+      ],
+      "people_per_source_page": "none",
+      "notes": ""
+    },
+    {
+      "local_path": "public/assets/photography/library/pertanian/central-java-farmer-casting-net-in-paddy.webp",
+      "status": "license verified on source page; not yet downloaded; visual review pending",
+      "source": "Pexels",
+      "source_url": "https://www.pexels.com/photo/indonesian-farmer-casting-fish-net-in-rice-field-34514243/",
+      "title": "Indonesian Farmer Casting Fish Net in Rice Field",
+      "creator": "Found GHI",
+      "creator_url": "https://www.pexels.com/@found-ghi-2156772983/",
+      "license": "Pexels License",
+      "license_url": "https://www.pexels.com/license/",
+      "attribution_required": false,
+      "attribution_courtesy": "Foto: Found GHI / Pexels",
+      "location_per_source_page": "Central Java, Indonesia",
+      "download_urls": [
+        "https://images.pexels.com/photos/34514243/pexels-photo-34514243.jpeg?auto=compress&cs=tinysrgb&w=2400",
+        "https://images.pexels.com/photos/34514243/pexels-photo-34514243.jpeg?cs=srgb&dl=pexels-found-ghi-2156772983-34514243.jpg&fm=jpg"
+      ],
+      "people_per_source_page": "one",
+      "notes": ""
+    },
+    {
+      "local_path": "public/assets/photography/library/pesisir/west-java-fisherman-mending-nets.webp",
+      "status": "license verified on source page; not yet downloaded; visual review pending",
+      "source": "Pexels",
+      "source_url": "https://www.pexels.com/photo/indonesian-fisherman-repairing-fishing-nets-at-harbor-37805453/",
+      "title": "Indonesian Fisherman Repairing Fishing Nets at Harbor",
+      "creator": "kevin yung",
+      "creator_url": "https://www.pexels.com/@kevin-yung-2152346613/",
+      "license": "Pexels License",
+      "license_url": "https://www.pexels.com/license/",
+      "attribution_required": false,
+      "attribution_courtesy": "Foto: kevin yung / Pexels",
+      "location_per_source_page": "West Java, Indonesia",
+      "download_urls": [
+        "https://images.pexels.com/photos/37805453/pexels-photo-37805453.jpeg?auto=compress&cs=tinysrgb&w=2400",
+        "https://images.pexels.com/photos/37805453/pexels-photo-37805453.jpeg?cs=srgb&dl=pexels-kevin-yung-2152346613-37805453.jpg&fm=jpg"
+      ],
+      "people_per_source_page": "one",
+      "notes": ""
+    },
+    {
+      "local_path": "public/assets/photography/library/pesisir/phinisi-boats-in-harbor.webp",
+      "status": "license verified on source page; not yet downloaded; visual review pending",
+      "source": "Pexels",
+      "source_url": "https://www.pexels.com/photo/traditional-phinisi-boats-in-harbor-with-fisherman-36341641/",
+      "title": "Traditional Phinisi Boats in Harbor with Fisherman",
+      "creator": "Jeffry Surianto",
+      "creator_url": "https://www.pexels.com/@andromeda99/",
+      "license": "Pexels License",
+      "license_url": "https://www.pexels.com/license/",
+      "attribution_required": false,
+      "attribution_courtesy": "Foto: Jeffry Surianto / Pexels",
+      "location_per_source_page": "Indonesia (no finer location on page)",
+      "download_urls": [
+        "https://images.pexels.com/photos/36341641/pexels-photo-36341641.jpeg?auto=compress&cs=tinysrgb&w=2400",
+        "https://images.pexels.com/photos/36341641/pexels-photo-36341641.jpeg?cs=srgb&dl=pexels-andromeda99-36341641.jpg&fm=jpg"
+      ],
+      "people_per_source_page": "one",
+      "notes": ""
+    },
+    {
+      "local_path": "public/assets/photography/library/pesisir/bangka-belitung-fisherman-casting-net-sunrise.webp",
+      "status": "license verified on source page; not yet downloaded; visual review pending",
+      "source": "Pexels",
+      "source_url": "https://www.pexels.com/photo/fisherman-at-sunrise-in-bangka-belitung-islands-37606547/",
+      "title": "Fisherman at Sunrise in Bangka Belitung Islands",
+      "creator": "Faris Munandar",
+      "creator_url": "https://www.pexels.com/@fmphotograph/",
+      "license": "Pexels License",
+      "license_url": "https://www.pexels.com/license/",
+      "attribution_required": false,
+      "attribution_courtesy": "Foto: Faris Munandar / Pexels",
+      "location_per_source_page": "Bangka Belitung Islands, Indonesia",
+      "download_urls": [
+        "https://images.pexels.com/photos/37606547/pexels-photo-37606547.jpeg?auto=compress&cs=tinysrgb&w=2400",
+        "https://images.pexels.com/photos/37606547/pexels-photo-37606547.jpeg?cs=srgb&dl=pexels-fmphotograph-37606547.jpg&fm=jpg"
+      ],
+      "people_per_source_page": "one",
+      "notes": ""
+    },
+    {
+      "local_path": "public/assets/photography/library/pesisir/west-sumatra-fisherman-net-from-canoe.webp",
+      "status": "license verified on source page; not yet downloaded; visual review pending",
+      "source": "Pexels",
+      "source_url": "https://www.pexels.com/photo/traditional-fishing-in-west-sumatra-indonesia-37891877/",
+      "title": "Traditional Fishing in West Sumatra, Indonesia",
+      "creator": "sumarno sumarno",
+      "creator_url": "https://www.pexels.com/@sumarno-sumarno-2161431466/",
+      "license": "Pexels License",
+      "license_url": "https://www.pexels.com/license/",
+      "attribution_required": false,
+      "attribution_courtesy": "Foto: sumarno sumarno / Pexels",
+      "location_per_source_page": "West Sumatra, Indonesia",
+      "download_urls": [
+        "https://images.pexels.com/photos/37891877/pexels-photo-37891877.jpeg?auto=compress&cs=tinysrgb&w=2400",
+        "https://images.pexels.com/photos/37891877/pexels-photo-37891877.jpeg?cs=srgb&dl=pexels-sumarno-sumarno-2161431466-37891877.jpg&fm=jpg"
+      ],
+      "people_per_source_page": "one",
+      "notes": ""
+    },
+    {
+      "local_path": "public/assets/photography/library/pasar/jakarta-fish-market-sorting.webp",
+      "status": "license verified on source page; not yet downloaded; visual review pending",
+      "source": "Pexels",
+      "source_url": "https://www.pexels.com/photo/fish-market-scene-in-jakarta-indonesia-38252858/",
+      "title": "Fish Market Scene in Jakarta, Indonesia",
+      "creator": "Andri Wijayanto",
+      "creator_url": "https://www.pexels.com/@andri-wijayanto-2162120540/",
+      "license": "Pexels License",
+      "license_url": "https://www.pexels.com/license/",
+      "attribution_required": false,
+      "attribution_courtesy": "Foto: Andri Wijayanto / Pexels",
+      "location_per_source_page": "Jakarta, Indonesia",
+      "download_urls": [
+        "https://images.pexels.com/photos/38252858/pexels-photo-38252858.jpeg?auto=compress&cs=tinysrgb&w=2400",
+        "https://images.pexels.com/photos/38252858/pexels-photo-38252858.jpeg?cs=srgb&dl=pexels-andri-wijayanto-2162120540-38252858.jpg&fm=jpg"
+      ],
+      "people_per_source_page": "one",
+      "notes": ""
+    },
+    {
+      "local_path": "public/assets/photography/library/pasar/ntb-fish-market.webp",
+      "status": "license verified on source page; not yet downloaded; visual review pending",
+      "source": "Pexels",
+      "source_url": "https://www.pexels.com/photo/bustling-fish-market-in-west-nusa-tenggara-37024065/",
+      "title": "Bustling Fish Market in West Nusa Tenggara",
+      "creator": "Fahry Samalewa",
+      "creator_url": "https://www.pexels.com/@fahry-samalewa-2389454/",
+      "license": "Pexels License",
+      "license_url": "https://www.pexels.com/license/",
+      "attribution_required": false,
+      "attribution_courtesy": "Foto: Fahry Samalewa / Pexels",
+      "location_per_source_page": "West Nusa Tenggara, Indonesia",
+      "download_urls": [
+        "https://images.pexels.com/photos/37024065/pexels-photo-37024065.jpeg?auto=compress&cs=tinysrgb&w=2400",
+        "https://images.pexels.com/photos/37024065/pexels-photo-37024065.jpeg?cs=srgb&dl=pexels-fahry-samalewa-2389454-37024065.jpg&fm=jpg"
+      ],
+      "people_per_source_page": "unknown",
+      "notes": ""
+    },
+    {
+      "local_path": "public/assets/photography/library/pasar/flores-local-market.webp",
+      "status": "license verified on source page; not yet downloaded; visual review pending",
+      "source": "Pexels",
+      "source_url": "https://www.pexels.com/photo/vibrant-local-market-scene-in-flores-indonesia-32054310/",
+      "title": "Vibrant Local Market Scene in Flores, Indonesia",
+      "creator": "Smaart",
+      "creator_url": "https://www.pexels.com/@smaart-343619394/",
+      "license": "Pexels License",
+      "license_url": "https://www.pexels.com/license/",
+      "attribution_required": false,
+      "attribution_courtesy": "Foto: Smaart / Pexels",
+      "location_per_source_page": "Flores, Indonesia",
+      "download_urls": [
+        "https://images.pexels.com/photos/32054310/pexels-photo-32054310.jpeg?auto=compress&cs=tinysrgb&w=2400",
+        "https://images.pexels.com/photos/32054310/pexels-photo-32054310.jpeg?cs=srgb&dl=pexels-smaart-343619394-32054310.jpg&fm=jpg"
+      ],
+      "people_per_source_page": "unknown",
+      "notes": ""
+    },
+    {
+      "local_path": "public/assets/photography/library/pasar/banjarmasin-floating-market.webp",
+      "status": "license verified on source page; not yet downloaded; visual review pending",
+      "source": "Pexels",
+      "source_url": "https://www.pexels.com/photo/traditional-floating-market-in-banjarmasin-38289584/",
+      "title": "Traditional Floating Market in Banjarmasin",
+      "creator": "muhammad djasmail",
+      "creator_url": "https://www.pexels.com/@muhammad-djasmail-2159583776/",
+      "license": "Pexels License",
+      "license_url": "https://www.pexels.com/license/",
+      "attribution_required": false,
+      "attribution_courtesy": "Foto: muhammad djasmail / Pexels",
+      "location_per_source_page": "Banjarmasin, South Kalimantan, Indonesia",
+      "download_urls": [
+        "https://images.pexels.com/photos/38289584/pexels-photo-38289584.jpeg?auto=compress&cs=tinysrgb&w=2400",
+        "https://images.pexels.com/photos/38289584/pexels-photo-38289584.jpeg?cs=srgb&dl=pexels-muhammad-djasmail-2159583776-38289584.jpg&fm=jpg"
+      ],
+      "people_per_source_page": "adults",
+      "notes": ""
+    },
+    {
+      "local_path": "public/assets/photography/library/pasar/west-java-traditional-market.webp",
+      "status": "license verified on source page; not yet downloaded; visual review pending",
+      "source": "Pexels",
+      "source_url": "https://www.pexels.com/photo/vibrant-traditional-market-in-west-java-indonesia-28572618/",
+      "title": "Vibrant Traditional Market in West Java, Indonesia",
+      "creator": "TaZe",
+      "creator_url": "https://www.pexels.com/@taze-1342414269/",
+      "license": "Pexels License",
+      "license_url": "https://www.pexels.com/license/",
+      "attribution_required": false,
+      "attribution_courtesy": "Foto: TaZe / Pexels",
+      "location_per_source_page": "West Java, Indonesia",
+      "download_urls": [
+        "https://images.pexels.com/photos/28572618/pexels-photo-28572618.jpeg?auto=compress&cs=tinysrgb&w=2400",
+        "https://images.pexels.com/photos/28572618/pexels-photo-28572618.jpeg?cs=srgb&dl=pexels-taze-1342414269-28572618.jpg&fm=jpg"
+      ],
+      "people_per_source_page": "unknown",
+      "notes": ""
+    },
+    {
+      "local_path": "public/assets/photography/library/pasar/pontianak-women-selling-at-market.webp",
+      "status": "license verified on source page; not yet downloaded; visual review pending",
+      "source": "Pexels",
+      "source_url": "https://www.pexels.com/photo/women-selling-food-at-the-market-27109736/",
+      "title": "Women Selling Food at the Market",
+      "creator": "Rizky Rianto",
+      "creator_url": "https://www.pexels.com/@rizky-rianto-1515216241/",
+      "license": "Pexels License",
+      "license_url": "https://www.pexels.com/license/",
+      "attribution_required": false,
+      "attribution_courtesy": "Foto: Rizky Rianto / Pexels",
+      "location_per_source_page": "Pontianak, Kalimantan Barat, Indonesia",
+      "download_urls": [
+        "https://images.pexels.com/photos/27109736/pexels-photo-27109736.jpeg?auto=compress&cs=tinysrgb&w=2400",
+        "https://images.pexels.com/photos/27109736/pexels-photo-27109736.jpeg?cs=srgb&dl=pexels-rizky-rianto-1515216241-27109736.jpg&fm=jpg"
+      ],
+      "people_per_source_page": "adults",
+      "notes": ""
+    },
+    {
+      "local_path": "public/assets/photography/library/pasar/banten-elderly-women-at-market.webp",
+      "status": "license verified on source page; not yet downloaded; visual review pending",
+      "source": "Pexels",
+      "source_url": "https://www.pexels.com/photo/elderly-women-sitting-on-ground-together-4454063/",
+      "title": "Elderly Women Sitting on Ground Together",
+      "creator": "Tom Fisk",
+      "creator_url": "https://www.pexels.com/@tomfisk/",
+      "license": "Pexels License",
+      "license_url": "https://www.pexels.com/license/",
+      "attribution_required": false,
+      "attribution_courtesy": "Foto: Tom Fisk / Pexels",
+      "location_per_source_page": "Banten, Indonesia",
+      "download_urls": [
+        "https://images.pexels.com/photos/4454063/pexels-photo-4454063.jpeg?auto=compress&cs=tinysrgb&w=2400",
+        "https://images.pexels.com/photos/4454063/pexels-photo-4454063.jpeg?cs=srgb&dl=pexels-tomfisk-4454063.jpg&fm=jpg"
+      ],
+      "people_per_source_page": "adults",
+      "notes": ""
+    },
+    {
+      "local_path": "public/assets/photography/library/pasar/banten-street-market-shoppers.webp",
+      "status": "license verified on source page; not yet downloaded; visual review pending",
+      "source": "Pexels",
+      "source_url": "https://www.pexels.com/photo/people-with-shopping-bags-walking-around-a-street-market-4454060/",
+      "title": "People with Shopping Bags Walking around a Street Market",
+      "creator": "Tom Fisk",
+      "creator_url": "https://www.pexels.com/@tomfisk/",
+      "license": "Pexels License",
+      "license_url": "https://www.pexels.com/license/",
+      "attribution_required": false,
+      "attribution_courtesy": "Foto: Tom Fisk / Pexels",
+      "location_per_source_page": "Banten, Indonesia",
+      "download_urls": [
+        "https://images.pexels.com/photos/4454060/pexels-photo-4454060.jpeg?auto=compress&cs=tinysrgb&w=2400",
+        "https://images.pexels.com/photos/4454060/pexels-photo-4454060.jpeg?cs=srgb&dl=pexels-tomfisk-4454060.jpg&fm=jpg"
+      ],
+      "people_per_source_page": "adults",
+      "notes": ""
+    },
+    {
+      "local_path": "public/assets/photography/library/pendidikan/high-school-students-in-classroom.webp",
+      "status": "license verified on source page; not yet downloaded; visual review pending",
+      "source": "Pexels",
+      "source_url": "https://www.pexels.com/photo/indonesian-high-school-students-in-classroom-35865718/",
+      "title": "Indonesian High School Students in Classroom",
+      "creator": "Airlangga Jati",
+      "creator_url": "https://www.pexels.com/@airlangga/",
+      "license": "Pexels License",
+      "license_url": "https://www.pexels.com/license/",
+      "attribution_required": false,
+      "attribution_courtesy": "Foto: Airlangga Jati / Pexels",
+      "location_per_source_page": "Indonesia (no finer location on page)",
+      "download_urls": [
+        "https://images.pexels.com/photos/35865718/pexels-photo-35865718.jpeg?auto=compress&cs=tinysrgb&w=2400",
+        "https://images.pexels.com/photos/35865718/pexels-photo-35865718.jpeg?cs=srgb&dl=pexels-airlangga-35865718.jpg&fm=jpg"
+      ],
+      "people_per_source_page": "minors",
+      "notes": "School pupils are pictured. Do not imply they endorse Student Go."
+    },
+    {
+      "local_path": "public/assets/photography/library/pendidikan/jawa-barat-student-with-tablet-on-campus.webp",
+      "status": "license verified on source page; not yet downloaded; visual review pending",
+      "source": "Pexels",
+      "source_url": "https://www.pexels.com/photo/young-adult-holding-tablet-in-campus-setting-outdoors-40551009/",
+      "title": "Young Adult Holding Tablet in Campus Setting Outdoors",
+      "creator": "Irma Sjachlan",
+      "creator_url": "https://www.pexels.com/@irma-sjachlan-2157444897/",
+      "license": "Pexels License",
+      "license_url": "https://www.pexels.com/license/",
+      "attribution_required": false,
+      "attribution_courtesy": "Foto: Irma Sjachlan / Pexels",
+      "location_per_source_page": "Jawa Barat, Indonesia",
+      "download_urls": [
+        "https://images.pexels.com/photos/40551009/pexels-photo-40551009.jpeg?auto=compress&cs=tinysrgb&w=2400",
+        "https://images.pexels.com/photos/40551009/pexels-photo-40551009.jpeg?cs=srgb&dl=pexels-irma-sjachlan-2157444897-40551009.jpg&fm=jpg"
+      ],
+      "people_per_source_page": "one",
+      "notes": "Identifiable person."
+    },
+    {
+      "local_path": "public/assets/photography/homepage/maluku-islands-aerial.webp",
+      "status": "license verified on source page; not yet downloaded; visual review pending",
+      "source": "Pexels",
+      "source_url": "https://www.pexels.com/photo/aerial-view-of-maluku-islands-22305144/",
+      "title": "Aerial View of Maluku Islands",
+      "creator": "Danny Hollander",
+      "creator_url": "https://www.pexels.com/@danny-hollander-532626220/",
+      "license": "Pexels License",
+      "license_url": "https://www.pexels.com/license/",
+      "attribution_required": false,
+      "attribution_courtesy": "Foto: Danny Hollander / Pexels",
+      "location_per_source_page": "Maluku Islands, Indonesia",
+      "download_urls": [
+        "https://images.pexels.com/photos/22305144/pexels-photo-22305144.jpeg?auto=compress&cs=tinysrgb&w=2400",
+        "https://images.pexels.com/photos/22305144/pexels-photo-22305144.jpeg?cs=srgb&dl=pexels-danny-hollander-532626220-22305144.jpg&fm=jpg"
+      ],
+      "people_per_source_page": "none",
+      "notes": ""
+    },
+    {
+      "local_path": "public/assets/photography/library/pesisir/banda-neira-woman-drying-fish.webp",
+      "status": "license verified on source page; not yet downloaded; visual review pending",
+      "source": "Pexels",
+      "source_url": "https://www.pexels.com/photo/traditional-fish-drying-in-banda-neira-indonesia-31949631/",
+      "title": "Traditional Fish Drying in Banda Neira, Indonesia",
+      "creator": "Zainal Lakembe",
+      "creator_url": "https://www.pexels.com/@zainal-lakembe-2149585068/",
+      "license": "Pexels License",
+      "license_url": "https://www.pexels.com/license/",
+      "attribution_required": false,
+      "attribution_courtesy": "Foto: Zainal Lakembe / Pexels",
+      "location_per_source_page": "Banda Neira, Maluku, Indonesia",
+      "download_urls": [
+        "https://images.pexels.com/photos/31949631/pexels-photo-31949631.jpeg?auto=compress&cs=tinysrgb&w=2400",
+        "https://images.pexels.com/photos/31949631/pexels-photo-31949631.jpeg?cs=srgb&dl=pexels-zainal-lakembe-2149585068-31949631.jpg&fm=jpg"
+      ],
+      "people_per_source_page": "one",
+      "notes": ""
+    },
+    {
+      "local_path": "public/assets/photography/library/pesisir/north-maluku-boats-on-beach-aerial.webp",
+      "status": "license verified on source page; not yet downloaded; visual review pending",
+      "source": "Pexels",
+      "source_url": "https://www.pexels.com/photo/aerial-view-of-boats-on-tropical-beach-in-indonesia-38463229/",
+      "title": "Aerial View of Boats on Tropical Beach in Indonesia",
+      "creator": "Rizky Arief Imanullah",
+      "creator_url": "https://www.pexels.com/@r12kyarief/",
+      "license": "Pexels License",
+      "license_url": "https://www.pexels.com/license/",
+      "attribution_required": false,
+      "attribution_courtesy": "Foto: Rizky Arief Imanullah / Pexels",
+      "location_per_source_page": "North Maluku, Indonesia",
+      "download_urls": [
+        "https://images.pexels.com/photos/38463229/pexels-photo-38463229.jpeg?auto=compress&cs=tinysrgb&w=2400",
+        "https://images.pexels.com/photos/38463229/pexels-photo-38463229.jpeg?cs=srgb&dl=pexels-r12kyarief-38463229.jpg&fm=jpg"
+      ],
+      "people_per_source_page": "none",
+      "notes": ""
+    },
+    {
+      "local_path": "public/assets/photography/library/desa/waigeo-barat-coastal-huts-aerial.webp",
+      "status": "license verified on source page; not yet downloaded; visual review pending",
+      "source": "Pexels",
+      "source_url": "https://www.pexels.com/photo/wooden-sheds-on-tropical-sea-coast-19758798/",
+      "title": "Wooden Sheds on Tropical Sea Coast",
+      "creator": "Melson Dreams",
+      "creator_url": "https://www.pexels.com/@melson-dreams-349386037/",
+      "license": "Pexels License",
+      "license_url": "https://www.pexels.com/license/",
+      "attribution_required": false,
+      "attribution_courtesy": "Foto: Melson Dreams / Pexels",
+      "location_per_source_page": "Waigeo Barat Kepulauan, West Papua, Indonesia",
+      "download_urls": [
+        "https://images.pexels.com/photos/19758798/pexels-photo-19758798.jpeg?auto=compress&cs=tinysrgb&w=2400",
+        "https://images.pexels.com/photos/19758798/pexels-photo-19758798.jpeg?cs=srgb&dl=pexels-melson-dreams-349386037-19758798.jpg&fm=jpg"
+      ],
+      "people_per_source_page": "none",
+      "notes": ""
+    },
+    {
+      "local_path": "public/assets/photography/library/desa/papua-harbor-boats-and-locals.webp",
+      "status": "license verified on source page; not yet downloaded; visual review pending",
+      "source": "Pexels",
+      "source_url": "https://www.pexels.com/photo/bustling-harbor-scene-in-papua-indonesia-32344943/",
+      "title": "Bustling Harbor Scene in Papua, Indonesia",
+      "creator": "ria via",
+      "creator_url": "https://www.pexels.com/@ria-via-2152711206/",
+      "license": "Pexels License",
+      "license_url": "https://www.pexels.com/license/",
+      "attribution_required": false,
+      "attribution_courtesy": "Foto: ria via / Pexels",
+      "location_per_source_page": "Papua, Indonesia",
+      "download_urls": [
+        "https://images.pexels.com/photos/32344943/pexels-photo-32344943.jpeg?auto=compress&cs=tinysrgb&w=2400",
+        "https://images.pexels.com/photos/32344943/pexels-photo-32344943.jpeg?cs=srgb&dl=pexels-ria-via-2152711206-32344943.jpg&fm=jpg"
+      ],
+      "people_per_source_page": "unknown",
+      "notes": ""
+    },
+    {
+      "local_path": "public/assets/photography/library/desa/papua-island-landscape.webp",
+      "status": "license verified on source page; not yet downloaded; visual review pending",
+      "source": "Pexels",
+      "source_url": "https://www.pexels.com/photo/serene-island-scenery-in-papua-indonesia-32507843/",
+      "title": "Serene Island Scenery in Papua, Indonesia",
+      "creator": "Adiardi Zulfansyah",
+      "creator_url": "https://www.pexels.com/@adiardizulfansyah/",
+      "license": "Pexels License",
+      "license_url": "https://www.pexels.com/license/",
+      "attribution_required": false,
+      "attribution_courtesy": "Foto: Adiardi Zulfansyah / Pexels",
+      "location_per_source_page": "Papua, Indonesia",
+      "download_urls": [
+        "https://images.pexels.com/photos/32507843/pexels-photo-32507843.jpeg?auto=compress&cs=tinysrgb&w=2400",
+        "https://images.pexels.com/photos/32507843/pexels-photo-32507843.jpeg?cs=srgb&dl=pexels-adiardizulfansyah-32507843.jpg&fm=jpg"
+      ],
+      "people_per_source_page": "none",
+      "notes": ""
+    },
+    {
+      "local_path": "public/assets/photography/library/desa/southeast-sulawesi-stilt-houses-by-river.webp",
+      "status": "license verified on source page; not yet downloaded; visual review pending",
+      "source": "Pexels",
+      "source_url": "https://www.pexels.com/photo/tranquil-waterfront-scene-in-south-east-sulawesi-30187266/",
+      "title": "Tranquil Waterfront Scene in South East Sulawesi",
+      "creator": "Albar Buton",
+      "creator_url": "https://www.pexels.com/@albar-buton-939228963/",
+      "license": "Pexels License",
+      "license_url": "https://www.pexels.com/license/",
+      "attribution_required": false,
+      "attribution_courtesy": "Foto: Albar Buton / Pexels",
+      "location_per_source_page": "South East Sulawesi, Indonesia",
+      "download_urls": [
+        "https://images.pexels.com/photos/30187266/pexels-photo-30187266.jpeg?auto=compress&cs=tinysrgb&w=2400",
+        "https://images.pexels.com/photos/30187266/pexels-photo-30187266.jpeg?cs=srgb&dl=pexels-albar-buton-939228963-30187266.jpg&fm=jpg"
+      ],
+      "people_per_source_page": "none",
+      "notes": ""
+    },
+    {
+      "local_path": "public/assets/photography/homepage/cirebon-aerial-village-red-roofs.webp",
+      "status": "license verified on source page; not yet downloaded; visual review pending",
+      "source": "Unsplash",
+      "source_url": "https://unsplash.com/photos/an-aerial-view-of-a-village-with-red-roofs-6MCcHDmGra4",
+      "title": "an aerial view of a village with red roofs",
+      "creator": "Mujib",
+      "creator_url": "https://unsplash.com/@mujibanget",
+      "license": "Unsplash License",
+      "license_url": "https://unsplash.com/license",
+      "attribution_required": false,
+      "attribution_courtesy": "Foto: Mujib / Unsplash",
+      "location_per_source_page": "Ciledug, Cirebon, West Java, Indonesia",
+      "download_urls": [
+        "https://images.unsplash.com/photo-1716731049987-c5ec344a9c80?fm=jpg&q=85&w=2400",
+        "https://unsplash.com/photos/6MCcHDmGra4/download?force=true"
+      ],
+      "people_per_source_page": "none",
+      "notes": ""
+    },
+    {
+      "local_path": "public/assets/photography/library/desa/penglipuran-village-path.webp",
+      "status": "license verified on source page; not yet downloaded; visual review pending",
+      "source": "Unsplash",
+      "source_url": "https://unsplash.com/photos/a-long-narrow-path-between-two-buildings-in-a-village-pziaKacFYkw",
+      "title": "a long narrow path between two buildings in a village",
+      "creator": "satria setiawan",
+      "creator_url": "https://unsplash.com/@satriaesetiawan",
+      "license": "Unsplash License",
+      "license_url": "https://unsplash.com/license",
+      "attribution_required": false,
+      "attribution_courtesy": "Foto: satria setiawan / Unsplash",
+      "location_per_source_page": "Desa Penglipuran, Bangli Regency, Bali, Indonesia",
+      "download_urls": [
+        "https://images.unsplash.com/photo-1671080749889-19f8a69deb2b?fm=jpg&q=85&w=2400",
+        "https://unsplash.com/photos/pziaKacFYkw/download?force=true"
+      ],
+      "people_per_source_page": "unknown",
+      "notes": ""
+    },
+    {
+      "local_path": "public/assets/photography/library/desa/rural-road-house-and-mountain.webp",
+      "status": "license verified on source page; not yet downloaded; visual review pending",
+      "source": "Unsplash",
+      "source_url": "https://unsplash.com/photos/a-rural-road-with-a-house-and-a-mountain-in-the-background-4r1WzVLfYWI",
+      "title": "a rural road with a house and a mountain in the background",
+      "creator": "Ahmad Hasan Hariri",
+      "creator_url": "https://unsplash.com/@ahasanhariri",
+      "license": "Unsplash License",
+      "license_url": "https://unsplash.com/license",
+      "attribution_required": false,
+      "attribution_courtesy": "Foto: Ahmad Hasan Hariri / Unsplash",
+      "location_per_source_page": "Indonesia (no finer location on page)",
+      "download_urls": [
+        "https://images.unsplash.com/photo-1696819646359-5d77448b0d3b?fm=jpg&q=85&w=2400",
+        "https://unsplash.com/photos/4r1WzVLfYWI/download?force=true"
+      ],
+      "people_per_source_page": "unknown",
+      "notes": ""
+    },
+    {
+      "local_path": "public/assets/photography/homepage/kutai-kartanegara-aerial-town-and-river.webp",
+      "status": "license verified on source page; not yet downloaded; visual review pending",
+      "source": "Unsplash",
+      "source_url": "https://unsplash.com/photos/aerial-view-of-a-town-muddy-river-and-lush-forest-2KMngfLtLKY",
+      "title": "Aerial view of a town, muddy river, and lush forest",
+      "creator": "Fiqih Alfarish",
+      "creator_url": "https://unsplash.com/@fiqihalfarish",
+      "license": "Unsplash License",
+      "license_url": "https://unsplash.com/license",
+      "attribution_required": false,
+      "attribution_courtesy": "Foto: Fiqih Alfarish / Unsplash",
+      "location_per_source_page": "Loa Kulu Kota, Kutai Kartanegara, East Kalimantan, Indonesia",
+      "download_urls": [
+        "https://images.unsplash.com/photo-1783998030087-ba5d6b4eabc8?fm=jpg&q=85&w=2400",
+        "https://unsplash.com/photos/2KMngfLtLKY/download?force=true"
+      ],
+      "people_per_source_page": "none",
+      "notes": ""
+    },
+    {
+      "local_path": "public/assets/photography/library/pertanian/sidemen-bali-rice-terraces-at-dawn.webp",
+      "status": "license verified on source page; not yet downloaded; visual review pending",
+      "source": "Unsplash",
+      "source_url": "https://unsplash.com/photos/person-walking-through-green-rice-terraces-7hww7t6NLcg",
+      "title": "A person walking through bright green rice terraces below a misty mountain at dawn",
+      "creator": "Geio Tischler",
+      "creator_url": "https://unsplash.com/@oww",
+      "license": "Unsplash License",
+      "license_url": "https://unsplash.com/license",
+      "attribution_required": false,
+      "attribution_courtesy": "Foto: Geio Tischler / Unsplash",
+      "location_per_source_page": "Sidemen, Bali, Indonesia (page: 'Mount Agung in the sunrise')",
+      "download_urls": [
+        "https://images.unsplash.com/photo-1558005530-a7958896ec60?fm=jpg&q=85&w=2400",
+        "https://unsplash.com/photos/7hww7t6NLcg/download?force=true"
+      ],
+      "people_per_source_page": "one",
+      "notes": ""
+    },
+    {
+      "local_path": "public/assets/photography/library/pertanian/bali-woman-working-in-rice-field.webp",
+      "status": "license verified on source page; not yet downloaded; visual review pending",
+      "source": "Unsplash",
+      "source_url": "https://unsplash.com/photos/a-woman-is-working-in-a-rice-field-Wft59e9QNhc",
+      "title": "a woman is working in a rice field",
+      "creator": "Deny Napitupulu",
+      "creator_url": "https://unsplash.com/@denynapitupulu",
+      "license": "Unsplash License",
+      "license_url": "https://unsplash.com/license",
+      "attribution_required": false,
+      "attribution_courtesy": "Foto: Deny Napitupulu / Unsplash",
+      "location_per_source_page": "Bali, Indonesia",
+      "download_urls": [
+        "https://images.unsplash.com/photo-1700906310080-65a7d9718929?fm=jpg&q=85&w=2400",
+        "https://unsplash.com/photos/Wft59e9QNhc/download?force=true"
+      ],
+      "people_per_source_page": "one",
+      "notes": "Page tags also mention a man; count unconfirmed."
+    },
+    {
+      "local_path": "public/assets/photography/library/pendidikan/universitas-indonesia-graduation-flags.webp",
+      "status": "license verified on source page; not yet downloaded; visual review pending",
+      "source": "Unsplash",
+      "source_url": "https://unsplash.com/photos/graduation-ceremony-with-flags-and-student-in-cap-kXCrTG_Ap_Q",
+      "title": "Graduation ceremony with flags and student in cap",
+      "creator": "Reyhan Aviseno",
+      "creator_url": "https://unsplash.com/@aavisenoo",
+      "license": "Unsplash License",
+      "license_url": "https://unsplash.com/license",
+      "attribution_required": false,
+      "attribution_courtesy": "Foto: Reyhan Aviseno / Unsplash",
+      "location_per_source_page": "Universitas Indonesia, Depok, West Java, Indonesia",
+      "download_urls": [
+        "https://images.unsplash.com/photo-1759328381007-64559a862aa6?fm=jpg&q=85&w=2400",
+        "https://unsplash.com/photos/kXCrTG_Ap_Q/download?force=true"
+      ],
+      "people_per_source_page": "one",
+      "notes": "Identifiable person."
+    },
+    {
+      "local_path": "public/assets/photography/library/pasar/surakarta-market-shoppers.webp",
+      "status": "license verified on source page; not yet downloaded; visual review pending",
+      "source": "Unsplash",
+      "source_url": "https://unsplash.com/photos/a-group-of-people-shopping-in-a-market-8vF5Kikv3RI",
+      "title": "a group of people shopping in a market",
+      "creator": "Prabu Panji",
+      "creator_url": "https://unsplash.com/@prabuuuuu",
+      "license": "Unsplash License",
+      "license_url": "https://unsplash.com/license",
+      "attribution_required": false,
+      "attribution_courtesy": "Foto: Prabu Panji / Unsplash",
+      "location_per_source_page": "Surakarta, Central Java, Indonesia",
+      "download_urls": [
+        "https://images.unsplash.com/photo-1642473194881-c7425b3789f1?fm=jpg&q=85&w=2400",
+        "https://unsplash.com/photos/8vF5Kikv3RI/download?force=true"
+      ],
+      "people_per_source_page": "adults",
+      "notes": ""
+    },
+    {
+      "local_path": "public/assets/photography/library/pendidikan/umy-graduates-in-red-gowns.webp",
+      "status": "license verified on source page; not yet downloaded; visual review pending",
+      "source": "Unsplash",
+      "source_url": "https://unsplash.com/photos/a-large-group-of-people-in-red-graduation-gowns-Zfee_GUBs_k",
+      "title": "A large group of people in red graduation gowns",
+      "creator": "Mardanafin",
+      "creator_url": "https://unsplash.com/@mardanafin",
+      "license": "Unsplash License",
+      "license_url": "https://unsplash.com/license",
+      "attribution_required": false,
+      "attribution_courtesy": "Foto: Mardanafin / Unsplash",
+      "location_per_source_page": "Universitas Muhammadiyah Yogyakarta, Bantul, DI Yogyakarta, Indonesia",
+      "download_urls": [
+        "https://images.unsplash.com/photo-1709029363815-f49bd2fa1dd6?fm=jpg&q=85&w=2400",
+        "https://unsplash.com/photos/Zfee_GUBs_k/download?force=true"
+      ],
+      "people_per_source_page": "adults",
+      "notes": ""
+    },
+    {
+      "local_path": "public/assets/photography/library/pesisir/gili-gede-mangroves-on-shore.webp",
+      "status": "license verified on source page; not yet downloaded; visual review pending",
+      "source": "Unsplash",
+      "source_url": "https://unsplash.com/photos/mangrove-trees-on-sandy-bay-shore-Sacec1fSDB4",
+      "title": "Mangrove trees with exposed roots on a sandy shore by a calm blue bay",
+      "creator": "Rowan Heuvel",
+      "creator_url": "https://unsplash.com/@insolitus",
+      "license": "Unsplash License",
+      "license_url": "https://unsplash.com/license",
+      "attribution_required": false,
+      "attribution_courtesy": "Foto: Rowan Heuvel / Unsplash",
+      "location_per_source_page": "Gili Gede, West Nusa Tenggara, Indonesia",
+      "download_urls": [
+        "https://images.unsplash.com/photo-1789300891383-018bbd9e7328?fm=jpg&q=85&w=2400",
+        "https://unsplash.com/photos/Sacec1fSDB4/download?force=true"
+      ],
+      "people_per_source_page": "none",
+      "notes": ""
+    },
+    {
+      "local_path": "public/assets/photography/library/pesisir/batam-beach-litter-in-tree-roots.webp",
+      "status": "license verified on source page; not yet downloaded; visual review pending",
+      "source": "Unsplash",
+      "source_url": "https://unsplash.com/photos/litter-is-tangled-in-the-roots-of-a-tree-umLdkZrAqXQ",
+      "title": "Litter is tangled in the roots of a tree",
+      "creator": "Carl Tronders",
+      "creator_url": "https://unsplash.com/@allvar",
+      "license": "Unsplash License",
+      "license_url": "https://unsplash.com/license",
+      "attribution_required": false,
+      "attribution_courtesy": "Foto: Carl Tronders / Unsplash",
+      "location_per_source_page": "Viovio Beach, Batam, Riau Islands, Indonesia",
+      "download_urls": [
+        "https://images.unsplash.com/photo-1746478622131-9ca889a8a7ce?fm=jpg&q=85&w=2400",
+        "https://unsplash.com/photos/umLdkZrAqXQ/download?force=true"
+      ],
+      "people_per_source_page": "none",
+      "notes": ""
+    },
+    {
+      "local_path": "public/assets/photography/library/pesisir/bontang-wooden-dock-and-mangroves.webp",
+      "status": "license verified on source page; not yet downloaded; visual review pending",
+      "source": "Unsplash",
+      "source_url": "https://unsplash.com/photos/brown-wooden-dock-on-lake-during-daytime-bE5OCKdC9Rw",
+      "title": "brown wooden dock on lake during daytime",
+      "creator": "Hanif Ramadhani",
+      "creator_url": "https://unsplash.com/@haniframadhani",
+      "license": "Unsplash License",
+      "license_url": "https://unsplash.com/license",
+      "attribution_required": false,
+      "attribution_courtesy": "Foto: Hanif Ramadhani / Unsplash",
+      "location_per_source_page": "Bontang, East Kalimantan, Indonesia",
+      "download_urls": [
+        "https://images.unsplash.com/photo-1625026709964-82551cfbfcd3?fm=jpg&q=85&w=2400",
+        "https://unsplash.com/photos/bE5OCKdC9Rw/download?force=true"
+      ],
+      "people_per_source_page": "none",
+      "notes": ""
+    },
+    {
+      "local_path": "public/assets/photography/library/pesisir/komodo-boats-on-water.webp",
+      "status": "license verified on source page; not yet downloaded; visual review pending",
+      "source": "Unsplash",
+      "source_url": "https://unsplash.com/photos/a-group-of-boats-floating-on-top-of-a-body-of-water-cT0nqZOlAME",
+      "title": "A group of boats floating on top of a body of water",
+      "creator": "Dhiemas Afif Febriyan",
+      "creator_url": "https://unsplash.com/@afebriyan",
+      "license": "Unsplash License",
+      "license_url": "https://unsplash.com/license",
+      "attribution_required": false,
+      "attribution_courtesy": "Foto: Dhiemas Afif Febriyan / Unsplash",
+      "location_per_source_page": "Komodo Island, West Manggarai, East Nusa Tenggara, Indonesia",
+      "download_urls": [
+        "https://images.unsplash.com/photo-1720059777516-97a4f858f778?fm=jpg&q=85&w=2400",
+        "https://unsplash.com/photos/cT0nqZOlAME/download?force=true"
+      ],
+      "people_per_source_page": "none",
+      "notes": ""
+    },
+    {
+      "local_path": "public/assets/photography/library/desa/kebumen-three-cyclists-across-field.webp",
+      "status": "license verified on source page; not yet downloaded; visual review pending",
+      "source": "Unsplash",
+      "source_url": "https://unsplash.com/photos/three-person-riding-bikes-on-green-grass-field-8o4W9LZv6eo",
+      "title": "Three person riding bikes on green grass field",
+      "creator": "Dikaseva",
+      "creator_url": "https://unsplash.com/@dikaseva",
+      "license": "Unsplash License",
+      "license_url": "https://unsplash.com/license",
+      "attribution_required": false,
+      "attribution_courtesy": "Foto: Dikaseva / Unsplash",
+      "location_per_source_page": "Kebumen, Central Java, Indonesia",
+      "download_urls": [
+        "https://images.unsplash.com/photo-1442544213729-6a15f1611937?fm=jpg&q=85&w=2400",
+        "https://unsplash.com/photos/8o4W9LZv6eo/download?force=true"
+      ],
+      "people_per_source_page": "adults",
+      "notes": ""
+    }
+  ]
+}
