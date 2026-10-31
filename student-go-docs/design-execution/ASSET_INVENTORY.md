@@ -1013,3 +1013,36 @@ No file under `public/` was added, deleted, overwritten, moved or renamed (gener
 | `icons/ui/sprite.svg` | B | **Reuse** (no icon added) | search, x, file-text, external-link, map-pin, arrow-right, check, circle-x + status icons |
 | Institution logos | user upload | **Retain** (same placement size as before; initials when no logo) | `x-ui.avatar`, decorative |
 | Space Grotesk link, inline `<style>` blocks, gradient image placeholders, `via.placeholder.com` fallback, emoji tips, `alert()`/`confirm()` of the old views | C | **Replaced** by shared components, Tailwind utilities on existing tokens, the sprite and `window.sgConfirm` | No CSS file added or changed |
+
+## 32. Phase 25 — company profile (2026-10-31)
+
+No file under `public/` was added, deleted, overwritten, moved or renamed (generated `public/build/` only). Usage decisions for `/company/profile` and `/company/profile/edit`:
+
+| Asset | Source | Decision | Where it is used now |
+|---|---|---|---|
+| `company-profile.jpg` (hero background) | A | **Deprecate (usage)** on `company/profile/index` and `company/profile/edit` | Standard organisation header instead. Still referenced by `company/profile/public` (public company profile, not in this phase's route list). File retained. |
+| Company logo (`companies.logo`, Supabase Storage) | user upload | **Retain** | Shown in the profile header and the edit preview only when stored (`x-ui.avatar`, square); initials otherwise. Same upload field `logo`, same `uploadCompanyLogo` path, same DELETE `company.profile.delete-logo`. Seeded companies have no logo (0/130). |
+| `icons/ui/sprite.svg` | B | **Reuse** (no icon added) | pencil, external-link, map-pin, upload, trash-2, arrow-left + status icons |
+| Inline `<style>` blocks, gradient initials tile, inline heroicons, `confirm()`/`alert()` of the old views | C | **Replaced** by `resources/css/student-go/company.css` (Phase 25 section), `.sg-org` (Phase 5), the sprite, `window.sgConfirm` and `window.showNotification` | — |
+
+## 33. Phase 11 — active projects and wishlist (2026-10-31)
+
+| Asset | Source | Decision | Where / note |
+|---|---|---|---|
+| `projects-student.jpeg` (projects hero background) | A | **Deprecate (usage)** on `student/projects/index` | Replaced by the standard page header. File retained, hash unchanged. |
+| `illustrations/empty-states/no-applications.svg` | B | **Reuse** | 'Belum ada proyek KKN' (no accepted application yet) |
+| `illustrations/empty-states/no-saved-projects.svg` | B | **Reuse** | 'Belum ada masalah tersimpan' |
+| `illustrations/empty-states/no-search-results.svg` | B | **Reuse** | 'Tidak ada proyek pada tahap ini' (filter) |
+| `icons/ui/sprite.svg` | B | **Reuse** (no icon added) | lightbulb, file-text, check, plus, trash-2, search + status icons |
+| Problem gallery images and institution logos on wishlist cards | user upload | **Retain**, no longer shown in the list (rows carry title, institution, deadline; guardrail 7). Files untouched | — |
+| Space Grotesk link, inline `<style>` blocks, gradient tiles, page-local toast, `confirm()`/`alert()` of the old views | C | **Replaced** by shared components, Phase 7's `.sg-dash-project__progress`, `window.showNotification` and `window.sgConfirm` | No CSS file added or changed |
+
+## 34. Phase 26 — error pages (2026-10-31)
+
+| Asset | Decision | Use |
+|---|---|---|
+| `public/assets/brand/student-go-logo.svg` | Reuse | Header of the standalone 500/503 template (4xx pages use the shell navbar) |
+| `public/assets/brand/favicon.svg`, `favicon.ico` | Reuse | Standalone template head |
+| `public/assets/icons/ui/sprite.svg` (`arrow-left`, `house`) | Reuse | Kembali / Ke beranda buttons |
+
+No illustration or photograph added; no `public/` file changed.
