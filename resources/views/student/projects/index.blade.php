@@ -94,6 +94,9 @@
                             @if ($project->is_overdue && $project->status === 'active')
                                 <span class="sg-table__meta mt-1">Melewati tanggal selesai</span>
                             @endif
+                            @if ($project->certificate_path && $project->certificate_number)
+                                <span class="sg-table__meta mt-1 tabular-nums">Sertifikat No. {{ $project->certificate_number }}</span>
+                            @endif
                         </div>
                     </td>
                     <td data-label="Progres" class="min-w-40">
@@ -128,6 +131,12 @@
                             @if ($project->status === 'active')
                                 <x-ui.button variant="secondary" icon="file-text" :href="route('student.projects.create-report', $project->id)" class="whitespace-nowrap">Buat laporan</x-ui.button>
                             @elseif ($project->status === 'completed')
+                                {{-- sertifikat dibuat otomatis saat instansi menyelesaikan proyek (CertificateService); tampil hanya bila ada --}}
+                                @if ($project->certificate_path)
+                                    <a href="{{ document_url($project->certificate_path) }}" target="_blank" download class="sg-btn sg-btn--secondary whitespace-nowrap">
+                                        <x-icon name="download" size="sm" />Unduh sertifikat<span class="sr-only"> {{ $judul }}</span>
+                                    </a>
+                                @endif
                                 {{-- toggle portofolio: endpoint dan metode sama (POST, AJAX) --}}
                                 <button type="button" class="sg-btn sg-btn--secondary whitespace-nowrap"
                                         data-portfolio-toggle="{{ $project->id }}" aria-pressed="{{ $project->is_portfolio_visible ? 'true' : 'false' }}"
