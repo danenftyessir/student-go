@@ -25,7 +25,7 @@
 - Real numbers only (from the database) or none; remove the hard-coded 34 / 514 / 85+ / 120+ block (VERIFIED hard-coded on the live page).
 - Proof section: 3-5 latest open KKN problems as list rows plus the interactive coverage map.
 - Audience sections ('Wujudkan Dampak Nyata Lewat KKN' and 'Rekrut Talenta Terbaik untuk Proyek Anda' today) rewritten as two text columns with an original workflow SVG or, later, real screenshots.
-- Removal of 'Kenapa Memilih Karsa?' three-feature row and the motivational quote block.
+- Removal of 'Kenapa Memilih Student Go?' three-feature row and the motivational quote block.
 - Fix horizontal scroll at 390 and 768 px (the AOS `fade-left` elements); remove AOS from this page.
 - Editorial layer: selected documentary photographs framed between paragraphs, never as backgrounds (D-19).
 
@@ -51,7 +51,7 @@
 
 ## C. Existing implementation
 
-- [VERIFIED live] `<title>` 'Laravel - Platform Digital untuk Kuliah Kerja Nyata Berkelanjutan'; `<html lang="en">`; one h1 'Platform Digital untuk Kuliah Kerja Nyata'; h2s: 'Wujudkan Dampak Nyata Lewat KKN', 'Rekrut Talenta Terbaik untuk Proyek Anda', 'Kenapa Memilih Karsa?', 'Jangkauan di Seluruh Indonesia'.
+- [VERIFIED live] `<title>` 'Laravel - Platform Digital untuk Kuliah Kerja Nyata Berkelanjutan'; `<html lang="en">`; one h1 'Platform Digital untuk Kuliah Kerja Nyata'; h2s: 'Wujudkan Dampak Nyata Lewat KKN', 'Rekrut Talenta Terbaik untuk Proyek Anda', 'Kenapa Memilih Student Go?', 'Jangkauan di Seluruh Indonesia'.
 - [VERIFIED live] Stat block 34 Provinsi, 514 Kabupaten/Kota, 85+ Instansi Mitra, 120+ Proyek Selesai renders even while the database is unreachable, so it is hard-coded text. 14 elements carry `data-aos`. Primary CTAs 'Login Sekarang' and 'Daftar Sekarang'. Public nav: About Us, Contact, Login, Register.
 - [VERIFIED live] Fonts loaded on `/`: Inter 400/500/600/700/900, Outfit 600/700, Lora 400, Merriweather 700. Libraries: Alpine, Leaflet, AOS on the window object; two inline `<style>` blocks; 17 images, none broken at 1525 px.
 - [OBSERVED] Hero stacks a photo, seven radial-gradient blobs, a 60/75 px Merriweather h1 and Lora paragraph; the page scrolls sideways at 390 px (455 px wide) and at 768 px; page height about 4,800 px; generic SVG mock-UI and flat-building illustrations; Leaflet pins cluster in Sumatra-Java and are not clickable.
@@ -65,7 +65,7 @@
 |---|---|---|
 | J9 (P1) | Marketing metrics are fabricated or unsourced (34/514/85+/120+ hard-coded; 'Proyek Selesai' contradicts data). | VERIFIED hard-coded; OBSERVED contradiction |
 | J15 (P2) | Merriweather/Lora hero fonts appear nowhere else; four families in three stacks. | VERIFIED fonts |
-| J20 (P2) | Tab title 'Laravel - ...', section 'Kenapa Memilih Karsa?', footer privacy link '#'. | VERIFIED |
+| J20 (P2) | Tab title 'Laravel - ...', section 'Kenapa Memilih Student Go?', footer privacy link '#'. | VERIFIED |
 | J23 (P2) | AOS fade effects without reduced-motion support. | OBSERVED |
 | J7 (P1) | Horizontal scroll at 390 px (455) and 768 px caused by AOS `fade-left` elements. | OBSERVED (iframe measurement) |
 | H | Template patterns: mesh gradient, glass pills, three-feature row, generic SVG mock-UI, big quote with no information. | OBSERVED |
@@ -101,7 +101,7 @@
 
 4.6. Audience sections: write two text columns (Mahasiswa / Instansi and, if the company role is promoted today, Perusahaan) with the matching workflow SVG (`student-journey.svg`, `institution-journey.svg`, `company-journey.svg`). Real product screenshots can replace them in Phase 28 once designed pages exist; do not fake a UI.
 
-4.7. Remove: AOS script/CSS and `data-aos` attributes, seven-layer gradient, glass pills, 'Kenapa Memilih Karsa?', quote block, hard-coded stat block, Merriweather/Lora, unused illustrations.
+4.7. Remove: AOS script/CSS and `data-aos` attributes, seven-layer gradient, glass pills, 'Kenapa Memilih Student Go?', quote block, hard-coded stat block, Merriweather/Lora, unused illustrations.
 
 4.8. Editorial layer: place up to two photographs with caption, location (for example a `sg-coord` label) and Indonesian alt text: first from the existing `public/` field photographs (WebP derivatives per D-34, originals untouched, rights confirmed per D-30), and only if a slot stays empty from the catalogue (D-33; alt text and credit from `credits.json`). Add a contour/survey-mark motif sparingly. Reject any photo whose rights or consent status is unclear. Stop referencing `hero-background.jpg` from the homepage template (usage Deprecated; the file stays).
 
@@ -133,7 +133,7 @@
 | `hero-background.jpg` | Deprecate (usage) / Reuse (optional) | Leaves the hero. May return as one framed figure if rights are confirmed (D-30). | VERIFIED |
 | `about.jpg` | Adapt / Reuse (optional) | Candidate framed landscape for the homepage band; needs a derivative (original is 3.6 MB). | VERIFIED |
 | `mahasiswa-about.jpeg`, `handprints-about.jpeg`, `jaket-about.jpeg`, `dashboard-student2.jpeg`, `network-student.JPG`, `projects-student.jpeg`, `repo-student.jpeg` | Reuse (candidates) | At most two framed, captioned documentary figures on the homepage, chosen after rights and consent are confirmed (D-30). | VERIFIED (about photos) / INFERRED (others) |
-| `karsa-logo.png` | Retain | Navigation and footer logo as decided in Phase 3. | VERIFIED |
+| `student-go-logo.png` | Retain | Navigation and footer logo as decided in Phase 3. | VERIFIED |
 
 ### H.2 Source B: custom package assets available for this phase
 
@@ -213,7 +213,7 @@ The phase is COMPLETE only if every box can be checked with evidence in the phas
 - [ ] No horizontal page scroll at 360, 390, 768, 1024, 1366, 1440 px.
 - [ ] The hero has no photo background, gradient blobs, glass pills, serif hero font, or AOS; the h1 and primary CTA are visible within the first 160 px at 390 px.
 - [ ] Leaflet interactive map is present and functional; pins use the new marker; OSM attribution is visible.
-- [ ] 'Kenapa Memilih Karsa?' feature row and the quote block are gone; audience sections describe real product flows.
+- [ ] 'Kenapa Memilih Student Go?' feature row and the quote block are gone; audience sections describe real product flows.
 - [ ] At most two photographs are used, each framed with caption and credit, each with confirmed rights (D-30) and approved placement (D-19); no photo is a background; `hero-background.jpg` and every other original is still on disk.
 - [ ] No request to AOS, Boxicons, Font Awesome or the old Google Fonts families on this page.
 - [ ] Page weight is lower than the baseline (report numbers).

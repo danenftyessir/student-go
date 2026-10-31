@@ -155,7 +155,7 @@ Widths: 360, 390, 768, 1024, 1366 and 1440. Note on the full-page captures of cr
 | Functionality vs baseline: routes, input names, query parameters, redirects, ownership | PASS: role test (guest → login; student/company redirected; another institution's problem → 404 on show, edit and destroy) |
 | Console/network: no JS errors; no hot-linked image; no 404 for a new asset | PASS (the only 404 is the deliberate cross-institution ownership check) |
 | Automated suite | Before this session's changes: Phase 17 16/16. After: Phase 18 9/9 (98 assertions); **full suite 185/185, 2,058 assertions** |
-| Assets: `public/` hash check | 37/38 identical, 0 changed; missing `public/karsa-logo.png` (deleted by the user before Phase 4) |
+| Assets: `public/` hash check | 37/38 identical, 0 changed; missing `public/student-go-logo.png` (deleted by the user before Phase 4) |
 | Phase-specific: create a draft with every section filled, compare stored values | PASS: draft #78 as institution #64, no image upload (uploads go to Supabase Storage). Every field matched the input (`checks/row78.json`), including `detailed_location` from `address`, lists without blank rows, SDG `[3,4]`, status `draft`. Then deleted through the detail page's confirm dialog (focus starts on 'Batal'). The redirect showed the empty state, detail now answers 404, and `deleted_at` is set (the model uses soft deletes; the row remains as trashed) |
 | Phase-specific: validation errors inside the right section, nav indicates them | PASS (test + live) |
 | Phase-specific: rapid province change | PASS |

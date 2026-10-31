@@ -16,7 +16,7 @@ This copy lives at `student-go-docs/design-system/INTEGRATION.md`. Sections 0-8 
 | §2 style guide paths `../public/assets` | Rewritten to `../../public/assets/` in the copied `styleguide.html` and `styleguide.css` (one level deeper) | Needed for the new location |
 | §3 import the three files | `fonts.css`, `tokens.css`, `components.css` imported after `@import 'tailwindcss'`. The existing `@source` lines and `@theme` (Instrument Sans) were kept. | **Staged (D-29).** Everything that changes existing pages globally was moved unchanged into `resources/css/student-go/legacy-overrides.css`, which is **not imported yet**. Phase 3 un-comments one line. See `DESIGN_SYSTEM.md` §0. |
 | §3 checks | `--sg-brand` = `#405080` on a real page. All three WOFF2 files load from `/assets/fonts/` (HTTP 200, `font/woff2`) when used, and no Google request is added by the new CSS. | The old Google Fonts links stay in the layouts until Phase 3 removes them, so `fonts.googleapis.com` is still requested by existing pages. Phase 2 removed nothing. |
-| §4 layout head, favicon, wordmark, `APP_NAME` | **Not done** (Phase 3 owns the shell) | D-01 = Student Go with a new assistant name (TBD in Phase 16). D-18 = package wordmark. `karsa-logo.png` and the 0-byte root `favicon.ico` are untouched. |
+| §4 layout head, favicon, wordmark, `APP_NAME` | **Not done** (Phase 3 owns the shell) | D-01 = Student Go with a new assistant name (TBD in Phase 16). D-18 = package wordmark. `student-go-logo.png` and the 0-byte root `favicon.ico` are untouched. |
 | §4 icon component | Added `resources/views/components/icon.blade.php` → `<x-icon name="…" size="sm\|lg" label="…" />` | Adds `focusable="false"`, and `role="img"` + `aria-label` when `label` is given |
 | §4 remove Google Fonts, Boxicons, Font Awesome, AOS | **Not done** (Phase 3, D-20 still open) | |
 | §7 photographs | All 60 WebP and `credits.json` were already in the package. They were copied, **not downloaded**, and `fetch-photos.php` was not run. All 60 are valid WebP (17.1 MB, longest side 1800 px), with no EXIF or XMP. | A preliminary visual review (agent, contact sheets) is in `photo-review.json`: 37 available, 14 available with care, 9 held. The user confirms it before any placement (D-19). No photo was placed. |
@@ -135,7 +135,7 @@ Remove from the layout(s), after confirming nothing else uses them:
 
 **Keep** Leaflet and the OpenStreetMap tiles (the brief says keep the interactive map). Replace the default marker with `assets/illustrations/motifs/map-pin.svg` (and `map-pin-selected.svg` for the selected project) via `L.icon({ iconUrl, iconSize: [28, 38], iconAnchor: [14, 38] })`. This swaps only the icon image; the map, tiles, clustering and click handlers stay as they are.
 
-Wordmark (replaces the "Karsa"/PNG logo, J20):
+Wordmark (replaces the "Student Go"/PNG logo, J20):
 
 ```blade
 <a href="{{ route('home') }}" aria-label="Student Go — beranda">
@@ -276,7 +276,7 @@ The audit marks these P0/P1 and says a redesign must not hide them. Nothing in t
 
 ## Decisions the audit lists as blocking (still open)
 
-Product name (Student Go vs Karsa in `APP_NAME`, titles, KARA assistant); contact-visibility policy; sort order and count definitions; Indonesian-first language policy with an approved status dictionary; enum alignment for institution type and company size; whether Student Go stays KKN-only.
+Product name (Student Go vs Student Go in `APP_NAME`, titles, SAGO assistant); contact-visibility policy; sort order and count definitions; Indonesian-first language policy with an approved status dictionary; enum alignment for institution type and company size; whether Student Go stays KKN-only.
 
 ---
 

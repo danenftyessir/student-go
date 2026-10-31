@@ -109,7 +109,7 @@ Not touched: routes, middleware, models, migrations, seeders, `.env`, `component
 
 Recorded in `ASSET_INVENTORY.md` section 22. In short:
 
-- **No file was added, changed or removed under `public/`.** The baseline hash check gives 37/38 identical and 0 changed. The one missing file is `karsa-logo.png`, deleted by the user before Phase 4.
+- **No file was added, changed or removed under `public/`.** The baseline hash check gives 37/38 identical and 0 changed. The one missing file is `student-go-logo.png`, deleted by the user before Phase 4.
 - **Reuse:** `no-applications.svg` (empty state) and the Lucide sprite (no new icon).
 - **Retain, not shown:** the institution logo (the audit keeps the header without a photo) and student photos (applicant rows use initials).
 - **Not placed:** `workflows/institution-journey*.svg`. Its label 'halaman Pelamar' contradicts the navigation ('Aplikasi'), and image text does not scale at 360 px.

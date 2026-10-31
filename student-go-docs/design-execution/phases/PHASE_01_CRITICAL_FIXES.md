@@ -47,7 +47,7 @@ No route is owned by this phase; it works on shared files and every route (see s
 - [OBSERVED] 127 of 127 sampled public profiles show a name different from the account username (example: username silvihidayat1001 shows 'Wulan Nabila'); a company clicking talent 'Uli Hidayat' opens a profile titled 'Oki Nabila'.
 - [OBSERVED] Browse-problems: 7 pages x 12, ID 47/49/50/51/61 repeat on pages 1-3, only 62 unique IDs reachable; 15 open problems never appear (31, 32, 36, 41, 46, 53, 55, 57, 64, 66, 67, 71, 72, 73, 74). Repository: 19 pages yield 209 unique of 216; header claims 221.
 - [OBSERVED] Guests can read email and WhatsApp on `/profile/{username}`.
-- [OBSERVED] `GET /student/chatbot/create` created two empty KARA conversations; `/student/repository/abc` returns HTTP 500; `/institution/reviews/create` renders a full QueryException page.
+- [OBSERVED] `GET /student/chatbot/create` created two empty SAGO conversations; `/student/repository/abc` returns HTTP 500; `/institution/reviews/create` renders a full QueryException page.
 - [VERIFIED 2026-10-30] Debug mode is on (stack traces rendered on `/institution/19`, `/register/student`, `/forgot-password`).
 - [INFERRED] The name mismatch is a seeder issue (users.name vs first/last name), per audit G.
 

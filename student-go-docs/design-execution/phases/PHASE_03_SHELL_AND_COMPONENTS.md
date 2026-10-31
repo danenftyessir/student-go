@@ -94,7 +94,7 @@
 
 3.2. Using the Stage One layout map, create the public, app and auth layouts on top of the Student Go CSS. Keep the old layouts until every page has moved (strangler approach), or replace in place if the repository has a single layout per shell.
 
-3.3. Head: `<html lang="id">`, title pattern, favicon links from `public/assets/brand`, font preloads for the two fonts used above the fold, the Vite directive for the app CSS/JS; keep the Vite input list consistent so `resources/css/auth-institution.css`-style missing-manifest errors cannot recur. Logo: follow D-01/D-18. If Student Go was chosen, reference `student-go-logo.svg` (on-dark variant on dark surfaces); if Karsa stays, keep `karsa-logo.png` or its optimised derivative. Never both in one header, and never delete the PNG. Fonts: remove the Google Fonts `<link>` tags only from the site layouts, and only after confirming that no certificate view or PDF template depends on them (D-32); Pinyon Script and Poppins stay available to the certificate feature. Favicon: link the package set; do not overwrite `public/favicon.ico` unless the user approved it.
+3.3. Head: `<html lang="id">`, title pattern, favicon links from `public/assets/brand`, font preloads for the two fonts used above the fold, the Vite directive for the app CSS/JS; keep the Vite input list consistent so `resources/css/auth-institution.css`-style missing-manifest errors cannot recur. Logo: follow D-01/D-18. If Student Go was chosen, reference `student-go-logo.svg` (on-dark variant on dark surfaces); if Student Go stays, keep `student-go-logo.png` or its optimised derivative. Never both in one header, and never delete the PNG. Fonts: remove the Google Fonts `<link>` tags only from the site layouts, and only after confirming that no certificate view or PDF template depends on them (D-32); Pinyon Script and Poppins stay available to the certificate feature. Favicon: link the package set; do not overwrite `public/favicon.ico` unless the user approved it.
 
 3.4. Navigation: build the role-aware nav (desktop and mobile) with the D-02 labels; bell with `aria-label` that includes the count, `aria-live` count update, dropdown of the 5 latest; avatar menu with name, role badge, profile link, wishlist (student), logout form (POST, CSRF) - same endpoints as today.
 
@@ -137,7 +137,7 @@
 
 | Asset | Decision | What happens in this phase | Evidence |
 |---|---|---|---|
-| `karsa-logo.png` | Retain / Replace (conditional) | Header and footer logo. Replaced in templates by `student-go-logo.svg` only if D-01/D-18 choose Student Go; otherwise adapted. The PNG stays on disk either way. | VERIFIED |
+| `student-go-logo.png` | Retain / Replace (conditional) | Header and footer logo. Replaced in templates by `student-go-logo.svg` only if D-01/D-18 choose Student Go; otherwise adapted. The PNG stays on disk either way. | VERIFIED |
 | `favicon.ico` (0 bytes) | Replace | Link the package favicon set from the layout `<head>`. Do not overwrite `public/favicon.ico` unless this phase's report records explicit approval. | VERIFIED |
 | `robots.txt` | Retain | No change. | VERIFIED |
 | Certificate fonts and templates | Retain | When removing the Google Fonts `<link>` from site layouts, first confirm no certificate view includes the same link or layout (D-32). | UNKNOWN / BLOCKED |
@@ -150,7 +150,7 @@
 
 ### H.3 Reconciliation for this phase
 
-Overlap 1 (logo) and 2 (favicon) in ASSET_INVENTORY.md section 11. Never ship the Karsa PNG and the Student Go SVG in the same header.
+Overlap 1 (logo) and 2 (favicon) in ASSET_INVENTORY.md section 11. Never ship the Student Go PNG and the Student Go SVG in the same header.
 
 Overlap comparisons that touch this phase are in `ASSET_INVENTORY.md` section 11; where a Source A asset and a Source B asset serve the same purpose, that table gives the starting recommendation and this phase re-checks it against the real page.
 

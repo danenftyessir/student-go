@@ -18,7 +18,7 @@ Living reference: open `docs/styleguide.html` (built from the real CSS in `resou
 | Student Go tokens (brand, earth, semantic, `--shadow-overlay`, `--ease-standard`, `--duration-state`, every `--sg-*` role, `.sg-on-dark`) | `resources/css/student-go/tokens.css` | Yes |
 | `.sg-*` components | `resources/css/student-go/components.css` | Yes. No page uses them yet. |
 | Global overrides: `--font-sans`, `--font-serif`, the 9-step `text-*` scale, `tracking-tight`, re-tuned `gray-*`, `primary-*` aliases, `radius-*` (including the `xl/2xl/3xl` shim), `@layer base` element rules (html font, body colour, h1-h4 weight, tabular figures, `overflow-wrap`, `:focus-visible` ring), and the global `prefers-reduced-motion` rule | `resources/css/student-go/legacy-overrides.css` | **No: staged (D-29).** The `@import` line is commented out in `app.css`. **Phase 3** activates it together with the new shell. |
-| Brand | `public/assets/brand/` | Files only. The layout still shows `karsa-logo.png` and has no `<link rel="icon">` until Phase 3. |
+| Brand | `public/assets/brand/` | Files only. The layout still shows `student-go-logo.png` and has no `<link rel="icon">` until Phase 3. |
 | Icons | `public/assets/icons/ui/` (71 SVG + `sprite.svg` + `icons.json` + licence), Blade helper `resources/views/components/icon.blade.php` | Files and helper. Nothing uses them yet. |
 | Illustrations | `public/assets/illustrations/{empty-states,workflows,geographic,motifs}/` | Files only |
 | Catalogue photographs | `public/assets/photography/{homepage,about,library/*}/` + `credits.json` | Files only. No photograph is placed in any page (D-19). Review state: `photo-review.json`. |
@@ -72,7 +72,7 @@ Certificate typography (Poppins, Pinyon Script in `public/assets/certificate/fon
 
 | Audit finding | What replaces it |
 |---|---|
-| Three product names (KKN Go, Karsa, "Laravel" in every tab) | Student Go wordmark + symbol + favicon (`public/assets/brand/`); `lang="id"` and real titles are an integration step (see INTEGRATION.md) |
+| Three product names (Student Go, Student Go, "Laravel" in every tab) | Student Go wordmark + symbol + favicon (`public/assets/brand/`); `lang="id"` and real titles are an integration step (see INTEGRATION.md) |
 | Four web-font families in three stacks, 12 text sizes | One interface family (Plus Jakarta Sans), one reading serif (Source Serif 4), 9-step scale, max 30px inside the app |
 | At least six competing accents; undefined `bg-primary-*` | One brand colour `#405080`; `primary-*` now aliases `brand-*`; earth accent for editorial surfaces only |
 | Gradient buttons, mesh blobs, glass tiles | Flat controls; no gradient anywhere in the component CSS |
@@ -226,7 +226,7 @@ Prefix `.sg-`. All are plain CSS and work with or without Tailwind utilities.
 
 The sprite is same-origin by design (external `<use>` is blocked across origins and from `file://`). Icon-only buttons need an accessible name (`aria-label`). No emoji as icons. No Font Awesome or Boxicons (the audit found them loaded but used 2 and 0 times).
 
-One meaning, one icon (full list in `public/assets/icons/ui/icons.json`): location `map-pin`, deadline `calendar`, duration `clock`, quota `users`, institution `building-2`, company `briefcase`, student `graduation-cap`, document `file-text`, repository `folder-open`, saved `bookmark`, apply `send`, verified `badge-check`, SDG `target`, KARA assistant `message-square-text`, list view `layout-list`, gallery view `layout-grid`, map view `map`.
+One meaning, one icon (full list in `public/assets/icons/ui/icons.json`): location `map-pin`, deadline `calendar`, duration `clock`, quota `users`, institution `building-2`, company `briefcase`, student `graduation-cap`, document `file-text`, repository `folder-open`, saved `bookmark`, apply `send`, verified `badge-check`, SDG `target`, SAGO assistant `message-square-text`, list view `layout-list`, gallery view `layout-grid`, map view `map`.
 
 ---
 

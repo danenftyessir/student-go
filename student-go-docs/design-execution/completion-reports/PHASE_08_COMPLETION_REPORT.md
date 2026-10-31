@@ -85,7 +85,7 @@ Also found: Kab/Kota select never filled (JS fetched `/student/browse-problems/g
 
 ## 8. Asset Reuse and Asset Changes
 
-See `ASSET_INVENTORY.md` §24. No file under `public/` added, deleted, overwritten, moved or renamed: 37/38 baseline hashes identical, 0 changed (missing `karsa-logo.png` was deleted by the user before Phase 4). `dashboard-student.jpg` Retain / Deprecate as hero; `map-pin.svg`, `no-search-results.svg`, sprite Reuse; 37 catalogue photos Reuse as seed objects in `sg-storage` (not in `public/`); Space Grotesk link and the two 404 links removed; Leaflet unchanged (AD-08).
+See `ASSET_INVENTORY.md` §24. No file under `public/` added, deleted, overwritten, moved or renamed: 37/38 baseline hashes identical, 0 changed (missing `student-go-logo.png` was deleted by the user before Phase 4). `dashboard-student.jpg` Retain / Deprecate as hero; `map-pin.svg`, `no-search-results.svg`, sprite Reuse; 37 catalogue photos Reuse as seed objects in `sg-storage` (not in `public/`); Space Grotesk link and the two 404 links removed; Leaflet unchanged (AD-08).
 
 ## 9. Testing Results
 

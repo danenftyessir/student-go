@@ -45,7 +45,7 @@ The complete inventory has the requested fields, split over three tables per ass
 
 | # | Asset (file) | Original location | Category | Dimensions (px) | Size | Exists? |
 |---|---|---|---|---|---|---|
-| 1 | `karsa-logo.png` | `public/karsa-logo.png` | Brand logo (raster) | 1430x566 | 272 KB | VERIFIED (HTTP 200, loaded in the browser) |
+| 1 | `student-go-logo.png` | `public/student-go-logo.png` | Brand logo (raster) | 1430x566 | 272 KB | VERIFIED (HTTP 200, loaded in the browser) |
 | 2 | `hero-background.jpg` | `public/hero-background.jpg` | Photograph (hero background) | 1280x720 | 85 KB | VERIFIED (HTTP 200, loaded in the browser) |
 | 3 | `about.jpg` | `public/about.jpg` | Photograph (landscape) | 7360x4912 | 3,602 KB | VERIFIED (HTTP 200, loaded in the browser) |
 | 4 | `mahasiswa-about.jpeg` | `public/mahasiswa-about.jpeg` | Photograph (documentary, people) | 4912x2760 | 718 KB | VERIFIED (HTTP 200, loaded in the browser) |
@@ -67,7 +67,7 @@ The complete inventory has the requested fields, split over three tables per ass
 | 20 | `company3.jpg` | `public/company3.jpg` | Photograph (corporate stock-style) | 1406x705 | 233 KB | VERIFIED (HTTP 200, loaded in the browser) |
 | 21 | `company4.jpg` | `public/company4.jpg` | Photograph (corporate stock-style) | 1024x509 | 84 KB | VERIFIED (HTTP 200, loaded in the browser) |
 | 22 | `company5.jpg` | `public/company5.jpg` | Photograph (corporate stock-style) | 1024x510 | 121 KB | VERIFIED (HTTP 200, loaded in the browser) |
-| 23 | `KARA-background.png` | `public/KARA-background.png` | Decorative background (raster) | 2389x1319 | 1,763 KB | VERIFIED (HTTP 200, loaded in the browser) |
+| 23 | `SAGO-background.png` | `public/SAGO-background.png` | Decorative background (raster) | 2389x1319 | 1,763 KB | VERIFIED (HTTP 200, loaded in the browser) |
 | 24 | `profile_13523136.jpg` | `public/profile_13523136.jpg` | Personal photograph (team portrait) | 1220x1184 | 238 KB | VERIFIED (HTTP 200, loaded in the browser) |
 | 25 | `profile_13523124.jpeg` | `public/profile_13523124.jpeg` | Personal photograph (team portrait) | 990x1034 | 241 KB | VERIFIED (HTTP 200, loaded in the browser) |
 | 26 | `profile_18223127.jpg` | referenced as `/profile_18223127.jpg`; no file found | Personal photograph (team portrait) | not found | — | NOT FOUND (referenced by `/contact`) |
@@ -79,7 +79,7 @@ The complete inventory has the requested fields, split over three tables per ass
 
 | Asset | Current usage | Evidence | Intended design usage | Decision | Target implementation path |
 |---|---|---|---|---|---|
-| `karsa-logo.png` | `<img>` in the header and footer of every guest page checked (`/`, `/about`, `/contact`, `/login`, `/register`); rendered at 40-48 px high. `alt` = 'Karsa - Karya Untuk Bangsa'. | VERIFIED (rendered HTML 2026-10-30) | Stays the live logo until the product-name decision (D-01) and brand-mark decision (D-18) are answered. If the name becomes Student Go it is replaced in templates by `student-go-logo.svg` (Source B) in Phase 3; if it stays Karsa it is adapted into an optimised SVG or 2x PNG. The slate-indigo of this logo is the source of the proposed brand colour `#405080`. | **Retain**; **Adapt** later; **Replace** in templates only after D-01/D-18 | Stays at `public/karsa-logo.png`. Any optimised derivative goes to `public/assets/brand/` under a new name (for example `karsa-logo.svg`); the original is not touched. |
+| `student-go-logo.png` | `<img>` in the header and footer of every guest page checked (`/`, `/about`, `/contact`, `/login`, `/register`); rendered at 40-48 px high. `alt` = 'Student Go - Karya Untuk Bangsa'. | VERIFIED (rendered HTML 2026-10-30) | Stays the live logo until the product-name decision (D-01) and brand-mark decision (D-18) are answered. If the name becomes Student Go it is replaced in templates by `student-go-logo.svg` (Source B) in Phase 3; if it stays Student Go it is adapted into an optimised SVG or 2x PNG. The slate-indigo of this logo is the source of the proposed brand colour `#405080`. | **Retain**; **Adapt** later; **Replace** in templates only after D-01/D-18 | Stays at `public/student-go-logo.png`. Any optimised derivative goes to `public/assets/brand/` under a new name (for example `student-go-logo.svg`); the original is not touched. |
 | `hero-background.jpg` | Inline CSS `url(/hero-background.jpg)` on `/`: the homepage hero, stacked under seven radial gradients and white text (audit G01). | VERIFIED (inline style on `/`); layout detail OBSERVED (audit) | Not as a full-bleed hero background (audit guardrail 1 and G01 direction: a short typographic hero). Candidate for one framed, captioned documentary figure on the homepage only if its rights are confirmed (D-30); otherwise it stays unused after Phase 4. | **Retain**; **Deprecate** as hero background; **Reuse** only as a framed figure if rights confirmed | Stays at `public/hero-background.jpg`. A WebP derivative, if reused, goes to `public/assets/photography/field/`. |
 | `about.jpg` | `<img>` on `/about` (the full-screen first slide in the audit's carousel). | VERIFIED (rendered HTML) | Reuse as a framed documentary figure on About or the homepage (no people in frame, so no consent issue) after rights are confirmed and after a derivative is made. Original stays. | **Retain**; **Adapt** (responsive WebP derivatives); **Reuse** as a framed figure | Original stays at `public/about.jpg`. Derivatives (for example 2400, 1600, 800 px WebP) go to `public/assets/photography/field/about-rice-terraces-{w}.webp`. |
 | `mahasiswa-about.jpeg` | `<img>` on `/about`. | VERIFIED (rendered HTML) | Reuse: the most authentic image type in the app (the audit says to reuse the real KKN field photos in story pages). A framed figure with a Place - what is happening caption on About. | **Retain**; **Reuse**; **Adapt** (derivatives) | Original stays. Derivatives to `public/assets/photography/field/`. |
@@ -101,7 +101,7 @@ The complete inventory has the requested fields, split over three tables per ass
 | `company3.jpg` | As company1.jpg. | OBSERVED (audit); mapping INFERRED | No photo. | **Retain** (until verified); **Deprecate**; **Replace** usage | Stays. |
 | `company4.jpg` | As company1.jpg. | OBSERVED (audit); mapping INFERRED | No photo. | **Retain** (until verified); **Deprecate**; **Replace** usage | Stays. |
 | `company5.jpg` | As company1.jpg. | OBSERVED (audit); mapping INFERRED | No photo. | **Retain** (until verified); **Deprecate**; **Replace** usage | Stays. |
-| `KARA-background.png` | Name suggests the KARA assistant screens (`/student/chatbot*`). Not seen in rendered HTML (login required). | INFERRED (filename) | Replace its role: the design drops gradients and decorative backgrounds (audit guardrails 5 and 7). Use a flat surface, or `contour-field.svg` (Source B) if a motif is wanted (Phase 16). Keep the file until D-01 decides the assistant's name and look. | **Retain** (until Phase 16); **Replace** usage; **Adapt** if it is kept | Stays at `public/KARA-background.png`. |
+| `SAGO-background.png` | Name suggests the SAGO assistant screens (`/student/chatbot*`). Not seen in rendered HTML (login required). | INFERRED (filename) | Replace its role: the design drops gradients and decorative backgrounds (audit guardrails 5 and 7). Use a flat surface, or `contour-field.svg` (Source B) if a motif is wanted (Phase 16). Keep the file until D-01 decides the assistant's name and look. | **Retain** (until Phase 16); **Replace** usage; **Adapt** if it is kept | Stays at `public/SAGO-background.png`. |
 | `profile_13523136.jpg` | `<img class=team-photo>` in the team card on `/contact`. | VERIFIED (rendered HTML) | Preserve. Phase 5 moves the team to About as a simple list with valid photos or initials (audit G03). | **Retain**; **Adapt** (square crop derivative later) | Stays. Any renamed or cropped derivative goes to `public/assets/photography/team/` and only after D-31 is answered. |
 | `profile_13523124.jpeg` | `/contact` references `/profile_13523124.jpg`, but this file is `.jpeg`. | VERIFIED (the `.jpg` URL fails to load; `.jpeg` and `.JPEG` load) | Preserve. Phase 5 repairs the reference (a template change, not a file rename). | **Retain**; **Adapt** (fix reference in Phase 5) | Stays. Do not rename the file; correct the template reference. |
 | `profile_18223127.jpg` | `/contact` references `/profile_18223127.jpg` (and its alt text shows instead). | VERIFIED reference; file NOT FOUND under `.jpg`, `.JPG`, `.jpeg`, `.JPEG`, `.png`, `.PNG`, `.webp` | Phase 5: use the file if the user supplies it, otherwise an initials avatar. Nothing is invented. | **Retain** the reference record; user supplies the file or initials are used | n/a |
@@ -115,7 +115,7 @@ Images were looked at by eye in thumbnail contact sheets (this session). Quality
 
 | Asset | Visual assessment (looked at by eye) | Licence / source | Concern |
 |---|---|---|---|
-| `karsa-logo.png` | Sharp wordmark 'Karsa' in slate indigo with a grey chevron mark on a transparent background; far larger than the 40 px it is drawn at. | First-party brand asset (assumed). No licence or source record in the repository that I could see (UNKNOWN). | The package's INTEGRATION.md section 4 says to remove the 272 KB PNG logo. That instruction is superseded by AD-09. |
+| `student-go-logo.png` | Sharp wordmark 'Student Go' in slate indigo with a grey chevron mark on a transparent background; far larger than the 40 px it is drawn at. | First-party brand asset (assumed). No licence or source record in the repository that I could see (UNKNOWN). | The package's INTEGRATION.md section 4 says to remove the 272 KB PNG logo. That instruction is superseded by AD-09. |
 | `hero-background.jpg` | Terraced rice paddies and banana plants under a hazy mountain sky; soft, low contrast, slightly washed out. Works as a mood image, not as a background for text. | Unknown source and rights (UNKNOWN). | Rights unknown. Compare with Source B homepage photos and `about.jpg` before choosing any single landscape (section 11, overlap 3). |
 | `about.jpg` | Terraced rice fields in strong green light, sharp, landscape. 7360x4912 is a camera or stock original size; 3.6 MB to show one image is the heaviest asset in the app. | Unknown source and rights (UNKNOWN). EXIF was not inspected (the file was not downloaded). | 3.6 MB is the weight problem the audit flags in J6. Never serve it unresized. |
 | `mahasiswa-about.jpeg` | Students in patterned shirts seen from behind and the side, facing forest; natural light; faces mostly turned away. Genuine field photograph. | Unknown photographer; consent of the people shown not documented (UNKNOWN). | Rights and consent (D-30). Alt text must describe the scene. |
@@ -137,7 +137,7 @@ Images were looked at by eye in thumbnail contact sheets (this session). Quality
 | `company3.jpg` | Office presentation to a small team around a glass table; screen shows garbled text. | Unknown (UNKNOWN). | Unrelated to the domain; the on-screen text is not legible. |
 | `company4.jpg` | Laptop and monitors on a wooden desk with a latte; lower resolution than the others. | Unknown (UNKNOWN). | Unrelated to the domain; 1024 px wide stretched into a wide hero. |
 | `company5.jpg` | Colleagues around a laptop in a loft office; lower resolution. | Unknown (UNKNOWN). | Unrelated to the domain. |
-| `KARA-background.png` | Blue-grey teal gradient with fine golden star-burst lines; atmospheric but decorative, 1.7 MB. | Unknown; possibly generated or designed in-house (UNKNOWN). | Heavy PNG for a gradient. |
+| `SAGO-background.png` | Blue-grey teal gradient with fine golden star-burst lines; atmospheric but decorative, 1.7 MB. | Unknown; possibly generated or designed in-house (UNKNOWN). | Heavy PNG for a gradient. |
 | `profile_13523136.jpg` | Standing portrait outdoors, near a palm tree and a brick wall; usable square crop. | Personal photograph of a team member; presumably supplied by them (UNKNOWN in writing). | The file name contains a student ID number. Public page (D-31). |
 | `profile_13523124.jpeg` | Portrait, slightly tall crop (not viewed individually to avoid exposing a personal photo beyond what the page already shows). | Personal photograph (UNKNOWN in writing). | Broken image on a public page today; identifying file name (D-31). |
 | `profile_18223127.jpg` | Cannot be viewed: the file is missing at the referenced path. | n/a | Missing file on a public page (audit G03: 'dua foto profil rusak'). |
@@ -163,7 +163,7 @@ Read-only pass over the repository (branch `feat/students`, HEAD `e824b9d`). `pu
 
 | File | Bytes | Pixels | Referenced from (VERIFIED in source) | Was in 1.1? | Note |
 |---|---|---|---|---|---|
-| `karsa-logo.png` | 278,755 | 1430x566 | `components/navbar.blade.php:9`, `components/footer.blade.php:7`, `auth/login:80`, `auth/register:30`, `auth/student-register:329`, `auth/institution-register:331`, `auth/company-register:243`; also `README.md` | yes | confirmed |
+| `student-go-logo.png` | 278,755 | 1430x566 | `components/navbar.blade.php:9`, `components/footer.blade.php:7`, `auth/login:80`, `auth/register:30`, `auth/student-register:329`, `auth/institution-register:331`, `auth/company-register:243`; also `README.md` | yes | confirmed |
 | `hero-background.jpg` | 86,574 | 1280x720 | `home/index.blade.php:19` | yes | confirmed |
 | `about.jpg` | 3,688,625 | 7360x4912 | `about/index.blade.php:150` | yes | confirmed |
 | `mahasiswa-about.jpeg` | 735,177 | 4912x2760 | `about/index.blade.php:19` | yes | confirmed |
@@ -185,19 +185,21 @@ Read-only pass over the repository (branch `feat/students`, HEAD `e824b9d`). `pu
 | `company3.jpg` | 238,773 | 1406x705 | `company/applications/index.blade.php:168`, `company/jobs/{create,edit}.blade.php:9` | yes | mapping VERIFIED |
 | `company4.jpg` | 85,856 | 1024x509 | `company/talents/saved.blade.php:166` | yes | mapping VERIFIED |
 | `company5.jpg` | 124,036 | 1024x510 | `company/talents/show.blade.php:8` (that view has no route) | yes | effectively unused |
-| `KARA-background.png` | 1,805,588 | 2389x1319 | **none** | yes | **corrected**: not used by the chatbot views (they use `deal-work-together.jpg`). Retain. |
+| `SAGO-background.png` | 1,805,588 | 2389x1319 | **none** | yes | **corrected**: not used by the chatbot views (they use `deal-work-together.jpg`). Retain. |
 | `profile_13523136.jpg` | 243,346 | 1220x1184 | `app/Http/Controllers/ContactController.php` (team photo key) | yes | confirmed |
 | `profile_13523124.jpeg` | 246,297 | 990x1034 | referenced as `profile_13523124.jpg` in `ContactController.php` → 404 | yes | confirmed broken reference |
 | `profile_18223127.jpg` | — | — | `ContactController.php`; file absent under every extension | yes (NOT FOUND) | confirmed missing |
 | `favicon.ico` | 0 | — | none (no `<link rel=icon>` in the layouts) | yes | confirmed |
 | `robots.txt` | 24 | — | — | yes | confirmed |
-| `deal-work-together.jpg` | 1,092,772 | 6016x4016 | `company/dashboard/index.blade.php:9`, `student/chatbot/index.blade.php:16` | **no — added** | photo hero on the company dashboard and the KARA list. Retain; Deprecate as hero (guardrail 1); rights UNKNOWN (D-30) |
+| `deal-work-together.jpg` | 1,092,772 | 6016x4016 | `company/dashboard/index.blade.php:9`, `student/chatbot/index.blade.php:16` | **no — added** | photo hero on the company dashboard and the SAGO list. Retain; Deprecate as hero (guardrail 1); rights UNKNOWN (D-30) |
 | `magang-preview.jpg` | 76,590 | 960x640 | `student/jobs/index.blade.php:24` | **no — added** | jobs hero. Retain; Deprecate as hero; rights UNKNOWN |
 | `institution-register-background.jpeg` | 610,985 | 4912x2760 | `auth/institution-register.blade.php:29` | **no — added** | auth background (Phase 6). Retain; rights UNKNOWN |
 | `student-register-background.jpeg` | 427,719 | 4912x2760 | `auth/student-register.blade.php:26` | **no — added** | auth background (Phase 6). Retain; rights UNKNOWN |
 | `reg-com-background.jpg` | 1,031,676 | 3649x5362 | **none** | **no — added** | unreferenced; Retain (not deleted) |
 | `profile_13523151.jpeg` | 410,163 | 1074x1130 | **none** | **no — added** | personal photo with a student ID in the name; possibly the missing team portrait — user to confirm (D-31). Never published without that. |
-| `assets/certificate/template.png` | 332,656 | 2000x1414 | `app/Services/CertificateService.php:160` | **no — added** | **Protected (D-32).** Contains a real signature and stamp. |
+| `assets/certificate/template.png` | 332,656 → 717,354 | 2000x1414 | `app/Services/CertificateService.php:160` | **no — added** | **Protected (D-32).** Contains a real signature and stamp. **Replaced 2026-11-01** at the user's request: now a copy of `Sertifikat_Penghargaan_Student_Go.pptx (2).png` with the printed village-head name and the year prefix '20' erased (see 'Certificate template update' at the end). The old Karsa template is still in git history (`HEAD`). |
+| `assets/certificate/Sertifikat_Penghargaan_Student_Go.pptx (2).png` | 1,054,118 | 2000x1414 | none (source of `template.png`) | **no — added 2026-11-01 by the user** | **Protected (D-32).** User-supplied Student Go template; kept untouched. |
+| `assets/certificate/Sertifikat_Penghargaan_Student_Go.pptx.pdf` | 323,558 | — | none | **no — added 2026-11-01 by the user** | User-supplied PDF export of the same template; Retain, unused. |
 | `assets/certificate/fonts/PinyonScript-Regular.ttf` | 148,956 | — | `CertificateService.php:162` | **no — added** | **Protected (D-32).** Certificate only; not a website font. |
 | `assets/certificate/fonts/Poppins-Regular.ttf` | 158,240 | — | `CertificateService.php:161` | **no — added** | **Protected (D-32).** Certificate only. |
 | `.htaccess`, `index.php` | 740, 543 | — | framework | **no — added** | Retain (framework files) |
@@ -242,10 +244,10 @@ Licence: original work for this project. Compiled with Tailwind CSS 4.1.16 in th
 | `apple-touch-icon.png` (10.8 KB) | `<link rel="apple-touch-icon">` | Original work, no third-party rights | **Replace** the empty `public/favicon.ico` (Source A) from the layout `<head>` | `public/assets/brand/apple-touch-icon.png` |
 | `favicon.ico` (1.4 KB) | `<link rel="icon" sizes="32x32">` fallback | Original work, no third-party rights | **Replace** the empty `public/favicon.ico` (Source A) from the layout `<head>` | `public/assets/brand/favicon.ico` |
 | `favicon.svg` (8.1 KB) | `<link rel="icon" type="image/svg+xml">` | Original work, no third-party rights | **Replace** the empty `public/favicon.ico` (Source A) from the layout `<head>` | `public/assets/brand/favicon.svg` |
-| `student-go-logo-on-dark.svg` (12.9 KB) | Auth side panel, dark footer | Original work, no third-party rights | **Reuse** only if D-01 picks Student Go; otherwise **Retain** the Karsa logo (Source A) and do not use this wordmark | `public/assets/brand/student-go-logo-on-dark.svg` |
-| `student-go-logo.svg` (12.9 KB) | Header, footer, auth form side (light surfaces) | Original work, no third-party rights | **Reuse** only if D-01 picks Student Go; otherwise **Retain** the Karsa logo (Source A) and do not use this wordmark | `public/assets/brand/student-go-logo.svg` |
-| `student-go-symbol-on-dark.svg` (8.1 KB) | Dark surfaces where only the mark fits | Original work, no third-party rights | **Reuse** only if D-01 picks Student Go; otherwise **Retain** the Karsa logo (Source A) and do not use this wordmark | `public/assets/brand/student-go-symbol-on-dark.svg` |
-| `student-go-symbol.svg` (8.1 KB) | Mobile header, avatar-less placeholders, app icon source | Original work, no third-party rights | **Reuse** only if D-01 picks Student Go; otherwise **Retain** the Karsa logo (Source A) and do not use this wordmark | `public/assets/brand/student-go-symbol.svg` |
+| `student-go-logo-on-dark.svg` (12.9 KB) | Auth side panel, dark footer | Original work, no third-party rights | **Reuse** only if D-01 picks Student Go; otherwise **Retain** the Student Go logo (Source A) and do not use this wordmark | `public/assets/brand/student-go-logo-on-dark.svg` |
+| `student-go-logo.svg` (12.9 KB) | Header, footer, auth form side (light surfaces) | Original work, no third-party rights | **Reuse** only if D-01 picks Student Go; otherwise **Retain** the Student Go logo (Source A) and do not use this wordmark | `public/assets/brand/student-go-logo.svg` |
+| `student-go-symbol-on-dark.svg` (8.1 KB) | Dark surfaces where only the mark fits | Original work, no third-party rights | **Reuse** only if D-01 picks Student Go; otherwise **Retain** the Student Go logo (Source A) and do not use this wordmark | `public/assets/brand/student-go-symbol-on-dark.svg` |
+| `student-go-symbol.svg` (8.1 KB) | Mobile header, avatar-less placeholders, app icon source | Original work, no third-party rights | **Reuse** only if D-01 picks Student Go; otherwise **Retain** the Student Go logo (Source A) and do not use this wordmark | `public/assets/brand/student-go-symbol.svg` |
 
 Visual check: the symbol is a route drawn as an 'S' (ring = origin, dot = destination); the wordmark 'Student Go' reads cleanly at header size and on the dark navy variant. This is a brand-name decision, not only an asset decision (D-01, D-18).
 
@@ -317,7 +319,7 @@ Certificate typography (Pinyon Script, Poppins) is **not** part of this package 
 | `map-pin.svg` (7.9 KB) | Lokasi | **Reuse** via the sprite | `public/assets/icons/ui/map-pin.svg` |
 | `map.svg` (8.1 KB) | Tampilan peta | **Reuse** via the sprite | `public/assets/icons/ui/map.svg` |
 | `menu.svg` (7.9 KB) | Menu mobile | **Reuse** via the sprite | `public/assets/icons/ui/menu.svg` |
-| `message-square-text.svg` (8.0 KB) | Asisten KARA | **Reuse** via the sprite | `public/assets/icons/ui/message-square-text.svg` |
+| `message-square-text.svg` (8.0 KB) | Asisten SAGO | **Reuse** via the sprite | `public/assets/icons/ui/message-square-text.svg` |
 | `pencil.svg` (8.0 KB) | Ubah | **Reuse** via the sprite | `public/assets/icons/ui/pencil.svg` |
 | `phone.svg` (8.0 KB) | Telepon / WhatsApp | **Reuse** via the sprite | `public/assets/icons/ui/phone.svg` |
 | `plus.svg` (7.8 KB) | Tambah | **Reuse** via the sprite | `public/assets/icons/ui/plus.svg` |
@@ -462,11 +464,11 @@ Target implementation path for any photo that is later downloaded and approved: 
 
 | Route | Asset references found in the returned HTML | Notes |
 |---|---|---|
-| / | `karsa-logo.png` (img); `hero-background.jpg` (inline CSS url) | Also loads Google Fonts, Font Awesome 6.5.1, Leaflet 1.9.4, AOS 2.3.1, Boxicons 2.1.4, Alpine 3.13.3 from CDNs; Vite bundle `build/assets/app-CDP40zpX.css` / `app-34mOoJaZ.js`. |
-| /about | `karsa-logo.png`; `mahasiswa-about.jpeg`; `about.jpg`; `handprints-about.jpeg`; `jaket-about.jpeg` | Four documentary or landscape photographs, all 4912x2760 or larger. |
-| /contact | `karsa-logo.png` (2x); `contact.jpg`; `profile_18223127.jpg` (missing); `profile_13523136.jpg`; `profile_13523124.jpg` (404: file is `.jpeg`) | Two of three team portraits are broken. |
-| /login | `karsa-logo.png`; `login-register-view.jpg` (inline CSS url) | Auth layout. |
-| /register | `karsa-logo.png` | No photo; role chooser. |
+| / | `student-go-logo.png` (img); `hero-background.jpg` (inline CSS url) | Also loads Google Fonts, Font Awesome 6.5.1, Leaflet 1.9.4, AOS 2.3.1, Boxicons 2.1.4, Alpine 3.13.3 from CDNs; Vite bundle `build/assets/app-CDP40zpX.css` / `app-34mOoJaZ.js`. |
+| /about | `student-go-logo.png`; `mahasiswa-about.jpeg`; `about.jpg`; `handprints-about.jpeg`; `jaket-about.jpeg` | Four documentary or landscape photographs, all 4912x2760 or larger. |
+| /contact | `student-go-logo.png` (2x); `contact.jpg`; `profile_18223127.jpg` (missing); `profile_13523136.jpg`; `profile_13523124.jpg` (404: file is `.jpeg`) | Two of three team portraits are broken. |
+| /login | `student-go-logo.png`; `login-register-view.jpg` (inline CSS url) | Auth layout. |
+| /register | `student-go-logo.png` | No photo; role chooser. |
 | /register/institution, /register/company, /forgot-password | BLOCKED: HTTP 500 locally, nothing to read | Cause verified earlier only for `/forgot-password` (Vite manifest lacks `resources/css/auth-institution.css`) and `/register/student` (database query); for the other two UNKNOWN. Fix is outside discovery. |
 | /student/dashboard (not logged in) | Redirects to the login page, so the page behind it was not read | All authenticated pages (21 student, 11 institution, 12 company) are BLOCKED for rendered-HTML evidence this session; their asset usage comes from the audit (OBSERVED) or the filenames (INFERRED). |
 
@@ -514,7 +516,7 @@ Retain and Reuse are different: *retain* means the file stays and keeps working;
 |---|---|---|---|
 | `mahasiswa-about.jpeg`, `handprints-about.jpeg`, `jaket-about.jpeg`, `dashboard-student2.jpeg`, `network-student.JPG`, `projects-student.jpeg`, `repo-student.jpeg` | Genuine KKN field photographs; the audit calls them the most authentic assets in the application and says to reuse them in story pages. High resolution, specific to the domain, most with faces turned away. | Framed, captioned figures on About and Home (at most one or two per page), documentary stories, never page backgrounds. Derivatives, not originals. | D-30 (rights and consent), D-34 (derivatives) |
 | `about.jpg` | A strong landscape with no people (no consent issue). | One framed landscape on About or Home. | D-30, D-34 |
-| `karsa-logo.png` | Live brand asset; the source of the brand colour; the product name is undecided. | Stays live until D-01/D-18; then replaced in templates or adapted. | D-01, D-18 |
+| `student-go-logo.png` | Live brand asset; the source of the brand colour; the product name is undecided. | Stays live until D-01/D-18; then replaced in templates or adapted. | D-01, D-18 |
 | `profile_13523136.jpg`, `profile_13523124.jpeg` | Genuine personal photographs of team members. | Team list on About (Phase 5) with valid references; initials where a file is missing. | D-31 |
 | Student profile photographs, institution/company logos, verification documents, problem gallery images, repository documents | Functional feature assets and user data. | Shown exactly as today; no new public exposure. | D-04, D-14, D-31 |
 | Certificate templates, Pinyon Script, Poppins | Functional feature assets the user explicitly asked to keep; separate from website typography. | Untouched; compared before and after phases that touch fonts, layout or the asset pipeline. | D-32 |
@@ -544,8 +546,8 @@ Retain and Reuse are different: *retain* means the file stays and keeps working;
 |---|---|---|---|
 | `about.jpg` (7360x4912, 3.6 MB), `dashboard-student3.jpg` (3827x5741, 3.3 MB) | Responsive WebP derivatives (for example 2400, 1600, 800 px wide), `srcset` and `sizes`, explicit `width`/`height`; Indonesian alt text; caption in the form 'Place - what is happening. Foto: name'. | Weight (audit J6), layout shift, accessibility. | 4, 5 (D-34) |
 | `mahasiswa-about.jpeg`, `handprints-about.jpeg`, `jaket-about.jpeg`, `dashboard-student2.jpeg`, `network-student.JPG`, `projects-student.jpeg`, `repo-student.jpeg` (each 4912x2760, 0.4-1.2 MB) | Same derivative set; crop decisions (for example avoid showing identifiable people at full size in `repo-student.jpeg`); keep the uppercase `.JPG` reference as is until the derivative replaces it. | Weight; consent; Linux is case-sensitive. | 4, 5 (D-30, D-34) |
-| `KARA-background.png` (1.7 MB) if it is kept | Optimise or replace with a flat surface / `contour-field.svg`. | No gradient backgrounds; weight. | 16 |
-| `karsa-logo.png` (1430x566, 272 KB, drawn at 40 px) | If Karsa stays: optimised SVG or 2x PNG at its display size. If Student Go: replaced by `student-go-logo.svg` in templates. | Weight (audit J24); brand decision. | 3 (D-01, D-18) |
+| `SAGO-background.png` (1.7 MB) if it is kept | Optimise or replace with a flat surface / `contour-field.svg`. | No gradient backgrounds; weight. | 16 |
+| `student-go-logo.png` (1430x566, 272 KB, drawn at 40 px) | If Student Go stays: optimised SVG or 2x PNG at its display size. If Student Go: replaced by `student-go-logo.svg` in templates. | Weight (audit J24); brand decision. | 3 (D-01, D-18) |
 | `profile_13523124.jpeg` | Fix the template reference (`.jpg` -> `.jpeg`); do not rename the file. | Broken image on a public page. | 5 (D-31) |
 | `profile_*` team portraits | Square crop derivative with a neutral file name, only if the user approves. | Student ID numbers in public file names. | 5 (D-31) |
 | Package SVG and PNG files (96 + 7) | Strip the embedded C2PA `<metadata>` block on the copy in `public/assets/` (about 7.7 KB per SVG; 71 icons are about 570 KB instead of tens of KB); keep package originals and record both hashes. | Weight; hygiene. | 2 (D-35) |
@@ -568,12 +570,12 @@ Retain and Reuse are different: *retain* means the file stays and keeps working;
 | `dashboard-student2.jpeg` as the dashboard hero (and `dashboard-student.jpg`, `dashboard-student3.jpg` if referenced) | Audit S01: 370 px hero before any data; guardrail 1 | Page header with greeting and the next task | 7 | Stays; reused elsewhere |
 | `application-student.jpg` (applications), `projects-student.jpeg` (projects), `network-student.JPG` and `search-network.jpg` (friends), `repo-student.jpeg` (repository) as page heroes (INFERRED mapping) | Same | Standard `.sg-page-header` | 10, 11, 13, 14 | Stay; documentary candidates |
 | `company1-5.jpg`, `company-profile.jpg` as company/jobs heroes | Audit: unrelated corporate stock; guardrail 7 | No photo | 15, 21-25 | Stay until verified; archive only with approval |
-| `KARA-background.png` as the chatbot background (INFERRED) | Gradient, decorative, 1.7 MB | Flat surface or `contour-field.svg` | 16 | Stays |
+| `SAGO-background.png` as the chatbot background (INFERRED) | Gradient, decorative, 1.7 MB | Flat surface or `contour-field.svg` | 16 | Stays |
 | Inline SVG mock-UI and flat-building illustration on `/` | Audit G01: generic illustration | Workflow diagrams; real product screenshot later | 4 | Markup in Blade (git history is the backup) |
 | Leaflet default marker images | Off-brand | `map-pin*.svg` | 8 | Library file (CDN) untouched |
 | Google Fonts, Font Awesome, Boxicons, AOS | Four font families in three stacks; unused or decorative libraries (audit C, J15, J23, J24) | Local fonts; Lucide; no AOS | 2, 3, 15 | CDN links removed from layouts; certificate-view links excepted (D-32) |
 | Empty `favicon.ico` | 0 bytes | Package favicon set | 3 | Stays unless overwriting is approved |
-| `karsa-logo.png` in templates | Only if D-01 picks Student Go | `student-go-logo.svg` | 3 | Stays on disk |
+| `student-go-logo.png` in templates | Only if D-01 picks Student Go | `student-go-logo.svg` | 3 | Stays on disk |
 
 ## 8. Missing assets
 
@@ -581,7 +583,7 @@ Retain and Reuse are different: *retain* means the file stays and keeps working;
 |---|---|---|---|
 | Provenance and consent records for every existing photograph | No credit, licence, `credits.json` or consent record exists for any Source A image (UNKNOWN). | Any new or larger placement (D-30) | The user / the KKN documentation team |
 | `profile_18223127.jpg` | Referenced by `/contact`, not found under seven extensions (VERIFIED). | Team list (Phase 5) | The user (or use initials) |
-| A vector source of the Karsa logo | Only a 1430x566 PNG exists (OBSERVED/VERIFIED). | Option (c) of D-18 | The user / designer |
+| A vector source of the Student Go logo | Only a 1430x566 PNG exists (OBSERVED/VERIFIED). | Option (c) of D-18 | The user / designer |
 | Certificate templates and fonts: locations | Not found at probed paths; no certificate route in the audit (UNKNOWN / BLOCKED). | Protecting them (D-32) | Stage One or the user |
 | Location and storage of uploaded avatars, logos, verification documents | Cannot be listed without the repository (BLOCKED). | Preservation and privacy checks | Stage One |
 | A real product screenshot of the finished application | INTEGRATION.md: the homepage 'needs ... a real screenshot of the finished app'; none exists. | Homepage (Phase 4, last) | Produced after Phases 7-25 |
@@ -620,7 +622,7 @@ Nothing below is legal advice; it lists what has to be confirmed.
 
 | From (package, `student-go-assets/...`) | Proposed canonical destination (project root) | Collision check | Laravel / Vite notes | Phase |
 |---|---|---|---|---|
-| `public/assets/brand/` | `public/assets/brand/` | `/assets/brand/*` 404 (VERIFIED); does not touch root `karsa-logo.png` or `favicon.ico` | Reference with `{{ asset('assets/brand/...') }}` | 2-3 |
+| `public/assets/brand/` | `public/assets/brand/` | `/assets/brand/*` 404 (VERIFIED); does not touch root `student-go-logo.png` or `favicon.ico` | Reference with `{{ asset('assets/brand/...') }}` | 2-3 |
 | `public/assets/fonts/` | `public/assets/fonts/` | `/assets/fonts/*` 404 (VERIFIED) | Served from `public/`; `fonts.css` URLs are root-relative | 2 |
 | `public/assets/icons/ui/` | `public/assets/icons/ui/` | 404 (VERIFIED) | Sprite must be same-origin | 2-3 |
 | `public/assets/illustrations/{empty-states,workflows,geographic,motifs}/` | `public/assets/illustrations/...` | 404 (VERIFIED for `motifs/map-pin.svg`) | Inline workflows; `L.icon` for pins | 2-8 |
@@ -668,12 +670,12 @@ Where the two sources serve the same purpose, the recommendation below is the st
 
 | # | Purpose | Source A (existing) | Source B (custom) | Recommendation |
 |---|---|---|---|---|
-| 1 | Logo / wordmark | `karsa-logo.png` (A) | `brand/student-go-logo.svg`, `-on-dark.svg`, symbol files (B) | These are two names, not two drawings of one name. Gated by D-01 and D-18. Keep the PNG live until the decision; if Student Go is chosen, use the SVG and keep the PNG on disk; if Karsa is kept, adapt the PNG into an SVG or 2x PNG and do not use the Student Go wordmark. Never ship both in one header. |
+| 1 | Logo / wordmark | `student-go-logo.png` (A) | `brand/student-go-logo.svg`, `-on-dark.svg`, symbol files (B) | These are two names, not two drawings of one name. Gated by D-01 and D-18. Keep the PNG live until the decision; if Student Go is chosen, use the SVG and keep the PNG on disk; if Student Go is kept, adapt the PNG into an SVG or 2x PNG and do not use the Student Go wordmark. Never ship both in one header. |
 | 2 | Favicon and app icons | `favicon.ico` 0 bytes (A) | `brand/favicon.svg`, `favicon.ico`, `apple-touch-icon.png` (B) | B wins. A is empty. Link the package files from the layout; do not overwrite the root file. |
 | 3 | Homepage imagery | `hero-background.jpg`, `about.jpg`, `dashboard-student2.jpeg`, `network-student.JPG`, `projects-student.jpeg` (A) | 6 homepage candidates in the catalogue, not downloaded (B) | Prefer A: it is already in the project, it is Indonesian, and several frames show real KKN activity (audit: the most authentic assets). Decide only after rights are confirmed (D-30). Use at most one or two, framed and captioned, never as a background. Download nothing from B until a slot is left empty (D-33). |
 | 4 | About-page photographs | `mahasiswa-about.jpeg`, `handprints-about.jpeg`, `jaket-about.jpeg`, `about.jpg` (A) | 4 About candidates in the catalogue, not downloaded (B) | Prefer A for the same reason. B is the fallback for a missing landscape or for any A photo whose rights cannot be confirmed. |
 | 5 | Auth side imagery | `login-register-view.jpg` (A) | `motifs/contour-field.svg` + wordmark (B) | Prefer B (no photo): it is lighter, has no rights question, and matches the design principle that the auth panel is a task surface. Keep A as an unused fallback figure. |
-| 6 | KARA assistant background | `KARA-background.png` (A) | `motifs/contour-field.svg` or a flat surface (B) | Prefer B or flat. The gradient PNG breaks the no-gradient rule and weighs 1.7 MB. Keep the file until Phase 16. |
+| 6 | SAGO assistant background | `SAGO-background.png` (A) | `motifs/contour-field.svg` or a flat surface (B) | Prefer B or flat. The gradient PNG breaks the no-gradient rule and weighs 1.7 MB. Keep the file until Phase 16. |
 | 7 | Company page imagery | `company-profile.jpg`, `company1-5.jpg` (A) | Nothing; the package deliberately has no corporate photos (B) | No photo. The plain page header carries the page. If a company logo exists it is shown, otherwise initials. |
 | 8 | Icons | Inline SVG (outline style), Boxicons 2.1.4 (used 0 times), Font Awesome 6.5.1 (used 2 times) (A/C) | Lucide sprite, 71 icons at 1.5 px (B) | B wins: one family, local, ISC licence. Migrate page by page; remove the two CDN libraries only when no template uses them (D-20). |
 | 9 | Website typography | Inter, Outfit, Merriweather, Lora from Google Fonts (A/C) | Plus Jakarta Sans + Source Serif 4, local WOFF2 (B) | B wins for the website (pending D-17). Certificate typography (Pinyon Script, Poppins) is a separate, protected stack and is outside this decision (D-32). |
@@ -705,8 +707,8 @@ These extend the Stage One list in `DISCOVERY_REPORT.md` section 12 (S1-01 to S1
 
 | INTEGRATION.md says | Conflict | Adapted instruction |
 |---|---|---|
-| Section 4: remove 'The 272 KB PNG logo' (J24) | Deletes a live brand asset before the name decision. | Retain `karsa-logo.png`; stop referencing it from templates only when D-01/D-18 choose Student Go, and only in Phase 3. |
-| Section 4: wordmark 'replaces the Karsa/PNG logo' and set `APP_NAME="Student Go"` | A naming decision, not an asset swap. | D-01 first. `.env` is not touched by any asset phase. |
+| Section 4: remove 'The 272 KB PNG logo' (J24) | Deletes a live brand asset before the name decision. | Retain `student-go-logo.png`; stop referencing it from templates only when D-01/D-18 choose Student Go, and only in Phase 3. |
+| Section 4: wordmark 'replaces the Student Go/PNG logo' and set `APP_NAME="Student Go"` | A naming decision, not an asset swap. | D-01 first. `.env` is not touched by any asset phase. |
 | Section 4: remove Google Fonts links and font-family overrides | Could break certificate rendering if a certificate view shares the layout or link. | Remove from site layouts only after D-32 locates certificate fonts. |
 | Section 6 step 7 and Section 5 J6: replace each photo hero | Treats the photo files as disposable. | Replace the hero usage (template change); keep the photos; reuse the genuine ones as framed figures. |
 | Section 2: `cp -R docs/* $L/docs/` | May collide with an existing `docs/` folder. | Target `student-go-docs/design-system/` (proposal) or check Stage One first. |
@@ -747,7 +749,7 @@ The project copies of the 96 SVGs, 7 PNGs and the style guide HTML differ from t
 
 | Asset | Decision | Status |
 |---|---|---|
-| `karsa-logo.png` | Retain until Phase 3 replaces the reference (D-18 a); never deleted | Untouched, still in the layout |
+| `student-go-logo.png` | Retain until Phase 3 replaces the reference (D-18 a); never deleted | Untouched, still in the layout |
 | `favicon.ico` (0 bytes, root) | Retain on disk; `brand/favicon.*` replaces the reference in Phase 3 | Untouched |
 | All photographs in `public/` | Retain; rights still open (D-30) | Untouched; the regression pages that show them load them with HTTP 200 |
 | `public/assets/certificate/**` | Protected (D-32) | Byte-identical; re-rendered certificate sample is pixel-identical to the Phase 0 baseline |
@@ -765,7 +767,7 @@ Phase 3 changed **references only**; no file under `public/` was added, deleted,
 
 | Asset | Source | Decision in Phase 3 | Where it is used now |
 |---|---|---|---|
-| `public/karsa-logo.png` | A | **Replace** in the header and footer templates (D-01, D-18). Kept on disk. Still referenced by pages not yet migrated, if any (none found in the shell). | — |
+| `public/student-go-logo.png` | A | **Replace** in the header and footer templates (D-01, D-18). Kept on disk. Still referenced by pages not yet migrated, if any (none found in the shell). | — |
 | `public/favicon.ico` (0 bytes) | A | **Retain** on disk, not overwritten. The layouts link the package set instead. | — |
 | `public/assets/brand/student-go-logo.svg` | B | **Reuse** | Navbar wordmark (all layouts) |
 | `public/assets/brand/student-go-logo-on-dark.svg` | B | **Reuse** | Footer |
@@ -811,9 +813,9 @@ The homepage was revised after the first Phase 4 version (section 17). Section 1
 | `illustrations/geographic/indonesia-regions.svg`, `motifs/contour-field.svg`, `workflows/student-journey*.svg`, `institution-journey*.svg` | B | **Not placed any more** (the revised page uses data rows, a table and the video instead) | — |
 | `illustrations/motifs/map-pin.svg`, `map-pin-selected.svg` | B | **Reuse** inside a Leaflet `divIcon` with the count | Homepage map |
 | `public/assets/brand/student-go-logo-on-dark.svg` | B | **Reuse** in the header over the hero (homepage only) | Navbar |
-| `public/karsa-logo.png` | A | **Deleted from the working tree by the user** (stated 2026-10-31 in the Phase 4 closing session: deliberate). This deviates from AD-09 by the owner's choice; it is still in git HEAD. Five standalone auth views still reference it (broken image): `auth/login`, `auth/register`, `auth/student-register`, `auth/institution-register`, `auth/company-register` → Phase 6 (RN-13). | — |
+| `public/student-go-logo.png` | A | **Deleted from the working tree by the user** (stated 2026-10-31 in the Phase 4 closing session: deliberate). This deviates from AD-09 by the owner's choice; it is still in git HEAD. Five standalone auth views still reference it (broken image): `auth/login`, `auth/register`, `auth/student-register`, `auth/institution-register`, `auth/company-register` → Phase 6 (RN-13). | — |
 
-Hashes: 37 of the 38 Phase 0 `public/` files match the baseline; the 38th is `karsa-logo.png` (above). Nothing else under `public/` was deleted, overwritten, moved or renamed.
+Hashes: 37 of the 38 Phase 0 `public/` files match the baseline; the 38th is `student-go-logo.png` (above). Nothing else under `public/` was deleted, overwritten, moved or renamed.
 
 ## 19. Phase 5 record: about, contact, public institution profile (2026-10-31)
 
@@ -856,7 +858,7 @@ No file under `public/` was added, deleted, overwritten, moved or renamed by thi
 | `public/login-register-view.jpg` | A | **Retain** file; **Deprecate** as auth background (D-19 answer for auth: no photograph) | Nowhere (was the `/login` background) |
 | `public/student-register-background.jpeg` | A | **Retain** file; **Deprecate** as background | Nowhere (was the `/register/student` background) |
 | `public/institution-register-background.jpeg` | A | **Retain** file; **Deprecate** as background | Nowhere (was the `/register/institution` background) |
-| `public/karsa-logo.png` | A | References removed from the five auth views (RN-13). The file itself was deleted outside the design before this phase (git shows `D`); the auth pages showed a broken image until now | Nowhere |
+| `public/student-go-logo.png` | A | References removed from the five auth views (RN-13). The file itself was deleted outside the design before this phase (git shows `D`); the auth pages showed a broken image until now | Nowhere |
 | `assets/brand/student-go-logo.svg` | B | **Reuse** | Auth header (`layouts/auth.blade.php`), `alt=""` inside a link named "Student Go, ke beranda" |
 | `illustrations/motifs/contour-field.svg` | B | **Reuse** via `.sg-contour` (one per page) | Auth side panel from 1024 px (login, three registrations) |
 | `icons/ui/sprite.svg` | B | **Reuse** (no icon added; the sprite has no `building`, so Instansi uses `map-pin`) | eye / eye-off, graduation-cap, map-pin, briefcase, mail, user, image, file-text, upload, check, circle-dashed, circle-alert, circle-check, arrow-left/right, chevron-right, log-in |
@@ -879,7 +881,7 @@ No file under `public/` was added, deleted, overwritten, moved or renamed by thi
 
 ## 22. Phase 17 — institution dashboard (2026-10-31)
 
-No file under `public/` was added, deleted, overwritten, moved or renamed by this phase (generated `public/build/` only). Baseline hash check after the phase: 37/38 identical, 0 changed; the one missing file is `public/karsa-logo.png`, deleted by the user before Phase 4 (recorded there). Usage decisions for `/institution/dashboard`:
+No file under `public/` was added, deleted, overwritten, moved or renamed by this phase (generated `public/build/` only). Baseline hash check after the phase: 37/38 identical, 0 changed; the one missing file is `public/student-go-logo.png`, deleted by the user before Phase 4 (recorded there). Usage decisions for `/institution/dashboard`:
 
 | Asset | Source | Decision | Where it is used now |
 |---|---|---|---|
@@ -892,11 +894,11 @@ No file under `public/` was added, deleted, overwritten, moved or renamed by thi
 
 ## 23. Phase 21 — company dashboard (2026-10-31)
 
-No file under `public/` was added, deleted, overwritten, moved or renamed by this phase (generated `public/build/` only). Baseline hash check after the phase: 37/38 identical, 0 changed; the one missing file is `public/karsa-logo.png`, deleted by the user before Phase 4. Usage decisions for `/company/dashboard`:
+No file under `public/` was added, deleted, overwritten, moved or renamed by this phase (generated `public/build/` only). Baseline hash check after the phase: 37/38 identical, 0 changed; the one missing file is `public/student-go-logo.png`, deleted by the user before Phase 4. Usage decisions for `/company/dashboard`:
 
 | Asset | Source | Decision | Where it is used now |
 |---|---|---|---|
-| `deal-work-together.jpg` (6016x4016, 1.09 MB; rights UNKNOWN, D-30) | A | **Retain** (file); **Deprecate** as the company dashboard hero (J6, guardrail 1): the page starts with `x-ui.page-header`. Still referenced by `student/chatbot/index.blade.php` (Phase 16) | KARA list only |
+| `deal-work-together.jpg` (6016x4016, 1.09 MB; rights UNKNOWN, D-30) | A | **Retain** (file); **Deprecate** as the company dashboard hero (J6, guardrail 1): the page starts with `x-ui.page-header`. Still referenced by `student/chatbot/index.blade.php` (Phase 16) | SAGO list only |
 | `company1-5.jpg`, `company-profile.jpg` | A | **Retain**, unchanged: not referenced by the company dashboard (VERIFIED in source; section H.1's mapping was INFERRED). Still used by other company pages (Phases 22-25) | other company pages |
 | Company logo (`logo` upload) | user upload | **Retain**, not shown on the dashboard; header shows the name only (audit C01) | navbar initials, profile pages (unchanged) |
 | Student profile photos | user uploads | **Retain**, not shown: applicant and talent rows use initials (`x-ui.avatar`, decorative). The old talent rows pointed `asset()` at a Supabase path, which never loaded | — |
@@ -908,7 +910,7 @@ No file under `public/` was added, deleted, overwritten, moved or renamed by thi
 
 ## 24. Phase 8 — student project discovery (2026-10-31)
 
-No file under `public/` was added, deleted, overwritten, moved or renamed by this phase (generated `public/build/` only). Baseline hash check after the phase: 37/38 identical, 0 changed; the one missing file is `public/karsa-logo.png`, deleted by the user before Phase 4. Usage decisions for `/student/browse-problems`:
+No file under `public/` was added, deleted, overwritten, moved or renamed by this phase (generated `public/build/` only). Baseline hash check after the phase: 37/38 identical, 0 changed; the one missing file is `public/student-go-logo.png`, deleted by the user before Phase 4. Usage decisions for `/student/browse-problems`:
 
 | Asset | Source | Decision | Where it is used now |
 |---|---|---|---|
@@ -924,7 +926,7 @@ No file under `public/` was added, deleted, overwritten, moved or renamed by thi
 
 ## 25. Phase 18 — institution problem management (2026-10-31)
 
-No file under `public/` was added, deleted, overwritten, moved or renamed by this phase (generated `public/build/` only). Baseline hash check after the phase: 37/38 identical, 0 changed. The one missing file is `public/karsa-logo.png`, deleted by the user before Phase 4. Usage decisions for `/institution/problems`, `/create`, `/{id}`, `/{id}/edit`:
+No file under `public/` was added, deleted, overwritten, moved or renamed by this phase (generated `public/build/` only). Baseline hash check after the phase: 37/38 identical, 0 changed. The one missing file is `public/student-go-logo.png`, deleted by the user before Phase 4. Usage decisions for `/institution/problems`, `/create`, `/{id}`, `/{id}/edit`:
 
 | Asset | Source | Decision | Where it is used now |
 |---|---|---|---|
@@ -937,7 +939,7 @@ No file under `public/` was added, deleted, overwritten, moved or renamed by thi
 
 ## 26. Phase 22 — company talent discovery (2026-10-31)
 
-Pages: `/company/talents`, `/company/talents/saved`, `/company/talents/compare`. No file under `public/` was added, changed, moved or removed (37/38 Phase 0 hashes identical; `karsa-logo.png` was deleted by the user before Phase 4).
+Pages: `/company/talents`, `/company/talents/saved`, `/company/talents/compare`. No file under `public/` was added, changed, moved or removed (37/38 Phase 0 hashes identical; `student-go-logo.png` was deleted by the user before Phase 4).
 
 | Asset | Source | Decision | Where / note |
 |---|---|---|---|
@@ -963,7 +965,7 @@ No file under `public/` was added, deleted, overwritten, moved or renamed by thi
 
 ## 28. Phase 23 — company job management (2026-10-31)
 
-Pages: `/company/jobs`, `/company/jobs/create`, `/company/jobs/{id}`. No file under `public/` was added, changed, moved or removed (37/38 Phase 0 hashes identical; `karsa-logo.png` was deleted by the user before Phase 4).
+Pages: `/company/jobs`, `/company/jobs/create`, `/company/jobs/{id}`. No file under `public/` was added, changed, moved or removed (37/38 Phase 0 hashes identical; `student-go-logo.png` was deleted by the user before Phase 4).
 
 | Asset | Source | Decision | Where / note |
 |---|---|---|---|
@@ -977,7 +979,7 @@ Pages: `/company/jobs`, `/company/jobs/create`, `/company/jobs/{id}`. No file un
 
 ## 29. Phase 19 — institution review and monitoring (2026-10-31)
 
-No file under `public/` was added, deleted, overwritten, moved or renamed by this phase (generated `public/build/` only). Baseline hash check after the phase: 37/38 identical, 0 changed. The one missing file is `public/karsa-logo.png`, deleted by the user before Phase 4. Usage decisions for `/institution/applications` (+ `/{id}`, `/{id}/review`), `/institution/projects` (+ `/{id}`) and `/institution/reviews` (+ `/{id}`, `/{id}/edit`, `/create/{projectId}`):
+No file under `public/` was added, deleted, overwritten, moved or renamed by this phase (generated `public/build/` only). Baseline hash check after the phase: 37/38 identical, 0 changed. The one missing file is `public/student-go-logo.png`, deleted by the user before Phase 4. Usage decisions for `/institution/applications` (+ `/{id}`, `/{id}/review`), `/institution/projects` (+ `/{id}`) and `/institution/reviews` (+ `/{id}`, `/{id}/edit`, `/create/{projectId}`):
 
 | Asset | Source | Decision | Where it is used now |
 |---|---|---|---|
@@ -1046,3 +1048,14 @@ No file under `public/` was added, deleted, overwritten, moved or renamed (gener
 | `public/assets/icons/ui/sprite.svg` (`arrow-left`, `house`) | Reuse | Kembali / Ke beranda buttons |
 
 No illustration or photograph added; no `public/` file changed.
+
+## Certificate template update (2026-11-01, user request)
+
+| File | Decision | Note |
+|---|---|---|
+| `public/assets/certificate/Sertifikat_Penghargaan_Student_Go.pptx (2).png` | **Retain** (source, untouched) | Added by the user; SHA-256 `c31a9058…3bc1` asserted in `tests/Feature/Phase2/DesignSystemAssetsTest.php` |
+| `public/assets/certificate/template.png` | **Replace** (user-authorised) | Copy of the source with two areas repainted by vertical background interpolation: the printed name 'DRS. BUDIYAN SETYONO' (x 503-917, y 1171-1202) and the year prefix '20' after '/XI/' (x 1243-1291, y 433-463). SHA-256 `12e83245…dcdc`. The previous Karsa template was deleted from the working tree by the user and remains in git `HEAD` |
+| `public/assets/certificate/Sertifikat_Penghargaan_Student_Go.pptx.pdf` | **Retain**, unused | PDF export supplied by the user |
+| `public/assets/certificate/fonts/*.ttf` | **Retain**, unchanged | Poppins + Pinyon Script still render all variable text |
+
+Generator (`app/Services/CertificateService.php`): text positions re-fitted (number right-aligned before '/KKN', full year after '/XI/', name centred above the divider in dark green, NIM after 'NIM:', year in the gap of line 1, date range right-aligned before 'dengan hasil', `pic_name` upper case centred under the left signature); new `align` and `max_width` keys shrink long names instead of overflowing. Certificates already stored in Supabase are not regenerated. Samples: `reports/certificate-2026-11-01/sample_short.png`, `sample_long.png`.

@@ -205,7 +205,7 @@ Live checks:
 - **Contrast:** new pairs measured (`checks/contrast-new-pairs.txt`). Text on the selected row ≥ 5.21:1, meter segments ≥ 6.03:1; the empty track is decorative because the value is written as text.
 - **Reduced motion:** only colour/background transitions, covered by the global reduced-motion rule.
 - **Console/network:** no JS errors; the only console error is the intended 404 page. No hot-linked image remains (`ui-avatars.com` and `asset('storage/…')` removed).
-- **Assets:** `public/` hash check 37/38 identical, 0 changed (`karsa-logo.png` deleted by the user before Phase 4).
+- **Assets:** `public/` hash check 37/38 identical, 0 changed (`student-go-logo.png` deleted by the user before Phase 4).
 - **Suite:** 185 → **224/224** (2,442 assertions; includes other sessions' tests). One run had a transient `ExampleTest` 500 (`rename()` in the shared `storage/framework/views` right after `view:clear` while other sessions were compiling views); it passed alone and in a full re-run.
 
 ## 12. Before/after screenshots

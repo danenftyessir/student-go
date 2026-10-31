@@ -156,8 +156,8 @@ Not touched: routes, middleware, models, migrations, other seeders, `.env`, `tok
 
 Recorded in `ASSET_INVENTORY.md` section 23. In short:
 
-- **No change under `public/`.** No file was added, changed or removed there. The baseline hash check gives 37/38 identical and 0 changed; the missing file is `karsa-logo.png`, deleted by the user before Phase 4.
-- **Deprecate as hero:** `deal-work-together.jpg`, the old dashboard hero. The phase file named `company1-5.jpg`, but the source shows that file was this one. The file is retained and is still used by the KARA list.
+- **No change under `public/`.** No file was added, changed or removed there. The baseline hash check gives 37/38 identical and 0 changed; the missing file is `student-go-logo.png`, deleted by the user before Phase 4.
+- **Deprecate as hero:** `deal-work-together.jpg`, the old dashboard hero. The phase file named `company1-5.jpg`, but the source shows that file was this one. The file is retained and is still used by the SAGO list.
 - **Reuse:** `no-applications.svg` and the Lucide sprite. No icon was added; `message-square-text` is used for Wawancara.
 - **Adapt:** `workflows/company-journey(-vertical).svg` is turned into an HTML step list.
 - **Retain, conditional:** the existing Chart.js 4.4.1 CDN tag. It is no longer loaded on every visit.
@@ -220,7 +220,7 @@ All three sessions write to the same working directory and branch: no worktrees,
 | `COMPONENT_INVENTORY.md` | One row extended | Low. |
 | `public/build/` | Rebuilt | Every session overwrites it; rebuild once after all sessions finish. |
 | `resources/js/app.js` | +4 lines: dynamic import of `student-go/charts.js` when a chart is on the page (13.2) | Low. Other phases that need a chart reuse it with `canvas[data-sg-chart]`. |
-| `package.json`, `package-lock.json` | + `chart.js` 4.4.1 (exact, devDependency) and `@kurkle/color` 0.3.4. npm 11.8.0 also rewrote lockfile metadata: it dropped the top-level `"name": "Karsa"` and the `libc` hints of optional platform packages. No other package version changed | Medium: lockfiles conflict easily. Re-run `npm install` after merging instead of hand-merging; run `npm install` on other machines. |
+| `package.json`, `package-lock.json` | + `chart.js` 4.4.1 (exact, devDependency) and `@kurkle/color` 0.3.4. npm 11.8.0 also rewrote lockfile metadata: it dropped the top-level `"name": "Student Go"` and the `libc` hints of optional platform packages. No other package version changed | Medium: lockfiles conflict easily. Re-run `npm install` after merging instead of hand-merging; run `npm install` on other machines. |
 | `app/Models/JobApplication.php` | + `STATUS_ALIASES`, `statusesFor()` (13.1) | Low (additive). Phase 24 should build on it. |
 | `app/Http/Controllers/Company/JobApplicationController.php` | `index()` only: alias-aware filter and columns (13.1) | Phase 24 territory, changed at the user's request. |
 | Dev database | Seed rows (section 6) | Session A/B counts are unaffected (company tables only; 12 student users gained one job application each). |

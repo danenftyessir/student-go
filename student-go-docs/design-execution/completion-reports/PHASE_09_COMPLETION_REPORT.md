@@ -100,7 +100,7 @@ Evidence: `reports/phase9/before/` (S03 = #1 as student 86, S04 = #45 as student
 | `vendor/bin/pint --test tests/Feature/Phase9` | **PASS** |
 | `npm run build` | **PASS** (CSS 248.60 kB / gzip 38.35 kB, including Sessions B/C styles) |
 | Route snapshot vs `reports/phase8/routes-after.json` | **PASS** 203 = 203, identical |
-| `public/` baseline hashes | 37/38 identical, 0 changed (`karsa-logo.png` was deleted by the user before Phase 4) |
+| `public/` baseline hashes | 37/38 identical, 0 changed (`student-go-logo.png` was deleted by the user before Phase 4) |
 
 ### 8.2 Browser (`after/interaction-checks.json`, 30/30 PASS; local seeded DB; GET only, Simpan not clicked)
 
