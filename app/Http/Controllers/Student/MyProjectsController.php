@@ -141,7 +141,7 @@ class MyProjectsController extends Controller
         } catch (\Exception $e) {
             return response()->json([
                 'success' => false,
-                'message' => 'Gagal update milestone: ' . $e->getMessage(),
+                'message' => safe_error_message('Gagal update milestone: ', $e),
             ], 500);
         }
     }
@@ -206,7 +206,7 @@ class MyProjectsController extends Controller
         } catch (\Exception $e) {
             return back()
                 ->withInput()
-                ->with('error', 'Gagal mengirim laporan: ' . $e->getMessage());
+                ->with('error', safe_error_message('Gagal mengirim laporan: ', $e));
         }
     }
 
@@ -270,7 +270,7 @@ class MyProjectsController extends Controller
         } catch (\Exception $e) {
             return back()
                 ->withInput()
-                ->with('error', 'Gagal mengirim laporan akhir: ' . $e->getMessage());
+                ->with('error', safe_error_message('Gagal mengirim laporan akhir: ', $e));
         }
     }
 
@@ -319,7 +319,7 @@ class MyProjectsController extends Controller
         } catch (\Exception $e) {
             return response()->json([
                 'success' => false,
-                'message' => 'Gagal mengubah visibility portfolio: ' . $e->getMessage(),
+                'message' => safe_error_message('Gagal mengubah visibility portfolio: ', $e),
             ], 500);
         }
     }
