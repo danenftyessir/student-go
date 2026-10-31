@@ -921,3 +921,70 @@ No file under `public/` was added, deleted, overwritten, moved or renamed by thi
 | Catalogue photographs `public/assets/photography/**` marked `available` in `photo-review.json` (37; Unsplash / Pexels licences as recorded in `student-go-docs/design-system/ASSET_SOURCES.md`; no identifiable people) | B | **Reuse** as **dev seed images** (D-14 answer): converted to JPEG ≤ 1600 px q82 and uploaded as 92 objects to the public Supabase bucket `sg-storage` under the paths already stored in `problem_images.image_path` (`problems/masalah-desa-NN.jpg|.jpeg`). Nothing was copied into `public/`; the database is unchanged. Each photo is reused 2–3 times and does not depict the problem it is attached to. Log: `reports/phase8/seed-images-upload-log.json` | gallery view (image only when a record exists and loads); detail pages (Phase 9) read the same objects |
 | KKN photographs with people in `public/` | A | **Not used** (D-30 open) | — |
 | Leaflet 1.9.4, leaflet.markercluster 1.5.3 (unpkg) | external | **Retain** (AD-08), unchanged versions and URLs | map view |
+
+## 25. Phase 18 — institution problem management (2026-10-31)
+
+No file under `public/` was added, deleted, overwritten, moved or renamed by this phase (generated `public/build/` only). Baseline hash check after the phase: 37/38 identical, 0 changed. The one missing file is `public/karsa-logo.png`, deleted by the user before Phase 4. Usage decisions for `/institution/problems`, `/create`, `/{id}`, `/{id}/edit`:
+
+| Asset | Source | Decision | Where it is used now |
+|---|---|---|---|
+| Problem gallery uploads (`problem_images`, Supabase Storage; seed objects from Phase 8 in `sg-storage`) | user upload | **Retain**: same files, same storage paths, same `image_url` accessor. Detail page: documentation grid with a 'Sampul' label on the cover. Edit page: current photos, each with a visible 'Hapus foto N' checkbox (`delete_images[]`; the old checkbox was `hidden` and could not be reached by keyboard). If an image fails to load it is hidden and the text 'Foto tidak dapat dimuat' is shown instead. No placeholder tile | detail, edit |
+| `https://via.placeholder.com/…` image fallbacks in the old list/detail views | external (hot-linked) | **Removed** (no hot-linked images): the list is a table without thumbnails; detail and edit show the text fallback above | — |
+| `illustrations/empty-states/no-search-results.svg` | B | **Reuse** | 'Tidak ada masalah yang cocok' (filters with no match) |
+| `icons/ui/sprite.svg` | B | **Reuse** (no icon added) | plus, pencil, x, check, circle-alert, upload, file-text + status icons |
+| Inline `<style>` blocks, inline heroicons and the `alert()` SDG check of the old views | C | **Replaced** by `resources/css/student-go/institution.css` (Phase 18 section), the sprite and an inline error in section 3 | — |
+| Institution logo, student photos | user uploads | **Retain**, not shown on these pages (unchanged elsewhere) | — |
+
+## 26. Phase 22 — company talent discovery (2026-10-31)
+
+Pages: `/company/talents`, `/company/talents/saved`, `/company/talents/compare`. No file under `public/` was added, changed, moved or removed (37/38 Phase 0 hashes identical; `karsa-logo.png` was deleted by the user before Phase 4).
+
+| Asset | Source | Decision | Where / note |
+|---|---|---|---|
+| `company1.jpg` (talents hero) | A | **Deprecate (usage)** | No longer referenced by `company/talents/index`; file retained. Its URL also returned 404 in the before capture. |
+| `company4.jpg` (saved talents hero) | A | **Deprecate (usage)** | No longer referenced by `company/talents/saved`; file retained. |
+| Student profile photographs | user uploads | **Retain**, not shown | Rows use initials (`x-ui.avatar` without `src`), as the old grid effectively did; no new or larger exposure (D-04, D-31). The compare page no longer requests `ui-avatars.com`. |
+| `illustrations/empty-states/no-saved-projects.svg` | B | **Reuse** | Empty saved talents ('Belum ada talenta tersimpan'). |
+| `illustrations/empty-states/no-search-results.svg` | B | **Reuse** | Empty pool and 'Tidak ada mahasiswa yang cocok'. |
+| `icons/ui/sprite.svg` | B | **Reuse** (no icon added) | bookmark, download, map-pin, folder-open, trash-2, badge-check, plus, x, list-filter, arrow-left. |
+| Inline `<style>` blocks, inline heroicons, `prompt()`/`confirm()` of the old views | C | **Replaced** | `resources/css/student-go/company.css` (Phase 22 section), the sprite, `window.sgConfirm`. |
+
+## 27. Phase 9 — problem detail (2026-10-31)
+
+No file under `public/` was added, deleted, overwritten, moved or renamed by this phase (generated `public/build/` only). Usage decisions for `/student/browse-problems/{id}`:
+
+| Asset | Source | Decision | Where it is used now |
+|---|---|---|---|
+| Problem images (`problem_images`, D-14 seed objects in `sg-storage`) | remote | **Retain**; shown only after they load, dropped with their caption on error; no placeholder, no 'Gallery N' | 'Foto' section of the brief |
+| Institution logo (`logo_path` upload) | user upload | **Retain**, same placement as before (this authenticated page); initials when there is none (0 logos in the seed) | 'Tentang instansi' |
+| `icons/ui/sprite.svg` | B | **Reuse** (no icon added; no `heart`/`share` in the sprite, so Simpan uses `bookmark` and Bagikan `link`) | bookmark, link, clock, award, info, lock, arrow-right + status icons |
+| Inline heroicons, emoji (⭐ 🔥 ⏰), gradients and the inline `<style>` block of the old view | C | **Replaced** by the sprite, text flags and `student-brief.css` | — |
+| Catalogue / KKN photographs | A, B | **Not used** (D-19 and D-30 stay open for this page; a brief shows only the problem's own images) | — |
+
+## 28. Phase 23 — company job management (2026-10-31)
+
+Pages: `/company/jobs`, `/company/jobs/create`, `/company/jobs/{id}`. No file under `public/` was added, changed, moved or removed (37/38 Phase 0 hashes identical; `karsa-logo.png` was deleted by the user before Phase 4).
+
+| Asset | Source | Decision | Where / note |
+|---|---|---|---|
+| `company2.jpg` (jobs table hero) | A | **Deprecate (usage)** | No longer referenced by `company/jobs/index`; file retained. Referenced nowhere else now. |
+| `company3.jpg` (wizard hero) | A | **Deprecate (usage) on the wizard** | No longer referenced by `company/jobs/create`; still used by `company/jobs/edit` (not in this phase's scope) and `company/applications/index` (Phase 24). File retained. |
+| `illustrations/empty-states/no-applications.svg` | B | **Reuse** | 'Belum ada lowongan' inside the jobs table. |
+| `illustrations/empty-states/no-search-results.svg` | B | **Reuse** | 'Tidak ada lowongan yang cocok' inside the jobs table. |
+| `icons/ui/sprite.svg` | B | **Reuse** (no icon added) | plus, eye, pencil, trash-2, users, arrow-left/right, check, bookmark, map-pin, briefcase, building-2, clipboard-list, circle-alert. |
+| LinkedIn brand colour, inline heroicons, inline `<style>` and `alert()`/`confirm()` of the old views | C | **Replaced** | `resources/css/student-go/company.css` (Phase 23 section), the sprite, `window.sgConfirm`. |
+| Applicant photos (`storage/profiles/…` paths in the old detail view) | user uploads | **Retain**, not shown | Detail lists applicants with initials (the old local `storage/profiles` path never resolved; uploads live in Supabase). No new exposure. |
+
+## 29. Phase 19 — institution review and monitoring (2026-10-31)
+
+No file under `public/` was added, deleted, overwritten, moved or renamed by this phase (generated `public/build/` only). Baseline hash check after the phase: 37/38 identical, 0 changed. The one missing file is `public/karsa-logo.png`, deleted by the user before Phase 4. Usage decisions for `/institution/applications` (+ `/{id}`, `/{id}/review`), `/institution/projects` (+ `/{id}`) and `/institution/reviews` (+ `/{id}`, `/{id}/edit`, `/create/{projectId}`):
+
+| Asset | Source | Decision | Where it is used now |
+|---|---|---|---|
+| `illustrations/empty-states/no-applications.svg` | B | **Reuse** | 'Belum ada lamaran' (applications, empty account) |
+| `illustrations/empty-states/no-search-results.svg` | B | **Reuse** | no-match states on applications, projects and reviews |
+| `illustrations/workflows/project-status.svg` (suggested in section H.2) | B | **Not placed**: the stage meter and the milestone timeline already state each project's stage in text. The image labels do not match the stored project statuses (`active`, `on_hold`, `completed`, `cancelled`) | — |
+| `icons/ui/sprite.svg` | B | **Reuse** (no icon added; there is no star icon, so ratings are shown as 'n/5' with a neutral five-segment meter) | check, x, settings, pencil, file-text + status icons |
+| Student profile photos (`profile_photo_url`) | user upload | **Retain**, not shown: the queue, panels and review list use initials (`x-ui.avatar`, decorative because the name is written next to it). The old review views linked `asset('storage/'.…)` (empty folder) and `ui-avatars.com` (hot-linked); both are gone | — |
+| Proposal files (`applications.proposal_content`, base64 in the database) | user upload | **Retain**: same route `institution.applications.download-proposal`, link 'Buka proposal' (0 seeded rows have one) | application detail |
+| Inline heroicons, inline `<style>` blocks, gradient headers and yellow star SVGs of the old views | C | **Replaced** by the sprite, `resources/css/student-go/institution.css` (Phase 19 section) and the neutral rating meter | — |
