@@ -120,7 +120,7 @@ class DocumentVerificationController extends Controller
             return response()->json([
                 'success' => false,
                 'message' => 'Failed to upload documents',
-                'error' => $e->getMessage()
+                'error' => config('app.debug') ? $e->getMessage() : 'Internal server error'
             ], 500);
         }
     }
@@ -175,7 +175,7 @@ class DocumentVerificationController extends Controller
             return response()->json([
                 'success' => false,
                 'message' => 'Failed to verify documents',
-                'error' => $e->getMessage()
+                'error' => config('app.debug') ? $e->getMessage() : 'Internal server error'
             ], 500);
         }
     }

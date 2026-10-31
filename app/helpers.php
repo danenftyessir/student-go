@@ -1,7 +1,7 @@
 <?php
 
 /**
- * file helper functions global untuk aplikasi Karsa
+ * file helper functions global untuk aplikasi Student Go
  * berisi fungsi-fungsi utility yang sering digunakan
  * 
  * path: app/helpers.php
@@ -144,7 +144,7 @@ if (!function_exists('supabase_url')) {
         }
 
         $projectId = config('services.supabase.project_id');
-        $bucket = config('services.supabase.bucket', 'karsa-storage');
+        $bucket = config('services.supabase.bucket', 'sg-storage');
 
         // Prioritas 1: Cek local storage dulu untuk backward compatibility
         // File path yang ada di public disk biasanya relative path
@@ -500,5 +500,27 @@ if (!function_exists('short_number')) {
         }
         
         return (string) $number;
+    }
+}
+
+if (!function_exists('safe_error_message')) {
+    /**
+     * pesan error untuk pengguna; detail exception hanya ikut saat app.debug aktif
+     * (D-25: pesan QueryException memuat host, port, database dan SQL)
+     *
+     * @param string $prefix pesan awal, mis. 'Terjadi kesalahan: '
+     * @param \Throwable $e exception yang ditangkap
+     * @return string pesan aman untuk flash atau JSON
+     *
+     * usage:
+     * safe_error_message('Terjadi kesalahan: ', $e) // debug mati: "Terjadi kesalahan."
+     */
+    function safe_error_message(string $prefix, \Throwable $e): string
+    {
+        if (config('app.debug')) {
+            return $prefix . $e->getMessage();
+        }
+
+        return rtrim(preg_replace('/\s*Error:\s*$/', '', $prefix), ' :.') . '.';
     }
 }

@@ -184,7 +184,7 @@ class ProfileController extends Controller
 
             return back()
                 ->withInput()
-                ->with('error', 'Terjadi kesalahan saat memperbarui profil: ' . $e->getMessage());
+                ->with('error', safe_error_message('Terjadi kesalahan saat memperbarui profil: ', $e));
         }
     }
 
@@ -241,7 +241,7 @@ class ProfileController extends Controller
         } catch (\Exception $e) {
             return response()->json([
                 'success' => false,
-                'message' => 'Gagal mengubah visibility: ' . $e->getMessage(),
+                'message' => safe_error_message('Gagal mengubah visibility: ', $e),
             ], 500);
         }
     }

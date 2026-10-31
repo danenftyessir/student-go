@@ -119,7 +119,7 @@ class VerificationController extends Controller
             DB::rollBack();
             Log::error('Document upload error: ' . $e->getMessage());
 
-            return redirect()->back()->with('error', 'Gagal mengupload dokumen: ' . $e->getMessage());
+            return redirect()->back()->with('error', safe_error_message('Gagal mengupload dokumen: ', $e));
         }
     }
 
@@ -149,7 +149,7 @@ class VerificationController extends Controller
             Log::error('Verification trigger error: ' . $e->getMessage());
 
             return redirect()->back()
-                ->with('error', 'Gagal memverifikasi dokumen: ' . $e->getMessage());
+                ->with('error', safe_error_message('Gagal memverifikasi dokumen: ', $e));
         }
     }
 
