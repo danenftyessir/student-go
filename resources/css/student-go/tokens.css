@@ -1,0 +1,115 @@
+/*
+ * Student Go — design tokens (Tailwind CSS v4 @theme + semantic CSS variables)
+ *
+ * Direction: "Ruang Kerja" (workbench) as the foundation, with a restrained
+ * "Catatan Lapangan" (field notes) editorial layer.  See
+ * student-go-docs/design-system/DESIGN_SYSTEM.md.
+ *
+ * STAGED WIRING (D-29, Phase 2). This file holds only tokens in Student Go
+ * namespaces, so importing it changes no existing page. The package tokens
+ * that redefine Tailwind default names (font-sans, font-serif, text-*,
+ * tracking-tight, gray-*, primary-*, radius-*) were moved unchanged to
+ * legacy-overrides.css, which Phase 3 activates with the new shell. The two
+ * files together are the single source of truth; no value was changed.
+ *
+ * Contrast ratios (measured, WCAG 2.x) are listed in DESIGN_SYSTEM.md.
+ */
+
+@theme {
+  /* ── Brand: slate-indigo, derived from the existing logo (#405080) ── */
+  --color-brand-50:  #f3f5fa;
+  --color-brand-100: #e6eaf4;
+  --color-brand-200: #cdd5e9;
+  --color-brand-300: #a9b6d6;
+  --color-brand-400: #7f8fbc;
+  --color-brand-500: #5b6da0;
+  --color-brand-600: #405080;  /* primary: buttons, links, selected nav, focus ring */
+  --color-brand-700: #344168;
+  --color-brand-800: #293350;
+  --color-brand-900: #1f263c;
+
+  /* ── Earth accent: editorial surfaces only (markers, captions, pins) ── */
+  --color-earth-50:  #fbf3ee;
+  --color-earth-100: #f4e2d6;
+  --color-earth-300: #d9a587;
+  --color-earth-600: #9a4f28;  /* 5.96:1 on white                                */
+  --color-earth-700: #7d3e1d;
+
+  /* ── Semantic: each text color pairs with its tint at >= 4.5:1 ── */
+  --color-success-50: #e9f6ef;  --color-success-600: #1b7a4b;  --color-success-700: #14633d;
+  --color-warning-50: #fff4dc;  --color-warning-600: #9a5f00;  --color-warning-700: #7a4a00;
+  --color-danger-50:  #fdecea;  --color-danger-600:  #b42318;  --color-danger-700:  #a3201a;
+  --color-info-50:    #e8f1fb;  --color-info-600:    #1d5fa8;  --color-info-700:    #1a528f;
+
+  /* ── Elevation: overlays only (menus, dialogs, toasts, sticky bars) ── */
+  --shadow-overlay: 0 8px 24px -4px rgb(27 34 54 / 0.16), 0 2px 6px -2px rgb(27 34 54 / 0.12);
+
+  /* ── Motion ── */
+  --ease-standard: cubic-bezier(0.2, 0, 0, 1);
+  --duration-state: 150ms;      /* state changes only: max 150–200ms */
+}
+
+/* ── Semantic variables (what components consume) ───────────────────── */
+:root {
+  color-scheme: light;
+
+  --sg-surface-page: #ffffff;
+  --sg-surface-raised: #ffffff;
+  --sg-surface-sunken: var(--color-gray-50);
+
+  --sg-text-primary: var(--color-gray-900);
+  --sg-text-secondary: var(--color-gray-600);  /* >= 7:1  */
+  --sg-text-tertiary: var(--color-gray-500);   /* >= 4.5:1 */
+  --sg-text-on-brand: #ffffff;
+  --sg-text-link: var(--color-brand-700);
+
+  --sg-border-default: var(--color-gray-200);  /* dividers, panels            */
+  --sg-border-strong: var(--color-gray-300);   /* button outlines             */
+  --sg-border-control: var(--color-gray-400);  /* inputs: WCAG 1.4.11 >= 3:1  */
+
+  --sg-brand: var(--color-brand-600);
+  --sg-brand-hover: var(--color-brand-700);
+  --sg-brand-active: var(--color-brand-800);
+  --sg-brand-tint: var(--color-brand-50);
+  --sg-focus: var(--color-brand-600);
+
+  --sg-earth: var(--color-earth-600);
+  --sg-earth-tint: var(--color-earth-50);
+
+  /* One status vocabulary: Menunggu · Ditinjau · Diterima · Ditolak · Dibatalkan */
+  --sg-status-menunggu-bg: var(--color-gray-100);    --sg-status-menunggu-fg: var(--color-gray-700);
+  --sg-status-ditinjau-bg: var(--color-info-50);     --sg-status-ditinjau-fg: var(--color-info-700);
+  --sg-status-diterima-bg: var(--color-success-50);  --sg-status-diterima-fg: var(--color-success-700);
+  --sg-status-ditolak-bg: var(--color-danger-50);    --sg-status-ditolak-fg: var(--color-danger-700);
+  --sg-status-dibatalkan-bg: var(--color-gray-100);  --sg-status-dibatalkan-fg: var(--color-gray-600);
+
+  --sg-radius-control: var(--radius-md);
+  --sg-radius-panel: var(--radius-lg);
+
+  /* Layout widths (audit I): workspace 1200, reading column 720, forms 640–720 */
+  --sg-w-workspace: 75rem;
+  --sg-w-reading: 45rem;
+  --sg-w-form: 42rem;
+  --sg-gutter: 1rem;           /* mobile; 1.5rem tablet; 2rem desktop (see components.css) */
+
+  /* Homepage hero video (AD-11): white text over the moving background, one scrim for legibility */
+  --sg-on-media: #ffffff;
+  --sg-on-media-muted: rgb(255 255 255 / 0.88);
+  --sg-on-media-line: rgb(255 255 255 / 0.6);
+  --sg-on-media-hover: rgb(255 255 255 / 0.12);
+  --sg-hero-ink: #0c1430;      /* navy text on the white hero action */
+  --sg-hero-ground: #0c1430;   /* behind the poster until it paints */
+  --sg-hero-scrim: rgb(8 14 34 / 0.35);
+  --sg-hero-scrim-deep: rgb(8 14 34 / 0.55);
+}
+
+/* Dark surfaces (auth side panel, footer) — logo + text pairings verified in docs */
+.sg-on-dark {
+  --sg-surface-page: #171c2e;
+  --sg-text-primary: #f4f6fb;
+  --sg-text-secondary: #c9d1ec;
+  --sg-text-link: #aeb9dd;
+  --sg-border-default: #2b3350;
+  color: var(--sg-text-primary);
+  background: var(--sg-surface-page);
+}

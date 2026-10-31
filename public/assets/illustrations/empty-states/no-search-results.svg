@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="160" height="120" viewBox="0 0 160 120" aria-hidden="true" focusable="false"><style>.l{fill:none;stroke:var(--sg-ill-stroke,#405080);stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke}.n{stroke:var(--sg-ill-muted,#9AA0AE)}.f{fill:var(--sg-ill-tint,#E6EAF4)}.w{fill:var(--sg-ill-paper,#FFFFFF)}.d{stroke-dasharray:3 4}.a{fill:var(--sg-ill-accent,#A4552B);stroke:none}.as{stroke:var(--sg-ill-accent,#A4552B)}</style><g class="l n"><path d="M12 9.5v5M9.5 12h5"/><path d="M148 9.5v5M145.5 12h5"/><path d="M12 105.5v5M9.5 108h5"/><path d="M148 105.5v5M145.5 108h5"/></g>
+<rect class="l w" x="26" y="24" width="108" height="72" rx="3"/>
+<path class="l n d" d="M62 24V96M98 24V96M26 48H134M26 72H134"/>
+<circle class="l w" cx="76" cy="58" r="29"/>
+<path class="l n" d="M55 60c-1-9 7-17 17-17 8 0 15 4 17 11 2 8-3 17-12 19-8 2-12-3-17-4-3-1-5-4-5-9Z"/>
+<path class="l n" d="M65 60c0-5 4-9 9-9 6 0 9 4 8 9-1 5-5 8-10 8-4 0-7-3-7-8Z"/>
+<path class="l as" d="M71 58h10M76 53v10" style="stroke:var(--sg-ill-accent,#A4552B)"/>
+<path class="l" d="M97 79L116 98"/>
+<path class="l f" d="M112 94L120 102a3 3 0 0 0 4-4L116 90Z"/>
+</svg>
