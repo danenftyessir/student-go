@@ -26,7 +26,7 @@ class SupabaseStorageService
         // Use new config location
         $this->projectId = config('services.supabase.project_id');
         $this->serviceKey = config('services.supabase.service_key');
-        $this->bucketName = config('services.supabase.bucket', 'karsa-storage');
+        $this->bucketName = config('services.supabase.bucket', 'sg-storage');
         $this->baseUrl = "https://{$this->projectId}.supabase.co/storage/v1";
 
         // cek apakah supabase dikonfigurasi dengan benar
