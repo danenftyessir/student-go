@@ -363,3 +363,44 @@ dialog .sg-co-preview__part p { display: block; -webkit-line-clamp: none; }
 .sg-co-app__history time { color: var(--sg-text-secondary); font-variant-numeric: tabular-nums; }
 .sg-co-app__history-detail { color: var(--sg-text-secondary); white-space: pre-line; overflow-wrap: anywhere; }
 .sg-co-app__dialog-actions { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: .5rem; }
+
+/* ─────────────────────────────────────────────────────────────────────────────
+ * Phase 25 (2026-10-31): company profile (/company/profile) on the shared organisation profile (.sg-org, phase 5),
+ * same facts grid as the institution profile (phase 20, mirrored here as .sg-co-*); sectioned edit form
+ * (/company/profile/edit) with the registration fields. Existing tokens only; no hero photo.
+ * ───────────────────────────────────────────────────────────────────────────── */
+
+.sg-co-profile__tagline { margin: .25rem 0 0; max-width: 60ch; font-size: 1rem; line-height: 1.5rem; color: var(--sg-text-secondary); overflow-wrap: anywhere; }
+.sg-co-profile__actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: 1.25rem; }
+.sg-co-profile__about { white-space: pre-line; }
+.sg-co-profile__hint { margin: 0; font-size: .875rem; line-height: 1.25rem; color: var(--sg-text-secondary); }
+.sg-co-profile__hint a { font-weight: 600; color: var(--sg-text-link); text-decoration: underline; text-underline-offset: 2px; }
+.sg-co-profile .sg-org__aside .sg-status { margin-bottom: .75rem; }
+
+.sg-co-facts { display: grid; grid-template-columns: minmax(0, 1fr); gap: 1rem 2rem; margin: 0; padding-top: 1rem; border-top: 1px solid var(--sg-border-default); }
+@media (min-width: 640px) { .sg-co-facts:not(.sg-co-facts--single) { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.sg-co-facts > div { display: grid; gap: .125rem; min-width: 0; }
+.sg-co-facts__wide { grid-column: 1 / -1; }
+.sg-co-facts dt { font-size: .75rem; line-height: 1rem; color: var(--sg-text-tertiary); }
+.sg-co-facts dd { margin: 0; font-size: .9375rem; line-height: 1.375rem; color: var(--sg-text-primary); overflow-wrap: anywhere; }
+.sg-co-facts dd a { color: var(--sg-text-link); text-decoration: underline; text-underline-offset: 2px; }
+.sg-co-facts__empty { color: var(--sg-text-tertiary); }
+
+/* edit form: numbered sections, two-column rows from 640px, save bar */
+.sg-co-profile-edit { padding-bottom: 3rem; }
+.sg-co-profile-edit__alert { margin-bottom: 1.5rem; }
+.sg-co-section { display: grid; gap: 1.25rem; padding-block: 1.5rem 2rem; border-top: 1px solid var(--sg-border-default); }
+.sg-co-section:first-of-type { border-top: 0; padding-top: 0; }
+.sg-co-section > h2 { display: flex; align-items: center; gap: .625rem; margin: 0; font-size: 1.125rem; line-height: 1.75rem; font-weight: 600; color: var(--sg-text-primary); }
+.sg-co-section__num { display: inline-flex; align-items: center; justify-content: center; flex: none; width: 1.75rem; height: 1.75rem; border: 1px solid var(--sg-border-strong); border-radius: 999px; font-size: .8125rem; font-variant-numeric: tabular-nums; color: var(--sg-text-secondary); }
+.sg-co-section__opt { font-size: .75rem; font-weight: 500; color: var(--sg-text-tertiary); }
+.sg-co-section .sg-field { max-width: 46rem; min-width: 0; }
+.sg-co-grid-2 { display: grid; gap: 1.25rem; max-width: 46rem; align-items: start; }
+@media (min-width: 640px) { .sg-co-grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.sg-co-grid-2 > .sg-field { min-width: 0; }
+.sg-co-logo { display: grid; gap: 1rem; max-width: 46rem; align-items: start; }
+@media (min-width: 640px) { .sg-co-logo { grid-template-columns: auto minmax(0, 1fr); gap: 1.5rem; } }
+.sg-co-logo__controls { display: grid; gap: .75rem; justify-items: start; min-width: 0; }
+.sg-co-logo__controls > .sg-field { justify-self: stretch; }
+.sg-co-savebar { position: sticky; bottom: 0; z-index: 10; display: flex; flex-wrap: wrap; justify-content: flex-end; gap: .5rem; max-width: 46rem;
+  padding: .75rem 0 calc(.75rem + env(safe-area-inset-bottom, 0px)); background: var(--sg-surface-raised); border-top: 1px solid var(--sg-border-default); }
