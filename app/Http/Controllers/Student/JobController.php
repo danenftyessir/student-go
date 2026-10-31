@@ -316,7 +316,6 @@ class JobController extends Controller
             'user_id' => $user->id,
             'job_posting_id' => $id,
             'folder' => $request->input('folder'),
-            'saved_at' => now(),
         ]);
 
         return response()->json([
