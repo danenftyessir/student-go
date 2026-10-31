@@ -1,0 +1,22 @@
+@import 'tailwindcss';
+
+/* student go design system. phase 2 menambahkan font, token dan komponen; phase 3 mengaktifkan legacy-overrides.css bersama shell baru (D-29). */
+@import './student-go/fonts.css';
+@import './student-go/tokens.css';
+@import './student-go/components.css';
+@import './student-go/hero.css'; /* beranda: pembuka video (AD-11) */
+@import './student-go/public-pages.css'; /* phase 5: tentang kami, kontak, profil publik instansi */
+@import './student-go/auth.css'; /* phase 6: masuk, registrasi, lupa/reset password */
+@import './student-go/student-dashboard.css'; /* phase 7: dashboard mahasiswa */
+@import './student-go/student-browse.css'; /* phase 8: telusuri masalah */
+@import './student-go/student-brief.css'; /* phase 9: detail masalah (brief) */
+@import './student-go/institution.css'; /* phase 17: ruang kerja instansi (dashboard) */
+@import './student-go/company.css'; /* phase 21: ruang kerja perusahaan (dashboard) */
+@import './student-go/legacy-overrides.css';
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+@source '../**/*.blade.php';
+@source '../**/*.js';
+
+/* phase 3: blok @theme 'Instrument Sans' (font yang tidak pernah dimuat) dihapus; --font-sans kini dari legacy-overrides.css */
