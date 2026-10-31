@@ -113,7 +113,7 @@ class VerificationController extends Controller
             }
 
             return redirect()->route('institution.verification.upload')
-                ->with('success', 'Dokumen berhasil diupload! Klik tombol "Mulai Verifikasi AI" untuk memulai verifikasi.');
+                ->with('success', 'Dokumen berhasil diunggah. Klik "Ajukan pemeriksaan" bila dokumen yang diperlukan sudah lengkap.');
 
         } catch (\Exception $e) {
             DB::rollBack();
