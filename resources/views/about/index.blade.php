@@ -4,7 +4,7 @@
 
 {{-- phase 5: tentang kami sebagai artikel yang di-scroll (pengganti carousel 7 slide, J34).
      isi ditulis dari fakta produk (D-23 b, DRAFT); tanpa angka tanpa sumber (J9), tanpa sejarah,
-     usia, misi atau klaim dampak era karsa (RN-07, RN-08, RN-09; D-37). foto: dokumentasi KKN ITB 2025
+     usia, misi atau klaim dampak era lama (RN-07, RN-08, RN-09; D-37). foto: dokumentasi KKN ITB 2025
      (hak dikonfirmasi D-30), turunan webp (D-34), caption tanpa kredit (D-19). --}}
 
 @php

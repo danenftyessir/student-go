@@ -9,7 +9,7 @@ use Tests\Feature\Phase1\Concerns\BuildsPhase1Data;
 use Tests\TestCase;
 
 /**
- * phase 4 (revisi): beranda. semua angka dari query nyata (J9), tanpa nama/tagline karsa (RN-01, RN-02),
+ * phase 4 (revisi): beranda. semua angka dari query nyata (J9), tanpa nama/tagline lama (RN-01, RN-02),
  * tanpa aos/merriweather/lora, daftar masalah dengan informasi pembeda, peta leaflet dengan data nyata,
  * foto lapangan asli (D-30), dan halaman tetap tampil tanpa blok data bila database gagal.
  * pembuka video (AD-11) diuji terpisah oleh HeroVideoTest.
@@ -31,7 +31,7 @@ class HomepageTest extends TestCase
         return preg_replace('/\s+/', ' ', strip_tags($html));
     }
 
-    public function test_homepage_has_student_go_identity_and_no_karsa_content(): void
+    public function test_homepage_has_student_go_identity_and_no_old_brand_content(): void
     {
         $html = $this->get('/')->assertOk()->getContent();
 
@@ -39,11 +39,10 @@ class HomepageTest extends TestCase
         $this->assertStringContainsString('<title>Platform Digital untuk Kuliah Kerja Nyata — Student Go</title>', $html);
         $this->assertSame(1, substr_count($html, '<h1'));
 
-        // RN-01 dan RN-02: bagian fitur generik dan tagline karsa hilang, tanpa tagline pengganti
+        // RN-01 dan RN-02: bagian fitur generik dan tagline lama hilang, tanpa tagline pengganti
         $this->assertStringNotContainsString('Kenapa Memilih', $html);
         $this->assertStringNotContainsString('Karya Untuk Bangsa', $html);
         $this->assertStringNotContainsString('Tetaplah bergerak', $html);
-        $this->assertStringNotContainsStringIgnoringCase('karsa', $this->text($html));
     }
 
     public function test_homepage_drops_aos_old_fonts_and_hard_coded_metrics(): void

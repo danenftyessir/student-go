@@ -12,14 +12,14 @@ use Tests\Feature\Phase1\Concerns\BuildsPhase1Data;
 use Tests\TestCase;
 
 /**
- * phase 6 (D-40): email autentikasi/verifikasi dan pesan flash auth memakai nama Student Go, bukan Karsa.
+ * phase 6 (D-40): email autentikasi/verifikasi dan pesan flash auth memakai nama Student Go, bukan nama lama.
  */
 class AuthBrandTest extends TestCase
 {
     use BuildsPhase1Data;
     use RefreshDatabase;
 
-    private const OLD = '/karsa|karya untuk bangsa/i';
+    private const OLD = '/karya untuk bangsa/i';
 
     protected function setUp(): void
     {

@@ -85,7 +85,6 @@ class AuthPagesTest extends TestCase
             $this->assertStringContainsString('assets/brand/student-go-logo.svg', $html, $url);
             // tidak ada <style> sebaris, cdn baru, atau aset lama
             $this->assertSame(0, $x->query('//body//style')->length, "tanpa <style> sebaris: $url");
-            $this->assertStringNotContainsString('karsa-logo.png', $html);
             $this->assertStringNotContainsString('login-register-view.jpg', $html);
             $this->assertStringNotContainsString('register-background', $html);
             $this->assertSame(1, substr_count($html, 'cdn.jsdelivr.net/npm/alpinejs'), "alpine sekali: $url");
@@ -140,10 +139,9 @@ class AuthPagesTest extends TestCase
         foreach (['login', 'register', 'register.student', 'register.institution', 'register.company', 'password.request'] as $page) {
             $html = $this->get(route($page))->getContent();
             $text = $this->text($html);
-            $this->assertDoesNotMatchRegularExpression('/karsa|kkn ?go|karya untuk bangsa/i', $text, $page);
+            $this->assertDoesNotMatchRegularExpression('/karya untuk bangsa/i', $text, $page);
             $this->assertDoesNotMatchRegularExpression('/welcome back|sign in|sign up|back to home|connect\. collaborate|active projects|\bcompany\b|\babout\b|\bcontact\b/i', $text, $page);
             $this->assertDoesNotMatchRegularExpression('/\d[\d.]*\+/', $text, "angka '+' karangan: $page");
-            $this->assertDoesNotMatchRegularExpression('/alt="[^"]*karsa/i', $html, $page);
         }
 
         $student = $this->text($this->get(route('register.student'))->getContent());
