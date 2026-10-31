@@ -229,3 +229,58 @@
 .sg-inst-page__narrow { max-width: 46rem; }
 .sg-inst-actions { display: inline-flex; flex-direction: column; gap: .25rem; white-space: nowrap; }
 @media (max-width: 639px) { .sg-inst-actions { flex-direction: row; gap: 1rem; } }
+
+/* ════════════════════════════════════════════════════════════════════
+ * Phase 20 (2026-10-31): profil instansi, edit profil, verifikasi dokumen.
+ * Profile reuses the organisation pattern from public-pages.css (.sg-org*);
+ * the edit form reuses .sg-inst-section / .sg-inst-grid-2 / .sg-inst-status (phase 18).
+ * Long names, emails and URLs wrap (overflow-wrap: anywhere), never overlap a neighbour.
+ * ════════════════════════════════════════════════════════════════════ */
+
+/* ── profile: header actions, facts grid (2 columns from 640px), aside ── */
+.sg-inst-profile__status { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem; margin-top: .75rem; }
+.sg-inst-profile__actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: 1.25rem; }
+.sg-inst-facts { display: grid; grid-template-columns: minmax(0, 1fr); gap: 1rem 2rem; margin: 0; padding-top: 1rem; border-top: 1px solid var(--sg-border-default); }
+@media (min-width: 640px) { .sg-inst-facts { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.sg-inst-facts > div { display: grid; gap: .125rem; min-width: 0; }
+.sg-inst-facts__wide { grid-column: 1 / -1; }
+.sg-inst-facts dt { font-size: .75rem; line-height: 1rem; color: var(--sg-text-tertiary); }
+.sg-inst-facts dd { margin: 0; font-size: .9375rem; line-height: 1.375rem; color: var(--sg-text-primary); overflow-wrap: anywhere; }
+.sg-inst-facts dd a { color: var(--sg-text-link); text-decoration: underline; text-underline-offset: 2px; }
+.sg-inst-facts__empty { color: var(--sg-text-tertiary); }
+.sg-inst-profile__hint { margin: 0; font-size: .875rem; line-height: 1.25rem; color: var(--sg-text-secondary); }
+.sg-inst-profile__hint a { font-weight: 600; color: var(--sg-text-link); text-decoration: underline; text-underline-offset: 2px; }
+.sg-inst-profile__aside-text { margin: .75rem 0; font-size: .875rem; line-height: 1.25rem; color: var(--sg-text-secondary); }
+
+/* ── edit form: logo row + sticky save bar ── */
+.sg-inst-logo { display: grid; grid-template-columns: minmax(0, 1fr); gap: 1rem; max-width: 46rem; align-items: start; }
+@media (min-width: 640px) { .sg-inst-logo { grid-template-columns: auto minmax(0, 1fr); gap: 1.5rem; } }
+.sg-inst-logo .sg-field { min-width: 0; }
+.sg-inst-savebar { position: sticky; bottom: 0; z-index: 10; display: flex; flex-wrap: wrap; justify-content: flex-end; gap: .5rem; max-width: 46rem; padding: .75rem 0 calc(.75rem + env(safe-area-inset-bottom, 0px)); background: var(--sg-surface-raised); border-top: 1px solid var(--sg-border-default); }
+
+/* ── verification: status panel, document checklist, submit-for-check panel ── */
+.sg-inst-verify { display: grid; gap: 2rem; max-width: 52rem; }
+.sg-inst-panel { display: grid; gap: .5rem; padding: 1rem 1.25rem; border: 1px solid var(--sg-border-default); border-radius: var(--sg-radius-panel); background: var(--sg-surface-raised); }
+.sg-inst-panel h2 { display: flex; align-items: center; gap: .5rem; margin: 0; font-size: 1rem; line-height: 1.5rem; font-weight: 600; color: var(--sg-text-primary); }
+.sg-inst-panel h2 .sg-icon { color: var(--sg-text-secondary); }
+.sg-inst-panel p { margin: 0; max-width: 68ch; font-size: .875rem; line-height: 1.25rem; color: var(--sg-text-secondary); overflow-wrap: anywhere; }
+.sg-inst-panel__row { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem 1rem; }
+.sg-inst-panel__actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .5rem; }
+
+.sg-inst-checklist__head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: .25rem 1rem; margin-bottom: .75rem; }
+.sg-inst-checklist__head h2 { margin: 0; font-size: 1.125rem; line-height: 1.75rem; font-weight: 600; color: var(--sg-text-primary); }
+.sg-inst-checklist__count { font-size: .875rem; line-height: 1.25rem; color: var(--sg-text-secondary); font-variant-numeric: tabular-nums; }
+.sg-inst-checklist { margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--sg-border-default); }
+.sg-inst-checklist > li { display: grid; grid-template-columns: 1.75rem minmax(0, 1fr); gap: .75rem; padding-block: 1.25rem; border-bottom: 1px solid var(--sg-border-default); }
+.sg-inst-checklist__mark { display: inline-flex; align-items: center; justify-content: center; width: 1.75rem; height: 1.75rem; border: 1.5px dashed var(--sg-border-strong); border-radius: 999px; color: var(--sg-text-tertiary); }
+.sg-inst-checklist__mark[data-done] { border: 0; color: var(--sg-text-on-brand); background: var(--sg-brand); }
+.sg-inst-checklist__mark .sg-icon { width: 1rem; height: 1rem; }
+.sg-inst-checklist__body { display: grid; gap: .75rem; min-width: 0; }
+.sg-inst-checklist__title { display: flex; flex-wrap: wrap; align-items: center; gap: .25rem .5rem; margin: 0; font-size: 1rem; line-height: 1.5rem; font-weight: 600; color: var(--sg-text-primary); overflow-wrap: anywhere; }
+.sg-inst-checklist__req { font-size: .75rem; line-height: 1rem; font-weight: 500; color: var(--sg-text-secondary); }
+.sg-inst-checklist__desc { margin: .125rem 0 0; font-size: .875rem; line-height: 1.25rem; color: var(--sg-text-secondary); }
+.sg-inst-checklist__state { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem .75rem; min-width: 0; margin: 0; font-size: .875rem; line-height: 1.25rem; color: var(--sg-text-secondary); }
+.sg-inst-checklist__state .sg-file-chip { max-width: 100%; }
+.sg-inst-checklist__date { font-size: .75rem; line-height: 1rem; color: var(--sg-text-tertiary); font-variant-numeric: tabular-nums; }
+.sg-inst-checklist .sg-field { max-width: 36rem; }
+.sg-inst-verify__actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: 1.25rem; }

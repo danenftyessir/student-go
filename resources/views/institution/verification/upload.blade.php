@@ -2,199 +2,136 @@
 
 @section('title', 'Upload Dokumen Verifikasi')
 
+{{-- phase 20: checklist dokumen + komponen unggah bersama (J17, J21). kontrak tetap: POST verification.upload.submit
+     (multipart) dengan official_letter / logo / pic_identity / npwp, jenis dan ukuran berkas sama dengan validasi
+     controller; POST verification.trigger tanpa field. status yang tampil hanya yang disimpan backend: satu status
+     instansi (verification_status) dan hasil per dokumen (verification_documents.ai_status, atau human_status
+     bila sudah ditinjau). copy tidak menjanjikan metode atau durasi pemeriksaan (D-09 masih terbuka). --}}
+
+@php
+    // urutan, jenis berkas dan batas ukuran mengikuti VerificationController::uploadDocuments
+    $documents = [
+        'official_letter' => ['title' => 'Surat pengantar atau SK instansi', 'req' => 'Wajib',
+            'desc' => 'Surat resmi dari instansi.', 'accept' => 'application/pdf', 'hint' => 'PDF, maks. 5 MB', 'max' => 5 * 1024 * 1024],
+        'logo' => ['title' => 'Logo instansi', 'req' => null,
+            'desc' => 'Logo resmi instansi.', 'accept' => 'image/jpeg,image/png', 'hint' => 'JPG atau PNG, maks. 2 MB', 'max' => 2 * 1024 * 1024],
+        'pic_identity' => ['title' => 'KTP penanggung jawab', 'req' => null,
+            'desc' => 'Foto KTP penanggung jawab yang terdaftar di profil.', 'accept' => 'image/jpeg,image/png', 'hint' => 'JPG atau PNG, maks. 2 MB', 'max' => 2 * 1024 * 1024],
+        'npwp' => ['title' => 'NPWP instansi', 'req' => 'Opsional',
+            'desc' => 'Kartu atau surat keterangan NPWP instansi.', 'accept' => 'application/pdf,image/jpeg,image/png', 'hint' => 'PDF, JPG atau PNG, maks. 2 MB', 'max' => 2 * 1024 * 1024],
+    ];
+    $byType = $existingDocuments->keyBy('document_type');
+    $uploadedCount = collect(array_keys($documents))->filter(fn ($type) => $byType->has($type))->count();
+    $status = $institution->verification_status;
+    $statusText = [
+        'pending_verification' => 'Dokumen instansi belum diperiksa. Unggah dokumen di bawah, lalu ajukan pemeriksaan.',
+        'needs_review' => 'Sebagian dokumen perlu ditinjau lebih lanjut. Periksa catatan di halaman status verifikasi.',
+        'rejected' => 'Verifikasi ditolak. Lihat alasannya di halaman status verifikasi, lalu unggah ulang dokumen yang diperlukan.',
+        'active' => 'Instansi sudah terverifikasi.',
+        'suspended' => 'Akun instansi sedang ditangguhkan.',
+    ][$status] ?? null;
+    $bytes = fn ($size) => $size >= 1048576 ? number_format($size / 1048576, 1, ',', '.') . ' MB' : number_format(max(1, round($size / 1024)), 0, ',', '.') . ' KB';
+@endphp
+
 @section('content')
-<div class="min-h-screen bg-gray-50 py-8">
-    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="sg-container sg-inst-page">
+    <x-ui.page-header title="Verifikasi dokumen instansi"
+                      description="Unggah dokumen resmi instansi. Hasil pemeriksaan tampil per dokumen di halaman ini."
+                      :back="route('institution.dashboard')" back-label="Kembali ke dashboard" />
 
-        {{-- Header --}}
-        <div class="mb-8">
-            <h1 class="text-3xl font-bold text-gray-900">Verifikasi Dokumen Institusi</h1>
-            <p class="text-gray-600 mt-2">Upload dokumen untuk verifikasi otomatis menggunakan AI</p>
-        </div>
+    @if (session('success'))
+        <x-ui.alert tone="success" class="sg-inst-page__errors">{{ session('success') }}</x-ui.alert>
+    @endif
+    @if (session('error'))
+        <x-ui.alert tone="danger" class="sg-inst-page__errors">{{ session('error') }}</x-ui.alert>
+    @endif
+    <x-ui.form-errors class="sg-inst-page__errors" />
 
-        {{-- Success/Error Messages --}}
-        @if(session('success'))
-        <div class="mb-6 bg-green-50 border-l-4 border-green-400 p-4 rounded">
-            <div class="flex items-center">
-                <svg class="w-6 h-6 text-green-400 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                </svg>
-                <p class="text-green-700">{{ session('success') }}</p>
+    <div class="sg-inst-verify">
+        {{-- satu status instansi --}}
+        <section class="sg-inst-panel" aria-labelledby="verifikasi-status">
+            <h2 id="verifikasi-status"><x-icon name="shield-check" />Status verifikasi</h2>
+            <div class="sg-inst-panel__row">
+                <x-ui.status domain="verification" :value="$status" />
+                @if ($institution->verification_score !== null)
+                    <span class="sg-inst-checklist__date">Skor pemeriksaan {{ rtrim(rtrim(number_format((float) $institution->verification_score, 2, ',', '.'), '0'), ',') }}/100</span>
+                @endif
             </div>
-        </div>
-        @endif
+            @if ($statusText)<p>{{ $statusText }}</p>@endif
+        </section>
 
-        @if(session('error'))
-        <div class="mb-6 bg-red-50 border-l-4 border-red-400 p-4 rounded">
-            <div class="flex items-center">
-                <svg class="w-6 h-6 text-red-400 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                </svg>
-                <p class="text-red-700">{{ session('error') }}</p>
-            </div>
-        </div>
-        @endif
-
-        {{-- Institution Status Card --}}
-        <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-6">
-            <div class="flex items-center justify-between">
-                <div>
-                    <h3 class="text-lg font-bold text-gray-900">Status Verifikasi</h3>
-                    <p class="text-sm text-gray-600 mt-1">{{ $institution->name }}</p>
-                </div>
-                <div class="text-right">
-                    @php
-                        $statusConfig = [
-                            'pending_verification' => ['bg' => 'bg-yellow-100', 'text' => 'text-yellow-800', 'label' => 'Menunggu Verifikasi'],
-                            'needs_review' => ['bg' => 'bg-orange-100', 'text' => 'text-orange-800', 'label' => 'Perlu Review Manual'],
-                            'rejected' => ['bg' => 'bg-red-100', 'text' => 'text-red-800', 'label' => 'Ditolak'],
-                            'active' => ['bg' => 'bg-green-100', 'text' => 'text-green-800', 'label' => 'Aktif - Terverifikasi'],
-                        ];
-                        $status = $statusConfig[$institution->verification_status] ?? ['bg' => 'bg-gray-100', 'text' => 'text-gray-800', 'label' => 'Belum Diverifikasi'];
-                    @endphp
-                    <span class="px-4 py-2 rounded-full text-sm font-semibold {{ $status['bg'] }} {{ $status['text'] }}">
-                        {{ $status['label'] }}
-                    </span>
-                    @if($institution->verification_score)
-                    <p class="text-sm text-gray-600 mt-2">Score: {{ $institution->verification_score }}/100</p>
-                    @endif
-                </div>
-            </div>
-        </div>
-
-        {{-- Upload Form --}}
+        {{-- checklist dokumen --}}
         <form action="{{ route('institution.verification.upload.submit') }}" method="POST" enctype="multipart/form-data">
             @csrf
+            <div class="sg-inst-checklist__head">
+                <h2 id="verifikasi-dokumen">Dokumen</h2>
+                <span class="sg-inst-checklist__count">{{ $uploadedCount }} dari {{ count($documents) }} dokumen diunggah</span>
+            </div>
 
-            <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-6">
-                <h3 class="text-xl font-bold text-gray-900 mb-6">Upload Dokumen</h3>
-
-                <div class="space-y-6">
-                    {{-- Official Letter --}}
+            <ol class="sg-inst-checklist" aria-labelledby="verifikasi-dokumen">
+                @foreach ($documents as $type => $doc)
                     @php
-                        $officialLetterDoc = $existingDocuments->where('document_type', 'official_letter')->first();
+                        $stored = $byType->get($type);
+                        $result = $stored ? ($stored->human_reviewed && filled($stored->human_status) ? $stored->human_status : $stored->ai_status) : null;
                     @endphp
-                    <div class="border-b border-gray-200 pb-6">
-                        <label class="block text-sm font-semibold text-gray-700 mb-2">
-                            Surat Pengantar / SK Institusi <span class="text-red-500">*</span>
-                        </label>
-                        <p class="text-sm text-gray-600 mb-3">Upload surat resmi dari institusi (PDF, max 5MB)</p>
-                        <input type="file" name="official_letter" accept="application/pdf"
-                               class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none">
-                        @if($officialLetterDoc)
-                        <p class="text-sm text-green-600 mt-2">
-                            ✓ Sudah diupload: {{ $officialLetterDoc->file_name }}
-                            @if($officialLetterDoc->ai_status)
-                            <span class="ml-2 px-2 py-1 bg-blue-100 text-blue-800 rounded text-xs">{{ ucfirst($officialLetterDoc->ai_status) }}</span>
-                            @endif
-                        </p>
-                        @endif
-                    </div>
+                    <li>
+                        <span class="sg-inst-checklist__mark" @if ($stored) data-done @endif>
+                            <x-icon :name="$stored ? 'check' : 'circle-dashed'" />
+                        </span>
+                        <div class="sg-inst-checklist__body">
+                            <div>
+                                <h3 class="sg-inst-checklist__title">
+                                    {{ $doc['title'] }}
+                                    @if ($doc['req'])<span class="sg-inst-checklist__req">({{ strtolower($doc['req']) }})</span>@endif
+                                </h3>
+                                <p class="sg-inst-checklist__desc">{{ $doc['desc'] }}</p>
+                            </div>
 
-                    {{-- Logo --}}
-                    @php
-                        $logoDoc = $existingDocuments->where('document_type', 'logo')->first();
-                    @endphp
-                    <div class="border-b border-gray-200 pb-6">
-                        <label class="block text-sm font-semibold text-gray-700 mb-2">
-                            Logo Institusi
-                        </label>
-                        <p class="text-sm text-gray-600 mb-3">Upload logo institusi (JPG/PNG, max 2MB)</p>
-                        <input type="file" name="logo" accept="image/jpeg,image/png"
-                               class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none">
-                        @if($logoDoc)
-                        <p class="text-sm text-green-600 mt-2">
-                            ✓ Sudah diupload: {{ $logoDoc->file_name }}
-                            @if($logoDoc->ai_status)
-                            <span class="ml-2 px-2 py-1 bg-blue-100 text-blue-800 rounded text-xs">{{ ucfirst($logoDoc->ai_status) }}</span>
-                            @endif
-                        </p>
-                        @endif
-                    </div>
+                            <p class="sg-inst-checklist__state">
+                                @if ($stored)
+                                    <span class="sg-file-chip">
+                                        <x-icon name="file-text" size="sm" />
+                                        <span class="sg-file-chip__name" title="{{ $stored->file_name }}">{{ $stored->file_name }}</span>
+                                        @if ($stored->file_size)<span class="sg-file-chip__meta">{{ $bytes($stored->file_size) }}</span>@endif
+                                    </span>
+                                    @if ($result)
+                                        <x-ui.status domain="verification_document" :value="$result" />
+                                    @else
+                                        <span>Diunggah, belum diperiksa</span>
+                                    @endif
+                                    <span class="sg-inst-checklist__date">{{ $stored->updated_at?->locale('id')->translatedFormat('j M Y, H.i') }}</span>
+                                @else
+                                    <span>Belum diunggah</span>
+                                @endif
+                            </p>
 
-                    {{-- PIC Identity --}}
-                    @php
-                        $picDoc = $existingDocuments->where('document_type', 'pic_identity')->first();
-                    @endphp
-                    <div class="border-b border-gray-200 pb-6">
-                        <label class="block text-sm font-semibold text-gray-700 mb-2">
-                            KTP Penanggung Jawab
-                        </label>
-                        <p class="text-sm text-gray-600 mb-3">Upload foto KTP PIC (JPG/PNG, max 2MB)</p>
-                        <input type="file" name="pic_identity" accept="image/jpeg,image/png"
-                               class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none">
-                        @if($picDoc)
-                        <p class="text-sm text-green-600 mt-2">
-                            ✓ Sudah diupload: {{ $picDoc->file_name }}
-                            @if($picDoc->ai_status)
-                            <span class="ml-2 px-2 py-1 bg-blue-100 text-blue-800 rounded text-xs">{{ ucfirst($picDoc->ai_status) }}</span>
-                            @endif
-                        </p>
-                        @endif
-                    </div>
+                            <x-ui.upload :name="$type" :label="$stored ? 'Ganti berkas' : 'Unggah berkas'" :accept="$doc['accept']"
+                                         :hint="$doc['hint']" :max-size="$doc['max']" />
+                        </div>
+                    </li>
+                @endforeach
+            </ol>
 
-                    {{-- NPWP --}}
-                    @php
-                        $npwpDoc = $existingDocuments->where('document_type', 'npwp')->first();
-                    @endphp
-                    <div>
-                        <label class="block text-sm font-semibold text-gray-700 mb-2">
-                            NPWP (Opsional)
-                        </label>
-                        <p class="text-sm text-gray-600 mb-3">Upload NPWP institusi (PDF/JPG/PNG, max 2MB)</p>
-                        <input type="file" name="npwp" accept="application/pdf,image/jpeg,image/png"
-                               class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none">
-                        @if($npwpDoc)
-                        <p class="text-sm text-green-600 mt-2">
-                            ✓ Sudah diupload: {{ $npwpDoc->file_name }}
-                            @if($npwpDoc->ai_status)
-                            <span class="ml-2 px-2 py-1 bg-blue-100 text-blue-800 rounded text-xs">{{ ucfirst($npwpDoc->ai_status) }}</span>
-                            @endif
-                        </p>
-                        @endif
-                    </div>
-                </div>
-
-                <div class="mt-6 flex gap-4">
-                    <button type="submit" class="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 font-semibold transition-colors">
-                        Upload Dokumen
-                    </button>
-                    <a href="{{ route('institution.dashboard') }}" class="px-6 py-3 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 font-semibold transition-colors">
-                        Kembali ke Dashboard
-                    </a>
-                </div>
+            <div class="sg-inst-verify__actions">
+                <x-ui.button type="submit" icon="upload">Upload Dokumen</x-ui.button>
+                <x-ui.button variant="tertiary" :href="route('institution.dashboard')">Kembali ke Dashboard</x-ui.button>
             </div>
         </form>
 
-        {{-- Trigger AI Verification --}}
-        @if($existingDocuments->isNotEmpty())
-        <div class="bg-gradient-to-r from-indigo-50 to-purple-50 rounded-lg shadow-sm border border-indigo-200 p-6">
-            <div class="flex items-start gap-4">
-                <div class="flex-shrink-0">
-                    <svg class="w-12 h-12 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
-                    </svg>
-                </div>
-                <div class="flex-1">
-                    <h3 class="text-lg font-bold text-gray-900 mb-2">Mulai Verifikasi AI</h3>
-                    <p class="text-gray-700 mb-4">
-                        Dokumen Anda sudah diupload. Klik tombol di bawah untuk memulai verifikasi otomatis menggunakan AI.
-                        Proses ini akan menganalisis keaslian dan kelengkapan dokumen Anda.
-                    </p>
-                    <form action="{{ route('institution.verification.trigger') }}" method="POST" class="inline-block">
+        {{-- ajukan pemeriksaan: form dan route sama (verification.trigger) --}}
+        @if ($existingDocuments->isNotEmpty())
+            <section class="sg-inst-panel" aria-labelledby="verifikasi-ajukan">
+                <h2 id="verifikasi-ajukan"><x-icon name="clipboard-check" />Ajukan pemeriksaan dokumen</h2>
+                <p>Ajukan setelah dokumen yang diperlukan sudah diunggah. Hasil per dokumen dan status instansi tampil di halaman status verifikasi.</p>
+                <div class="sg-inst-panel__actions">
+                    <form action="{{ route('institution.verification.trigger') }}" method="POST">
                         @csrf
-                        <button type="submit" class="px-6 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-lg hover:from-indigo-700 hover:to-purple-700 font-semibold transition-all shadow-lg">
-                            🤖 Mulai Verifikasi AI
-                        </button>
+                        <x-ui.button type="submit" variant="secondary" icon="send">Ajukan pemeriksaan</x-ui.button>
                     </form>
-                    <a href="{{ route('institution.verification.status') }}" class="ml-3 px-6 py-3 bg-white text-indigo-600 rounded-lg hover:bg-indigo-50 font-semibold transition-colors border border-indigo-200 inline-block">
-                        Lihat Status Verifikasi
-                    </a>
+                    <x-ui.button variant="tertiary" :href="route('institution.verification.status')">Lihat Status Verifikasi</x-ui.button>
                 </div>
-            </div>
-        </div>
+            </section>
         @endif
-
     </div>
 </div>
 @endsection
