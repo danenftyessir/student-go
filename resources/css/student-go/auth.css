@@ -1,0 +1,118 @@
+/*
+ * Student Go — Phase 6 (2026-10-31): authentication pages (/login, /register,
+ * /register/{student,institution,company}, /forgot-password, /reset-password,
+ * /email/verify).
+ *
+ * Imported by app.css after public-pages.css (its own file, so it never collides
+ * with edits to the shared component file). Existing tokens only: no new colour,
+ * font, radius or shadow. Workbench layer: white page, one contour side panel
+ * (>= 1024px, the page's only motif), divided rows instead of cards, no photo,
+ * no numbers. Documented in COMPONENT_INVENTORY.md section 8.
+ */
+
+.sg-auth-body { background: var(--sg-surface-page); color: var(--sg-text-primary); }
+
+/* ── Compact header: wordmark home + two public links ── */
+.sg-auth-header { background: var(--sg-surface-raised); border-bottom: 1px solid var(--sg-border-default); }
+.sg-auth-header__bar { display: flex; align-items: center; justify-content: space-between; gap: 1rem; height: 4rem; padding-inline: var(--sg-gutter); }
+.sg-auth-header__brand { display: inline-flex; align-items: center; flex: none; border-radius: var(--radius-sm); }
+.sg-auth-header__brand img { display: block; height: 1.75rem; width: auto; }
+.sg-auth-header__nav { display: flex; align-items: center; gap: .125rem; }
+.sg-auth-header__nav a { display: inline-flex; align-items: center; min-height: 2.25rem; padding-inline: .625rem; font: 500 .875rem/1.25rem var(--font-sans); color: var(--sg-text-secondary); text-decoration: none; border-radius: var(--sg-radius-control); transition: color var(--duration-state) var(--ease-standard), background-color var(--duration-state) var(--ease-standard); }
+.sg-auth-header__nav a:hover { color: var(--sg-text-primary); background: var(--color-gray-50); }
+@media (pointer: coarse) { .sg-auth-header__nav a { min-height: 2.75rem; } }
+
+/* ── Frame: form column + optional contour panel ── */
+.sg-auth { display: grid; min-height: calc(100vh - 4rem); min-height: calc(100dvh - 4rem); }
+@media (min-width: 1024px) { .sg-auth--split { grid-template-columns: minmax(0, 1fr) minmax(22rem, 38%); } }
+.sg-auth__main { display: flex; align-items: flex-start; justify-content: center; min-width: 0; padding: 2rem var(--sg-gutter) 3rem; }
+.sg-auth__main:focus { outline: none; }                      /* target of the skip link only (tabindex -1), as .sg-main */
+@media (min-width: 640px) { .sg-auth__main { padding-block: 3rem 4rem; } }
+.sg-auth__body { width: 100%; min-width: 0; max-width: 25rem; }          /* 400px: sign-in, password, verification */
+.sg-auth__body--wide { max-width: 40rem; }                                /* 640px: role chooser and registration */
+@media (min-width: 640px) { .sg-auth__body:not(.sg-auth__body--wide) { margin-block: auto; } }
+.sg-auth__flash { margin-bottom: 1.25rem; }
+
+.sg-auth__aside { display: none; }
+@media (min-width: 1024px) {
+  .sg-auth__aside { display: block; border-left: 1px solid var(--sg-border-default); }
+  .sg-auth__aside-inner { position: sticky; top: 0; max-width: 30rem; padding: 3.5rem 2.5rem; }
+  /* text sits on the panel's plain ground; the contour lines show around it, never through it */
+  .sg-auth__aside-inner > * { position: relative; background: var(--sg-surface-sunken); outline: .75rem solid var(--sg-surface-sunken); }
+}
+@media (min-width: 1280px) { .sg-auth__aside-inner { padding-inline: 3.5rem; } }
+
+/* page header inside the auth column: the shared x-ui.page-header, without its top padding */
+.sg-auth .sg-page-header { padding-top: 0; }
+.sg-auth .sg-page-header h1 { text-wrap: balance; }
+
+/* ── Side panel content: one heading, divided rows (roles or what to prepare) ── */
+.sg-auth-aside__title { margin: 0; max-width: 22ch; font-size: 1.25rem; line-height: 1.75rem; font-weight: 700; letter-spacing: -0.01em; text-wrap: balance; }
+.sg-auth-aside__lead { margin: .5rem 0 0; max-width: 40ch; font-size: .875rem; line-height: 1.375rem; color: var(--sg-text-secondary); }
+.sg-auth-aside__list { display: grid; margin: 1.5rem 0 0; padding: 0; list-style: none; border-top: 1px solid var(--sg-border-default); }
+.sg-auth-aside__list > li { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: .75rem; padding-block: .875rem; border-bottom: 1px solid var(--sg-border-default); font-size: .875rem; line-height: 1.25rem; color: var(--sg-text-secondary); }
+.sg-auth-aside__list strong { display: block; color: var(--sg-text-primary); font-weight: 600; }
+.sg-auth-aside__icon { display: inline-grid; place-items: center; width: 2rem; height: 2rem; color: var(--sg-brand); background: var(--sg-surface-raised); border: 1px solid var(--sg-border-default); border-radius: var(--radius-md); }
+.sg-auth-aside__note { margin: 1.25rem 0 0; max-width: 40ch; font-size: .875rem; line-height: 1.375rem; color: var(--sg-text-secondary); }
+
+/* ── Forms ── */
+.sg-auth-form { display: grid; gap: 1.25rem; }
+.sg-auth-form__row { display: grid; gap: 1.25rem; }
+@media (min-width: 640px) { .sg-auth-form__row--2 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.sg-auth-form__inline { font-size: .875rem; line-height: 1.25rem; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .5rem 1rem; }
+.sg-auth-link { color: var(--sg-text-link); font-weight: 600; text-decoration: underline; text-underline-offset: 2px; text-decoration-thickness: 1px; }
+.sg-auth-link:hover { text-decoration-thickness: 2px; }
+.sg-auth-alt { margin: 1.75rem 0 0; padding-top: 1.25rem; border-top: 1px solid var(--sg-border-default); font-size: .875rem; line-height: 1.25rem; color: var(--sg-text-secondary); }
+.sg-auth-note { margin: 0; font-size: .875rem; line-height: 1.375rem; color: var(--sg-text-secondary); }
+.sg-auth-note ul { margin: .25rem 0 0; padding-left: 1.25rem; list-style: disc; }
+
+/* dropzone turns red only after interaction (same rule as inputs) */
+.sg-auth .sg-dropzone:has(input[data-touched][aria-invalid="true"]) { border-color: var(--color-danger-600); }
+
+/* ── Role chooser: three bordered rows (icon · name + main task · chevron) ── */
+.sg-role-list { margin: 0; padding: 0; list-style: none; border: 1px solid var(--sg-border-default); border-radius: var(--sg-radius-panel); overflow: hidden; }
+.sg-role-list > li + li { border-top: 1px solid var(--sg-border-default); }
+.sg-role-row { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: 1rem; padding: 1rem 1.25rem; color: var(--sg-text-primary); text-decoration: none; transition: background-color var(--duration-state) var(--ease-standard); }
+.sg-role-row:hover { background: var(--sg-brand-tint); }
+.sg-role-row:focus-visible { outline-offset: -2px; }
+.sg-role-row__icon { display: inline-grid; place-items: center; width: 2.5rem; height: 2.5rem; color: var(--sg-brand); background: var(--sg-surface-raised); border: 1px solid var(--sg-border-default); border-radius: var(--radius-md); }
+.sg-role-row__name { display: block; font-size: 1rem; line-height: 1.5rem; font-weight: 600; }
+.sg-role-row__desc { display: block; margin-top: .125rem; font-size: .875rem; line-height: 1.25rem; color: var(--sg-text-secondary); }
+.sg-role-row__chev { color: var(--sg-text-tertiary); }
+.sg-role-row:hover .sg-role-row__chev { color: var(--sg-brand); }
+@media (max-width: 389px) { .sg-role-row { gap: .75rem; padding-inline: 1rem; } }
+
+/* ── Registration wizard (x-ui.stepper + one section per step) ── */
+.sg-wizard { display: grid; gap: 1.5rem; }
+.sg-wizard__stepper { padding-bottom: 1.25rem; border-bottom: 1px solid var(--sg-border-default); }
+.sg-wizard__step { display: grid; gap: 1.25rem; }
+.sg-wizard__head { display: grid; gap: .25rem; }
+.sg-wizard__title { margin: 0; font-size: 1.125rem; line-height: 1.75rem; font-weight: 600; }
+.sg-wizard__title:focus { outline: none; }                    /* programmatic focus target (tabindex -1) when a step opens */
+.sg-wizard__desc { margin: 0; font-size: .875rem; line-height: 1.25rem; color: var(--sg-text-secondary); }
+.sg-wizard__group { display: grid; gap: 1.25rem; padding-top: 1.25rem; border-top: 1px solid var(--sg-border-default); }
+.sg-wizard__group-title { margin: 0; font-size: .875rem; line-height: 1.25rem; font-weight: 600; color: var(--sg-text-primary); }
+.sg-wizard__actions { display: flex; align-items: center; justify-content: space-between; gap: .75rem; padding-top: 1.25rem; border-top: 1px solid var(--sg-border-default); }
+.sg-wizard__actions > :only-child, .sg-wizard__actions > .sg-wizard__primary { margin-left: auto; }
+@media (max-width: 639px) {
+  .sg-wizard__actions { flex-direction: column-reverse; align-items: stretch; }
+  .sg-wizard__actions .sg-btn { width: 100%; }
+  .sg-wizard__actions > :only-child, .sg-wizard__actions > .sg-wizard__primary { margin-left: 0; }
+}
+.sg-wizard__summary:focus { outline: none; }
+.sg-wizard__summary a { color: inherit; text-decoration: underline; text-underline-offset: 2px; }
+
+/* success panel after institution/company registration (replaces the old alert()) */
+.sg-auth-done { display: grid; gap: 1rem; padding: 1.5rem; border: 1px solid var(--color-success-600); border-radius: var(--sg-radius-panel); background: var(--color-success-50); }
+.sg-auth-done:focus { outline: none; }
+.sg-auth-done__title { display: flex; align-items: center; gap: .5rem; margin: 0; font-size: 1.125rem; line-height: 1.75rem; font-weight: 600; }
+.sg-auth-done__title .sg-icon { color: var(--color-success-700); }
+.sg-auth-done p { margin: 0; font-size: .875rem; line-height: 1.375rem; color: var(--sg-text-primary); }
+.sg-auth-done__actions { display: flex; flex-wrap: wrap; gap: .75rem; }
+
+/* province -> regency status line (aria-live) */
+.sg-auth-status { display: flex; align-items: center; gap: .5rem; min-height: 1.25rem; font-size: .75rem; line-height: 1rem; color: var(--sg-text-tertiary); }
+.sg-auth-status[data-state="error"] { color: var(--color-danger-700); }
+.sg-auth-status .sg-spinner { width: .75rem; height: .75rem; }
+.sg-wizard__content { display: contents; }                     /* hidden (x-show) once the success panel replaces the wizard */
+button.sg-auth-link { padding: 0; font: inherit; font-weight: 600; background: none; border: 0; cursor: pointer; }
