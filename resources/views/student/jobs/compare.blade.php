@@ -149,9 +149,14 @@
                             <td class="p-4 text-sm font-medium text-gray-700 border-r border-gray-200 bg-gray-50">Benefits</td>
                             @foreach($jobs as $job)
                             <td class="compare-cell p-4 border-r border-gray-200 last:border-r-0">
-                                @if($job->benefits && count($job->benefits) > 0)
+                                @php
+                                    // benefits disimpan sebagai teks per baris ("- item"), bukan array
+                                    $benefits = is_array($job->benefits) ? $job->benefits : preg_split('/\R/', (string) $job->benefits);
+                                    $benefits = array_values(array_filter(array_map(fn ($b) => trim(ltrim(trim((string) $b), '-•* ')), $benefits)));
+                                @endphp
+                                @if(count($benefits) > 0)
                                 <ul class="space-y-1 text-sm text-gray-700">
-                                    @foreach(array_slice($job->benefits, 0, 5) as $benefit)
+                                    @foreach(array_slice($benefits, 0, 5) as $benefit)
                                     <li class="flex items-start gap-1.5">
                                         <svg class="w-4 h-4 text-green-500 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
