@@ -91,8 +91,10 @@ class DesignSystemAssetsTest extends TestCase
 
     public function test_certificate_assets_are_unchanged(): void
     {
+        // template diganti pengguna pada 2026-11-01 (D-32): template.png = sumber pptx (2).png tanpa nama kades dan awalan tahun
         $expected = [
-            'assets/certificate/template.png' => '132d7559f93e4972bcb3ab098a8e008bbd5002e0516825c51850ef4834e4e59f',
+            'assets/certificate/template.png' => '12e83245dfb7d9d26ca33d7bc72a02c78080712a726da61d9b7cf4dd90a1dcdc',
+            'assets/certificate/Sertifikat_Penghargaan_Student_Go.pptx (2).png' => 'c31a9058bcb4e34c5589ebc3b212ff25b778a26a80cadb8c02c4ccba24633bc1',
             'assets/certificate/fonts/PinyonScript-Regular.ttf' => '0f816f50c0a25ed5e687570f2b43c16c1954969db6121095dcec2ad0745cdb0e',
             'assets/certificate/fonts/Poppins-Regular.ttf' => '707fdc5c8bab57a90061c6a8ed7b70d5ffb82fc810e994e79f90bace890c255a',
         ];
