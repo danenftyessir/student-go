@@ -988,3 +988,28 @@ No file under `public/` was added, deleted, overwritten, moved or renamed by thi
 | Student profile photos (`profile_photo_url`) | user upload | **Retain**, not shown: the queue, panels and review list use initials (`x-ui.avatar`, decorative because the name is written next to it). The old review views linked `asset('storage/'.…)` (empty folder) and `ui-avatars.com` (hot-linked); both are gone | — |
 | Proposal files (`applications.proposal_content`, base64 in the database) | user upload | **Retain**: same route `institution.applications.download-proposal`, link 'Buka proposal' (0 seeded rows have one) | application detail |
 | Inline heroicons, inline `<style>` blocks, gradient headers and yellow star SVGs of the old views | C | **Replaced** by the sprite, `resources/css/student-go/institution.css` (Phase 19 section) and the neutral rating meter | — |
+
+## 30. Phase 24 — applicant pipeline (2026-10-31)
+
+No file under `public/` was added, deleted, overwritten, moved or renamed (generated `public/build/` only; `git diff --name-status -- public/` is empty). Usage decisions for `/company/applications` and `/company/applications/{id}`:
+
+| Asset | Source | Decision | Where it is used now |
+|---|---|---|---|
+| `company3.jpg` (list hero background) | A | **Deprecate (usage)** on `company/applications/index` | No longer referenced there; still used by `company/jobs/edit` (not in scope). File retained. |
+| `company1.jpg` (detail hero background) | A | **Deprecate (usage)** on `company/applications/show` | No longer referenced there. File retained. |
+| `illustrations/empty-states/no-applications.svg` | B | **Reuse** | 'Belum ada pelamar' (empty account, and empty stage inside the table) |
+| `illustrations/empty-states/no-search-results.svg` | B | **Reuse** | 'Tidak ada pelamar yang cocok' (filters) |
+| `icons/ui/sprite.svg` | B | **Reuse** (no icon added; no star icon, so ratings are 'n/5' with a neutral five-segment meter) | briefcase, eye, clipboard-check, users, download, user-check, circle-check, circle-x, file-text, external-link + status icons |
+| Applicant photographs | user upload | **Retain**, not shown (as before: the old list read `user.profile.avatar_url`, which does not exist, so it always showed initials; the old detail showed no photo). Initials via `x-ui.avatar`, decorative | — |
+| Inline `<style>` blocks, gradient avatars, yellow star SVGs, inline heroicons, custom toast and `alert()` of the old views | C | **Replaced** by `resources/css/student-go/company.css` (Phase 24 section), the sprite, `window.showNotification` and `window.sgConfirm` | — |
+
+## 31. Phase 10 — student applications (2026-10-31)
+
+| Asset | Source | Decision | Where / note |
+|---|---|---|---|
+| `application-student.jpg` (list hero background) | A | **Deprecate (usage)** on `student/applications/index` | Replaced by the standard page header. File retained, hash unchanged. |
+| `illustrations/empty-states/no-applications.svg` | B | **Reuse** | 'Belum ada lamaran proyek / lowongan' |
+| `illustrations/empty-states/no-search-results.svg` | B | **Reuse** | 'Tidak ada lamaran yang cocok' (filters) |
+| `icons/ui/sprite.svg` | B | **Reuse** (no icon added) | search, x, file-text, external-link, map-pin, arrow-right, check, circle-x + status icons |
+| Institution logos | user upload | **Retain** (same placement size as before; initials when no logo) | `x-ui.avatar`, decorative |
+| Space Grotesk link, inline `<style>` blocks, gradient image placeholders, `via.placeholder.com` fallback, emoji tips, `alert()`/`confirm()` of the old views | C | **Replaced** by shared components, Tailwind utilities on existing tokens, the sprite and `window.sgConfirm` | No CSS file added or changed |

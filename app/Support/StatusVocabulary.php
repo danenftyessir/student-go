@@ -68,6 +68,15 @@ class StatusVocabulary
             'verified' => ['Terverifikasi', 'success', 'badge-check'],
             'rejected' => ['Ditolak', 'danger', 'circle-x'],
             'needs_review' => ['Perlu Ditinjau', 'warning', 'circle-alert'],
+            // phase 20: nilai instansi (Institution::STATUS_ACTIVE / STATUS_SUSPENDED); 'verified' milik perusahaan
+            'active' => ['Terverifikasi', 'success', 'badge-check'],
+            'suspended' => ['Ditangguhkan', 'muted', 'lock'],
+        ],
+        // phase 20: hasil pemeriksaan per dokumen verifikasi instansi (verification_documents.ai_status)
+        'verification_document' => [
+            'approved' => ['Disetujui', 'success', 'circle-check'],
+            'needs_review' => ['Perlu Ditinjau', 'warning', 'circle-alert'],
+            'rejected' => ['Ditolak', 'danger', 'circle-x'],
         ],
         'job_posting' => [
             'draft' => ['Draf', 'neutral', 'pencil'],

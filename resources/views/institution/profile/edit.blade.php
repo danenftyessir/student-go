@@ -2,332 +2,178 @@
 
 @section('title', 'Edit Profil Instansi')
 
+{{-- phase 20: form bersection dengan urutan dan label yang sama seperti registrasi instansi (data instansi,
+     lokasi, penanggung jawab). kontrak tetap: PUT institution.profile.update, multipart, 12 field dengan
+     name sama; id logo-input / province-select / regency-select tetap. nilai tersimpan selalu terpilih:
+     jenis instansi teks bebas (mis. 'Dinas Kesehatan') tampil sebagai opsi terpilih tanpa mengubah data (D-06). --}}
+
+@php
+    // label sama dengan form registrasi; kunci = nilai yang divalidasi registrasi
+    $standardTypes = [
+        'pemerintah_desa' => 'Pemerintah desa',
+        'dinas' => 'Dinas',
+        'ngo' => 'Lembaga swadaya masyarakat (LSM/NGO)',
+        'puskesmas' => 'Puskesmas',
+        'sekolah' => 'Sekolah',
+        'perguruan_tinggi' => 'Perguruan tinggi',
+        'lainnya' => 'Lainnya',
+    ];
+    // nilai di luar daftar standar yang dikirim controller (nilai tersimpan, D-06)
+    $storedTypes = array_diff_key($institutionTypes, $standardTypes);
+    $currentType = (string) old('type', $institution->type);
+    // old() yang tidak tersimpan dan tidak standar tetap terpilih setelah galat validasi
+    if ($currentType !== '' && ! array_key_exists($currentType, $standardTypes) && ! array_key_exists($currentType, $storedTypes)) {
+        $storedTypes[$currentType] = $currentType;
+    }
+@endphp
+
 @section('content')
-<div class="min-h-screen bg-gray-50 py-8">
-    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-        
-        {{-- header --}}
-        <div class="mb-8">
-            <a href="{{ route('institution.profile.index') }}" class="text-blue-600 hover:text-blue-700 flex items-center gap-2 mb-4">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
-                </svg>
-                Kembali
-            </a>
-            <h1 class="text-3xl font-bold text-gray-900">Edit Profil Instansi</h1>
-            <p class="text-gray-600 mt-1">Perbarui Informasi Profil Instansi Anda</p>
-        </div>
+<div class="sg-container sg-inst-page">
+    <x-ui.page-header title="Edit profil instansi"
+                      description="Perubahan nama, jenis, lokasi dan deskripsi langsung tampil di profil publik."
+                      :back="route('institution.profile.index')" back-label="Kembali ke profil" />
 
-        {{-- pesan sukses/error --}}
-        @if(session('success'))
-            <div class="mb-6 bg-green-50 border border-green-200 rounded-lg p-4">
-                <div class="flex items-center">
-                    <svg class="w-5 h-5 text-green-600 mr-3" fill="currentColor" viewBox="0 0 20 20">
-                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-                    </svg>
-                    <p class="text-green-800 font-medium">{{ session('success') }}</p>
-                </div>
-            </div>
-        @endif
+    @if (session('success'))
+        <x-ui.alert tone="success" class="sg-inst-page__errors">{{ session('success') }}</x-ui.alert>
+    @endif
+    @if (session('error'))
+        <x-ui.alert tone="danger" class="sg-inst-page__errors">{{ session('error') }}</x-ui.alert>
+    @endif
+    <x-ui.form-errors class="sg-inst-page__errors" />
 
-        @if(session('error'))
-            <div class="mb-6 bg-red-50 border border-red-200 rounded-lg p-4">
-                <div class="flex items-center">
-                    <svg class="w-5 h-5 text-red-600 mr-3" fill="currentColor" viewBox="0 0 20 20">
-                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"></path>
-                    </svg>
-                    <p class="text-red-800 font-medium">{{ session('error') }}</p>
-                </div>
-            </div>
-        @endif
+    <form method="POST" action="{{ route('institution.profile.update') }}" enctype="multipart/form-data">
+        @csrf
+        @method('PUT')
 
-        {{-- form edit profile --}}
-        <form method="POST" action="{{ route('institution.profile.update') }}" enctype="multipart/form-data" class="space-y-6">
-            @csrf
-            @method('PUT')
+        {{-- 1. data instansi --}}
+        <section class="sg-inst-section" aria-labelledby="judul-data">
+            <h2 id="judul-data"><span class="sg-inst-section__num">1</span>Data instansi</h2>
 
-            {{-- logo section --}}
-            <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-                <h2 class="text-xl font-bold text-gray-900 mb-4">Logo Instansi</h2>
-                
-                <div class="flex items-start gap-6">
-                    {{-- preview logo --}}
-                    <div class="flex-shrink-0">
-                        @if($institution->logo_path)
-                        <img id="logo-preview" 
-                             src="{{ $institution->getLogoUrl() }}" 
-                             alt="Logo" 
-                             class="w-32 h-32 rounded-lg object-cover border-2 border-gray-200">
-                        @else
-                        <div id="logo-preview" class="w-32 h-32 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg flex items-center justify-center">
-                            <span class="text-white text-4xl font-bold">{{ substr($institution->name, 0, 1) }}</span>
-                        </div>
+            <x-ui.field label="Nama instansi" for="name" required>
+                <x-ui.input name="name" :value="$institution->name" autocomplete="organization" maxlength="255" required />
+            </x-ui.field>
+
+            <div class="sg-inst-grid-2">
+                <x-ui.field label="Jenis instansi" for="type" required>
+                    <x-ui.select name="type" placeholder="Pilih jenis instansi" required>
+                        @if ($storedTypes)
+                            <optgroup label="Tersimpan saat ini">
+                                @foreach ($storedTypes as $value => $label)
+                                    <option value="{{ $value }}" @selected($currentType === (string) $value)>{{ $label }}</option>
+                                @endforeach
+                            </optgroup>
+                            <optgroup label="Pilihan standar">
                         @endif
-                    </div>
+                        @foreach ($standardTypes as $value => $label)
+                            <option value="{{ $value }}" @selected($currentType === (string) $value)>{{ $label }}</option>
+                        @endforeach
+                        @if ($storedTypes)
+                            </optgroup>
+                        @endif
+                    </x-ui.select>
+                </x-ui.field>
 
-                    <div class="flex-1">
-                        <label class="block text-sm font-semibold text-gray-700 mb-2">Upload Logo Baru</label>
-                        <input type="file" 
-                               name="logo" 
-                               id="logo-input"
-                               accept="image/jpeg,image/jpg,image/png"
-                               class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                               onchange="previewLogo(event)">
-                        <p class="text-xs text-gray-500 mt-2">Format: JPG, PNG. Maksimal 2MB</p>
-                        @error('logo')
-                        <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
-                        @enderror
-                    </div>
-                </div>
+                <x-ui.field label="Email resmi instansi" for="email" required help="Dipakai untuk masuk. Mengubah email meminta verifikasi email ulang.">
+                    <x-ui.input name="email" type="email" :value="$user->email" autocomplete="email" maxlength="255" required help />
+                </x-ui.field>
             </div>
 
-            {{-- informasi dasar --}}
-            <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-                <h2 class="text-xl font-bold text-gray-900 mb-6">Informasi Dasar</h2>
+            <x-ui.field label="Website (opsional)" for="website" help="Awali dengan https://">
+                <x-ui.input name="website" type="url" :value="$institution->website" autocomplete="url" maxlength="255" placeholder="https://sukamaju.desa.id" help />
+            </x-ui.field>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    {{-- nama instansi --}}
-                    <div class="md:col-span-2">
-                        <label class="block text-sm font-semibold text-gray-700 mb-2">Nama Instansi *</label>
-                        <input type="text" 
-                               name="name" 
-                               value="{{ old('name', $institution->name) }}"
-                               required
-                               class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-                        @error('name')
-                        <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
-                        @enderror
-                    </div>
+            <x-ui.field label="Deskripsi instansi (opsional)" for="description" help="Tampil di bagian 'Tentang instansi' pada profil publik.">
+                <x-ui.textarea name="description" :value="$institution->description" rows="5" help
+                               placeholder="Wilayah kerja, layanan utama, atau program yang sedang berjalan." />
+            </x-ui.field>
 
-                    {{-- jenis instansi --}}
-                    <div>
-                        <label class="block text-sm font-semibold text-gray-700 mb-2">Jenis Instansi *</label>
-                        <select name="type" 
-                                required
-                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-                            <option value="">Pilih Jenis</option>
-                            @foreach($institutionTypes as $key => $value)
-                            <option value="{{ $key }}" {{ old('type', $institution->type) == $key ? 'selected' : '' }}>
-                                {{ ucwords($value) }}
-                            </option>
-                            @endforeach
-                        </select>
-                        @error('type')
-                        <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
-                        @enderror
-                    </div>
-
-                    {{-- email --}}
-                    <div>
-                        <label class="block text-sm font-semibold text-gray-700 mb-2">Email *</label>
-                        <input type="email" 
-                               name="email" 
-                               value="{{ old('email', $user->email) }}"
-                               required
-                               class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-                        @error('email')
-                        <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
-                        @enderror
-                    </div>
-                </div>
+            {{-- logo: pratinjau = logo tersimpan atau inisial (tanpa gambar pengganti) --}}
+            <div class="sg-inst-logo">
+                <x-ui.avatar id="logo-preview" :src="$institution->logo_path ? $institution->getLogoUrl() : null" :name="$institution->name"
+                             size="xl" square alt="Logo {{ $institution->name }}" />
+                <x-ui.upload name="logo" id="logo-input" label="Logo instansi (opsional)" accept="image/jpeg,image/jpg,image/png"
+                             hint="JPG atau PNG, maks. 2 MB. Kosongkan bila logo tidak diganti." :max-size="2 * 1024 * 1024"
+                             onchange="previewLogo(event)" />
             </div>
+        </section>
 
-            {{-- lokasi --}}
-            <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-                <h2 class="text-xl font-bold text-gray-900 mb-6">Lokasi</h2>
+        {{-- 2. lokasi: kabupaten/kota mengikuti provinsi (GET /api/regencies/{id}, sgRegions) --}}
+        <section class="sg-inst-section" aria-labelledby="judul-lokasi">
+            <h2 id="judul-lokasi"><span class="sg-inst-section__num">2</span>Lokasi</h2>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    {{-- provinsi --}}
-                    <div>
-                        <label class="block text-sm font-semibold text-gray-700 mb-2">Provinsi *</label>
-                        <select name="province_id" 
-                                id="province-select"
-                                required
-                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-                            <option value="">Pilih Provinsi</option>
-                            @foreach($provinces as $province)
-                            <option value="{{ $province->id }}" {{ old('province_id', $institution->province_id) == $province->id ? 'selected' : '' }}>
-                                {{ $province->name }}
-                            </option>
-                            @endforeach
-                        </select>
-                        @error('province_id')
-                        <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
-                        @enderror
-                    </div>
+            <x-ui.field label="Alamat lengkap" for="address" required>
+                <x-ui.textarea name="address" :value="$institution->address" rows="3" autocomplete="street-address" required />
+            </x-ui.field>
 
-                    {{-- kabupaten/kota --}}
-                    <div>
-                        <label class="block text-sm font-semibold text-gray-700 mb-2">Kabupaten/Kota *</label>
-                        <select name="regency_id" 
-                                id="regency-select"
-                                required
-                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-                            <option value="">Pilih Kabupaten/Kota</option>
-                            @foreach($regencies as $regency)
-                            <option value="{{ $regency->id }}" {{ old('regency_id', $institution->regency_id) == $regency->id ? 'selected' : '' }}>
-                                {{ $regency->name }}
-                            </option>
-                            @endforeach
-                        </select>
-                        @error('regency_id')
-                        <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
-                        @enderror
-                    </div>
-
-                    {{-- alamat lengkap --}}
-                    <div class="md:col-span-2">
-                        <label class="block text-sm font-semibold text-gray-700 mb-2">Alamat Lengkap *</label>
-                        <textarea name="address" 
-                                  rows="3"
-                                  required
-                                  class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">{{ old('address', $institution->address) }}</textarea>
-                        @error('address')
-                        <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
-                        @enderror
-                    </div>
-
-                    {{-- telepon --}}
-                    <div>
-                        <label class="block text-sm font-semibold text-gray-700 mb-2">Telepon *</label>
-                        <input type="tel" 
-                               name="phone" 
-                               value="{{ old('phone', $institution->phone) }}"
-                               required
-                               class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-                        @error('phone')
-                        <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
-                        @enderror
-                    </div>
-
-                    {{-- website --}}
-                    <div>
-                        <label class="block text-sm font-semibold text-gray-700 mb-2">Website (Opsional)</label>
-                        <input type="url" 
-                               name="website" 
-                               value="{{ old('website', $institution->website) }}"
-                               placeholder="https://example.com"
-                               class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-                        @error('website')
-                        <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
-                        @enderror
-                    </div>
-                </div>
+            <div class="sg-inst-grid-2"
+                 x-data="sgRegions({ url: @js(url('/api/regencies/__ID__')), province: @js((string) old('province_id', $institution->province_id)), regency: @js((string) old('regency_id', $institution->regency_id)), regencies: @js($regencies->map(fn ($r) => ['id' => $r->id, 'name' => $r->name])->values()) })">
+                <x-ui.field label="Provinsi" for="province-select" name="province_id" required>
+                    <x-ui.select name="province_id" id="province-select" :options="$provinces->pluck('name', 'id')->all()" :selected="$institution->province_id"
+                                 placeholder="Pilih provinsi" required x-model="province" x-ref="province" @change="load()" />
+                </x-ui.field>
+                <x-ui.field label="Kabupaten/kota" for="regency-select" name="regency_id" required>
+                    <x-ui.select name="regency_id" id="regency-select" placeholder="Pilih kabupaten/kota" required aria-describedby="regency-select-status"
+                                 x-model="regency" x-ref="regency" x-bind:disabled="loading">
+                        <template x-for="item in regencies" :key="item.id">
+                            <option :value="item.id" x-text="item.name"></option>
+                        </template>
+                    </x-ui.select>
+                    <p class="sg-inst-status" id="regency-select-status" aria-live="polite" :data-state="failed ? 'error' : null">
+                        <span class="sg-spinner" aria-hidden="true" x-show="loading" x-cloak></span>
+                        <span x-text="status || (province ? '' : 'Pilih provinsi terlebih dahulu.')"></span>
+                        <button type="button" class="sg-btn sg-btn--tertiary" x-show="failed" x-cloak @click="load()">Coba lagi</button>
+                    </p>
+                </x-ui.field>
             </div>
+        </section>
 
-            {{-- penanggung jawab --}}
-            <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-                <h2 class="text-xl font-bold text-gray-900 mb-6">Penanggung Jawab</h2>
+        {{-- 3. penanggung jawab --}}
+        <section class="sg-inst-section" aria-labelledby="judul-pic">
+            <h2 id="judul-pic"><span class="sg-inst-section__num">3</span>Penanggung jawab</h2>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    {{-- nama PIC --}}
-                    <div>
-                        <label class="block text-sm font-semibold text-gray-700 mb-2">Nama PIC *</label>
-                        <input type="text" 
-                               name="pic_name" 
-                               value="{{ old('pic_name', $institution->pic_name) }}"
-                               required
-                               class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-                        @error('pic_name')
-                        <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
-                        @enderror
-                    </div>
-
-                    {{-- jabatan PIC --}}
-                    <div>
-                        <label class="block text-sm font-semibold text-gray-700 mb-2">Jabatan *</label>
-                        <input type="text" 
-                               name="pic_position" 
-                               value="{{ old('pic_position', $institution->pic_position) }}"
-                               required
-                               class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-                        @error('pic_position')
-                        <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
-                        @enderror
-                    </div>
-                </div>
+            <div class="sg-inst-grid-2">
+                <x-ui.field label="Nama penanggung jawab" for="pic_name" required>
+                    <x-ui.input name="pic_name" :value="$institution->pic_name" autocomplete="name" maxlength="255" required />
+                </x-ui.field>
+                <x-ui.field label="Jabatan" for="pic_position" required>
+                    <x-ui.input name="pic_position" :value="$institution->pic_position" autocomplete="organization-title" maxlength="255" required />
+                </x-ui.field>
+                <x-ui.field label="Nomor telepon" for="phone" required>
+                    <x-ui.input name="phone" type="tel" :value="$institution->phone" autocomplete="tel" maxlength="20" required />
+                </x-ui.field>
             </div>
+        </section>
 
-            {{-- deskripsi --}}
-            <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-                <h2 class="text-xl font-bold text-gray-900 mb-6">Deskripsi Instansi</h2>
-
-                <div>
-                    <label class="block text-sm font-semibold text-gray-700 mb-2">Deskripsi (Opsional)</label>
-                    <textarea name="description" 
-                              rows="5"
-                              class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                              placeholder="Ceritakan tentang instansi Anda...">{{ old('description', $institution->description) }}</textarea>
-                    @error('description')
-                    <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
-                    @enderror
-                </div>
-            </div>
-
-            {{-- action buttons --}}
-            <div class="flex gap-4">
-                <button type="submit" 
-                        class="flex-1 px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-semibold">
-                    Simpan Perubahan
-                </button>
-                <a href="{{ route('institution.profile.index') }}" 
-                   class="px-6 py-3 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition-colors font-semibold">
-                    Batal
-                </a>
-            </div>
-        </form>
-    </div>
+        <div class="sg-inst-savebar">
+            <x-ui.button variant="tertiary" :href="route('institution.profile.index')">Batal</x-ui.button>
+            <x-ui.button type="submit">Simpan Perubahan</x-ui.button>
+        </div>
+    </form>
 </div>
 
 @push('scripts')
 <script>
-// preview logo saat dipilih
-function previewLogo(event) {
-    const file = event.target.files[0];
-    if (file) {
-        const reader = new FileReader();
-        reader.onload = function(e) {
-            const preview = document.getElementById('logo-preview');
-            preview.innerHTML = `<img src="${e.target.result}" alt="Logo Preview" class="w-32 h-32 rounded-lg object-cover border-2 border-gray-200">`;
-        }
-        reader.readAsDataURL(file);
-    }
-}
+// pratinjau logo saat dipilih; bila pilihan dihapus, pratinjau kembali ke logo tersimpan
+(function () {
+    const preview = document.getElementById('logo-preview');
+    const original = preview ? [...preview.childNodes].map((n) => n.cloneNode(true)) : [];
+    let objectUrl = null;
 
-// dynamic loading kabupaten/kota berdasarkan provinsi
-document.getElementById('province-select').addEventListener('change', function() {
-    const provinceId = this.value;
-    const regencySelect = document.getElementById('regency-select');
-    
-    // reset regency select
-    regencySelect.innerHTML = '<option value="">Loading...</option>';
-    regencySelect.disabled = true;
-    
-    if (!provinceId) {
-        regencySelect.innerHTML = '<option value="">Pilih Kabupaten/Kota</option>';
-        return;
-    }
-    
-    // fetch regencies dari API
-    fetch(`/api/regencies/${provinceId}`)
-        .then(response => response.json())
-        .then(data => {
-            regencySelect.innerHTML = '<option value="">Pilih Kabupaten/Kota</option>';
-            
-            data.forEach(regency => {
-                const option = document.createElement('option');
-                option.value = regency.id;
-                option.textContent = regency.name;
-                regencySelect.appendChild(option);
-            });
-            
-            regencySelect.disabled = false;
-        })
-        .catch(error => {
-            console.error('Error loading regencies:', error);
-            regencySelect.innerHTML = '<option value="">Error Loading Data</option>';
-        });
-});
+    window.previewLogo = function (event) {
+        if (!preview || event.target.name !== 'logo') return;
+        const file = event.target.files && event.target.files[0];
+        if (objectUrl) { URL.revokeObjectURL(objectUrl); objectUrl = null; }
+        if (!file || !file.type.startsWith('image/')) {
+            preview.replaceChildren(...original.map((n) => n.cloneNode(true)));
+            return;
+        }
+        objectUrl = URL.createObjectURL(file);
+        const img = document.createElement('img');
+        img.src = objectUrl;
+        img.alt = 'Pratinjau logo baru';
+        preview.replaceChildren(img);
+    };
+})();
 </script>
 @endpush
 @endsection
