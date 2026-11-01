@@ -7,8 +7,9 @@
  * Existing tokens only: no new colour, font, radius or shadow; no illustration.
  */
 
-.sg-error { padding: 3rem var(--sg-gutter) 4rem; }
-@media (min-width: 1024px) { .sg-error { padding-block: 5rem 6rem; } }
+/* section saja: .sg-error juga kelas galat field (components.css), jangan beri padding halaman (phase 29 F, C5) */
+section.sg-error { padding: 3rem var(--sg-gutter) 4rem; }
+@media (min-width: 1024px) { section.sg-error { padding-block: 5rem 6rem; } }
 .sg-error__panel { max-width: var(--sg-w-form, 36rem); margin-inline: auto; }
 .sg-error__code { margin: 0; font: 700 3rem/1 var(--font-sans); font-variant-numeric: tabular-nums; letter-spacing: -0.02em; color: var(--sg-brand); }
 @media (min-width: 640px) { .sg-error__code { font-size: 3.75rem; } }
