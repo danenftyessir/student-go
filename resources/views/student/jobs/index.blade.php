@@ -148,6 +148,7 @@
                 <x-ui.empty-state
                     title="Halaman ini kosong"
                     description="Daftar lowongan tidak sepanjang itu. Kembali ke halaman pertama dengan filter yang sama."
+                    illustration="no-search-results"
                     class="sg-browse__empty">
                     <x-slot:action>
                         <x-ui.button variant="secondary" :href="$jobs->url(1)">Ke halaman 1</x-ui.button>
