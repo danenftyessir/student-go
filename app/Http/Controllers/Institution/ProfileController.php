@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Log;
 use App\Models\Province;
 use App\Models\Regency;
 use App\Models\Institution;
+use App\Support\ProvinceRegion;
 
 class ProfileController extends Controller
 {
@@ -222,6 +223,9 @@ class ProfileController extends Controller
             ->orderBy('title')
             ->get();
 
-        return view('institution.profile.public', compact('institution', 'stats', 'completedWork'));
+        // peta wilayah (phase 29 paket G): dari masalah dibuka yang sudah dimuat di atas, tanpa query baru
+        $regions = ProvinceRegion::summary($institution->province?->code, $institution->problems->where('status', 'open'));
+
+        return view('institution.profile.public', compact('institution', 'stats', 'completedWork', 'regions'));
     }
 }
