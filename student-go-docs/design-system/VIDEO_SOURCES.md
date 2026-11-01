@@ -1,6 +1,6 @@
 # Video sources
 
-Every moving image the site serves. Recorded 2026-10-31 at the close of Phase 4 (decision AD-11 in `student-go-docs/redesign-execution/DECISIONS_AND_OPEN_QUESTIONS.md`).
+Every moving image the site serves. Recorded 2026-10-31 at the close of Phase 4 (decision AD-11 in `student-go-docs/design-execution/DECISIONS_AND_OPEN_QUESTIONS.md`).
 
 ## Homepage hero loop
 

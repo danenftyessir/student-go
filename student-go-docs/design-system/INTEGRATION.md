@@ -1,4 +1,4 @@
-# INTEGRATION — putting the Student Go redesign into the Laravel project
+# INTEGRATION — putting the Student Go design into the Laravel project
 
 Read this before copying anything. It says what is finished, what is not, and the order to do the rest in.
 
@@ -6,11 +6,11 @@ Read this before copying anything. It says what is finished, what is not, and th
 
 ## Phase 2 — what was actually done in this project (2026-10-30)
 
-This copy lives at `student-go-docs/design-system/INTEGRATION.md`. Sections 0-8 below are the package's original instructions, kept for reference. Where they differ from what was done, **this section wins**. The decision records are in `student-go-docs/redesign-execution/DECISIONS_AND_OPEN_QUESTIONS.md` (D-01, D-16, D-17, D-18, D-29, D-33, D-35) and `ASSET_INVENTORY.md` section 13.
+This copy lives at `student-go-docs/design-system/INTEGRATION.md`. Sections 0-8 below are the package's original instructions, kept for reference. Where they differ from what was done, **this section wins**. The decision records are in `student-go-docs/design-execution/DECISIONS_AND_OPEN_QUESTIONS.md` (D-01, D-16, D-17, D-18, D-29, D-33, D-35) and `ASSET_INVENTORY.md` section 13.
 
 | Package step | What was done | Deviation and why |
 |---|---|---|
-| §1 new branch `redesign/student-go-visual` | Stayed on `feat/students`, no commit | D-27: no new branch and no commits until the repository move |
+| §1 new branch `design/student-go-visual` | Stayed on `feat/students`, no commit | D-27: no new branch and no commits until the repository move |
 | §2 `cp -R` into the Laravel root | 185 files copied by a script that **refuses to overwrite** (`open(…, 'x')`). Before the copy, a collision check found no existing target. | Docs went to `student-go-docs/design-system/` instead of `docs/` (that folder already holds the audit PDF and proposal). The package README became `PACKAGE_README.md`. `storage/app/asset-originals/` (54 MB of JPEG originals) was **not** copied, so `.gitignore` is unchanged. |
 | §2 assets byte-identical | The C2PA `<metadata>` block was stripped from the 96 SVGs and the styleguide HTML, and the `caBX` chunk from the 7 PNGs, **on the copies only** (D-35). Every other file is byte-identical. | Package originals untouched (111/111 manifest hashes still match). Both hashes for every file are in `c2pa-strip-hashes.tsv`. The 96 stripped SVGs render pixel-identically to the originals, and the 7 PNGs are pixel-identical. Icons shrank from 668 KB to 123 KB. |
 | §2 style guide paths `../public/assets` | Rewritten to `../../public/assets/` in the copied `styleguide.html` and `styleguide.css` (one level deeper) | Needed for the new location |
@@ -20,20 +20,20 @@ This copy lives at `student-go-docs/design-system/INTEGRATION.md`. Sections 0-8 
 | §4 icon component | Added `resources/views/components/icon.blade.php` → `<x-icon name="…" size="sm\|lg" label="…" />` | Adds `focusable="false"`, and `role="img"` + `aria-label` when `label` is given |
 | §4 remove Google Fonts, Boxicons, Font Awesome, AOS | **Not done** (Phase 3, D-20 still open) | |
 | §7 photographs | All 60 WebP and `credits.json` were already in the package. They were copied, **not downloaded**, and `fetch-photos.php` was not run. All 60 are valid WebP (17.1 MB, longest side 1800 px), with no EXIF or XMP. | A preliminary visual review (agent, contact sheets) is in `photo-review.json`: 37 available, 14 available with care, 9 held. The user confirms it before any placement (D-19). No photo was placed. |
-| §8 verification | Done at 360/390/768/1024/1366/1440. Evidence is in `student-go-docs/redesign-execution/reports/phase2/`. | |
+| §8 verification | Done at 360/390/768/1024/1366/1440. Evidence is in `student-go-docs/design-execution/reports/phase2/`. | |
 
 **Rollback:** comment out the three `@import` lines in `resources/css/app.css` and rebuild. The new folders are additive and can be left in place.
 
 ## Phase 3 — shell (2026-10-30)
 
-§4 is now done: shared `<head>` (`partials/head.blade.php`: `lang="id"`, title pattern `… — Student Go`, favicon set, font preload, Vite bundle before Alpine), Student Go wordmark in header and footer, `legacy-overrides.css` imported, Google Fonts / fonts.bunny / Font Awesome / Boxicons removed from the layouts (D-20 a; Alpine and Leaflet stay on their CDNs; AOS goes with the homepage in Phase 4). `APP_NAME` in `.env` was **not** changed: the layouts print "Student Go" directly, because changing `APP_NAME` also renames the session cookie and cache prefix (everyone would be logged out). Components: `student-go-docs/redesign-execution/COMPONENT_INVENTORY.md`.
+§4 is now done: shared `<head>` (`partials/head.blade.php`: `lang="id"`, title pattern `… — Student Go`, favicon set, font preload, Vite bundle before Alpine), Student Go wordmark in header and footer, `legacy-overrides.css` imported, Google Fonts / fonts.bunny / Font Awesome / Boxicons removed from the layouts (D-20 a; Alpine and Leaflet stay on their CDNs; AOS goes with the homepage in Phase 4). `APP_NAME` in `.env` was **not** changed: the layouts print "Student Go" directly, because changing `APP_NAME` also renames the session cookie and cache prefix (everyone would be logged out). Components: `student-go-docs/design-execution/COMPONENT_INVENTORY.md`.
 
 ## 0. Honest status
 
 | | |
 |---|---|
 | **Done and verified** | Design tokens, component CSS, brand SVGs, 5 empty states, 4 workflow diagrams (horizontal + vertical), Indonesia region map, motifs, 71 Lucide icons + sprite, local fonts with OFL texts, a living style guide (`docs/styleguide.html`), manifest. CSS compiles with **Tailwind 4.1.16** (the version your compiled CSS reports in the audit). The style guide was screenshotted at 1440 / 1366 / 1024 / 768 / 390 / 360 px (`docs/screenshots/`) with no page-level horizontal overflow, both font families loaded, no console messages and no failed requests. |
-| **Not done** | **Your Blade views are not redesigned.** The session that produced this package could not reach your project folder (no linked computer) and could not run `composer install` (Packagist blocked), so no view, layout, controller or route was read or changed, and the app was never run with this CSS. Role dashboards, auth, browse, detail, profile, repository, institution and company pages are specified (`DESIGN_SYSTEM.md` section 9) but not built. |
+| **Not done** | **Your Blade views are not designed.** The session that produced this package could not reach your project folder (no linked computer) and could not run `composer install` (Packagist blocked), so no view, layout, controller or route was read or changed, and the app was never run with this CSS. Role dashboards, auth, browse, detail, profile, repository, institution and company pages are specified (`DESIGN_SYSTEM.md` section 9) but not built. |
 | **Not downloaded** | The 60 photographs. Each one was opened on its own Unsplash or Pexels page and its license read there, but the files could not be fetched from this session. `php scripts/fetch-photos.php` does it on your machine (section 7). None has been looked at by eye. |
 | **Not tested** | Vite build, Alpine interactions, Leaflet markers with the new pin, any logged-in page, any of the three roles, real-data stress (77 projects / 216 documents / 76-character institution names) *inside the app*. The style guide does exercise long strings, a 76-character name and a 52-character email, but that is a fixture page, not your data. |
 
@@ -45,7 +45,7 @@ To finish the job, either link the Student Go folder to this task in the Claude 
 
 ```bash
 git status                       # start from a clean tree
-git switch -c redesign/student-go-visual
+git switch -c design/student-go-visual
 cat composer.json package.json   # confirm Laravel version, tailwindcss ^4, @tailwindcss/vite, alpinejs
 ls resources/views resources/views/layouts resources/views/components 2>/dev/null
 php artisan route:list --except-vendor > route-list.before.txt   # your rollback reference
@@ -251,15 +251,15 @@ If a download fails, the script lists it; open that photo's Source URL (in `docs
 
 # SEPARATE RECORD — data-integrity and privacy problems this pass did NOT fix
 
-The audit marks these P0/P1 and says a redesign must not hide them. Nothing in this package changes data, access control, routes or business logic, and no component was designed to disguise them. Each needs a decision or backend work.
+The audit marks these P0/P1 and says a design must not hide them. Nothing in this package changes data, access control, routes or business logic, and no component was designed to disguise them. Each needs a decision or backend work.
 
 ## P0
 
-| ID | Problem (audit evidence) | Why the redesign must not mask it | Needed from you |
+| ID | Problem (audit evidence) | Why the design must not mask it | Needed from you |
 |---|---|---|---|
 | **J1** | One person shows two names and unrelated initials: 127 of 127 sample profiles mismatch; "Uli Hidayat" can appear to companies as "Oki Nabila". | Avatar initials in the new design are derived from the name passed in. If you pick one name source and derive initials from it, the bug is fixed; if you "fix" it by hiding the avatar or the second name, a company can still contact the wrong person. | Choose the single source of truth for a student's display name; fix the seeder/model. |
 | **J2** | Lists repeat records and hide others (15 of 77 problems and 7 of 216 documents never appear). | The new list/table will show exactly what the query returns. Do not "solve" this with infinite scroll or a larger page size. | Deterministic sort with an `id` tie-breaker; real counts. |
-| **J3** | Guests can fetch a student's email and WhatsApp from `/profile/{username}` without logging in (700 students). | The profile redesign shows a contact block as a separate component. **It displays whatever the backend sends, as before.** It was not hidden or reduced here because that is an access-control change. | A product/legal decision on contact visibility; then a policy in the controller. |
+| **J3** | Guests can fetch a student's email and WhatsApp from `/profile/{username}` without logging in (700 students). | The profile design shows a contact block as a separate component. **It displays whatever the backend sends, as before.** It was not hidden or reduced here because that is an access-control change. | A product/legal decision on contact visibility; then a policy in the controller. |
 | **J4** | Counts contradict each other (77 / 73 / 62 / "1 dari 77"; 221 vs 216; 12 of 699). | Do not put any new number in a summary row until its definition is settled. `.sg-summary` shows only values you pass it. | One definition per count; label filtered totals as filtered. |
 
 ## P1 data/behaviour items

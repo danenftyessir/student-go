@@ -1,6 +1,6 @@
 {
   "generated": "2026-10-30",
-  "project": "Student Go visual redesign (asset package)",
+  "project": "Student Go visual design (asset package)",
   "license_summaries": {
     "Unsplash License": "Commercial and non-commercial use; no permission or attribution required (credit appreciated); may not compile images into a competing service. Source: https://unsplash.com/license",
     "Pexels License": "Free for commercial use, attribution not required; do not depict identifiable people in a bad light; do not sell unmodified copies; do not imply endorsement by people or brands shown; no redistribution on other stock platforms; not for use as a trademark. Source: https://www.pexels.com/license/"
@@ -9,8 +9,8 @@
     {
       "id": "brand",
       "kind": "original-svg",
-      "creator": "Student Go redesign (generated)",
-      "license": "Original work created for Student Go in this redesign (no third-party rights).",
+      "creator": "Student Go design (generated)",
+      "license": "Original work created for Student Go in this design (no third-party rights).",
       "notes": "Wordmark outlines were converted from Plus Jakarta Sans Bold (SIL OFL 1.1) glyph shapes; the OFL permits use of the font's output.",
       "files": [
         {
@@ -53,8 +53,8 @@
     {
       "id": "empty-states",
       "kind": "original-svg",
-      "creator": "Student Go redesign (generated)",
-      "license": "Original work created for Student Go in this redesign (no third-party rights).",
+      "creator": "Student Go design (generated)",
+      "license": "Original work created for Student Go in this design (no third-party rights).",
       "files": [
         {
           "path": "public/assets/illustrations/empty-states/no-applications.svg",
@@ -86,8 +86,8 @@
     {
       "id": "workflows",
       "kind": "original-svg",
-      "creator": "Student Go redesign (generated)",
-      "license": "Original work created for Student Go in this redesign (no third-party rights).",
+      "creator": "Student Go design (generated)",
+      "license": "Original work created for Student Go in this design (no third-party rights).",
       "notes": "Step labels derive from routes and statuses documented in the design audit; confirm against the application's real routes.",
       "files": [
         {
@@ -135,7 +135,7 @@
     {
       "id": "geographic",
       "kind": "derived-from-public-domain-data",
-      "creator": "Student Go redesign (generated)",
+      "creator": "Student Go design (generated)",
       "license": "Public domain source data (Natural Earth); drawing is original work.",
       "source": "Natural Earth admin-0 countries 1:50m via npm package world-atlas@2.0.2 (ISC packaging)",
       "source_url": "https://www.naturalearthdata.com/about/terms-of-use/",
@@ -155,8 +155,8 @@
     {
       "id": "motifs",
       "kind": "original-svg",
-      "creator": "Student Go redesign (generated)",
-      "license": "Original work created for Student Go in this redesign (no third-party rights).",
+      "creator": "Student Go design (generated)",
+      "license": "Original work created for Student Go in this design (no third-party rights).",
       "notes": "contour-field.svg is procedurally generated from a synthetic terrain (no real survey data).",
       "files": [
         {
@@ -610,8 +610,8 @@
     {
       "id": "css",
       "kind": "original-code",
-      "creator": "Student Go redesign",
-      "license": "Original work created for Student Go in this redesign (no third-party rights).",
+      "creator": "Student Go design",
+      "license": "Original work created for Student Go in this design (no third-party rights).",
       "files": [
         {
           "path": "resources/css/student-go/components.css",
@@ -633,8 +633,8 @@
     {
       "id": "scripts",
       "kind": "original-code",
-      "creator": "Student Go redesign",
-      "license": "Original work created for Student Go in this redesign (no third-party rights).",
+      "creator": "Student Go design",
+      "license": "Original work created for Student Go in this design (no third-party rights).",
       "files": [
         {
           "path": "scripts/fetch-photos.php",
@@ -651,8 +651,8 @@
     {
       "id": "photo-catalog",
       "kind": "data",
-      "creator": "Student Go redesign",
-      "license": "Original work created for Student Go in this redesign (no third-party rights).",
+      "creator": "Student Go design",
+      "license": "Original work created for Student Go in this design (no third-party rights).",
       "notes": "One record per photograph; each was opened on its own source page. Held-back items and reasons are in the same file.",
       "files": [
         {

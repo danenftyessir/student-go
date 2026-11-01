@@ -29,7 +29,7 @@ Living reference: open `docs/styleguide.html` (built from the real CSS in `resou
 
 **Until Phase 3 activates `legacy-overrides.css`**, `.sg-*` components take gray, radius and font from Tailwind's defaults (for example `--color-gray-900` is still `oklch(21% .034 264.665)` and `--font-sans` is still the old stack). Do not adopt `.sg-*` in a page before then. To activate it, un-comment `@import './student-go/legacy-overrides.css';` in `resources/css/app.css` and rebuild. A preview build with it active compiles (145.27 kB).
 
-> **Phase 3 update (2026-10-30):** `legacy-overrides.css` is now **imported** (D-29 staging ended), so the re-tuned `gray-*`, `primary-*` aliases, radius shim, type scale, `--font-sans`, base rules, `:focus-visible` ring and reduced-motion rule apply to every page. The old `@theme` block with 'Instrument Sans' was removed from `app.css`. `.sg-*` components may now be adopted by pages. The shell and shared Blade components (`<x-ui.*>`) are documented in `student-go-docs/redesign-execution/COMPONENT_INVENTORY.md`; their CSS was appended to `components.css` (Phase 3 section).
+> **Phase 3 update (2026-10-30):** `legacy-overrides.css` is now **imported** (D-29 staging ended), so the re-tuned `gray-*`, `primary-*` aliases, radius shim, type scale, `--font-sans`, base rules, `:focus-visible` ring and reduced-motion rule apply to every page. The old `@theme` block with 'Instrument Sans' was removed from `app.css`. `.sg-*` components may now be adopted by pages. The shell and shared Blade components (`<x-ui.*>`) are documented in `student-go-docs/design-execution/COMPONENT_INVENTORY.md`; their CSS was appended to `components.css` (Phase 3 section).
 
 ### 0.2 Token map (what the user asked for → where it is)
 
@@ -60,7 +60,7 @@ The helper renders `<svg class="sg-icon …"><use href="{{ asset('assets/icons/u
 
 ### 0.4 Contrast, re-measured on 2026-10-30 from the token files
 
-All 41 text and UI pairs pass (text ≥ 4.5:1, UI ≥ 3:1). Three decorative or disabled pairs are exempt. The full table, generated from the hex values in `tokens.css` and `legacy-overrides.css`, is `reports/phase2/contrast.md` in `student-go-docs/redesign-execution/`. The values match section 3 below. One observation for Phase 3: the secondary-button outline (`gray-300` on white, 1.59:1) relies on the label and the white fill to identify the control. That is allowed under WCAG 1.4.11 because the text identifies the button, but re-check it once buttons sit on `gray-50` surfaces.
+All 41 text and UI pairs pass (text ≥ 4.5:1, UI ≥ 3:1). Three decorative or disabled pairs are exempt. The full table, generated from the hex values in `tokens.css` and `legacy-overrides.css`, is `reports/phase2/contrast.md` in `student-go-docs/design-execution/`. The values match section 3 below. One observation for Phase 3: the secondary-button outline (`gray-300` on white, 1.59:1) relies on the label and the white fill to identify the control. That is allowed under WCAG 1.4.11 because the text identifies the button, but re-check it once buttons sit on `gray-50` surfaces.
 
 ### 0.5 What is protected and separate
 
