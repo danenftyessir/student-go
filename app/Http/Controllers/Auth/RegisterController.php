@@ -195,7 +195,7 @@ class RegisterController extends Controller
             DB::commit();
             
             // picu event bahwa user baru telah terdaftar (untuk kirim email verifikasi)
-            event(new Registered($user));
+            $this->dispatchRegistered($user);
 
             // log successful registration
             Log::info('Student registered successfully', [
@@ -361,7 +361,7 @@ class RegisterController extends Controller
             DB::commit();
 
             // picu event bahwa user baru telah terdaftar
-            event(new Registered($user));
+            $this->dispatchRegistered($user);
 
             // log successful registration
             Log::info('Institution registered successfully', [
@@ -602,6 +602,21 @@ class RegisterController extends Controller
             return back()
                 ->withInput()
                 ->with('error', safe_error_message('Terjadi kesalahan saat registrasi. Silakan coba lagi. Error: ', $e));
+        }
+    }
+
+    /**
+     * kirim event Registered (email verifikasi) tanpa menggagalkan registrasi:
+     * akun sudah di-commit, jadi galat SMTP cukup dicatat, bukan ditampilkan sebagai registrasi gagal
+     */
+    private function dispatchRegistered(User $user): void
+    {
+        try {
+            event(new Registered($user));
+        } catch (\Throwable $e) {
+            Log::error('Failed to dispatch Registered event (email verifikasi): ' . $e->getMessage(), [
+                'user_id' => $user->id,
+            ]);
         }
     }
 

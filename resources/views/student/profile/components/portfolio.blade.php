@@ -147,7 +147,7 @@
                                                         @endif
                                                     </p>
                                                     @if (filled($review->comment))
-                                                        <blockquote class="m-0 max-w-prose border-l-2 border-gray-300 pl-3 text-sm leading-6 text-gray-700 wrap-break-word">{{ $review->comment }}</blockquote>
+                                                        <blockquote class="m-0 max-w-prose rounded-sm bg-gray-50 px-3 py-2 text-sm leading-6 text-gray-700 wrap-break-word">{{ $review->comment }}</blockquote>
                                                     @endif
                                                 @endif
                                                 @if ($project->certificate_path)

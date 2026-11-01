@@ -235,7 +235,8 @@
 
         <div class="sg-inst-brief__actions">
             <a href="{{ $cancelHref }}" class="sg-btn sg-btn--tertiary">Batal</a>
-            <button type="submit" class="sg-btn sg-btn--primary" x-text="labels[statusValue] || @js($submitLabels[$status] ?? reset($submitLabels))">{{ $submitLabels[$status] ?? reset($submitLabels) }}</button>
+            <button type="submit" class="sg-btn sg-btn--primary" :disabled="submitting" :aria-busy="submitting ? 'true' : null"
+                    x-text="submitting ? 'Menyimpan…' : (labels[statusValue] || @js($submitLabels[$status] ?? reset($submitLabels)))">{{ $submitLabels[$status] ?? reset($submitLabels) }}</button>
         </div>
     </div>
 </div>
@@ -251,6 +252,7 @@ document.addEventListener('alpine:init', () => {
         state: {},
         active: 'informasi',
         statusValue: '',
+        submitting: false,
         sdgError: '',
         announce: '',
         announced: false,
@@ -272,6 +274,8 @@ document.addEventListener('alpine:init', () => {
             const firstError = Object.keys(this.errors).find((key) => this.errors[key] > 0);
             if (firstError) this.$nextTick(() => this.go(firstError, false));
             this.root.closest('form')?.addEventListener('submit', (e) => this.onSubmit(e));
+            // kembali lewat tombol back browser: aktifkan lagi tombol kirim
+            window.addEventListener('pageshow', () => { this.submitting = false; });
         },
         sections() { return [...this.root.querySelectorAll('[data-section]')]; },
         refresh() {
@@ -326,7 +330,11 @@ document.addEventListener('alpine:init', () => {
                 this.announce = 'Bagian Sasaran & SDG belum lengkap. Pilih minimal satu kategori SDG.';
                 this.go('sasaran', false);
                 this.root.querySelector('input[name="sdg_categories[]"]')?.focus({ preventScroll: true });
+                return;
             }
+            // cegah kirim ganda (unggah foto bisa lama; klik kedua membuat masalah dobel)
+            if (this.submitting) { event.preventDefault(); return; }
+            this.submitting = true;
         },
     }));
 

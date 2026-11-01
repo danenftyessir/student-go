@@ -144,7 +144,7 @@
                     </h3>
                     <div class="space-y-4">
                         @foreach($talent->experiences as $experience)
-                            <div class="border-l-2 border-green-200 pl-4">
+                            <div>
                                 <h4 class="font-semibold text-gray-900">{{ $experience->title }}</h4>
                                 <p class="text-gray-600 text-sm">{{ $experience->company }}</p>
                                 <p class="text-gray-500 text-sm">
@@ -171,7 +171,7 @@
                     </h3>
                     <div class="space-y-4">
                         @foreach($talent->educations as $education)
-                            <div class="border-l-2 border-indigo-200 pl-4">
+                            <div>
                                 <h4 class="font-semibold text-gray-900">{{ $education->institution }}</h4>
                                 <p class="text-gray-600 text-sm">{{ $education->degree }} - {{ $education->field_of_study }}</p>
                                 <p class="text-gray-500 text-sm">
