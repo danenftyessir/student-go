@@ -1,0 +1,442 @@
+{
+ "before:company-dashboard": {
+  "360": {
+   "overflow": 0,
+   "gap": 0,
+   "emptyImgs": [
+    "no-applications.svg"
+   ]
+  },
+  "390": {
+   "overflow": 0,
+   "gap": 0,
+   "emptyImgs": [
+    "no-applications.svg"
+   ]
+  },
+  "768": {
+   "overflow": 0,
+   "gap": 0,
+   "emptyImgs": [
+    "no-applications.svg"
+   ]
+  },
+  "1440": {
+   "overflow": 0,
+   "gap": 0,
+   "emptyImgs": [
+    "no-applications.svg"
+   ]
+  }
+ },
+ "after:company-dashboard": {
+  "360": {
+   "overflow": 0,
+   "gap": 0,
+   "emptyImgs": [
+    "no-applications.svg"
+   ]
+  },
+  "390": {
+   "overflow": 0,
+   "gap": 0,
+   "emptyImgs": [
+    "no-applications.svg"
+   ]
+  },
+  "768": {
+   "overflow": 0,
+   "gap": 0,
+   "emptyImgs": [
+    "no-applications.svg"
+   ]
+  },
+  "1440": {
+   "overflow": 0,
+   "gap": 0,
+   "emptyImgs": [
+    "no-applications.svg"
+   ]
+  }
+ },
+ "before:company-jobs": {
+  "360": {
+   "overflow": 0,
+   "gap": 0,
+   "emptyImgs": [
+    "no-applications.svg"
+   ]
+  },
+  "390": {
+   "overflow": 0,
+   "gap": 0,
+   "emptyImgs": [
+    "no-applications.svg"
+   ]
+  },
+  "768": {
+   "overflow": 0,
+   "gap": 0,
+   "emptyImgs": [
+    "no-applications.svg"
+   ]
+  },
+  "1440": {
+   "overflow": 0,
+   "gap": 40,
+   "emptyImgs": [
+    "no-applications.svg"
+   ]
+  }
+ },
+ "after:company-jobs": {
+  "360": {
+   "overflow": 0,
+   "gap": 0,
+   "emptyImgs": [
+    "no-applications.svg"
+   ]
+  },
+  "390": {
+   "overflow": 0,
+   "gap": 0,
+   "emptyImgs": [
+    "no-applications.svg"
+   ]
+  },
+  "768": {
+   "overflow": 0,
+   "gap": 0,
+   "emptyImgs": [
+    "no-applications.svg"
+   ]
+  },
+  "1440": {
+   "overflow": 0,
+   "gap": 0,
+   "emptyImgs": [
+    "no-applications.svg"
+   ]
+  }
+ },
+ "before:institution-dashboard": {
+  "360": {
+   "overflow": 0,
+   "gap": 0,
+   "emptyImgs": [
+    "no-applications.svg"
+   ]
+  },
+  "390": {
+   "overflow": 0,
+   "gap": 0,
+   "emptyImgs": [
+    "no-applications.svg"
+   ]
+  },
+  "768": {
+   "overflow": 0,
+   "gap": 0,
+   "emptyImgs": [
+    "no-applications.svg"
+   ]
+  },
+  "1440": {
+   "overflow": 0,
+   "gap": 0,
+   "emptyImgs": [
+    "no-applications.svg"
+   ]
+  }
+ },
+ "after:institution-dashboard": {
+  "360": {
+   "overflow": 0,
+   "gap": 0,
+   "emptyImgs": [
+    "no-applications.svg"
+   ]
+  },
+  "390": {
+   "overflow": 0,
+   "gap": 0,
+   "emptyImgs": [
+    "no-applications.svg"
+   ]
+  },
+  "768": {
+   "overflow": 0,
+   "gap": 0,
+   "emptyImgs": [
+    "no-applications.svg"
+   ]
+  },
+  "1440": {
+   "overflow": 0,
+   "gap": 0,
+   "emptyImgs": [
+    "no-applications.svg"
+   ]
+  }
+ },
+ "before:institution-problems": {
+  "360": {
+   "overflow": 0,
+   "gap": 0,
+   "emptyImgs": []
+  },
+  "390": {
+   "overflow": 0,
+   "gap": 0,
+   "emptyImgs": []
+  },
+  "768": {
+   "overflow": 0,
+   "gap": 167,
+   "emptyImgs": []
+  },
+  "1440": {
+   "overflow": 0,
+   "gap": 243,
+   "emptyImgs": []
+  }
+ },
+ "after:institution-problems": {
+  "360": {
+   "overflow": 0,
+   "gap": 0,
+   "emptyImgs": [
+    "no-documents.svg"
+   ]
+  },
+  "390": {
+   "overflow": 0,
+   "gap": 0,
+   "emptyImgs": [
+    "no-documents.svg"
+   ]
+  },
+  "768": {
+   "overflow": 0,
+   "gap": 0,
+   "emptyImgs": [
+    "no-documents.svg"
+   ]
+  },
+  "1440": {
+   "overflow": 0,
+   "gap": 0,
+   "emptyImgs": [
+    "no-documents.svg"
+   ]
+  }
+ },
+ "before:institution-projects": {
+  "360": {
+   "overflow": 0,
+   "gap": 0,
+   "emptyImgs": []
+  },
+  "390": {
+   "overflow": 0,
+   "gap": 0,
+   "emptyImgs": []
+  },
+  "768": {
+   "overflow": 0,
+   "gap": 147,
+   "emptyImgs": []
+  },
+  "1440": {
+   "overflow": 0,
+   "gap": 223,
+   "emptyImgs": []
+  }
+ },
+ "after:institution-projects": {
+  "360": {
+   "overflow": 0,
+   "gap": 0,
+   "emptyImgs": [
+    "no-applications.svg"
+   ]
+  },
+  "390": {
+   "overflow": 0,
+   "gap": 0,
+   "emptyImgs": [
+    "no-applications.svg"
+   ]
+  },
+  "768": {
+   "overflow": 0,
+   "gap": 0,
+   "emptyImgs": [
+    "no-applications.svg"
+   ]
+  },
+  "1440": {
+   "overflow": 0,
+   "gap": 0,
+   "emptyImgs": [
+    "no-applications.svg"
+   ]
+  }
+ },
+ "before:institution-reviews": {
+  "360": {
+   "overflow": 0,
+   "gap": 0,
+   "emptyImgs": []
+  },
+  "390": {
+   "overflow": 0,
+   "gap": 0,
+   "emptyImgs": []
+  },
+  "768": {
+   "overflow": 0,
+   "gap": 147,
+   "emptyImgs": []
+  },
+  "1440": {
+   "overflow": 0,
+   "gap": 223,
+   "emptyImgs": []
+  }
+ },
+ "after:institution-reviews": {
+  "360": {
+   "overflow": 0,
+   "gap": 0,
+   "emptyImgs": [
+    "no-documents.svg"
+   ]
+  },
+  "390": {
+   "overflow": 0,
+   "gap": 0,
+   "emptyImgs": [
+    "no-documents.svg"
+   ]
+  },
+  "768": {
+   "overflow": 0,
+   "gap": 0,
+   "emptyImgs": [
+    "no-documents.svg"
+   ]
+  },
+  "1440": {
+   "overflow": 0,
+   "gap": 0,
+   "emptyImgs": [
+    "no-documents.svg"
+   ]
+  }
+ },
+ "before:student-jobs-page99": {
+  "360": {
+   "overflow": 0,
+   "gap": 0,
+   "emptyImgs": []
+  },
+  "390": {
+   "overflow": 0,
+   "gap": 0,
+   "emptyImgs": []
+  },
+  "768": {
+   "overflow": 0,
+   "gap": 27,
+   "emptyImgs": []
+  },
+  "1440": {
+   "overflow": 0,
+   "gap": 103,
+   "emptyImgs": []
+  }
+ },
+ "after:student-jobs-page99": {
+  "360": {
+   "overflow": 0,
+   "gap": 0,
+   "emptyImgs": [
+    "no-search-results.svg"
+   ]
+  },
+  "390": {
+   "overflow": 0,
+   "gap": 0,
+   "emptyImgs": [
+    "no-search-results.svg"
+   ]
+  },
+  "768": {
+   "overflow": 0,
+   "gap": 0,
+   "emptyImgs": [
+    "no-search-results.svg"
+   ]
+  },
+  "1440": {
+   "overflow": 0,
+   "gap": 0,
+   "emptyImgs": [
+    "no-search-results.svg"
+   ]
+  }
+ },
+ "before:student-jobs-saved-folder": {
+  "360": {
+   "overflow": 0,
+   "gap": 0,
+   "emptyImgs": []
+  },
+  "390": {
+   "overflow": 0,
+   "gap": 0,
+   "emptyImgs": []
+  },
+  "768": {
+   "overflow": 0,
+   "gap": 25,
+   "emptyImgs": []
+  },
+  "1440": {
+   "overflow": 0,
+   "gap": 101,
+   "emptyImgs": []
+  }
+ },
+ "after:student-jobs-saved-folder": {
+  "360": {
+   "overflow": 0,
+   "gap": 0,
+   "emptyImgs": [
+    "no-saved-projects.svg"
+   ]
+  },
+  "390": {
+   "overflow": 0,
+   "gap": 0,
+   "emptyImgs": [
+    "no-saved-projects.svg"
+   ]
+  },
+  "768": {
+   "overflow": 0,
+   "gap": 0,
+   "emptyImgs": [
+    "no-saved-projects.svg"
+   ]
+  },
+  "1440": {
+   "overflow": 0,
+   "gap": 0,
+   "emptyImgs": [
+    "no-saved-projects.svg"
+   ]
+  }
+ }
+}

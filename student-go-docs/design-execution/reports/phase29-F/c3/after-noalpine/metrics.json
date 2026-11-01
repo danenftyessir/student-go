@@ -1,0 +1,46 @@
+{
+ "before:company-dashboard-chart": {
+  "360": {
+   "overflow": 0,
+   "gap": 0,
+   "emptyImgs": []
+  },
+  "390": {
+   "overflow": 0,
+   "gap": 0,
+   "emptyImgs": []
+  },
+  "768": {
+   "overflow": 0,
+   "gap": 0,
+   "emptyImgs": []
+  },
+  "1440": {
+   "overflow": 0,
+   "gap": 0,
+   "emptyImgs": []
+  }
+ },
+ "after:company-dashboard-chart": {
+  "360": {
+   "overflow": 0,
+   "gap": 0,
+   "emptyImgs": []
+  },
+  "390": {
+   "overflow": 0,
+   "gap": 0,
+   "emptyImgs": []
+  },
+  "768": {
+   "overflow": 0,
+   "gap": 0,
+   "emptyImgs": []
+  },
+  "1440": {
+   "overflow": 0,
+   "gap": 0,
+   "emptyImgs": []
+  }
+ }
+}
