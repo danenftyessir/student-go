@@ -4,6 +4,7 @@ namespace App\Services\AI;
 
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
+use App\Services\SupabaseStorageService;
 use Illuminate\Support\Facades\Storage;
 
 class AIDocumentVerificationService
@@ -94,13 +95,13 @@ class AIDocumentVerificationService
     protected function loadDocumentContent(string $filePath): ?array
     {
         try {
-            // Check if file exists in storage
-            if (!Storage::disk('supabase')->exists($filePath)) {
+            // ambil file lewat SupabaseStorageService (REST); disk s3 'supabase' tidak punya kredensial S3 valid
+            $fileContent = app(SupabaseStorageService::class)->getContents($filePath);
+            if ($fileContent === null) {
                 return null;
             }
 
-            $fileContent = Storage::disk('supabase')->get($filePath);
-            $mimeType = Storage::disk('supabase')->mimeType($filePath);
+            $mimeType = (new \finfo(FILEINFO_MIME_TYPE))->buffer($fileContent) ?: '';
 
             // Handle images (KTP, Logo)
             if (str_starts_with($mimeType, 'image/')) {
