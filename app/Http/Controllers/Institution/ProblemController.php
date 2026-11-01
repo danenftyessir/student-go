@@ -457,15 +457,9 @@ class ProblemController extends Controller
                             ]);
                         }
 
-                        // Coba hapus dari supabase disk (untuk file baru)
+                        // hapus dari supabase storage (untuk file baru)
                         try {
-                            if (Storage::disk('supabase')->exists($imagePath)) {
-                                Storage::disk('supabase')->delete($imagePath);
-                                Log::info('Problem Update - Image Deleted from Supabase Disk', [
-                                    'image_id' => $imageId,
-                                    'path' => $imagePath
-                                ]);
-                            }
+                            $this->storageService->delete($imagePath);
                         } catch (\Exception $e) {
                             Log::warning('Problem Update - Failed to delete from supabase disk', [
                                 'error' => $e->getMessage()
@@ -503,55 +497,18 @@ class ProblemController extends Controller
                             'problem_id' => $problem->id
                         ]);
 
-                        // Try upload to Supabase
-                        try {
-                            Log::info('Problem Update - Starting Supabase Upload', [
-                                'file' => $image->getClientOriginalName(),
-                                'size' => $image->getSize(),
-                                'mime' => $image->getMimeType(),
-                                'bucket' => config('filesystems.disks.supabase.bucket'),
-                                'endpoint' => config('filesystems.disks.supabase.endpoint')
-                            ]);
+                        // unggah lewat SupabaseStorageService (sama seperti store); disk s3 'supabase' tidak punya kredensial S3 yang valid
+                        $filename = uniqid() . '_' . time() . '.' . $image->getClientOriginalExtension();
+                        $path = $this->storageService->uploadFile($image, "problems/{$problem->id}/{$filename}");
 
-                            $path = $image->store('problems', 'supabase');
-
-                            if (!$path) {
-                                throw new \Exception("Store method returned false/empty path");
-                            }
-
-                            Log::info('Problem Update - Image Stored to Supabase Successfully', [
-                                'path' => $path,
-                                'problem_id' => $problem->id,
-                                'url' => supabase_url($path)
-                            ]);
-
-                        } catch (\Exception $supabaseException) {
-                            Log::error('Problem Update - Supabase Upload Failed', [
-                                'error' => $supabaseException->getMessage(),
-                                'file' => $image->getClientOriginalName(),
-                                'trace' => $supabaseException->getTraceAsString()
-                            ]);
-
-                            // Di production, jangan fallback ke local storage (ephemeral)
-                            if (app()->environment('production')) {
-                                throw new \Exception("Gagal upload gambar ke Supabase: " . $supabaseException->getMessage());
-                            }
-
-                            // Fallback ke public disk HANYA di local/development
-                            Log::warning('Problem Update - Using Public Disk Fallback (Development Only)', [
-                                'file' => $image->getClientOriginalName()
-                            ]);
-
-                            $path = $image->store('problems', 'public');
-
-                            if (!$path) {
-                                throw new \Exception("Fallback upload juga gagal. Error: " . $supabaseException->getMessage());
-                            }
-
-                            Log::info('Problem Update - Image Stored to Public Disk (Fallback)', [
-                                'path' => $path
-                            ]);
+                        if (!$path) {
+                            throw new \Exception("Upload returned false/empty path");
                         }
+
+                        Log::info('Problem Update - Image Stored', [
+                            'path' => $path,
+                            'problem_id' => $problem->id,
+                        ]);
 
                         $problem->images()->create([
                             'problem_id' => $problem->id,
@@ -649,11 +606,9 @@ class ProblemController extends Controller
                 ]);
             }
 
-            // Coba hapus dari supabase disk
+            // hapus dari supabase storage
             try {
-                if (Storage::disk('supabase')->exists($imagePath)) {
-                    Storage::disk('supabase')->delete($imagePath);
-                }
+                $this->storageService->delete($imagePath);
             } catch (\Exception $e) {
                 Log::warning('Problem Destroy - Failed to delete from supabase disk', [
                     'error' => $e->getMessage()

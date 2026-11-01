@@ -2,10 +2,9 @@
 
 namespace App\Services;
 
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Storage;
 
 /**
  * SupabaseService - Service untuk handle SEMUA operasi database dan storage ke Supabase
@@ -138,16 +137,21 @@ class SupabaseService
     public function uploadFile($bucket, $filePath, $file)
     {
         try {
-            // Upload ke Supabase Storage menggunakan Laravel Storage facade
-            $disk = Storage::disk('supabase');
-            $fullPath = "{$bucket}/{$filePath}";
+            // semua file ada di satu bucket (SUPABASE_BUCKET); $bucket dipakai sebagai folder di dalamnya.
+            // lewat SupabaseStorageService (REST), bukan disk s3 'supabase' yang tidak punya kredensial S3 valid
+            $fullPath = $this->storagePath($bucket, $filePath);
 
             if (is_string($file)) {
-                // Jika file adalah string (file content)
-                $disk->put($fullPath, $file);
-            } else {
-                // Jika file adalah UploadedFile
-                $disk->putFileAs($bucket, $file, basename($filePath));
+                // jika file adalah string (isi file): tulis ke file sementara agar bisa diunggah
+                $tmp = tempnam(sys_get_temp_dir(), 'sg');
+                file_put_contents($tmp, $file);
+                $file = new UploadedFile($tmp, basename($filePath), null, null, true);
+            }
+
+            $path = $this->storage()->uploadFile($file, $fullPath);
+
+            if (!$path) {
+                throw new \Exception("Upload ke storage gagal: {$fullPath}");
             }
 
             // Return public URL
@@ -164,18 +168,7 @@ class SupabaseService
     public function deleteFile($bucket, $filePath)
     {
         try {
-            $disk = Storage::disk('supabase');
-            $fullPath = "{$bucket}/{$filePath}";
-
-            // Try to delete directly without checking existence
-            // This avoids issues with exists() method on some storage drivers
-            try {
-                return $disk->delete($fullPath);
-            } catch (\Exception $deleteException) {
-                // File might not exist, which is fine
-                Log::info("File not found or already deleted: {$fullPath}");
-                return false;
-            }
+            return $this->storage()->delete($this->storagePath($bucket, $filePath));
         } catch (\Exception $e) {
             Log::error("Supabase delete file error: " . $e->getMessage());
             // Don't throw error for delete failures - just log it
@@ -188,8 +181,7 @@ class SupabaseService
      */
     public function getPublicUrl($bucket, $filePath)
     {
-        $supabaseUrl = env('SUPABASE_URL');
-        return "{$supabaseUrl}/storage/v1/object/public/{$bucket}/{$filePath}";
+        return $this->storage()->getPublicUrl($this->storagePath($bucket, $filePath));
     }
 
     /**
@@ -198,19 +190,7 @@ class SupabaseService
     public function getSignedUrl($bucket, $filePath, $expiresIn = 3600)
     {
         try {
-            $response = Http::withHeaders([
-                'Authorization' => 'Bearer ' . $this->supabaseServiceKey,
-                'apikey' => $this->supabaseKey,
-            ])->post("{$this->supabaseUrl}/storage/v1/object/sign/{$bucket}/{$filePath}", [
-                'expiresIn' => $expiresIn,
-            ]);
-
-            if ($response->successful()) {
-                $data = $response->json();
-                return "{$this->supabaseUrl}/storage/v1{$data['signedURL']}";
-            }
-
-            throw new \Exception("Failed to generate signed URL: " . $response->body());
+            return $this->storage()->createSignedUrl($this->storagePath($bucket, $filePath), (int) $expiresIn);
         } catch (\Exception $e) {
             Log::error("Supabase signed URL error: " . $e->getMessage());
             throw $e;
@@ -223,13 +203,24 @@ class SupabaseService
     public function listFiles($bucket, $prefix = '')
     {
         try {
-            $disk = Storage::disk('supabase');
-            $path = $prefix ? "{$bucket}/{$prefix}" : $bucket;
-            return $disk->files($path);
+            return $this->storage()->listFiles($prefix ? "{$bucket}/{$prefix}" : $bucket);
         } catch (\Exception $e) {
             Log::error("Supabase list files error: " . $e->getMessage());
             throw $e;
         }
+    }
+
+    /**
+     * path di bucket utama: "<folder>/<file>"
+     */
+    protected function storagePath($bucket, $filePath): string
+    {
+        return trim($bucket, '/') . '/' . ltrim($filePath, '/');
+    }
+
+    protected function storage(): SupabaseStorageService
+    {
+        return app(SupabaseStorageService::class);
     }
 
     // ========================================================================

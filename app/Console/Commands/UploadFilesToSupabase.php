@@ -3,7 +3,8 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\Storage;
+use App\Services\SupabaseStorageService;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\File;
 
 /**
@@ -29,14 +30,15 @@ class UploadFilesToSupabase extends Command
         
         // cek koneksi ke supabase
         try {
-            Storage::disk('supabase')->exists('test.txt');
+            // lewat SupabaseStorageService (REST, header apikey); disk s3 'supabase' tidak punya kredensial S3 valid
+            app(SupabaseStorageService::class)->listFiles('documents');
             $this->info("✅ Koneksi ke Supabase berhasil");
         } catch (\Exception $e) {
             $this->error("❌ Koneksi ke Supabase gagal: " . $e->getMessage());
             $this->info("💡 Pastikan konfigurasi Supabase di .env sudah benar:");
             $this->info("   - SUPABASE_URL");
-            $this->info("   - SUPABASE_ACCESS_KEY_ID");
-            $this->info("   - SUPABASE_SECRET_ACCESS_KEY");
+            $this->info("   - SUPABASE_PROJECT_ID");
+            $this->info("   - SUPABASE_SERVICE_KEY");
             $this->info("   - SUPABASE_BUCKET");
             return 1;
         }
@@ -98,18 +100,12 @@ class UploadFilesToSupabase extends Command
             }
 
             try {
-                $fileContent = File::get($file->getPathname());
                 $supabasePath = 'documents/reports/' . $fileName;
 
-                // cek apakah file sudah ada di supabase
-                $exists = Storage::disk('supabase')->exists($supabasePath);
-                
-                if ($exists) {
-                    // update file yang sudah ada
-                    Storage::disk('supabase')->put($supabasePath, $fileContent, 'public');
-                } else {
-                    // upload file baru
-                    Storage::disk('supabase')->put($supabasePath, $fileContent, 'public');
+                // x-upsert: file yang sudah ada ditimpa; tanpa fallback lokal (sumbernya justru folder lokal ini)
+                $upload = new UploadedFile($file->getPathname(), $fileName, null, null, true);
+                if (! app(SupabaseStorageService::class)->uploadFile($upload, $supabasePath, false)) {
+                    throw new \Exception('upload gagal');
                 }
                 
                 $uploaded++;
@@ -175,18 +171,12 @@ class UploadFilesToSupabase extends Command
             }
 
             try {
-                $fileContent = File::get($file->getPathname());
                 $supabasePath = 'problems/' . $fileName;
 
-                // cek apakah file sudah ada di supabase
-                $exists = Storage::disk('supabase')->exists($supabasePath);
-                
-                if ($exists) {
-                    // update file yang sudah ada
-                    Storage::disk('supabase')->put($supabasePath, $fileContent, 'public');
-                } else {
-                    // upload file baru
-                    Storage::disk('supabase')->put($supabasePath, $fileContent, 'public');
+                // x-upsert: file yang sudah ada ditimpa; tanpa fallback lokal (sumbernya justru folder lokal ini)
+                $upload = new UploadedFile($file->getPathname(), $fileName, null, null, true);
+                if (! app(SupabaseStorageService::class)->uploadFile($upload, $supabasePath, false)) {
+                    throw new \Exception('upload gagal');
                 }
                 
                 $uploaded++;
