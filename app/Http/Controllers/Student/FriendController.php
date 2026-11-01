@@ -379,8 +379,11 @@ class FriendController extends Controller
         $activities = [];
         
         // aktivitas: friend baru
-        $newFriends = Friend::whereIn('requester_id', $friendIds)
-                        ->orWhereIn('receiver_id', $friendIds)
+        // kelompokkan or agar filter status berlaku untuk kedua sisi
+        $newFriends = Friend::where(function ($query) use ($friendIds) {
+                            $query->whereIn('requester_id', $friendIds)
+                                  ->orWhereIn('receiver_id', $friendIds);
+                        })
                         ->where('status', 'accepted')
                         ->orderBy('responded_at', 'desc')
                         ->limit(5)
@@ -389,15 +392,17 @@ class FriendController extends Controller
         foreach ($newFriends as $friendship) {
             $friend = $friendship->getFriend($currentStudent->id);
             $otherFriend = $friendship->getFriend($friend->id);
-            
+            // responded_at bisa kosong pada data lama, pakai waktu update sebagai cadangan
+            $connectedAt = $friendship->responded_at ?? $friendship->updated_at ?? $friendship->created_at;
+
             $activities[] = [
                 'type' => 'friend',
                 'user_name' => $friend->user->first_name . ' ' . $friend->user->last_name,
                 'user_photo' => $friend->user->profile_photo_url,
                 'user_url' => route('student.friends.profile', $friend->id),
                 'action' => 'terhubung dengan ' . $otherFriend->user->first_name . ' ' . $otherFriend->user->last_name,
-                'timestamp' => $friendship->responded_at->diffForHumans(),
-                'raw_timestamp' => $friendship->responded_at,
+                'timestamp' => $connectedAt?->diffForHumans(),
+                'raw_timestamp' => $connectedAt,
             ];
         }
         
@@ -420,9 +425,8 @@ class FriendController extends Controller
                 'preview' => [
                     'title' => $application->problem->title,
                     'description' => $application->problem->description,
-                    'image' => $application->problem->cover_image
-                        ? Storage::url($application->problem->cover_image)
-                        : asset('placeholder-project.jpg')
+                    // tanpa gambar: berkas placeholder tidak ada (C6)
+                    'image' => null
                 ]
             ];
         }
@@ -447,9 +451,7 @@ class FriendController extends Controller
                 'preview' => [
                     'title' => $project->problem->title,
                     'description' => 'Proyek KKN berhasil diselesaikan',
-                    'image' => $project->problem->cover_image
-                        ? Storage::url($project->problem->cover_image)
-                        : asset('placeholder-project.jpg')
+                    'image' => null
                 ]
             ];
         }

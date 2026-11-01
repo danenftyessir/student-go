@@ -60,6 +60,7 @@
             <x-ui.empty-state
                 title="Tidak ada lowongan di sini"
                 description="{{ $currentFolder ? 'Folder “' . $currentFolder . '” tidak berisi lowongan pada halaman ini.' : 'Halaman ini tidak berisi lowongan tersimpan.' }}"
+                illustration="no-saved-projects"
                 class="sg-browse__empty">
                 <x-slot:action>
                     <x-ui.button variant="secondary" :href="route('student.jobs.saved')">Lihat semua tersimpan</x-ui.button>
