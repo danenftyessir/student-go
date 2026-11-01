@@ -164,6 +164,8 @@
                         </div>
                         {{-- sr-only pada pembungkus: tabel mengabaikan lebar 1px dan akan melebarkan halaman --}}
                         <div class="sr-only">
+                            {{-- pembungkus overflow-x: tabel menggulir di dalam wadahnya sendiri (phase 29 F, C3) --}}
+                            <div class="sg-co-dash__table-scroll">
                             <table>
                                 <caption>Jumlah lamaran masuk per bulan, enam bulan terakhir</caption>
                                 <thead><tr><th scope="col">Bulan</th><th scope="col">Lamaran</th></tr></thead>
@@ -173,6 +175,7 @@
                                     @endforeach
                                 </tbody>
                             </table>
+                            </div>
                         </div>
                         <figcaption class="sg-co-dash__note">Semua lamaran ke lowongan Anda, menurut tanggal masuk.</figcaption>
                     </figure>
