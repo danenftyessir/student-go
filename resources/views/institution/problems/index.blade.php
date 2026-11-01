@@ -93,7 +93,7 @@
             </x-slot:action>
         </x-ui.empty-state>
     @else
-        <x-ui.empty-state title="Belum ada masalah"
+        <x-ui.empty-state illustration="no-documents" title="Belum ada masalah"
                           description="Terbitkan masalah KKN agar mahasiswa dapat menemukan dan melamarnya. Mulai dengan tombol Buat masalah baru; Anda bisa menyimpannya sebagai draf lebih dulu." />
     @endif
 </div>

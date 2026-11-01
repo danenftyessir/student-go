@@ -101,7 +101,7 @@
             </x-slot:action>
         </x-ui.empty-state>
     @else
-        <x-ui.empty-state title="Belum ada proyek"
+        <x-ui.empty-state illustration="no-applications" title="Belum ada proyek"
                           description="Proyek dibuat otomatis ketika Anda menerima lamaran mahasiswa.">
             <x-slot:action>
                 <x-ui.button variant="secondary" :href="route('institution.applications.index')">Tinjau lamaran</x-ui.button>

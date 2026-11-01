@@ -65,7 +65,7 @@
             </x-slot:action>
         </x-ui.empty-state>
     @else
-        <x-ui.empty-state title="Belum ada ulasan"
+        <x-ui.empty-state illustration="no-documents" title="Belum ada ulasan"
                           description="Ulasan dapat ditulis setelah proyek mahasiswa berstatus Selesai, dari dashboard atau halaman detail proyek.">
             <x-slot:action>
                 <x-ui.button variant="secondary" :href="route('institution.projects.index', ['status' => 'completed'])">Lihat proyek selesai</x-ui.button>
