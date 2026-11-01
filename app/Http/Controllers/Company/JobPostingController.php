@@ -298,15 +298,14 @@ class JobPostingController extends Controller
             ->where('company_id', $company->id)
             ->firstOrFail();
 
-        // Data untuk form
+        // phase 29 paket E: data form sama dengan wizard create (saran departemen, label tipe, nama SDG bahasa indonesia)
         $departments = [
-            'Engineering', 'Marketing', 'Design', 'HR', 'Sales',
-            'Finance', 'Operations', 'Product', 'Customer Support', 'Legal'
+            'Pemberdayaan Masyarakat', 'Teknologi', 'Pendidikan', 'Kesehatan', 'Lingkungan',
+            'Pertanian', 'Pemasaran', 'Keuangan', 'Operasional', 'Riset & Kebijakan'
         ];
 
-        $jobTypes = [
-            'Full-time', 'Part-time', 'Contract', 'Internship', 'Freelance'
-        ];
+        // nilai tersimpan => label
+        $jobTypes = self::JOB_TYPE_LABELS;
 
         $availableSkills = [
             // Pendidikan & Pengajaran
@@ -340,27 +339,9 @@ class JobPostingController extends Controller
             'Administrasi Desa', 'Dokumentasi', 'Laporan', 'Data Entry', 'Survei'
         ];
 
-        $sdgOptions = [
-            ['id' => 1, 'name' => 'SDG 1: No Poverty', 'color' => 'red'],
-            ['id' => 2, 'name' => 'SDG 2: Zero Hunger', 'color' => 'yellow'],
-            ['id' => 3, 'name' => 'SDG 3: Good Health And Well-being', 'color' => 'green'],
-            ['id' => 4, 'name' => 'SDG 4: Quality Education', 'color' => 'red'],
-            ['id' => 5, 'name' => 'SDG 5: Gender Equality', 'color' => 'orange'],
-            ['id' => 6, 'name' => 'SDG 6: Clean Water And Sanitation', 'color' => 'blue'],
-            ['id' => 7, 'name' => 'SDG 7: Affordable And Clean Energy', 'color' => 'yellow'],
-            ['id' => 8, 'name' => 'SDG 8: Decent Work And Economic Growth', 'color' => 'red'],
-            ['id' => 9, 'name' => 'SDG 9: Industry, Innovation, And Infrastructure', 'color' => 'orange'],
-            ['id' => 10, 'name' => 'SDG 10: Reduced Inequalities', 'color' => 'pink'],
-            ['id' => 11, 'name' => 'SDG 11: Sustainable Cities And Communities', 'color' => 'amber'],
-            ['id' => 12, 'name' => 'SDG 12: Responsible Consumption And Production', 'color' => 'yellow'],
-            ['id' => 13, 'name' => 'SDG 13: Climate Action', 'color' => 'green'],
-            ['id' => 14, 'name' => 'SDG 14: Life Below Water', 'color' => 'blue'],
-            ['id' => 15, 'name' => 'SDG 15: Life On Land', 'color' => 'green'],
-            ['id' => 16, 'name' => 'SDG 16: Peace, Justice, And Strong Institutions', 'color' => 'blue'],
-            ['id' => 17, 'name' => 'SDG 17: Partnerships For The Goals', 'color' => 'blue'],
-        ];
+        $sdgOptions = collect(range(1, 17))->map(fn ($id) => ['id' => $id, 'name' => 'SDG ' . $id . ' · ' . sdg_label($id)])->all();
 
-        $categories = JobCategory::orderBy('name')->get();
+        $categories = JobCategory::orderBy('name')->pluck('name', 'id')->all();
 
         return view('company.jobs.edit', compact(
             'company',
