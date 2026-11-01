@@ -32,6 +32,11 @@
 .sg-auth__body--wide { max-width: 40rem; }                                /* 640px: role chooser and registration */
 @media (min-width: 640px) { .sg-auth__body:not(.sg-auth__body--wide) { margin-block: auto; } }
 .sg-auth__flash { margin-bottom: 1.25rem; }
+/* galat field: kalimat diawali huruf besar tanpa mengubah pesan server (phase 29 F, C5). ::first-letter tidak berlaku
+   pada flex atau setelah svg inline, jadi blok biasa dengan ikon di luar alur; indentasi gantung sama seperti flex */
+.sg-auth .sg-error { display: block; position: relative; padding-left: 1.375rem; }
+.sg-auth .sg-error > .sg-icon { position: absolute; left: 0; top: .125rem; }
+.sg-auth .sg-error::first-letter { text-transform: uppercase; }
 
 .sg-auth__aside { display: none; }
 @media (min-width: 1024px) {
