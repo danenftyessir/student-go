@@ -1,5 +1,6 @@
 {{-- pratinjau lowongan dari isian wizard (alpine formData). dipakai rail >= 1024px dan modal Pratinjau (D-26: front-end saja,
-     tidak menyimpan dan tidak menerbitkan apa pun). $companyName = nama perusahaan yang login. --}}
+     tidak menyimpan dan tidak menerbitkan apa pun). $companyName = nama perusahaan yang login.
+     $note (opsional, phase 29 paket E) = catatan penutup; bawaan = catatan wizard create. --}}
 <article class="sg-co-preview">
     <p class="sg-co-preview__eyebrow">Pratinjau untuk mahasiswa</p>
     <h2 class="sg-co-preview__title" :class="{ 'is-empty': !formData.title.trim() }" x-text="formData.title.trim() || 'Judul lowongan'">Judul lowongan</h2>
@@ -29,5 +30,9 @@
         <ul class="sg-co-preview__chips"><template x-for="id in formData.sdg_alignment" :key="id"><li class="sg-chip" x-text="sdgLabels[id] || ('SDG ' + id)"></li></template></ul>
     </section>
 
+    @isset($note)
+    <p class="sg-co-preview__note">{{ $note }}</p>
+    @else
     <p class="sg-co-preview__note">Disusun dari isian formulir di peramban ini. Belum ada yang terbit sampai Anda menekan "Buat lowongan".</p>
+    @endisset
 </article>
