@@ -1,0 +1,116 @@
+{
+ "job-363": {
+  "path": "/student/jobs/363",
+  "widths": {
+   "360": 399,
+   "390": 399,
+   "768": 768,
+   "1440": 1440
+  },
+  "status": 200,
+  "final_url": "http://127.0.0.1:8000/student/jobs/363",
+  "forms": [
+   {
+    "action": "http://127.0.0.1:8000/logout",
+    "method": "POST",
+    "enctype": null,
+    "spoof": null,
+    "fields": []
+   },
+   {
+    "action": "http://127.0.0.1:8000/logout",
+    "method": "POST",
+    "enctype": null,
+    "spoof": null,
+    "fields": []
+   },
+   {
+    "action": "http://127.0.0.1:8000/student/jobs/363/apply",
+    "method": "POST",
+    "enctype": null,
+    "spoof": null,
+    "fields": [
+     "textarea name=cover_letter id=null type=null accept=null",
+     "input name=resume_url id=null type=url accept=null",
+     "input name=portfolio_url id=null type=url accept=null"
+    ]
+   },
+   {
+    "action": null,
+    "method": "dialog",
+    "enctype": null,
+    "spoof": null,
+    "fields": []
+   }
+  ],
+  "h1": [
+   "Conservation Volunteer - Reboisasi & Restorasi Ekosistem"
+  ],
+  "title": "Conservation Volunteer - Reboisasi &amp; Restorasi Ekosistem - Lowongan Kerja — Student Go",
+  "english": [
+   "Cover Letter",
+   "Skills Yang Dibutuhkan",
+   "SDG Alignment",
+   "views",
+   "Internship",
+   "ago"
+  ]
+ },
+ "job-573": {
+  "path": "/student/jobs/573",
+  "widths": {
+   "360": 399,
+   "390": 399,
+   "768": 768,
+   "1440": 1440
+  },
+  "status": 200,
+  "final_url": "http://127.0.0.1:8000/student/jobs/573",
+  "forms": [
+   {
+    "action": "http://127.0.0.1:8000/logout",
+    "method": "POST",
+    "enctype": null,
+    "spoof": null,
+    "fields": []
+   },
+   {
+    "action": "http://127.0.0.1:8000/logout",
+    "method": "POST",
+    "enctype": null,
+    "spoof": null,
+    "fields": []
+   },
+   {
+    "action": "http://127.0.0.1:8000/student/jobs/573/apply",
+    "method": "POST",
+    "enctype": null,
+    "spoof": null,
+    "fields": [
+     "textarea name=cover_letter id=null type=null accept=null",
+     "input name=resume_url id=null type=url accept=null",
+     "input name=portfolio_url id=null type=url accept=null"
+    ]
+   },
+   {
+    "action": null,
+    "method": "dialog",
+    "enctype": null,
+    "spoof": null,
+    "fields": []
+   }
+  ],
+  "h1": [
+   "Conservation Volunteer - Reboisasi & Restorasi Ekosistem"
+  ],
+  "title": "Conservation Volunteer - Reboisasi &amp; Restorasi Ekosistem - Lowongan Kerja — Student Go",
+  "english": [
+   "Cover Letter",
+   "Skills Yang Dibutuhkan",
+   "SDG Alignment",
+   "views",
+   "Internship",
+   "ago"
+  ]
+ }
+}

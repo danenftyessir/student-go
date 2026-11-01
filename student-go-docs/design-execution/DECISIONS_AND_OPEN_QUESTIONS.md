@@ -168,6 +168,7 @@ Every row was OPEN at planning time; Phase 0 (2026-10-30) recorded answers for D
 - **Recommendation (not approved):** (a).
 - **Gates phases:** 26
 - **Source:** Audit F, G, K
+- NOTE (2026-11-01): the enrichment audit found six admin views in source (0 `sg-*` tokens). Whether and when they are designed is asked separately in D-47; D-11 itself is unchanged.
 
 ### D-12 — A working database for baseline and QA
 
@@ -268,7 +269,7 @@ Every row was OPEN at planning time; Phase 0 (2026-10-30) recorded answers for D
 
 ### D-19 — Documentary photography
 
-- **Status:** ANSWERED for the homepage (2026-10-31); OPEN for other pages
+- **Status:** ANSWERED for the homepage (2026-10-31); ANSWERED for the remaining pages (2026-11-01, see D-41 to D-45)
 - **Question:** Where may photographs appear, and who reviews them: the existing field photographs in `public/` (Source A) first, and the 60 catalogue photographs (Source B) only if gaps remain?
 - **Why it matters (evidence):** Source B photos are license-checked but not downloaded or viewed; the catalogue marks 5 photos with minors and 13 with unknown people status. Source A holds real KKN field photographs that the audit calls the most authentic assets in the app, but their provenance and consent are undocumented (D-30). Audit guardrail 7: images only where they carry content, never as page backgrounds.
 - **Options:**
@@ -284,6 +285,7 @@ Every row was OPEN at planning time; Phase 0 (2026-10-30) recorded answers for D
 - ANSWER (2026-10-31, Phase 5 pre-check, About only): editorial framed figures on `/about` from the four existing About photographs (`mahasiswa-about.jpeg`, `handprints-about.jpeg`, `jaket-about.jpeg`, `about.jpg`), with the D-30 and D-34 answers below. Whether a visible credit line is shown on About is not yet answered (the homepage has none). Not yet placed: Phase 5 waits for Phase 4.
 - ANSWER (2026-10-31, Phase 5 session, About): **caption only, no visible credit line** (as on the homepage). Placed: `mahasiswa-about.jpeg` (existing Phase 4 derivative), `handprints-about.jpeg` and `jaket-about.jpeg` (new derivatives). `about.jpg` was not placed (decorative, no KKN content; RN-04). Contact has no photograph.
 - ANSWER (2026-10-31, Phase 6, auth pages): **no photograph** (option c for auth). The wide-screen side panel uses the Student Go wordmark and the original `contour-field.svg` motif only; `login-register-view.jpg` stops being referenced and stays on disk.
+- ANSWER (2026-11-01, Phase 29 planning, all remaining pages): recorded as separate decisions so each can be cited on its own: D-41 (where photographs may appear and which files), D-42 (five `available` photos withheld), D-43 (browse gallery without fallback photos), D-44 (no catalogue photo on student profile/portfolio or repository document detail), D-45 (region map instead of a photo on the public institution profile). The homepage, About and auth answers above stand.
 
 ### D-20 — Delivery of JS/CSS libraries
 
@@ -527,6 +529,86 @@ Every row was OPEN at planning time; Phase 0 (2026-10-30) recorded answers for D
 - **Gates phases:** 22
 - **Source:** Phase 1 report section 7
 
+### D-41 — Where photographs may appear outside the homepage, About and auth (D-19, remaining part)
+
+- **Status:** ANSWERED (2026-11-01)
+- **Question:** On which other pages may photographs appear, and which files may be used?
+- **Why it matters (evidence):** D-19 was answered only for the homepage, About and auth. The enrichment audit (`reports/ASSET_ENRICHMENT_AUDIT.md` 3.3) found 60 catalogue photos referenced by no template, with a preliminary review of 37 `available`, 14 `available-with-care`, 9 `held` in `student-go-docs/design-system/photo-review.json`.
+- **Gates phases:** 9, 12, 14, 29
+- **Source:** User, 2026-11-01 (Phase 29 planning brief, 'Keputusan saya')
+- ANSWER (2026-11-01): photographs may be used on **editorial pages** (problem detail, repository document detail, student story/portfolio), **public profiles** (institution, company, student) and the **Telusuri Masalah gallery view**. Only the **37 photos with status `available`** in `photo-review.json` may be used; the 14 `available-with-care` and the 9 `held` photos are not used. D-42 withholds five of the 37. D-43, D-44 and D-45 narrow individual slots further (and package E of Phase 29 places no photo on the public company profile), so as of this date no catalogue photo is placed on any page by Phase 29 except through seed data, if D-46 is approved. Existing photographs in `public/` still need D-30 before a new slot.
+
+### D-42 — Five `available` photographs withheld until the user reviews them
+
+- **Status:** ANSWERED (2026-11-01): withheld; the user's own review is pending
+- **Question:** May the five `available` photos that seem to show recognisable people be used before a human check?
+- **Why it matters (evidence):** The enrichment audit (section 6 item 5) noted that these thumbnails seem to show people fairly clearly although `photo-review.json` records 'not recognisable' (the auditor's impression, not a decision).
+- **Gates phases:** 29 (package H), any later photo placement
+- **Source:** User, 2026-11-01
+- ANSWER (2026-11-01): not used anywhere, including seed data (package H), until the user has checked them personally: `library/pertanian/central-java-farmer-terraced-fields`, `library/pertanian/west-java-elderly-farmers-harvest-rice`, `library/pertanian/central-java-farmer-casting-net-in-paddy`, `library/pesisir/west-sumatra-fisherman-net-from-canoe`, `library/pasar/banjarmasin-floating-market`. That leaves 32 usable photos. To release one, the user adds a line here naming it.
+
+### D-43 — Fallback photos in the Telusuri Masalah gallery (U3)
+
+- **Status:** ANSWERED (2026-11-01)
+- **Question:** Should gallery cards without a problem photo get a catalogue photo?
+- **Why it matters (evidence):** 76 of 77 problems have 2–4 photos and the card already hides its media area when there is none (audit U3, `problem-card.blade.php`); a catalogue photo would imply it shows the problem (guardrail 7).
+- **Gates phases:** 8, 29
+- **Source:** User, 2026-11-01
+- ANSWER (2026-11-01): **no fallback photos** from the catalogue in the gallery. The current behaviour (no media area without a photo) stays.
+
+### D-44 — Catalogue photos on student profile/portfolio and repository document detail (U5)
+
+- **Status:** ANSWERED (2026-11-01)
+- **Question:** Do the student profile and portfolio (`/student/profile`, `/profile/{username}`) and the repository document detail (`/student/repository/{id}`) get catalogue photographs?
+- **Why it matters (evidence):** A photo next to a person's name implies it shows them (0 of 700 students have a profile photo); a report PDF has no real photograph (audit U5).
+- **Gates phases:** 12, 14, 29
+- **Source:** User, 2026-11-01
+- ANSWER (2026-11-01): **no catalogue photographs** on the student profile, portfolio or story, nor on the repository document detail. Initials avatars and the existing empty-state illustrations remain. This narrows D-41 for those slots.
+
+### D-45 — Public institution profile: region map instead of a photo (U4)
+
+- **Status:** ANSWERED (2026-11-01)
+- **Question:** Does `/institution/{id}` get a photograph or the region figure from `indonesia-regions.svg`?
+- **Why it matters (evidence):** The asset has seven island-group `<g>` elements with an `.is-active` hook; real content is available (the institution's province and its open problems). No province-to-group mapping exists in `app/Support` (audit U4).
+- **Gates phases:** 29 (package G)
+- **Source:** User, 2026-11-01
+- ANSWER (2026-11-01): the **region map**, not a photo. Phase 29 **package G is approved**: a new helper in `app/Support` maps the first two digits of the BPS province code to the seven groups; active groups get `.is-active`; a text equivalent such as '4 masalah dibuka di Jawa'; numbers only from real queries.
+
+### D-46 — Repair of the seed problem photographs (U2, Phase 29 package H)
+
+- **Status:** ANSWERED (2026-11-01): stage 1 then stage 2 approved after the stage 1 plan was read
+- **Question:** May the seed `problem_images` rows (and, if needed, files in Supabase Storage) be rewritten so that each problem gets photos from the pool of its first SDG with neutral captions?
+- **Why it matters (evidence):** The seed photos do not match their problems and six generic captions claim content they do not show (C10; 220 rows, 92 files). Writing changes the database and possibly Supabase Storage.
+- **Options:**
+  - (a) Approve stage 1 only (read-only plan: trace, matching, placement, captions, backup and restore), then decide on stage 2.
+  - (b) Approve stages 1 and 2.
+  - (c) Leave the seed photos as they are.
+- **Recommendation (not approved):** (a). Stage 2 never runs without an explicit approval of the stage 1 plan. Only D-41 photos minus D-42.
+- **Gates phases:** 29 (package H)
+- **Source:** Enrichment audit U2, C10; user, 2026-11-01 ('BELUM disetujui')
+- ANSWER (2026-11-01, after the stage 1 plan): stage 2 approved with these choices. (1) Yes. (2) Wide region pool: the six `desa` photos plus `maluku-islands-aerial`, `papua-island-landscape`, `waigeo-barat-coastal-huts-aerial`. (3) Captions 'Foto ilustrasi: <real location of the photo from `credits.json`>' (or 'Foto ilustrasi' when none is recorded); never the problem's regency/province; 'Gambaran wilayah' for the region pool. (4) SDG 1 moves to the region pool with SDG 3, 5 and 7. (5) `DatabaseSeeder` is not changed. Only rows change (220 rows, `image_path` and `caption`); Supabase Storage is not written, because all 32 photos already exist as bucket objects (stage 1 match). Applied with `ProblemSeedPhotosSeeder`; evidence `reports/phase29-H/`.
+
+### D-47 — The six `/admin/*` views
+
+- **Status:** OPEN (deferred by the user until an admin account exists)
+- **Question:** Are the six admin views designed, and when?
+- **Why it matters (evidence):** They exist in source with 0 `sg-*` tokens and 200–400 utility tokens each, but have never been viewed: the seed has no admin account (D-11, D-13). Creating one is a database write.
+- **Options:**
+  - (a) Keep out of scope (D-11 option a).
+  - (b) Add a package or phase once an admin account exists and the user approves creating it.
+- **Recommendation (not approved):** none beyond the user's deferral; revisit when an admin account is available.
+- **Gates phases:** none today (not in Phase 29)
+- **Source:** Enrichment audit 3.1, section 6 item 4; user, 2026-11-01
+
+### D-48 — `workflows/*.svg` and `indonesia-outline.svg` stay unused
+
+- **Status:** ANSWERED (2026-11-01)
+- **Question:** Are the eight workflow diagrams and the outline map placed anywhere?
+- **Why it matters (evidence):** The diagrams' labels do not match the real navigation and stored statuses (for example 'halaman Pelamar' versus the menu 'Aplikasi'; four stages versus `active`, `on_hold`, `completed`, `cancelled`), and text inside an image does not scale at 390 px; the outline map has no slot that carries content (audit section 5; same reasons in `ASSET_INVENTORY.md`, Phases 17, 19 and 21).
+- **Gates phases:** 29, 27
+- **Source:** User, 2026-11-01
+- ANSWER (2026-11-01): **not used**. The files stay on disk (rule 11); archiving them is U9 and needs separate phase authority.
+
 ## Part 3. Blockers and unknowns
 
 | Item | Label | What unblocks it |
@@ -579,6 +661,7 @@ Every row was OPEN at planning time; Phase 0 (2026-10-30) recorded answers for D
 | 26 | Error Pages | D-01, D-11, D-25 |
 | 27 | Responsiveness & Accessibility | D-24, D-22, D-12, D-13 |
 | 28 | Final QA | D-12, D-13, D-22, D-24 |
+| 29 | Unmapped Pages & Enrichment | D-02, D-04, D-09, D-13, D-14, D-19, D-25, D-30, D-32, D-41, D-42, D-43, D-44, D-45, D-46, D-48 |
 
 ## Part 5. Minimum answers before each wave
 

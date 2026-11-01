@@ -1,0 +1,23 @@
+== show-77
+ form attrs before [(None, None, None, None)]
+ form attrs after  [(None, None, None, None)]
+ CHANGED ('input', 'number', 'progress_percentage', None, None, False, False, '0', '100') -> ('input', 'number', 'progress_percentage', 'progress-308', None, False, False, '0', '100')
+ CHANGED ('textarea', None, 'notes', None, None, False, False, None, None) -> ('textarea', None, 'notes', 'notes-308', None, False, False, None, None)
+== report-77
+ form attrs before [('http://127.0.0.1:8000/student/projects/77/report', 'POST', 'multipart/form-data', None)]
+ form attrs after  [('http://127.0.0.1:8000/student/projects/77/report', 'POST', 'multipart/form-data', None)]
+ CHANGED ('select', None, 'type', None, None, False, True, None, None) -> ('select', None, 'type', 'type', None, False, True, None, None)
+ CHANGED ('input', 'text', 'title', None, None, False, True, None, None) -> ('input', 'text', 'title', 'title', None, False, True, None, None)
+ CHANGED ('input', 'date', 'period_start', None, None, False, True, None, None) -> ('input', 'date', 'period_start', 'period_start', None, False, True, None, None)
+ CHANGED ('input', 'date', 'period_end', None, None, False, True, None, None) -> ('input', 'date', 'period_end', 'period_end', None, False, True, None, None)
+ CHANGED ('textarea', None, 'summary', None, None, False, True, None, None) -> ('textarea', None, 'summary', 'summary', None, False, True, None, None)
+ CHANGED ('textarea', None, 'activities', None, None, False, True, None, None) -> ('textarea', None, 'activities', 'activities', None, False, True, None, None)
+ CHANGED ('textarea', None, 'challenges', None, None, False, False, None, None) -> ('textarea', None, 'challenges', 'challenges', None, False, False, None, None)
+ CHANGED ('textarea', None, 'next_plans', None, None, False, False, None, None) -> ('textarea', None, 'next_plans', 'next_plans', None, False, False, None, None)
+== final-77
+ form attrs before [('http://127.0.0.1:8000/student/projects/77/final-report', 'POST', 'multipart/form-data', None)]
+ form attrs after  [('http://127.0.0.1:8000/student/projects/77/final-report', 'POST', 'multipart/form-data', None)]
+ CHANGED ('textarea', None, 'summary', None, None, False, True, None, None) -> ('textarea', None, 'summary', 'summary', None, False, True, None, None)
+ CHANGED ('textarea', None, 'activities', None, None, False, True, None, None) -> ('textarea', None, 'activities', 'activities', None, False, True, None, None)
+ CHANGED ('input', 'number', 'beneficiaries', None, None, False, False, '0', None) -> ('input', 'number', 'beneficiaries', 'beneficiaries', None, False, False, '0', None)
+ CHANGED ('input', 'number', 'activities_count', None, None, False, False, '0', None) -> ('input', 'number', 'activities_count', 'activities_count', None, False, False, '0', None)

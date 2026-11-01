@@ -1,0 +1,406 @@
+{
+ "before": {
+  "manage-118": {
+   "status": 200,
+   "widths": {
+    "360": {
+     "sw": 360,
+     "iw": 360,
+     "h1": 1,
+     "lang": "id",
+     "title": "Kelola Proyek — Student Go",
+     "console_errors": [],
+     "bad_responses": [],
+     "dialog_add_sw": null,
+     "edit_prefill": null
+    },
+    "390": {
+     "sw": 390,
+     "iw": 390,
+     "h1": 1,
+     "lang": "id",
+     "title": "Kelola Proyek — Student Go",
+     "console_errors": [],
+     "bad_responses": [],
+     "dialog_add_sw": null,
+     "edit_prefill": null
+    },
+    "768": {
+     "sw": 768,
+     "iw": 768,
+     "h1": 1,
+     "lang": "id",
+     "title": "Kelola Proyek — Student Go",
+     "console_errors": [],
+     "bad_responses": [],
+     "dialog_add_sw": null,
+     "edit_prefill": null
+    },
+    "1440": {
+     "sw": 1440,
+     "iw": 1440,
+     "h1": 1,
+     "lang": "id",
+     "title": "Kelola Proyek — Student Go",
+     "console_errors": [],
+     "bad_responses": [],
+     "dialog_add_sw": null,
+     "edit_prefill": null
+    }
+   }
+  },
+  "manage-188": {
+   "status": 200,
+   "widths": {
+    "360": {
+     "sw": 360,
+     "iw": 360,
+     "h1": 1,
+     "lang": "id",
+     "title": "Kelola Proyek — Student Go",
+     "console_errors": [],
+     "bad_responses": [],
+     "dialog_add_sw": null,
+     "edit_prefill": null
+    },
+    "390": {
+     "sw": 390,
+     "iw": 390,
+     "h1": 1,
+     "lang": "id",
+     "title": "Kelola Proyek — Student Go",
+     "console_errors": [],
+     "bad_responses": [],
+     "dialog_add_sw": null,
+     "edit_prefill": null
+    },
+    "768": {
+     "sw": 768,
+     "iw": 768,
+     "h1": 1,
+     "lang": "id",
+     "title": "Kelola Proyek — Student Go",
+     "console_errors": [],
+     "bad_responses": [],
+     "dialog_add_sw": null,
+     "edit_prefill": null
+    },
+    "1440": {
+     "sw": 1440,
+     "iw": 1440,
+     "h1": 1,
+     "lang": "id",
+     "title": "Kelola Proyek — Student Go",
+     "console_errors": [],
+     "bad_responses": [],
+     "dialog_add_sw": null,
+     "edit_prefill": null
+    }
+   }
+  },
+  "manage-217": {
+   "status": 200,
+   "widths": {
+    "360": {
+     "sw": 360,
+     "iw": 360,
+     "h1": 1,
+     "lang": "id",
+     "title": "Kelola Proyek — Student Go",
+     "console_errors": [],
+     "bad_responses": [],
+     "dialog_add_sw": null,
+     "edit_prefill": null
+    },
+    "390": {
+     "sw": 390,
+     "iw": 390,
+     "h1": 1,
+     "lang": "id",
+     "title": "Kelola Proyek — Student Go",
+     "console_errors": [],
+     "bad_responses": [],
+     "dialog_add_sw": null,
+     "edit_prefill": null
+    },
+    "768": {
+     "sw": 768,
+     "iw": 768,
+     "h1": 1,
+     "lang": "id",
+     "title": "Kelola Proyek — Student Go",
+     "console_errors": [],
+     "bad_responses": [],
+     "dialog_add_sw": null,
+     "edit_prefill": null
+    },
+    "1440": {
+     "sw": 1440,
+     "iw": 1440,
+     "h1": 1,
+     "lang": "id",
+     "title": "Kelola Proyek — Student Go",
+     "console_errors": [],
+     "bad_responses": [],
+     "dialog_add_sw": null,
+     "edit_prefill": null
+    }
+   }
+  },
+  "verification-status": {
+   "status": 200,
+   "widths": {
+    "360": {
+     "sw": 360,
+     "iw": 360,
+     "h1": 1,
+     "lang": "id",
+     "title": "Status Verifikasi Dokumen — Student Go",
+     "console_errors": [],
+     "bad_responses": [],
+     "dialog_add_sw": null,
+     "edit_prefill": null
+    },
+    "390": {
+     "sw": 390,
+     "iw": 390,
+     "h1": 1,
+     "lang": "id",
+     "title": "Status Verifikasi Dokumen — Student Go",
+     "console_errors": [],
+     "bad_responses": [],
+     "dialog_add_sw": null,
+     "edit_prefill": null
+    },
+    "768": {
+     "sw": 768,
+     "iw": 768,
+     "h1": 1,
+     "lang": "id",
+     "title": "Status Verifikasi Dokumen — Student Go",
+     "console_errors": [],
+     "bad_responses": [],
+     "dialog_add_sw": null,
+     "edit_prefill": null
+    },
+    "1440": {
+     "sw": 1440,
+     "iw": 1440,
+     "h1": 1,
+     "lang": "id",
+     "title": "Status Verifikasi Dokumen — Student Go",
+     "console_errors": [],
+     "bad_responses": [],
+     "dialog_add_sw": null,
+     "edit_prefill": null
+    }
+   }
+  }
+ },
+ "after": {
+  "manage-118": {
+   "status": 200,
+   "widths": {
+    "360": {
+     "sw": 360,
+     "iw": 360,
+     "h1": 1,
+     "lang": "id",
+     "title": "Kelola Proyek — Student Go",
+     "console_errors": [],
+     "bad_responses": [],
+     "dialog_add_sw": null,
+     "edit_prefill": null
+    },
+    "390": {
+     "sw": 390,
+     "iw": 390,
+     "h1": 1,
+     "lang": "id",
+     "title": "Kelola Proyek — Student Go",
+     "console_errors": [],
+     "bad_responses": [],
+     "dialog_add_sw": null,
+     "edit_prefill": null
+    },
+    "768": {
+     "sw": 768,
+     "iw": 768,
+     "h1": 1,
+     "lang": "id",
+     "title": "Kelola Proyek — Student Go",
+     "console_errors": [],
+     "bad_responses": [],
+     "dialog_add_sw": null,
+     "edit_prefill": null
+    },
+    "1440": {
+     "sw": 1440,
+     "iw": 1440,
+     "h1": 1,
+     "lang": "id",
+     "title": "Kelola Proyek — Student Go",
+     "console_errors": [],
+     "bad_responses": [],
+     "dialog_add_sw": null,
+     "edit_prefill": null
+    }
+   }
+  },
+  "manage-188": {
+   "status": 200,
+   "widths": {
+    "360": {
+     "sw": 360,
+     "iw": 360,
+     "h1": 1,
+     "lang": "id",
+     "title": "Kelola Proyek — Student Go",
+     "console_errors": [],
+     "bad_responses": [],
+     "dialog_add_sw": null,
+     "edit_prefill": null
+    },
+    "390": {
+     "sw": 390,
+     "iw": 390,
+     "h1": 1,
+     "lang": "id",
+     "title": "Kelola Proyek — Student Go",
+     "console_errors": [],
+     "bad_responses": [],
+     "dialog_add_sw": 390,
+     "edit_prefill": {
+      "t": "Survei Dan Pemetaan Masalah",
+      "d": "2026-07-07",
+      "s": "completed"
+     }
+    },
+    "768": {
+     "sw": 768,
+     "iw": 768,
+     "h1": 1,
+     "lang": "id",
+     "title": "Kelola Proyek — Student Go",
+     "console_errors": [],
+     "bad_responses": [],
+     "dialog_add_sw": null,
+     "edit_prefill": null
+    },
+    "1440": {
+     "sw": 1440,
+     "iw": 1440,
+     "h1": 1,
+     "lang": "id",
+     "title": "Kelola Proyek — Student Go",
+     "console_errors": [],
+     "bad_responses": [],
+     "dialog_add_sw": 1440,
+     "edit_prefill": {
+      "t": "Survei Dan Pemetaan Masalah",
+      "d": "2026-07-07",
+      "s": "completed"
+     }
+    }
+   }
+  },
+  "manage-217": {
+   "status": 200,
+   "widths": {
+    "360": {
+     "sw": 360,
+     "iw": 360,
+     "h1": 1,
+     "lang": "id",
+     "title": "Kelola Proyek — Student Go",
+     "console_errors": [],
+     "bad_responses": [],
+     "dialog_add_sw": null,
+     "edit_prefill": null
+    },
+    "390": {
+     "sw": 390,
+     "iw": 390,
+     "h1": 1,
+     "lang": "id",
+     "title": "Kelola Proyek — Student Go",
+     "console_errors": [],
+     "bad_responses": [],
+     "dialog_add_sw": null,
+     "edit_prefill": null
+    },
+    "768": {
+     "sw": 768,
+     "iw": 768,
+     "h1": 1,
+     "lang": "id",
+     "title": "Kelola Proyek — Student Go",
+     "console_errors": [],
+     "bad_responses": [],
+     "dialog_add_sw": null,
+     "edit_prefill": null
+    },
+    "1440": {
+     "sw": 1440,
+     "iw": 1440,
+     "h1": 1,
+     "lang": "id",
+     "title": "Kelola Proyek — Student Go",
+     "console_errors": [],
+     "bad_responses": [],
+     "dialog_add_sw": null,
+     "edit_prefill": null
+    }
+   }
+  },
+  "verification-status": {
+   "status": 200,
+   "widths": {
+    "360": {
+     "sw": 360,
+     "iw": 360,
+     "h1": 1,
+     "lang": "id",
+     "title": "Status Verifikasi Dokumen — Student Go",
+     "console_errors": [],
+     "bad_responses": [],
+     "dialog_add_sw": null,
+     "edit_prefill": null
+    },
+    "390": {
+     "sw": 390,
+     "iw": 390,
+     "h1": 1,
+     "lang": "id",
+     "title": "Status Verifikasi Dokumen — Student Go",
+     "console_errors": [],
+     "bad_responses": [],
+     "dialog_add_sw": null,
+     "edit_prefill": null
+    },
+    "768": {
+     "sw": 768,
+     "iw": 768,
+     "h1": 1,
+     "lang": "id",
+     "title": "Status Verifikasi Dokumen — Student Go",
+     "console_errors": [],
+     "bad_responses": [],
+     "dialog_add_sw": null,
+     "edit_prefill": null
+    },
+    "1440": {
+     "sw": 1440,
+     "iw": 1440,
+     "h1": 1,
+     "lang": "id",
+     "title": "Status Verifikasi Dokumen — Student Go",
+     "console_errors": [],
+     "bad_responses": [],
+     "dialog_add_sw": null,
+     "edit_prefill": null
+    }
+   }
+  }
+ }
+}

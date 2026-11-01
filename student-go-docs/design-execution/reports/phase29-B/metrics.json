@@ -1,0 +1,695 @@
+{
+ "before": {
+  "show-77": {
+   "status": 200,
+   "h1": [
+    "Pembangkit Listrik Mikrohidro"
+   ],
+   "lang": "id",
+   "scrollWidth": {
+    "360": 360,
+    "390": 390,
+    "768": 768,
+    "1440": 1440
+   },
+   "english_probe": [
+    "Overdue",
+    "day ago",
+    "Update",
+    "Progress",
+    "Submit"
+   ],
+   "forms": [
+    {
+     "action": null,
+     "method": null,
+     "enctype": null,
+     "spoof": null,
+     "fields": [
+      {
+       "tag": "input",
+       "type": "number",
+       "name": "progress_percentage",
+       "id": null,
+       "accept": null,
+       "multiple": false,
+       "required": false,
+       "min": "0",
+       "max": "100"
+      },
+      {
+       "tag": "textarea",
+       "type": null,
+       "name": "notes",
+       "id": null,
+       "accept": null,
+       "multiple": false,
+       "required": false,
+       "min": null,
+       "max": null
+      }
+     ]
+    },
+    {
+     "action": null,
+     "method": null,
+     "enctype": null,
+     "spoof": null,
+     "fields": [
+      {
+       "tag": "input",
+       "type": "number",
+       "name": "progress_percentage",
+       "id": null,
+       "accept": null,
+       "multiple": false,
+       "required": false,
+       "min": "0",
+       "max": "100"
+      },
+      {
+       "tag": "textarea",
+       "type": null,
+       "name": "notes",
+       "id": null,
+       "accept": null,
+       "multiple": false,
+       "required": false,
+       "min": null,
+       "max": null
+      }
+     ]
+    },
+    {
+     "action": null,
+     "method": null,
+     "enctype": null,
+     "spoof": null,
+     "fields": [
+      {
+       "tag": "input",
+       "type": "number",
+       "name": "progress_percentage",
+       "id": null,
+       "accept": null,
+       "multiple": false,
+       "required": false,
+       "min": "0",
+       "max": "100"
+      },
+      {
+       "tag": "textarea",
+       "type": null,
+       "name": "notes",
+       "id": null,
+       "accept": null,
+       "multiple": false,
+       "required": false,
+       "min": null,
+       "max": null
+      }
+     ]
+    },
+    {
+     "action": null,
+     "method": null,
+     "enctype": null,
+     "spoof": null,
+     "fields": [
+      {
+       "tag": "input",
+       "type": "number",
+       "name": "progress_percentage",
+       "id": null,
+       "accept": null,
+       "multiple": false,
+       "required": false,
+       "min": "0",
+       "max": "100"
+      },
+      {
+       "tag": "textarea",
+       "type": null,
+       "name": "notes",
+       "id": null,
+       "accept": null,
+       "multiple": false,
+       "required": false,
+       "min": null,
+       "max": null
+      }
+     ]
+    }
+   ]
+  },
+  "report-77": {
+   "status": 200,
+   "h1": [
+    "Buat Laporan Progress"
+   ],
+   "lang": "id",
+   "scrollWidth": {
+    "360": 360,
+    "390": 390,
+    "768": 768,
+    "1440": 1440
+   },
+   "english_probe": [
+    "Progress",
+    "Submit",
+    "Optional",
+    "Upload"
+   ],
+   "forms": [
+    {
+     "action": "http://127.0.0.1:8000/student/projects/77/report",
+     "method": "POST",
+     "enctype": "multipart/form-data",
+     "spoof": null,
+     "fields": [
+      {
+       "tag": "select",
+       "type": null,
+       "name": "type",
+       "id": null,
+       "accept": null,
+       "multiple": false,
+       "required": true,
+       "min": null,
+       "max": null
+      },
+      {
+       "tag": "input",
+       "type": "text",
+       "name": "title",
+       "id": null,
+       "accept": null,
+       "multiple": false,
+       "required": true,
+       "min": null,
+       "max": null
+      },
+      {
+       "tag": "input",
+       "type": "date",
+       "name": "period_start",
+       "id": null,
+       "accept": null,
+       "multiple": false,
+       "required": true,
+       "min": null,
+       "max": null
+      },
+      {
+       "tag": "input",
+       "type": "date",
+       "name": "period_end",
+       "id": null,
+       "accept": null,
+       "multiple": false,
+       "required": true,
+       "min": null,
+       "max": null
+      },
+      {
+       "tag": "textarea",
+       "type": null,
+       "name": "summary",
+       "id": null,
+       "accept": null,
+       "multiple": false,
+       "required": true,
+       "min": null,
+       "max": null
+      },
+      {
+       "tag": "textarea",
+       "type": null,
+       "name": "activities",
+       "id": null,
+       "accept": null,
+       "multiple": false,
+       "required": true,
+       "min": null,
+       "max": null
+      },
+      {
+       "tag": "textarea",
+       "type": null,
+       "name": "challenges",
+       "id": null,
+       "accept": null,
+       "multiple": false,
+       "required": false,
+       "min": null,
+       "max": null
+      },
+      {
+       "tag": "textarea",
+       "type": null,
+       "name": "next_plans",
+       "id": null,
+       "accept": null,
+       "multiple": false,
+       "required": false,
+       "min": null,
+       "max": null
+      },
+      {
+       "tag": "input",
+       "type": "file",
+       "name": "document",
+       "id": "documentUpload",
+       "accept": ".pdf,.doc,.docx",
+       "multiple": false,
+       "required": false,
+       "min": null,
+       "max": null
+      },
+      {
+       "tag": "input",
+       "type": "file",
+       "name": "photos[]",
+       "id": "photosUpload",
+       "accept": "image/*",
+       "multiple": true,
+       "required": false,
+       "min": null,
+       "max": null
+      }
+     ]
+    }
+   ]
+  },
+  "final-77": {
+   "status": 200,
+   "h1": [
+    "Submit Laporan Akhir"
+   ],
+   "lang": "id",
+   "scrollWidth": {
+    "360": 360,
+    "390": 390,
+    "768": 768,
+    "1440": 1440
+   },
+   "english_probe": [
+    "Submit",
+    "Impact Metrics",
+    "Upload"
+   ],
+   "forms": [
+    {
+     "action": "http://127.0.0.1:8000/student/projects/77/final-report",
+     "method": "POST",
+     "enctype": "multipart/form-data",
+     "spoof": null,
+     "fields": [
+      {
+       "tag": "textarea",
+       "type": null,
+       "name": "summary",
+       "id": null,
+       "accept": null,
+       "multiple": false,
+       "required": true,
+       "min": null,
+       "max": null
+      },
+      {
+       "tag": "textarea",
+       "type": null,
+       "name": "activities",
+       "id": null,
+       "accept": null,
+       "multiple": false,
+       "required": true,
+       "min": null,
+       "max": null
+      },
+      {
+       "tag": "input",
+       "type": "number",
+       "name": "beneficiaries",
+       "id": null,
+       "accept": null,
+       "multiple": false,
+       "required": false,
+       "min": "0",
+       "max": null
+      },
+      {
+       "tag": "input",
+       "type": "number",
+       "name": "activities_count",
+       "id": null,
+       "accept": null,
+       "multiple": false,
+       "required": false,
+       "min": "0",
+       "max": null
+      },
+      {
+       "tag": "input",
+       "type": "file",
+       "name": "final_report",
+       "id": "finalReportUpload",
+       "accept": ".pdf",
+       "multiple": false,
+       "required": true,
+       "min": null,
+       "max": null
+      },
+      {
+       "tag": "input",
+       "type": "checkbox",
+       "name": null,
+       "id": null,
+       "accept": null,
+       "multiple": false,
+       "required": true,
+       "min": null,
+       "max": null
+      },
+      {
+       "tag": "input",
+       "type": "checkbox",
+       "name": null,
+       "id": null,
+       "accept": null,
+       "multiple": false,
+       "required": true,
+       "min": null,
+       "max": null
+      },
+      {
+       "tag": "input",
+       "type": "checkbox",
+       "name": null,
+       "id": null,
+       "accept": null,
+       "multiple": false,
+       "required": true,
+       "min": null,
+       "max": null
+      }
+     ]
+    }
+   ]
+  }
+ },
+ "after": {
+  "show-77": {
+   "status": 200,
+   "h1": [
+    "Pembangkit Listrik Mikrohidro"
+   ],
+   "lang": "id",
+   "scrollWidth": {
+    "360": 360,
+    "390": 390,
+    "768": 768,
+    "1440": 1440
+   },
+   "english_probe": [],
+   "forms": [
+    {
+     "action": null,
+     "method": null,
+     "enctype": null,
+     "spoof": null,
+     "fields": [
+      {
+       "tag": "input",
+       "type": "number",
+       "name": "progress_percentage",
+       "id": "progress-308",
+       "accept": null,
+       "multiple": false,
+       "required": false,
+       "min": "0",
+       "max": "100"
+      },
+      {
+       "tag": "textarea",
+       "type": null,
+       "name": "notes",
+       "id": "notes-308",
+       "accept": null,
+       "multiple": false,
+       "required": false,
+       "min": null,
+       "max": null
+      }
+     ]
+    }
+   ]
+  },
+  "report-77": {
+   "status": 200,
+   "h1": [
+    "Buat laporan kemajuan"
+   ],
+   "lang": "id",
+   "scrollWidth": {
+    "360": 360,
+    "390": 390,
+    "768": 768,
+    "1440": 1440
+   },
+   "english_probe": [],
+   "forms": [
+    {
+     "action": "http://127.0.0.1:8000/student/projects/77/report",
+     "method": "POST",
+     "enctype": "multipart/form-data",
+     "spoof": null,
+     "fields": [
+      {
+       "tag": "select",
+       "type": null,
+       "name": "type",
+       "id": "type",
+       "accept": null,
+       "multiple": false,
+       "required": true,
+       "min": null,
+       "max": null
+      },
+      {
+       "tag": "input",
+       "type": "text",
+       "name": "title",
+       "id": "title",
+       "accept": null,
+       "multiple": false,
+       "required": true,
+       "min": null,
+       "max": null
+      },
+      {
+       "tag": "input",
+       "type": "date",
+       "name": "period_start",
+       "id": "period_start",
+       "accept": null,
+       "multiple": false,
+       "required": true,
+       "min": null,
+       "max": null
+      },
+      {
+       "tag": "input",
+       "type": "date",
+       "name": "period_end",
+       "id": "period_end",
+       "accept": null,
+       "multiple": false,
+       "required": true,
+       "min": null,
+       "max": null
+      },
+      {
+       "tag": "textarea",
+       "type": null,
+       "name": "summary",
+       "id": "summary",
+       "accept": null,
+       "multiple": false,
+       "required": true,
+       "min": null,
+       "max": null
+      },
+      {
+       "tag": "textarea",
+       "type": null,
+       "name": "activities",
+       "id": "activities",
+       "accept": null,
+       "multiple": false,
+       "required": true,
+       "min": null,
+       "max": null
+      },
+      {
+       "tag": "textarea",
+       "type": null,
+       "name": "challenges",
+       "id": "challenges",
+       "accept": null,
+       "multiple": false,
+       "required": false,
+       "min": null,
+       "max": null
+      },
+      {
+       "tag": "textarea",
+       "type": null,
+       "name": "next_plans",
+       "id": "next_plans",
+       "accept": null,
+       "multiple": false,
+       "required": false,
+       "min": null,
+       "max": null
+      },
+      {
+       "tag": "input",
+       "type": "file",
+       "name": "document",
+       "id": "documentUpload",
+       "accept": ".pdf,.doc,.docx",
+       "multiple": false,
+       "required": false,
+       "min": null,
+       "max": null
+      },
+      {
+       "tag": "input",
+       "type": "file",
+       "name": "photos[]",
+       "id": "photosUpload",
+       "accept": "image/*",
+       "multiple": true,
+       "required": false,
+       "min": null,
+       "max": null
+      }
+     ]
+    }
+   ]
+  },
+  "final-77": {
+   "status": 200,
+   "h1": [
+    "Kirim laporan akhir"
+   ],
+   "lang": "id",
+   "scrollWidth": {
+    "360": 360,
+    "390": 390,
+    "768": 768,
+    "1440": 1440
+   },
+   "english_probe": [],
+   "forms": [
+    {
+     "action": "http://127.0.0.1:8000/student/projects/77/final-report",
+     "method": "POST",
+     "enctype": "multipart/form-data",
+     "spoof": null,
+     "fields": [
+      {
+       "tag": "textarea",
+       "type": null,
+       "name": "summary",
+       "id": "summary",
+       "accept": null,
+       "multiple": false,
+       "required": true,
+       "min": null,
+       "max": null
+      },
+      {
+       "tag": "textarea",
+       "type": null,
+       "name": "activities",
+       "id": "activities",
+       "accept": null,
+       "multiple": false,
+       "required": true,
+       "min": null,
+       "max": null
+      },
+      {
+       "tag": "input",
+       "type": "number",
+       "name": "beneficiaries",
+       "id": "beneficiaries",
+       "accept": null,
+       "multiple": false,
+       "required": false,
+       "min": "0",
+       "max": null
+      },
+      {
+       "tag": "input",
+       "type": "number",
+       "name": "activities_count",
+       "id": "activities_count",
+       "accept": null,
+       "multiple": false,
+       "required": false,
+       "min": "0",
+       "max": null
+      },
+      {
+       "tag": "input",
+       "type": "file",
+       "name": "final_report",
+       "id": "finalReportUpload",
+       "accept": ".pdf",
+       "multiple": false,
+       "required": true,
+       "min": null,
+       "max": null
+      },
+      {
+       "tag": "input",
+       "type": "checkbox",
+       "name": null,
+       "id": null,
+       "accept": null,
+       "multiple": false,
+       "required": true,
+       "min": null,
+       "max": null
+      },
+      {
+       "tag": "input",
+       "type": "checkbox",
+       "name": null,
+       "id": null,
+       "accept": null,
+       "multiple": false,
+       "required": true,
+       "min": null,
+       "max": null
+      },
+      {
+       "tag": "input",
+       "type": "checkbox",
+       "name": null,
+       "id": null,
+       "accept": null,
+       "multiple": false,
+       "required": true,
+       "min": null,
+       "max": null
+      }
+     ]
+    }
+   ]
+  }
+ }
+}

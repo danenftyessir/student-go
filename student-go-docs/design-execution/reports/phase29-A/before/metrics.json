@@ -1,0 +1,233 @@
+{
+ "tracker": {
+  "path": "/student/applications/tracker",
+  "widths": {
+   "360": 360,
+   "390": 390,
+   "768": 768,
+   "1440": 1440
+  },
+  "status": 200,
+  "final_url": "http://127.0.0.1:8000/student/applications/tracker",
+  "forms": [
+   {
+    "action": "http://127.0.0.1:8000/logout",
+    "method": "POST",
+    "enctype": null,
+    "spoof": null,
+    "fields": []
+   },
+   {
+    "action": "http://127.0.0.1:8000/logout",
+    "method": "POST",
+    "enctype": null,
+    "spoof": null,
+    "fields": []
+   },
+   {
+    "action": null,
+    "method": "dialog",
+    "enctype": null,
+    "spoof": null,
+    "fields": []
+   }
+  ],
+  "h1": [
+   "Application Tracker"
+  ],
+  "title": "Application Tracker — Student Go",
+  "english": [
+   "Application Tracker",
+   "Rejected",
+   "Pending",
+   "Shortlisted",
+   "Applied",
+   "ago"
+  ]
+ },
+ "app-330": {
+  "path": "/student/applications/330",
+  "widths": {
+   "360": 360,
+   "390": 390,
+   "768": 768,
+   "1440": 1440
+  },
+  "status": 200,
+  "final_url": "http://127.0.0.1:8000/student/applications/330",
+  "forms": [
+   {
+    "action": "http://127.0.0.1:8000/logout",
+    "method": "POST",
+    "enctype": null,
+    "spoof": null,
+    "fields": []
+   },
+   {
+    "action": "http://127.0.0.1:8000/logout",
+    "method": "POST",
+    "enctype": null,
+    "spoof": null,
+    "fields": []
+   },
+   {
+    "action": null,
+    "method": "dialog",
+    "enctype": null,
+    "spoof": null,
+    "fields": []
+   }
+  ],
+  "h1": [
+   "Koperasi Simpan Pinjam Desa"
+  ],
+  "title": "Detail Aplikasi — Student Go",
+  "english": []
+ },
+ "app-331": {
+  "path": "/student/applications/331",
+  "widths": {
+   "360": 360,
+   "390": 390,
+   "768": 768,
+   "1440": 1440
+  },
+  "status": 200,
+  "final_url": "http://127.0.0.1:8000/student/applications/331",
+  "forms": [
+   {
+    "action": "http://127.0.0.1:8000/logout",
+    "method": "POST",
+    "enctype": null,
+    "spoof": null,
+    "fields": []
+   },
+   {
+    "action": "http://127.0.0.1:8000/logout",
+    "method": "POST",
+    "enctype": null,
+    "spoof": null,
+    "fields": []
+   },
+   {
+    "action": "http://127.0.0.1:8000/student/applications/331",
+    "method": "POST",
+    "enctype": null,
+    "spoof": "DELETE",
+    "fields": [
+     "input name=_method id=null type=hidden accept=null"
+    ]
+   },
+   {
+    "action": null,
+    "method": "dialog",
+    "enctype": null,
+    "spoof": null,
+    "fields": []
+   }
+  ],
+  "h1": [
+   "Edukasi Kesehatan Dan Sanitasi"
+  ],
+  "title": "Detail Aplikasi — Student Go",
+  "english": []
+ },
+ "app-332": {
+  "path": "/student/applications/332",
+  "widths": {
+   "360": 360,
+   "390": 390,
+   "768": 768,
+   "1440": 1440
+  },
+  "status": 200,
+  "final_url": "http://127.0.0.1:8000/student/applications/332",
+  "forms": [
+   {
+    "action": "http://127.0.0.1:8000/logout",
+    "method": "POST",
+    "enctype": null,
+    "spoof": null,
+    "fields": []
+   },
+   {
+    "action": "http://127.0.0.1:8000/logout",
+    "method": "POST",
+    "enctype": null,
+    "spoof": null,
+    "fields": []
+   },
+   {
+    "action": "http://127.0.0.1:8000/student/applications/332",
+    "method": "POST",
+    "enctype": null,
+    "spoof": "DELETE",
+    "fields": [
+     "input name=_method id=null type=hidden accept=null"
+    ]
+   },
+   {
+    "action": null,
+    "method": "dialog",
+    "enctype": null,
+    "spoof": null,
+    "fields": []
+   }
+  ],
+  "h1": [
+   "Konservasi Terumbu Karang"
+  ],
+  "title": "Detail Aplikasi — Student Go",
+  "english": []
+ },
+ "create-5": {
+  "path": "/student/applications/create/5",
+  "widths": {
+   "360": 360,
+   "390": 390,
+   "768": 768,
+   "1440": 1440
+  },
+  "status": 200,
+  "final_url": "http://127.0.0.1:8000/student/applications/create/5",
+  "forms": [
+   {
+    "action": "http://127.0.0.1:8000/logout",
+    "method": "POST",
+    "enctype": null,
+    "spoof": null,
+    "fields": []
+   },
+   {
+    "action": "http://127.0.0.1:8000/logout",
+    "method": "POST",
+    "enctype": null,
+    "spoof": null,
+    "fields": []
+   },
+   {
+    "action": "http://127.0.0.1:8000/student/applications",
+    "method": "POST",
+    "enctype": "multipart/form-data",
+    "spoof": null,
+    "fields": [
+     "input name=problem_id id=null type=hidden accept=null",
+     "textarea name=motivation id=motivation type=null accept=null",
+     "input name=proposal id=proposal type=file accept=.pdf,.doc,.docx"
+    ]
+   },
+   {
+    "action": null,
+    "method": "dialog",
+    "enctype": null,
+    "spoof": null,
+    "fields": []
+   }
+  ],
+  "h1": [
+   "Ajukan lamaran"
+  ],
+  "title": "Ajukan Lamaran — Student Go",
+  "english": []
+ }
+}

@@ -197,7 +197,7 @@ Read-only pass over the repository (branch `feat/students`, HEAD `e824b9d`). `pu
 | `student-register-background.jpeg` | 427,719 | 4912x2760 | `auth/student-register.blade.php:26` | **no — added** | auth background (Phase 6). Retain; rights UNKNOWN |
 | `reg-com-background.jpg` | 1,031,676 | 3649x5362 | **none** | **no — added** | unreferenced; Retain (not deleted) |
 | `profile_13523151.jpeg` | 410,163 | 1074x1130 | **none** | **no — added** | personal photo with a student ID in the name; possibly the missing team portrait — user to confirm (D-31). Never published without that. |
-| `assets/certificate/template.png` | 332,656 → 717,354 | 2000x1414 | `app/Services/CertificateService.php:160` | **no — added** | **Protected (D-32).** Contains a real signature and stamp. **Replaced 2026-11-01** at the user's request: now a copy of `Sertifikat_Penghargaan_Student_Go.pptx (2).png` with the printed village-head name and the year prefix '20' erased (see 'Certificate template update' at the end). The old Karsa template is still in git history (`HEAD`). |
+| `assets/certificate/template.png` | 332,656 → 717,354 | 2000x1414 | `app/Services/CertificateService.php:160` | **no — added** | **Protected (D-32).** Contains a real signature and stamp. **Replaced 2026-11-01** at the user's request: now a copy of `Sertifikat_Penghargaan_Student_Go.pptx (2).png` with the printed village-head name and the year prefix '20' erased (see 'Certificate template update' at the end). The old Student Go template is still in git history (`HEAD`). |
 | `assets/certificate/Sertifikat_Penghargaan_Student_Go.pptx (2).png` | 1,054,118 | 2000x1414 | none (source of `template.png`) | **no — added 2026-11-01 by the user** | **Protected (D-32).** User-supplied Student Go template; kept untouched. |
 | `assets/certificate/Sertifikat_Penghargaan_Student_Go.pptx.pdf` | 323,558 | — | none | **no — added 2026-11-01 by the user** | User-supplied PDF export of the same template; Retain, unused. |
 | `assets/certificate/fonts/PinyonScript-Regular.ttf` | 148,956 | — | `CertificateService.php:162` | **no — added** | **Protected (D-32).** Certificate only; not a website font. |
@@ -1054,8 +1054,81 @@ No illustration or photograph added; no `public/` file changed.
 | File | Decision | Note |
 |---|---|---|
 | `public/assets/certificate/Sertifikat_Penghargaan_Student_Go.pptx (2).png` | **Retain** (source, untouched) | Added by the user; SHA-256 `c31a9058…3bc1` asserted in `tests/Feature/Phase2/DesignSystemAssetsTest.php` |
-| `public/assets/certificate/template.png` | **Replace** (user-authorised) | Copy of the source with two areas repainted by vertical background interpolation: the printed name 'DRS. BUDIYAN SETYONO' (x 503-917, y 1171-1202) and the year prefix '20' after '/XI/' (x 1243-1291, y 433-463). SHA-256 `12e83245…dcdc`. The previous Karsa template was deleted from the working tree by the user and remains in git `HEAD` |
+| `public/assets/certificate/template.png` | **Replace** (user-authorised) | Copy of the source with two areas repainted by vertical background interpolation: the printed name 'DRS. BUDIYAN SETYONO' (x 503-917, y 1171-1202) and the year prefix '20' after '/XI/' (x 1243-1291, y 433-463). SHA-256 `12e83245…dcdc`. The previous Student Go template was deleted from the working tree by the user and remains in git `HEAD` |
 | `public/assets/certificate/Sertifikat_Penghargaan_Student_Go.pptx.pdf` | **Retain**, unused | PDF export supplied by the user |
 | `public/assets/certificate/fonts/*.ttf` | **Retain**, unchanged | Poppins + Pinyon Script still render all variable text |
 
 Generator (`app/Services/CertificateService.php`): text positions re-fitted (number right-aligned before '/KKN', full year after '/XI/', name centred above the divider in dark green, NIM after 'NIM:', year in the gap of line 1, date range right-aligned before 'dengan hasil', `pic_name` upper case centred under the left signature); new `align` and `max_width` keys shrink long names instead of overflowing. Certificates already stored in Supabase are not regenerated. Samples: `reports/certificate-2026-11-01/sample_short.png`, `sample_long.png`.
+
+## Phase 29, paket A dan C — lamaran mahasiswa dan detail lowongan (2026-11-01)
+
+| Asset | Decision | Note |
+|---|---|---|
+| `assets/illustrations/empty-states/no-applications.svg` | **Reuse** | Empty state of `/student/applications/tracker` (account without applications) |
+| Lucide sprite: `briefcase`, `map-pin`, `building-2`, `clock`, `send`, `circle-check`, `x`, `arrow-right`, `globe` | **Reuse** | Job detail facts, apply/withdraw, company links |
+| Company logo (upload, `companies.logo`) | **Retain** | Shown via `x-ui.avatar` when present, initials otherwise (the old `avatar_svg` data image is no longer used on this page) |
+
+No reference to any `public/` file was removed (the two old views used inline SVG paths only), so nothing becomes Deprecate. No asset added, downloaded or generated; `public/` SHA-256 list (228 files, `public/build/` excluded) identical before and after.
+
+## Phase 29, paket G — peta wilayah profil publik instansi (2026-11-01)
+
+| Asset | Decision | Note |
+|---|---|---|
+| `assets/illustrations/geographic/indonesia-regions.svg` | **Reuse** | Inlined by `institution/profile/components/region-map.blade.php` through `App\Support\ProvinceRegion::inlineSvg()` on `/institution/{id}` (D-45). The file is read at render time and not edited (SHA-256 `d2debbc8…0c51ad` unchanged); its own `<style>` and root `<title>` are left out of the output, colours come from tokens in `public-pages.css` |
+
+`indonesia-outline.svg` and `workflows/*.svg` stay unused (D-48). No reference removed, so nothing becomes Deprecate. No asset added, downloaded or generated; `public/` SHA-256 list (228 files, `public/build/` excluded) identical before and after. Report: `reports/PHASE_29_PAKET_G_REPORT.md`.
+
+## Phase 29, paket B — proyek aktif mahasiswa (2026-11-01)
+
+| Asset | Decision | Note |
+|---|---|---|
+| Lucide sprite: `file-text`, `send`, `download`, `pencil`, `check`, `upload`, `x`, `circle-alert`, `triangle-alert` | **Reuse** | Header actions, milestone timeline, upload dropzones, notices on `/student/projects/{id}`, `/report/create`, `/final-report/create` |
+| Institution logo (upload, `institutions.logo_path`) | **Retain** | Shown via `x-ui.avatar` (`getLogoUrl()`) when present, initials otherwise (no gradient initial tile) |
+| Student profile photos (team members) | **Retain** | Shown via `x-ui.avatar` in the same small placement as before; initials when missing |
+| `public/assets/certificate/**` | **Protected (D-32)** | Not touched. The certificate number and download button live in `student/projects/index.blade.php` (not changed); `show` had none and none was added |
+
+The three old views used inline SVG paths only, so no reference to a `public/` file was removed and nothing becomes Deprecate. No asset added, downloaded or generated; `public/` SHA-256 list (228 files, `public/build/` excluded) identical before and after (method: before/after list, `baseline/asset-hashes.txt` not present). Report: `reports/phase29-B/REPORT.md`.
+
+## Phase 29, paket F — cacat dan polesan (2026-11-01)
+
+| Asset | Decision | Note |
+|---|---|---|
+| `placeholder-project.jpg`, `placeholder-profile-cover.jpg` | — (files never existed) | C6: the two `asset('placeholder-project.jpg')` uses in `FriendController@getActivities` now return `image: null`; the cover `<img>` in `student/friends/profile.blade.php` (unreachable view, C7) became a plain neutral band. No image file added |
+| `assets/illustrations/empty-states/no-documents.svg` | **Reuse** | U6: 'Belum ada masalah' (`/institution/problems`) and 'Belum ada ulasan' (`/institution/reviews`) |
+| `assets/illustrations/empty-states/no-applications.svg` | **Reuse** | U6: 'Belum ada proyek' (`/institution/projects`) |
+| `assets/illustrations/empty-states/no-saved-projects.svg` | **Reuse** | U6: 'Tidak ada lowongan di sini' (`/student/jobs/saved`, folder or page without rows) |
+| `assets/illustrations/empty-states/no-search-results.svg` | **Reuse** | U6: 'Halaman ini kosong' (`/student/jobs?page=` out of range) |
+
+The tab and sub-section empty states (portfolio ×2, public institution profile, 'Belum ada saran', 'Tidak ada permintaan masuk') stay text only. No reference to an existing `public/` file was removed, so nothing becomes Deprecate. No asset added, downloaded or generated; `public/` SHA-256 list (228 files, `public/build/` excluded) identical before and after (method: before/after list, `baseline/asset-hashes.txt` not present). Report: `reports/phase29-F/REPORT.md`.
+
+## Phase 29, paket D — institusi: kelola proyek dan status verifikasi (2026-11-01)
+
+| Asset | Decision | Note |
+|---|---|---|
+| Lucide sprite: `shield-check` (U7), `eye`, `pencil`, `plus`, `trash-2`, `check`, `message-square-text`, `triangle-alert`, `upload`, `x` | **Reuse** | Status panel heading on `/institution/verification/status`; header, milestone and report actions and dialogs on `/institution/projects/{id}/manage` (`rotate-ccw` is not in the sprite, so `message-square-text` marks 'Minta revisi') |
+| Verification documents (uploads, `verification_documents.file_url`) | **Retain** | Not linked (as before); only the stored file name is shown |
+
+Both old views used inline SVG paths only, so no reference to a `public/` file was removed and nothing becomes Deprecate. No empty-state illustration was added to the status page (U6 lists five other pages). No asset added, downloaded or generated; `public/` SHA-256 list (228 files, `public/build/` excluded) identical before and after (method: before/after list, `baseline/asset-hashes.txt` not present). Report: `reports/phase29-D/REPORT.md`.
+
+## Phase 29, paket E — perusahaan: profil publik dan ubah lowongan (2026-11-01)
+
+| Asset | Source | Decision | Note |
+|---|---|---|---|
+| `company-profile.jpg` (hero background) | A | **Deprecate (usage)** | Its last template reference (`company/profile/public.blade.php`, `/company/{id}`) is gone; the page uses the `.sg-org` header with logo or initials. No template references it any more. File retained (SHA-1 `0d71a452…`, 252,990 bytes, unchanged). |
+| `company3.jpg` (hero background) | A | **Deprecate (usage)** | Its last template reference (`company/jobs/edit.blade.php`) is gone; the edit form is the Phase 23 wizard with `x-ui.page-header`. No template references it any more. File retained (SHA-1 `72e46b3f…`, 238,773 bytes, unchanged). |
+| Company logo (`companies.logo`, Supabase Storage) | user upload | **Retain** | Shown on `/company/{id}` through `x-ui.avatar` (square) only when stored; initials otherwise (no gradient initial tile). Seeded companies have no logo. |
+| Lucide sprite: `globe`, `phone`, `mail`, `map-pin`, `external-link`, `info`, `arrow-right` (public profile); `eye`, `arrow-left`, `arrow-right`, `check`, `circle-alert` + status icons (edit) | B | **Reuse** (no icon added) | Contact rows (U5, U7), place, links, wizard navigation |
+| Inline `<style>` blocks, inline heroicons, gradient tiles, `alert()` of the two old views | C | **Replaced** by `resources/css/student-go/company.css` (Phase 29 paket E section), `.sg-org` (Phase 5), the shared wizard partial `company/jobs/components/wizard-steps.blade.php` and `x-ui.stepper` | — |
+
+No asset added, downloaded or generated. `public/` check: the git blob hashes of all 228 tracked files outside `public/build/` are identical to HEAD `000523d` (combined SHA-256 `d41322c9…` before = after); `baseline/asset-hashes.txt` is not present on this branch.
+
+## Phase 29, paket H — foto seed masalah (2026-11-01)
+
+| Asset | Source | Decision | Where / note |
+|---|---|---|---|
+| 32 catalogue photographs (`available` in `photo-review.json` minus the five of D-42), as the JPEG objects already in bucket `sg-storage` from Phase 8 (`problems/masalah-desa-NN.jpg/.jpeg`, NN = lowest object holding each photo) | B (via Phase 8 seed objects) | **Reuse** | `problem_images` seed rows only (220 rows, 77 problems): photo from the pool of the problem's first SDG, caption 'Foto ilustrasi: <real photo location>' or 'Gambaran wilayah' (D-46). Shown in the Telusuri Masalah gallery and the problem detail 'Foto' section; no template changed |
+| Five photos withheld by D-42 (14 bucket objects: NN 6, 7, 13, 16, 18, 43, 44, 50, 53, 55, 80, 81, 87, 90) | B | **Deprecate** (usage) | No longer referenced by any row; objects stay in the bucket |
+| The other 46 duplicate bucket objects | B | **Deprecate** (usage) | Unreferenced duplicates of the 32 photos; stay in the bucket |
+| Problem uploads by institutions (rows whose path is not `problems/masalah-desa-NN`) | user upload | **Retain** | Not touched (seeder pattern excludes them; rows 221–225 created during this session by another session were left as they were) |
+
+No asset added, downloaded, generated, deleted, moved or renamed. Supabase Storage not written (92 objects read once by GET in stage 1 for matching only). `public/`: SHA-256 of the 228 files outside `public/build/` identical before and after.

@@ -1,0 +1,22 @@
+# phase 29 paket E: kontrak form company/jobs/{id}/edit
+(baris name="…" milik <x-icon> dan meta csrf-token dibuang; tidak ada <input>/<select>/<textarea> bernama di kedua versi: semua isian terikat x-model, payload dibangun submitForm())
+## sebelum (HEAD 000523d, resources/views/company/jobs/edit.blade.php)
+<form @submit.prevent="submitForm" class="bg-white rounded-xl shadow-sm border border-gray-100 p-6 md:p-8 fade-in-up gpu-accelerate" style="animation-delay: 0.2s;">
+@csrf
+@method('PUT')
+form.method = 'POST'
+form.action = <company.jobs.update route>
+_method
+## sesudah (edit.blade.php + components/wizard-steps.blade.php)
+_method
+<form class="sg-co-wizard__form" novalidate @submit.prevent="submitForm()">
+@csrf
+@method('PUT')
+_method
+form.method = 'POST'
+form.action = <company.jobs.update route>
+_method
+## payload POST terekam di peramban (sebelum = sesudah)
+before: ['_method', '_token', 'department', 'description', 'impact_metrics', 'job_category_id', 'job_type', 'location', 'qualifications', 'responsibilities', 'salary_range', 'sdg_alignment[]', 'skills[]', 'status', 'success_criteria', 'title']
+after:  ['_method', '_token', 'department', 'description', 'impact_metrics', 'job_category_id', 'job_type', 'location', 'qualifications', 'responsibilities', 'salary_range', 'sdg_alignment[]', 'skills[]', 'status', 'success_criteria', 'title']
+identical: True
