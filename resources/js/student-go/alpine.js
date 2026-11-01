@@ -78,8 +78,19 @@ export function registerAlpine(Alpine) {
         },
     }));
 
-    // lonceng notifikasi: endpoint dan perilaku sama seperti sebelumnya (5 terbaru, polling 30 detik,
-    // klik menandai dibaca tanpa redirect, tandai semua dibaca)
+    // hanya tautan http(s) atau relatif yang boleh dibuka dari notifikasi
+    const actionUrl = (value) => {
+        if (!value || typeof value !== 'string') return null;
+        try {
+            const url = new URL(value, window.location.origin);
+            return ['http:', 'https:'].includes(url.protocol) ? url.href : null;
+        } catch (error) {
+            return null;
+        }
+    };
+
+    // lonceng notifikasi: endpoint sama seperti sebelumnya (5 terbaru, polling 30 detik,
+    // klik menandai dibaca lalu membuka action_url bila ada, tandai semua dibaca)
     Alpine.data('sgNotifications', (cfg) => ({
         open: false,
         notifications: [],
@@ -144,7 +155,12 @@ export function registerAlpine(Alpine) {
                     console.error('gagal mark as read:', error);
                 }
             }
-            // tidak ada redirect: notifikasi hanya ditandai dibaca
+            // sama seperti tombol "Buka" di halaman notifikasi: buka action_url bila ada
+            const target = actionUrl(notification.action_url);
+            if (target) {
+                window.location.href = target;
+                return;
+            }
             this.close(true);
         },
         async markAllAsRead() {

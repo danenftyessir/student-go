@@ -1,6 +1,6 @@
 {{-- components/notification-dropdown.blade.php (phase 3)
      endpoint sama seperti sebelumnya: notifications.latest (5 terbaru + unread_count, polling 30 detik),
-     POST /notifications/{id}/read saat item diklik (tanpa redirect), notifications.read-all.
+     POST /notifications/{id}/read saat item diklik, lalu buka action_url bila ada, notifications.read-all.
      logika ada di Alpine.data('sgNotifications') -> resources/js/student-go/alpine.js --}}
 <div class="sg-dropdown"
      x-data="sgNotifications({

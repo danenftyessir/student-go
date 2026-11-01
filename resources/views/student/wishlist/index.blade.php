@@ -61,7 +61,7 @@
                             @endif
                             @if ($lokasi !== '')<span class="sg-table__meta">{{ $lokasi }}</span>@endif
                             @if (filled($wishlist->notes))
-                                <p class="mt-2 mb-0 max-w-prose border-l-2 border-gray-300 pl-2 text-xs leading-4 text-gray-600 wrap-break-word">
+                                <p class="mt-2 mb-0 max-w-prose rounded-sm bg-gray-50 px-2.5 py-1.5 text-xs leading-4 text-gray-600 wrap-break-word">
                                     <span class="font-semibold text-gray-900">Catatan saya:</span> {{ $wishlist->notes }}
                                 </p>
                             @endif

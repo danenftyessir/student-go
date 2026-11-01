@@ -70,15 +70,27 @@ class UploadProblemImagesToSupabase extends Command
     }
 
     /**
+     * header auth storage: kunci baru (sb_secret_...) wajib lewat header apikey; Bearer hanya untuk kunci JWT lama
+     */
+    protected function authHeaders(): array
+    {
+        $headers = ['apikey' => $this->serviceKey];
+
+        if (str_starts_with((string) $this->serviceKey, 'eyJ')) {
+            $headers['Authorization'] = 'Bearer ' . $this->serviceKey;
+        }
+
+        return $headers;
+    }
+
+    /**
      * Cek apakah bucket accessible
      */
     protected function checkBucketAccess(): bool
     {
         try {
             $response = Http::timeout(10)
-                ->withHeaders([
-                    'Authorization' => 'Bearer ' . $this->serviceKey,
-                ])
+                ->withHeaders($this->authHeaders())
                 ->get("{$this->baseUrl}/bucket/{$this->bucketName}");
 
             return $response->successful();
@@ -135,9 +147,7 @@ class UploadProblemImagesToSupabase extends Command
             try {
                 // Cek apakah file sudah ada di Supabase
                 $existsResponse = Http::timeout(10)
-                    ->withHeaders([
-                        'Authorization' => 'Bearer ' . $this->serviceKey,
-                    ])
+                    ->withHeaders($this->authHeaders())
                     ->head("{$this->baseUrl}/object/{$this->bucketName}/{$encodedPath}");
 
                 if ($existsResponse->successful()) {
@@ -152,8 +162,7 @@ class UploadProblemImagesToSupabase extends Command
                 $mimeType = $this->getMimeType($file->getExtension());
 
                 $response = Http::timeout(60)
-                    ->withHeaders([
-                        'Authorization' => 'Bearer ' . $this->serviceKey,
+                    ->withHeaders($this->authHeaders() + [
                         'Content-Type' => $mimeType,
                         'x-upsert' => 'true',
                     ])
@@ -212,9 +221,7 @@ class UploadProblemImagesToSupabase extends Command
 
         try {
             $response = Http::timeout(10)
-                ->withHeaders([
-                    'Authorization' => 'Bearer ' . $this->serviceKey,
-                ])
+                ->withHeaders($this->authHeaders())
                 ->get("{$this->baseUrl}/object/list/{$this->bucketName}?prefix=problems/");
 
             if ($response->successful()) {
@@ -248,9 +255,7 @@ class UploadProblemImagesToSupabase extends Command
         try {
             // Ambil daftar file dari Supabase
             $response = Http::timeout(10)
-                ->withHeaders([
-                    'Authorization' => 'Bearer ' . $this->serviceKey,
-                ])
+                ->withHeaders($this->authHeaders())
                 ->get("{$this->baseUrl}/object/list/{$this->bucketName}?prefix=problems/");
 
             if (!$response->successful()) {
