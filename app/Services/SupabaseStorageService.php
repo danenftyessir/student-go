@@ -52,16 +52,17 @@ class SupabaseStorageService
      * 
      * @param UploadedFile $file file yang akan diupload
      * @param string $path path tujuan di bucket (contoh: problems/file.jpg)
+     * @param bool $allowLocalFallback false: jangan simpan ke local storage bila supabase gagal (return false)
      * @return string|false path file yang berhasil diupload atau false jika gagal
      */
-    public function uploadFile(UploadedFile $file, string $path)
+    public function uploadFile(UploadedFile $file, string $path, bool $allowLocalFallback = true)
     {
         if (config('app.env') === 'production' && !$this->useSupabase) {
             throw new \Exception('Supabase configuration is REQUIRED in production!...');
         }
         // jika supabase tidak dikonfigurasi, gunakan local storage
         if (!$this->useSupabase) {
-            return $this->uploadToLocal($file, $path);
+            return $allowLocalFallback ? $this->uploadToLocal($file, $path) : false;
         }
 
         try {
@@ -108,6 +109,10 @@ class SupabaseStorageService
                 'status' => $response->status(),
                 'body' => $response->body(),
             ]);
+
+            if (!$allowLocalFallback) {
+                return false;
+            }
             
             // fallback ke local storage
             Log::info("⚠️ Falling back to local storage");
@@ -118,6 +123,10 @@ class SupabaseStorageService
                 'path' => $path,
                 'error' => $e->getMessage(),
             ]);
+
+            if (!$allowLocalFallback) {
+                return false;
+            }
             
             // fallback ke local storage
             Log::info("⚠️ Falling back to local storage");
@@ -283,6 +292,100 @@ class SupabaseStorageService
             ]);
             return false;
         }
+    }
+
+    /**
+     * ambil isi file dari bucket (dengan fallback ke local storage)
+     *
+     * @param string $path path file
+     * @return string|null isi file atau null jika tidak ada / gagal
+     */
+    public function getContents(string $path): ?string
+    {
+        if (!$this->useSupabase) {
+            return Storage::disk('public')->exists($path) ? Storage::disk('public')->get($path) : null;
+        }
+
+        try {
+            $response = Http::timeout(30)
+                ->withHeaders($this->authHeaders())
+                ->get("{$this->baseUrl}/object/{$this->bucketName}/{$this->encodePath(ltrim($path, '/'))}");
+
+            if ($response->successful()) {
+                return $response->body();
+            }
+
+            Log::warning("⚠️ Get file contents FAILED", [
+                'path' => $path,
+                'status' => $response->status(),
+            ]);
+            return null;
+        } catch (\Exception $e) {
+            Log::error("❌ Get file contents EXCEPTION", [
+                'path' => $path,
+                'error' => $e->getMessage(),
+            ]);
+            return null;
+        }
+    }
+
+    /**
+     * daftar path file di bawah sebuah prefix (folder) di bucket
+     *
+     * @param string $prefix folder di bucket (contoh: company_documents)
+     * @return array daftar path file
+     */
+    public function listFiles(string $prefix = ''): array
+    {
+        $prefix = trim($prefix, '/');
+
+        if (!$this->useSupabase) {
+            return Storage::disk('public')->files($prefix);
+        }
+
+        $response = Http::timeout(10)
+            ->withHeaders($this->authHeaders())
+            ->post("{$this->baseUrl}/object/list/{$this->bucketName}", [
+                'prefix' => $prefix,
+                'limit' => 1000,
+            ]);
+
+        if (!$response->successful()) {
+            throw new \Exception("Gagal membaca daftar file: " . $response->body());
+        }
+
+        // objek tanpa id adalah folder, bukan file
+        return collect($response->json())
+            ->filter(fn ($item) => !empty($item['id']))
+            ->map(fn ($item) => ltrim("{$prefix}/{$item['name']}", '/'))
+            ->values()
+            ->all();
+    }
+
+    /**
+     * buat signed URL untuk file privat
+     *
+     * @param string $path path file
+     * @param int $expiresIn masa berlaku dalam detik
+     * @return string signed URL
+     */
+    public function createSignedUrl(string $path, int $expiresIn = 3600): string
+    {
+        if (!$this->useSupabase) {
+            return $this->getPublicUrl($path);
+        }
+
+        $response = Http::timeout(10)
+            ->withHeaders($this->authHeaders())
+            ->post("{$this->baseUrl}/object/sign/{$this->bucketName}/{$this->encodePath(ltrim($path, '/'))}", [
+                'expiresIn' => $expiresIn,
+            ]);
+
+        if (!$response->successful()) {
+            throw new \Exception("Failed to generate signed URL: " . $response->body());
+        }
+
+        return $this->baseUrl . $response->json('signedURL');
     }
 
     /**
