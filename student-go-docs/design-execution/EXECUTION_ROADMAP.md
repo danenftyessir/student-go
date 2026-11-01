@@ -64,8 +64,9 @@ A presentation-layer design of Student Go with a hybrid direction (AD-04): 'Ruan
 | 24 | [Applicant Pipeline](phases/PHASE_24_APPLICANT_PIPELINE.md) | Company role | 3, 23 | 1 | D-02, D-13, D-26 | M |
 | 25 | [Company Profile](phases/PHASE_25_COMPANY_PROFILE.md) | Company role | 3 | 1, 20 | D-06 | S |
 | 26 | [Error Pages](phases/PHASE_26_ERROR_PAGES.md) | Cross-cutting | 1, 2, 3 | — | D-01, D-11, D-25 | S |
-| 27 | [Responsiveness & Accessibility](phases/PHASE_27_RESPONSIVE_ACCESSIBILITY.md) | Cross-cutting | 4-26 | — | D-24, D-22, D-12, D-13 | L |
+| 27 | [Responsiveness & Accessibility](phases/PHASE_27_RESPONSIVE_ACCESSIBILITY.md) | Cross-cutting | 4-26, 29 | — | D-24, D-22, D-12, D-13 | L |
 | 28 | [Final QA](phases/PHASE_28_FINAL_QA.md) | Cross-cutting | 27 | — | D-12, D-13, D-22, D-24 | L |
+| 29 | [Unmapped Pages & Enrichment](phases/PHASE_29_UNMAPPED_PAGES_AND_ENRICHMENT.md) (packages A–H, one per request) | Cross-cutting | 1, 3 | per package: 5, 6, 8-11, 13, 15, 18-21, 23, 25 | D-02, D-04, D-09, D-13, D-14, D-19, D-25, D-30, D-32, D-41–D-48 | L |
 
 Sizes are planning guesses (S, M, L, XL), not commitments.
 
@@ -79,7 +80,8 @@ Default order is numeric. Dependencies are in the table above and in the tracker
 - **Phases 4-6** (public and auth), **7-16** (student), **17-20** (institution), **21-25** (company) depend on Phase 3 and, where listed, on Phase 1. Within a role the numeric order is a suggestion; the hard dependencies are the rule. Inside the student role the core flow is 8 (discover), 9 (detail), 10 (apply).
 - **Phase 23 before 24**: the applicant pipeline needs the jobs model understood first.
 - **Phase 26** (error pages) depends only on Phases 1, 2, 3, so it can run right after Phase 3 if the user wants debug-page exposure handled early.
-- **Phase 27** (responsive and accessibility sweep) depends on every page phase 4-26. **Phase 28** (final QA) depends on 27.
+- **Phase 27** (responsive and accessibility sweep) depends on every page phase 4-26 and on Phase 29. **Phase 28** (final QA) depends on 27.
+- **Phase 29** (added 2026-11-01) covers the pages that no other phase owned (enrichment audit 3.1) and the defects C1-C6 found next to them. It is executed one package at a time ('Execute Phase 29, paket X'); its row stays PARTIAL until every approved package is COMPLETE. Its number is higher than 27 and 28, but it runs before them.
 - Never run phases in parallel in one working tree. If two agents are used, give each its own branch and never the same phase.
 
 ## 6. Route coverage (every route found, mapped to a phase)
@@ -159,6 +161,27 @@ The audit found 59 route patterns: 13 public/shared, 21 student, 11 institution,
 | Non-GET action routes (apply, cancel application, add connection, wishlist toggle, save job/talent, save search, notification mark-read/delete, chatbot send/archive/delete, profile update, verification upload) | Student/Institution/Company | Not enumerable from GET crawling | UNKNOWN | Phase 0 | Stage One lists them from `route:list` and records form actions per page so designed forms keep posting to the same endpoints. |
 
 Count check: 59 patterns in the table (expected 59).
+
+**Routes added to the coverage on 2026-11-01 (Phase 29)**
+
+Found by the enrichment audit (`reports/ASSET_ENRICHMENT_AUDIT.md` section 3.1 and Appendix A): GET routes that render legacy markup and were mapped to no phase (the completion reports of Phases 19, 20, 23 and 25 list them as out of scope), plus the endpoint of defect C2. Route names and controller actions VERIFIED with `php artisan route:list --json` on `chore/project-assets` @ `92b9103` (203 routes).
+
+| Route name | Pattern | Role | Audit status | Evidence | Phase |
+|---|---|---|---|---|---|
+| `student.applications.tracker` | /student/applications/tracker | Student | Inspected (2026-11-01) | VERIFIED (DOM 0 % `sg-*`) | Phase 29, package A |
+| `student.projects.show` | /student/projects/{id} | Student | Inspected (project 77) | VERIFIED | Phase 29, package B |
+| `student.projects.create-report` | /student/projects/{id}/report/create | Student | Fetched; view file read | VERIFIED | Phase 29, package B |
+| `student.projects.create-final-report` | /student/projects/{id}/final-report/create | Student | Fetched; view file read | VERIFIED | Phase 29, package B |
+| `student.jobs.show` | /student/jobs/{id} | Student | Inspected (363, 573); overflow at 390 px | VERIFIED | Phase 29, package C |
+| `institution.projects.manage` | /institution/projects/{id}/manage | Institution | Fetched (118, 188, 217); DOM only | VERIFIED | Phase 29, package D |
+| `institution.verification.status` | /institution/verification/status | Institution | Fetched; DOM only | VERIFIED | Phase 29, package D |
+| `company.jobs.edit` | /company/jobs/{id}/edit | Company | Inspected (619, 623); overflow at 390 px | VERIFIED | Phase 29, package E |
+| `company.public` | /company/{id} | Public | Inspected (1, 77, 120) | VERIFIED | Phase 29, package E |
+| `student.friends.activities` | /student/friends/activities | Student | HTTP 500 (C2) | VERIFIED (status only) | Phase 29, package F |
+
+The mixed routes `student.applications.show` (/student/applications/{id}) and `student.applications.create` (/student/applications/create/{problemId}) stay mapped to Phase 10 in the table above; their remaining legacy markup is also rewritten by Phase 29, package A, because Phase 10 has no completion report. The non-existent-ID case of /student/applications/{id} (HTTP 500, C1) is fixed in package F. The six `/admin/*` views stay unmapped (D-47).
+
+Count check: 59 patterns above plus 10 rows added on 2026-11-01.
 
 ## 7. Screen coverage (audit page IDs mapped to phases)
 

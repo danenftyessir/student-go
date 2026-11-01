@@ -284,3 +284,58 @@
 .sg-inst-checklist__date { font-size: .75rem; line-height: 1rem; color: var(--sg-text-tertiary); font-variant-numeric: tabular-nums; }
 .sg-inst-checklist .sg-field { max-width: 36rem; }
 .sg-inst-verify__actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: 1.25rem; }
+
+/* ════════════════════════════════════════════════════════════════════
+ * Phase 29 paket D (2026-11-01): kelola proyek (/projects/{id}/manage) dan
+ * status verifikasi (/verification/status). Reuses .sg-inst-detail, .sg-inst-panel,
+ * .sg-inst-checklist__head, the stage meter and the shared <dialog>.
+ * Existing tokens only; dividers group content; no new shadow or colour.
+ * ════════════════════════════════════════════════════════════════════ */
+
+/* ── manage: sections in the main column ── */
+.sg-inst-manage__block { display: grid; gap: .75rem; min-width: 0; padding-top: 1.5rem; border-top: 1px solid var(--sg-border-default); }
+.sg-inst-manage__block:first-child { padding-top: 0; border-top: 0; }
+.sg-inst-manage__block > h2, .sg-inst-manage__head h2 { margin: 0; font-size: 1.125rem; line-height: 1.75rem; font-weight: 600; color: var(--sg-text-primary); }
+.sg-inst-manage__head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .5rem 1rem; }
+.sg-inst-manage__status { display: flex; flex-wrap: wrap; align-items: flex-end; gap: .75rem; max-width: 36rem; }
+.sg-inst-manage__status .sg-field { flex: 1 1 14rem; min-width: 0; }
+.sg-inst-manage__status + .sg-inst-detail__note { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem; }
+.sg-inst-manage__meter { margin: 0; }
+.sg-inst-manage__text { margin: .375rem 0 0; max-width: 68ch; font-size: .875rem; line-height: 1.375rem; color: var(--sg-text-secondary); overflow-wrap: anywhere; }
+.sg-inst-manage__flags { display: flex; flex-wrap: wrap; gap: .375rem; margin: .5rem 0 0; }
+.sg-inst-manage__actions { display: flex; flex-wrap: wrap; gap: .25rem .5rem; margin: .5rem 0 0 -.5rem; }
+.sg-inst-manage__actions .sg-btn--secondary { margin-left: .5rem; }
+.sg-inst-manage__sub { margin: 1rem 0 0; font-size: 1rem; line-height: 1.5rem; font-weight: 600; color: var(--sg-text-primary); }
+.sg-inst-manage__block .sg-list__title { overflow-wrap: anywhere; }
+.sg-inst-flag { align-items: center; gap: .25rem; }
+.sg-inst-flag .sg-icon { width: .875rem; height: .875rem; }
+.sg-inst-flag--warn { border-color: currentColor; color: var(--color-warning-700); }   /* text says 'Lewat target' too, never colour alone */
+
+/* dialog forms: the action row sits flush with the dialog edges like .sg-dialog__foot */
+.sg-inst-dialog-form .sg-dialog__foot { margin: .5rem -1.25rem -1.25rem; }
+.sg-inst-dialog-form .sg-check strong { font-weight: 600; }
+
+/* ── verification status: summary facts + per-document results ── */
+.sg-inst-verify--status { grid-template-columns: minmax(0, 1fr); }   /* long content never widens the column at 360px */
+.sg-inst-verify__facts { margin-top: .25rem; }
+.sg-inst-verify__num { font-variant-numeric: tabular-nums; }
+.sg-inst-docs { margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--sg-border-default); }
+.sg-inst-docs__item { display: grid; gap: .75rem; padding-block: 1.25rem; border-bottom: 1px solid var(--sg-border-default); min-width: 0; }
+.sg-inst-docs__head { display: flex; flex-wrap: wrap; align-items: flex-start; justify-content: space-between; gap: .5rem 1rem; }
+.sg-inst-docs__who { display: grid; gap: .125rem; flex: 1 1 14rem; min-width: 0; }
+.sg-inst-docs__who h3 { margin: 0; font-size: 1rem; line-height: 1.5rem; font-weight: 600; color: var(--sg-text-primary); overflow-wrap: anywhere; }
+.sg-inst-docs__file { margin: 0; font-size: .875rem; line-height: 1.25rem; color: var(--sg-text-secondary); overflow-wrap: anywhere; }
+.sg-inst-docs__score { margin: 0; font-size: .875rem; line-height: 1.25rem; color: var(--sg-text-secondary); font-variant-numeric: tabular-nums; }
+.sg-inst-docs__score strong { margin-left: .25rem; font-weight: 600; color: var(--sg-text-primary); }
+.sg-inst-docs__result { display: grid; gap: .5rem; padding-top: .75rem; border-top: 1px solid var(--sg-border-default); min-width: 0; }
+.sg-inst-docs__result h4 { margin: 0; font-size: .9375rem; line-height: 1.375rem; font-weight: 600; color: var(--sg-text-primary); }
+.sg-inst-docs__text { margin: 0; max-width: 68ch; font-size: .875rem; line-height: 1.375rem; color: var(--sg-text-primary); overflow-wrap: anywhere; }
+.sg-inst-docs__label { margin: .25rem 0 0; font-size: .875rem; line-height: 1.25rem; font-weight: 600; color: var(--sg-text-primary); }
+.sg-inst-docs__flags { display: grid; gap: .375rem; margin: 0; padding: 0; list-style: none; }
+.sg-inst-docs__flags li { display: flex; flex-wrap: wrap; align-items: baseline; gap: .25rem .5rem; font-size: .875rem; line-height: 1.25rem; color: var(--sg-text-primary); overflow-wrap: anywhere; }
+.sg-inst-docs__data { display: grid; gap: .25rem; margin: 0; }
+.sg-inst-docs__data > div { display: flex; flex-wrap: wrap; gap: 0 .5rem; font-size: .875rem; line-height: 1.25rem; min-width: 0; }
+.sg-inst-docs__data dt { font-weight: 600; color: var(--sg-text-primary); }
+.sg-inst-docs__data dt::after { content: ":"; }
+.sg-inst-docs__data dd { margin: 0; color: var(--sg-text-secondary); overflow-wrap: anywhere; min-width: 0; }
+.sg-inst-docs__meta { margin: 0; font-size: .75rem; line-height: 1rem; color: var(--sg-text-tertiary); font-variant-numeric: tabular-nums; }

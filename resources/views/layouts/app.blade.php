@@ -7,7 +7,8 @@
 <body class="font-sans antialiased">
     <a href="#main" class="sg-skip">Lewati ke konten utama</a>
 
-    <div class="min-h-screen bg-gray-50">
+    {{-- kolom flex: main mengisi sisa tinggi sehingga footer menempel di bawah halaman pendek (phase 29 F, C4) --}}
+    <div class="sg-shell bg-gray-50">
         @include('components.navbar')
 
         <main id="main" tabindex="-1" class="sg-main">

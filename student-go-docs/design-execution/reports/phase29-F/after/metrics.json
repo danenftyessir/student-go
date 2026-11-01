@@ -1,0 +1,714 @@
+{
+ "guest:/contact": {
+  "status": 200,
+  "widths": {
+   "360": {
+    "sw": 360,
+    "iw": 360,
+    "footerBottom": 1404,
+    "docH": 1404,
+    "gapBelowFooter": 0,
+    "emptyImgs": [],
+    "emptyTitles": []
+   },
+   "390": {
+    "sw": 390,
+    "iw": 390,
+    "footerBottom": 1356,
+    "docH": 1356,
+    "gapBelowFooter": 0,
+    "emptyImgs": [],
+    "emptyTitles": []
+   },
+   "768": {
+    "sw": 768,
+    "iw": 768,
+    "footerBottom": 1136,
+    "docH": 1136,
+    "gapBelowFooter": 0,
+    "emptyImgs": [],
+    "emptyTitles": []
+   },
+   "1440": {
+    "sw": 1440,
+    "iw": 1440,
+    "footerBottom": 900,
+    "docH": 900,
+    "gapBelowFooter": 0,
+    "emptyImgs": [],
+    "emptyTitles": []
+   }
+  }
+ },
+ "guest:/halaman-tidak-ada-29f": {
+  "status": 404,
+  "widths": {
+   "360": {
+    "sw": 360,
+    "iw": 360,
+    "footerBottom": 929,
+    "docH": 929,
+    "gapBelowFooter": 0,
+    "emptyImgs": [],
+    "emptyTitles": []
+   },
+   "390": {
+    "sw": 390,
+    "iw": 390,
+    "footerBottom": 929,
+    "docH": 929,
+    "gapBelowFooter": 0,
+    "emptyImgs": [],
+    "emptyTitles": []
+   },
+   "768": {
+    "sw": 768,
+    "iw": 768,
+    "footerBottom": 844,
+    "docH": 844,
+    "gapBelowFooter": 0,
+    "emptyImgs": [],
+    "emptyTitles": []
+   },
+   "1440": {
+    "sw": 1440,
+    "iw": 1440,
+    "footerBottom": 900,
+    "docH": 900,
+    "gapBelowFooter": 0,
+    "emptyImgs": [],
+    "emptyTitles": []
+   }
+  }
+ },
+ "guest:/about": {
+  "status": 200,
+  "widths": {
+   "360": {
+    "sw": 360,
+    "iw": 360,
+    "footerBottom": 5058,
+    "docH": 5058,
+    "gapBelowFooter": 0,
+    "emptyImgs": [],
+    "emptyTitles": []
+   },
+   "390": {
+    "sw": 390,
+    "iw": 390,
+    "footerBottom": 4929,
+    "docH": 4929,
+    "gapBelowFooter": 0,
+    "emptyImgs": [],
+    "emptyTitles": []
+   },
+   "768": {
+    "sw": 768,
+    "iw": 768,
+    "footerBottom": 4453,
+    "docH": 4453,
+    "gapBelowFooter": 0,
+    "emptyImgs": [],
+    "emptyTitles": []
+   },
+   "1440": {
+    "sw": 1440,
+    "iw": 1440,
+    "footerBottom": 3505,
+    "docH": 3505,
+    "gapBelowFooter": 0,
+    "emptyImgs": [],
+    "emptyTitles": []
+   }
+  }
+ },
+ "guest:LOGIN_ERROR": {
+  "status": 200,
+  "widths": {
+   "360": {
+    "sw": 360,
+    "iw": 360,
+    "footerBottom": null,
+    "docH": 845,
+    "gapBelowFooter": null,
+    "emptyImgs": [],
+    "emptyTitles": []
+   },
+   "390": {
+    "sw": 390,
+    "iw": 390,
+    "footerBottom": null,
+    "docH": 845,
+    "gapBelowFooter": null,
+    "emptyImgs": [],
+    "emptyTitles": []
+   },
+   "768": {
+    "sw": 768,
+    "iw": 768,
+    "footerBottom": null,
+    "docH": 845,
+    "gapBelowFooter": null,
+    "emptyImgs": [],
+    "emptyTitles": []
+   },
+   "1440": {
+    "sw": 1440,
+    "iw": 1440,
+    "footerBottom": null,
+    "docH": 901,
+    "gapBelowFooter": null,
+    "emptyImgs": [],
+    "emptyTitles": []
+   }
+  }
+ },
+ "student:/student/wishlist": {
+  "status": 200,
+  "widths": {
+   "360": {
+    "sw": 360,
+    "iw": 360,
+    "footerBottom": 1005,
+    "docH": 1005,
+    "gapBelowFooter": 0,
+    "emptyImgs": [
+     "no-saved-projects.svg"
+    ],
+    "emptyTitles": [
+     "Belum ada masalah tersimpan"
+    ]
+   },
+   "390": {
+    "sw": 390,
+    "iw": 390,
+    "footerBottom": 1005,
+    "docH": 1005,
+    "gapBelowFooter": 0,
+    "emptyImgs": [
+     "no-saved-projects.svg"
+    ],
+    "emptyTitles": [
+     "Belum ada masalah tersimpan"
+    ]
+   },
+   "768": {
+    "sw": 768,
+    "iw": 768,
+    "footerBottom": 849,
+    "docH": 849,
+    "gapBelowFooter": 0,
+    "emptyImgs": [
+     "no-saved-projects.svg"
+    ],
+    "emptyTitles": [
+     "Belum ada masalah tersimpan"
+    ]
+   },
+   "1440": {
+    "sw": 1440,
+    "iw": 1440,
+    "footerBottom": 900,
+    "docH": 900,
+    "gapBelowFooter": 0,
+    "emptyImgs": [
+     "no-saved-projects.svg"
+    ],
+    "emptyTitles": [
+     "Belum ada masalah tersimpan"
+    ]
+   }
+  }
+ },
+ "student:/student/projects": {
+  "status": 200,
+  "widths": {
+   "360": {
+    "sw": 360,
+    "iw": 360,
+    "footerBottom": 1005,
+    "docH": 1005,
+    "gapBelowFooter": 0,
+    "emptyImgs": [
+     "no-applications.svg"
+    ],
+    "emptyTitles": [
+     "Belum ada proyek KKN"
+    ]
+   },
+   "390": {
+    "sw": 390,
+    "iw": 390,
+    "footerBottom": 1005,
+    "docH": 1005,
+    "gapBelowFooter": 0,
+    "emptyImgs": [
+     "no-applications.svg"
+    ],
+    "emptyTitles": [
+     "Belum ada proyek KKN"
+    ]
+   },
+   "768": {
+    "sw": 768,
+    "iw": 768,
+    "footerBottom": 844,
+    "docH": 844,
+    "gapBelowFooter": 0,
+    "emptyImgs": [
+     "no-applications.svg"
+    ],
+    "emptyTitles": [
+     "Belum ada proyek KKN"
+    ]
+   },
+   "1440": {
+    "sw": 1440,
+    "iw": 1440,
+    "footerBottom": 900,
+    "docH": 900,
+    "gapBelowFooter": 0,
+    "emptyImgs": [
+     "no-applications.svg"
+    ],
+    "emptyTitles": [
+     "Belum ada proyek KKN"
+    ]
+   }
+  }
+ },
+ "student:/student/friends": {
+  "status": 200,
+  "widths": {
+   "360": {
+    "sw": 360,
+    "iw": 360,
+    "footerBottom": 967,
+    "docH": 967,
+    "gapBelowFooter": 0,
+    "emptyImgs": [],
+    "emptyTitles": [
+     "Tidak ada permintaan masuk"
+    ]
+   },
+   "390": {
+    "sw": 390,
+    "iw": 390,
+    "footerBottom": 947,
+    "docH": 947,
+    "gapBelowFooter": 0,
+    "emptyImgs": [],
+    "emptyTitles": [
+     "Tidak ada permintaan masuk"
+    ]
+   },
+   "768": {
+    "sw": 768,
+    "iw": 768,
+    "footerBottom": 844,
+    "docH": 844,
+    "gapBelowFooter": 0,
+    "emptyImgs": [],
+    "emptyTitles": [
+     "Tidak ada permintaan masuk"
+    ]
+   },
+   "1440": {
+    "sw": 1440,
+    "iw": 1440,
+    "footerBottom": 900,
+    "docH": 900,
+    "gapBelowFooter": 0,
+    "emptyImgs": [],
+    "emptyTitles": [
+     "Tidak ada permintaan masuk"
+    ]
+   }
+  }
+ },
+ "student:/student/jobs": {
+  "status": 200,
+  "widths": {
+   "360": {
+    "sw": 360,
+    "iw": 360,
+    "footerBottom": 5026,
+    "docH": 5026,
+    "gapBelowFooter": 0,
+    "emptyImgs": [],
+    "emptyTitles": []
+   },
+   "390": {
+    "sw": 390,
+    "iw": 390,
+    "footerBottom": 4888,
+    "docH": 4888,
+    "gapBelowFooter": 0,
+    "emptyImgs": [],
+    "emptyTitles": []
+   },
+   "768": {
+    "sw": 768,
+    "iw": 768,
+    "footerBottom": 3842,
+    "docH": 3842,
+    "gapBelowFooter": 0,
+    "emptyImgs": [],
+    "emptyTitles": []
+   },
+   "1440": {
+    "sw": 1440,
+    "iw": 1440,
+    "footerBottom": 2607,
+    "docH": 2607,
+    "gapBelowFooter": 0,
+    "emptyImgs": [],
+    "emptyTitles": []
+   }
+  }
+ },
+ "student:/student/jobs/saved": {
+  "status": 200,
+  "widths": {
+   "360": {
+    "sw": 360,
+    "iw": 360,
+    "footerBottom": 1043,
+    "docH": 1043,
+    "gapBelowFooter": 0,
+    "emptyImgs": [
+     "no-saved-projects.svg"
+    ],
+    "emptyTitles": [
+     "Belum ada lowongan tersimpan"
+    ]
+   },
+   "390": {
+    "sw": 390,
+    "iw": 390,
+    "footerBottom": 1043,
+    "docH": 1043,
+    "gapBelowFooter": 0,
+    "emptyImgs": [
+     "no-saved-projects.svg"
+    ],
+    "emptyTitles": [
+     "Belum ada lowongan tersimpan"
+    ]
+   },
+   "768": {
+    "sw": 768,
+    "iw": 768,
+    "footerBottom": 867,
+    "docH": 867,
+    "gapBelowFooter": 0,
+    "emptyImgs": [
+     "no-saved-projects.svg"
+    ],
+    "emptyTitles": [
+     "Belum ada lowongan tersimpan"
+    ]
+   },
+   "1440": {
+    "sw": 1440,
+    "iw": 1440,
+    "footerBottom": 900,
+    "docH": 900,
+    "gapBelowFooter": 0,
+    "emptyImgs": [
+     "no-saved-projects.svg"
+    ],
+    "emptyTitles": [
+     "Belum ada lowongan tersimpan"
+    ]
+   }
+  }
+ },
+ "student:/student/browse-problems": {
+  "status": 200,
+  "widths": {
+   "360": {
+    "sw": 360,
+    "iw": 360,
+    "footerBottom": 5105,
+    "docH": 5105,
+    "gapBelowFooter": 0,
+    "emptyImgs": [],
+    "emptyTitles": []
+   },
+   "390": {
+    "sw": 390,
+    "iw": 390,
+    "footerBottom": 5013,
+    "docH": 5013,
+    "gapBelowFooter": 0,
+    "emptyImgs": [],
+    "emptyTitles": []
+   },
+   "768": {
+    "sw": 768,
+    "iw": 768,
+    "footerBottom": 4161,
+    "docH": 4161,
+    "gapBelowFooter": 0,
+    "emptyImgs": [],
+    "emptyTitles": []
+   },
+   "1440": {
+    "sw": 1440,
+    "iw": 1440,
+    "footerBottom": 2297,
+    "docH": 2297,
+    "gapBelowFooter": 0,
+    "emptyImgs": [],
+    "emptyTitles": []
+   }
+  }
+ },
+ "institution:/institution/problems": {
+  "status": 200,
+  "widths": {
+   "360": {
+    "sw": 360,
+    "iw": 360,
+    "footerBottom": 1935,
+    "docH": 1935,
+    "gapBelowFooter": 0,
+    "emptyImgs": [],
+    "emptyTitles": []
+   },
+   "390": {
+    "sw": 390,
+    "iw": 390,
+    "footerBottom": 1867,
+    "docH": 1867,
+    "gapBelowFooter": 0,
+    "emptyImgs": [],
+    "emptyTitles": []
+   },
+   "768": {
+    "sw": 768,
+    "iw": 768,
+    "footerBottom": 1050,
+    "docH": 1050,
+    "gapBelowFooter": 0,
+    "emptyImgs": [],
+    "emptyTitles": []
+   },
+   "1440": {
+    "sw": 1440,
+    "iw": 1440,
+    "footerBottom": 950,
+    "docH": 950,
+    "gapBelowFooter": 0,
+    "emptyImgs": [],
+    "emptyTitles": []
+   }
+  }
+ },
+ "institution:/institution/projects": {
+  "status": 200,
+  "widths": {
+   "360": {
+    "sw": 360,
+    "iw": 360,
+    "footerBottom": 4395,
+    "docH": 4395,
+    "gapBelowFooter": 0,
+    "emptyImgs": [],
+    "emptyTitles": []
+   },
+   "390": {
+    "sw": 390,
+    "iw": 390,
+    "footerBottom": 4299,
+    "docH": 4299,
+    "gapBelowFooter": 0,
+    "emptyImgs": [],
+    "emptyTitles": []
+   },
+   "768": {
+    "sw": 768,
+    "iw": 768,
+    "footerBottom": 2478,
+    "docH": 2478,
+    "gapBelowFooter": 0,
+    "emptyImgs": [],
+    "emptyTitles": []
+   },
+   "1440": {
+    "sw": 1440,
+    "iw": 1440,
+    "footerBottom": 1802,
+    "docH": 1802,
+    "gapBelowFooter": 0,
+    "emptyImgs": [],
+    "emptyTitles": []
+   }
+  }
+ },
+ "institution:/institution/reviews": {
+  "status": 200,
+  "widths": {
+   "360": {
+    "sw": 360,
+    "iw": 360,
+    "footerBottom": 2214,
+    "docH": 2214,
+    "gapBelowFooter": 0,
+    "emptyImgs": [],
+    "emptyTitles": []
+   },
+   "390": {
+    "sw": 390,
+    "iw": 390,
+    "footerBottom": 2146,
+    "docH": 2146,
+    "gapBelowFooter": 0,
+    "emptyImgs": [],
+    "emptyTitles": []
+   },
+   "768": {
+    "sw": 768,
+    "iw": 768,
+    "footerBottom": 1639,
+    "docH": 1639,
+    "gapBelowFooter": 0,
+    "emptyImgs": [],
+    "emptyTitles": []
+   },
+   "1440": {
+    "sw": 1440,
+    "iw": 1440,
+    "footerBottom": 1571,
+    "docH": 1571,
+    "gapBelowFooter": 0,
+    "emptyImgs": [],
+    "emptyTitles": []
+   }
+  }
+ },
+ "institution:/institution/dashboard": {
+  "status": 200,
+  "widths": {
+   "360": {
+    "sw": 360,
+    "iw": 360,
+    "footerBottom": 2954,
+    "docH": 2954,
+    "gapBelowFooter": 0,
+    "emptyImgs": [],
+    "emptyTitles": []
+   },
+   "390": {
+    "sw": 390,
+    "iw": 390,
+    "footerBottom": 2910,
+    "docH": 2910,
+    "gapBelowFooter": 0,
+    "emptyImgs": [],
+    "emptyTitles": []
+   },
+   "768": {
+    "sw": 768,
+    "iw": 768,
+    "footerBottom": 2118,
+    "docH": 2118,
+    "gapBelowFooter": 0,
+    "emptyImgs": [],
+    "emptyTitles": []
+   },
+   "1440": {
+    "sw": 1440,
+    "iw": 1440,
+    "footerBottom": 1717,
+    "docH": 1717,
+    "gapBelowFooter": 0,
+    "emptyImgs": [],
+    "emptyTitles": []
+   }
+  }
+ },
+ "company:/company/dashboard": {
+  "status": 200,
+  "widths": {
+   "360": {
+    "sw": 360,
+    "iw": 360,
+    "footerBottom": 4190,
+    "docH": 4190,
+    "gapBelowFooter": 0,
+    "emptyImgs": [],
+    "emptyTitles": []
+   },
+   "390": {
+    "sw": 390,
+    "iw": 390,
+    "footerBottom": 4060,
+    "docH": 4060,
+    "gapBelowFooter": 0,
+    "emptyImgs": [],
+    "emptyTitles": []
+   },
+   "768": {
+    "sw": 768,
+    "iw": 768,
+    "footerBottom": 3032,
+    "docH": 3032,
+    "gapBelowFooter": 0,
+    "emptyImgs": [],
+    "emptyTitles": []
+   },
+   "1440": {
+    "sw": 1440,
+    "iw": 1440,
+    "footerBottom": 2052,
+    "docH": 2052,
+    "gapBelowFooter": 0,
+    "emptyImgs": [],
+    "emptyTitles": []
+   }
+  }
+ },
+ "company:/company/jobs": {
+  "status": 200,
+  "widths": {
+   "360": {
+    "sw": 360,
+    "iw": 360,
+    "footerBottom": 3191,
+    "docH": 3191,
+    "gapBelowFooter": 0,
+    "emptyImgs": [],
+    "emptyTitles": []
+   },
+   "390": {
+    "sw": 390,
+    "iw": 390,
+    "footerBottom": 3103,
+    "docH": 3103,
+    "gapBelowFooter": 0,
+    "emptyImgs": [],
+    "emptyTitles": []
+   },
+   "768": {
+    "sw": 768,
+    "iw": 768,
+    "footerBottom": 1674,
+    "docH": 1674,
+    "gapBelowFooter": 0,
+    "emptyImgs": [],
+    "emptyTitles": []
+   },
+   "1440": {
+    "sw": 1440,
+    "iw": 1440,
+    "footerBottom": 1310,
+    "docH": 1310,
+    "gapBelowFooter": 0,
+    "emptyImgs": [],
+    "emptyTitles": []
+   }
+  }
+ }
+}

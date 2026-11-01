@@ -307,6 +307,10 @@
 .sg-mobile-nav__account .sg-menu__title, .sg-mobile-nav__account .sg-menu__meta { min-width: 0; }
 .sg-mobile-nav__actions { display: grid; grid-template-columns: 1fr 1fr; gap: .5rem; padding: .75rem var(--sg-gutter) 1rem; }
 
+/* ── Shell column: main fills the remaining height so the footer sits at the bottom of short pages (phase 29 F, C4) ── */
+.sg-shell { display: flex; flex-direction: column; min-height: 100vh; min-height: 100dvh; }
+.sg-shell > .sg-main { flex: 1 0 auto; min-width: 0; }
+
 /* ── Skip link target, floating "back to top" ── */
 .sg-main:focus { outline: none; }
 .sg-scrolltop { position: fixed; right: 1rem; bottom: 1rem; z-index: 40; }

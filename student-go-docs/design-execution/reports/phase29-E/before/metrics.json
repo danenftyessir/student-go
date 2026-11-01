@@ -1,0 +1,208 @@
+{
+ "public-1-360": {
+  "scrollWidth": 360,
+  "innerWidth": 360,
+  "h1": 1,
+  "styleBlocksInMain": 1,
+  "heroPhoto": true,
+  "title": "Koperasi Tani Makmur Jaya - Profil Perusahaan — Student Go",
+  "status": 200,
+  "overflow": false
+ },
+ "public-77-360": {
+  "scrollWidth": 360,
+  "innerWidth": 360,
+  "h1": 1,
+  "styleBlocksInMain": 1,
+  "heroPhoto": true,
+  "title": "BUMDES Usaha Maju - Profil Perusahaan — Student Go",
+  "status": 200,
+  "overflow": false
+ },
+ "public-120-360": {
+  "scrollWidth": 360,
+  "innerWidth": 360,
+  "h1": 1,
+  "styleBlocksInMain": 1,
+  "heroPhoto": true,
+  "title": "Perkebunan Durian Medan - Profil Perusahaan — Student Go",
+  "status": 200,
+  "overflow": false
+ },
+ "public-1-390": {
+  "scrollWidth": 390,
+  "innerWidth": 390,
+  "h1": 1,
+  "styleBlocksInMain": 1,
+  "heroPhoto": true,
+  "title": "Koperasi Tani Makmur Jaya - Profil Perusahaan — Student Go",
+  "status": 200,
+  "overflow": false
+ },
+ "public-77-390": {
+  "scrollWidth": 390,
+  "innerWidth": 390,
+  "h1": 1,
+  "styleBlocksInMain": 1,
+  "heroPhoto": true,
+  "title": "BUMDES Usaha Maju - Profil Perusahaan — Student Go",
+  "status": 200,
+  "overflow": false
+ },
+ "public-120-390": {
+  "scrollWidth": 390,
+  "innerWidth": 390,
+  "h1": 1,
+  "styleBlocksInMain": 1,
+  "heroPhoto": true,
+  "title": "Perkebunan Durian Medan - Profil Perusahaan — Student Go",
+  "status": 200,
+  "overflow": false
+ },
+ "public-1-768": {
+  "scrollWidth": 768,
+  "innerWidth": 768,
+  "h1": 1,
+  "styleBlocksInMain": 1,
+  "heroPhoto": true,
+  "title": "Koperasi Tani Makmur Jaya - Profil Perusahaan — Student Go",
+  "status": 200,
+  "overflow": false
+ },
+ "public-77-768": {
+  "scrollWidth": 768,
+  "innerWidth": 768,
+  "h1": 1,
+  "styleBlocksInMain": 1,
+  "heroPhoto": true,
+  "title": "BUMDES Usaha Maju - Profil Perusahaan — Student Go",
+  "status": 200,
+  "overflow": false
+ },
+ "public-120-768": {
+  "scrollWidth": 768,
+  "innerWidth": 768,
+  "h1": 1,
+  "styleBlocksInMain": 1,
+  "heroPhoto": true,
+  "title": "Perkebunan Durian Medan - Profil Perusahaan — Student Go",
+  "status": 200,
+  "overflow": false
+ },
+ "public-1-1440": {
+  "scrollWidth": 1440,
+  "innerWidth": 1440,
+  "h1": 1,
+  "styleBlocksInMain": 1,
+  "heroPhoto": true,
+  "title": "Koperasi Tani Makmur Jaya - Profil Perusahaan — Student Go",
+  "status": 200,
+  "overflow": false
+ },
+ "public-77-1440": {
+  "scrollWidth": 1440,
+  "innerWidth": 1440,
+  "h1": 1,
+  "styleBlocksInMain": 1,
+  "heroPhoto": true,
+  "title": "BUMDES Usaha Maju - Profil Perusahaan — Student Go",
+  "status": 200,
+  "overflow": false
+ },
+ "public-120-1440": {
+  "scrollWidth": 1440,
+  "innerWidth": 1440,
+  "h1": 1,
+  "styleBlocksInMain": 1,
+  "heroPhoto": true,
+  "title": "Perkebunan Durian Medan - Profil Perusahaan — Student Go",
+  "status": 200,
+  "overflow": false
+ },
+ "edit-618-360": {
+  "scrollWidth": 475,
+  "innerWidth": 360,
+  "h1": 1,
+  "styleBlocksInMain": 1,
+  "heroPhoto": true,
+  "title": "Edit Lowongan Pekerjaan — Student Go",
+  "status": 200,
+  "overflow": true
+ },
+ "edit-618-390": {
+  "scrollWidth": 490,
+  "innerWidth": 390,
+  "h1": 1,
+  "styleBlocksInMain": 1,
+  "heroPhoto": true,
+  "title": "Edit Lowongan Pekerjaan — Student Go",
+  "status": 200,
+  "overflow": true
+ },
+ "edit-618-768": {
+  "scrollWidth": 768,
+  "innerWidth": 768,
+  "h1": 1,
+  "styleBlocksInMain": 1,
+  "heroPhoto": true,
+  "title": "Edit Lowongan Pekerjaan — Student Go",
+  "status": 200,
+  "overflow": false
+ },
+ "edit-618-1440": {
+  "scrollWidth": 1440,
+  "innerWidth": 1440,
+  "h1": 1,
+  "styleBlocksInMain": 1,
+  "heroPhoto": true,
+  "title": "Edit Lowongan Pekerjaan — Student Go",
+  "status": 200,
+  "overflow": false
+ },
+ "edit_formData": {
+  "title": "UMKM Mentor - Branding &amp; Business Development",
+  "department": "Economic Empowerment",
+  "location": "Bekasi",
+  "job_type": "Internship",
+  "status": "posted",
+  "job_category_id": "21",
+  "salary_range": "IDR2000000.00 - IDR3500000.00",
+  "description": "Mendampingi UMKM lokal untuk mengembangkan branding, packaging, dan strategi bisnis. Membantu UMKM naik kelas dari produk rumahan menjadi produk yang marketable.",
+  "responsibilities": "- Assessment bisnis UMKM (produk, target market, kompetitor)\n- Membantu design packaging dan branding UMKM\n- Membuat business plan dan pricing strategy\n- Training digital marketing dan social media untuk UMKM\n- Membantu akses ke marketplace atau koperasi\n- Monitoring sales dan feedback pelanggan",
+  "qualifications": "WAJIB:\n- Portfolio branding atau business development projects\n- Skill: business analysis, marketing strategy, branding design\n- Komunikatif dan persuasif dalam mentoring UMKM\n- Sabar dan empati terhadap pelaku usaha kecil\n\nDINILAI PLUS:\n- Pengalaman berbisnis sendiri atau di startup\n- Portfolio packaging design atau brand identity\n- Skill desain grafis (Canva, Photoshop, Illustrator)\n- Pemahaman tentang marketplace dan e-commerce",
+  "skills": [
+   "Business Development",
+   "Branding",
+   "Marketing Strategy",
+   "Packaging Design",
+   "Digital Marketing",
+   "Mentoring",
+   "Financial Planning"
+  ],
+  "sdg_alignment": [
+   1,
+   8,
+   10
+  ],
+  "impact_metrics": "Target: 10 UMKM ter-mentoring, 5 UMKM rebranding packaging, 3 UMKM masuk marketplace, peningkatan omzet rata-rata 30%",
+  "success_criteria": "UMKM menunjukkan peningkatan branding dan sales, serta mampu mengelola bisnis lebih terstruktur"
+ },
+ "edit_payload_keys": [
+  "_method",
+  "_token",
+  "department",
+  "description",
+  "impact_metrics",
+  "job_category_id",
+  "job_type",
+  "location",
+  "qualifications",
+  "responsibilities",
+  "salary_range",
+  "sdg_alignment[]",
+  "skills[]",
+  "status",
+  "success_criteria",
+  "title"
+ ]
+}

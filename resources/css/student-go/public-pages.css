@@ -165,3 +165,18 @@
 
 .sg-org__aside { align-self: start; min-width: 0; padding-top: 1rem; border-top: 2px solid var(--sg-text-primary); }
 .sg-org__aside .sg-dl dd { overflow-wrap: anywhere; }
+
+/* phase 29 paket G (D-45): peta wilayah di profil publik instansi. svg inline tanpa <style> bawaannya,
+   jadi warna di sini dari token; label koordinat disembunyikan karena terlalu kecil di kolom samping. */
+.sg-region-map { margin-top: 2rem; }
+.sg-region-map__figure { margin: 0 0 .75rem; }
+.sg-region-map__svg { display: block; width: 100%; height: auto; }
+.sg-region-map__svg .g { fill: none; stroke: var(--sg-border-default); stroke-width: 1; vector-effect: non-scaling-stroke; }
+.sg-region-map__svg .eq { stroke-dasharray: 3 4; }
+.sg-region-map__svg .t { display: none; }
+.sg-region-map__svg .sg-region { fill: var(--sg-brand-tint); stroke: var(--sg-brand); stroke-width: .8; stroke-linejoin: round; vector-effect: non-scaling-stroke; }
+.sg-region-map__svg .sg-region.is-active { fill: var(--sg-brand); stroke: var(--sg-brand); }
+.sg-region-map__list { margin: 0; padding: 0; list-style: none; font-size: .875rem; line-height: 1.25rem; color: var(--sg-text-primary); }
+.sg-region-map__list > li { display: flex; align-items: center; gap: .5rem; padding-block: .25rem; }
+.sg-region-map__key { flex: none; width: .75rem; height: .75rem; border-radius: 2px; background: var(--sg-brand); }
+.sg-region-map__home { color: var(--sg-text-secondary); }

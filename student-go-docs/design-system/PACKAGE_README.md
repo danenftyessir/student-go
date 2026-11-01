@@ -1,6 +1,6 @@
-# Student Go — redesign asset package
+# Student Go — design asset package
 
-Design system, original SVG graphics, local fonts, icons and a photo-fetch script for the Student Go redesign, built against the design audit (`Student_Go_Audit_Desain_ID 1.pdf`). The folder layout mirrors the Laravel project, so you can copy it over the project root.
+Design system, original SVG graphics, local fonts, icons and a photo-fetch script for the Student Go design, built against the design audit (`Student_Go_Audit_Desain_ID 1.pdf`). The folder layout mirrors the Laravel project, so you can copy it over the project root.
 
 **Direction:** *Ruang Kerja* (workbench: neutral surfaces, strong type, tables and lists, one brand colour) as the foundation, with a restrained *Catatan Lapangan* (field notes) layer for editorial pages: a reading serif, a single earth accent, route-line motifs, coordinate labels, documentary photography.
 
@@ -28,7 +28,7 @@ Design system, original SVG graphics, local fonts, icons and a photo-fetch scrip
 
 ## What this package is not
 
-It is not the redesigned application. No Blade view, layout, controller or route was changed, because the session that built it could not reach the Student Go project folder, and it never ran inside the app. The 60 photographs are selected and license-checked page by page but **not downloaded or looked at**. Both limits and the next steps are in `docs/INTEGRATION.md` section 0.
+It is not the designed application. No Blade view, layout, controller or route was changed, because the session that built it could not reach the Student Go project folder, and it never ran inside the app. The 60 photographs are selected and license-checked page by page but **not downloaded or looked at**. Both limits and the next steps are in `docs/INTEGRATION.md` section 0.
 
 ## Quick start
 

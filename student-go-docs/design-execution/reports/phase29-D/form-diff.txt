@@ -1,0 +1,1261 @@
+## before manage-118
+{
+ "fetch_calls": [
+  "/institution/projects/118/milestones/${milestoneId}",
+  "/institution/projects/118/status"
+ ],
+ "fetch_methods": [
+  "POST",
+  "PUT",
+  "DELETE"
+ ],
+ "form_action_js": [
+  "/institution/projects/118/reports/${reportId}/approve",
+  "/institution/projects/118/reports/${reportId}/reject"
+ ],
+ "forms": {
+  "dialogs": [],
+  "fields": [
+   {
+    "form": null,
+    "id": "project-status",
+    "name": null,
+    "required": false,
+    "tag": "select",
+    "type": "select-one",
+    "value": null
+   },
+   {
+    "form": "http://127.0.0.1:8000/institution/projects/118/milestone",
+    "id": null,
+    "name": "title",
+    "required": true,
+    "tag": "input",
+    "type": "text",
+    "value": null
+   },
+   {
+    "form": "http://127.0.0.1:8000/institution/projects/118/milestone",
+    "id": null,
+    "name": "description",
+    "required": false,
+    "tag": "textarea",
+    "type": "textarea",
+    "value": null
+   },
+   {
+    "form": "http://127.0.0.1:8000/institution/projects/118/milestone",
+    "id": null,
+    "name": "target_date",
+    "required": true,
+    "tag": "input",
+    "type": "date",
+    "value": null
+   },
+   {
+    "form": "http://127.0.0.1:8000/institution/projects/118/milestone",
+    "id": null,
+    "name": "requires_report",
+    "required": false,
+    "tag": "input",
+    "type": "hidden",
+    "value": "0"
+   },
+   {
+    "form": "http://127.0.0.1:8000/institution/projects/118/milestone",
+    "id": null,
+    "name": "requires_report",
+    "required": false,
+    "tag": "input",
+    "type": "checkbox",
+    "value": "1"
+   },
+   {
+    "form": "approve-form",
+    "id": null,
+    "name": "feedback",
+    "required": false,
+    "tag": "textarea",
+    "type": "textarea",
+    "value": null
+   },
+   {
+    "form": "reject-form",
+    "id": null,
+    "name": "feedback",
+    "required": true,
+    "tag": "textarea",
+    "type": "textarea",
+    "value": null
+   },
+   {
+    "form": "edit-milestone-form",
+    "id": "edit-milestone-id",
+    "name": null,
+    "required": false,
+    "tag": "input",
+    "type": "hidden",
+    "value": ""
+   },
+   {
+    "form": "edit-milestone-form",
+    "id": "edit-milestone-title",
+    "name": "title",
+    "required": true,
+    "tag": "input",
+    "type": "text",
+    "value": null
+   },
+   {
+    "form": "edit-milestone-form",
+    "id": "edit-milestone-description",
+    "name": "description",
+    "required": false,
+    "tag": "textarea",
+    "type": "textarea",
+    "value": null
+   },
+   {
+    "form": "edit-milestone-form",
+    "id": "edit-milestone-target-date",
+    "name": "target_date",
+    "required": true,
+    "tag": "input",
+    "type": "date",
+    "value": null
+   },
+   {
+    "form": "edit-milestone-form",
+    "id": "edit-milestone-status",
+    "name": "status",
+    "required": false,
+    "tag": "select",
+    "type": "select-one",
+    "value": null
+   },
+   {
+    "form": "edit-milestone-form",
+    "id": "edit-milestone-requires-report",
+    "name": "requires_report",
+    "required": false,
+    "tag": "input",
+    "type": "checkbox",
+    "value": "1"
+   }
+  ],
+  "forms": [
+   {
+    "action": "http://127.0.0.1:8000/institution/projects/118/milestone",
+    "csrf": true,
+    "enctype": null,
+    "id": null,
+    "method": "POST",
+    "onsubmit": null,
+    "spoof": null
+   },
+   {
+    "action": null,
+    "csrf": true,
+    "enctype": null,
+    "id": "approve-form",
+    "method": "POST",
+    "onsubmit": null,
+    "spoof": null
+   },
+   {
+    "action": null,
+    "csrf": true,
+    "enctype": null,
+    "id": "reject-form",
+    "method": "POST",
+    "onsubmit": null,
+    "spoof": null
+   },
+   {
+    "action": null,
+    "csrf": false,
+    "enctype": null,
+    "id": "edit-milestone-form",
+    "method": null,
+    "onsubmit": "yes",
+    "spoof": null
+   }
+  ],
+  "selects": [
+   {
+    "id": "project-status",
+    "options": [
+     "planning",
+     "active",
+     "review",
+     "completed",
+     "cancelled"
+    ]
+   },
+   {
+    "id": "edit-milestone-status",
+    "options": [
+     "pending",
+     "in_progress",
+     "completed"
+    ]
+   }
+  ]
+ }
+}
+
+## before manage-188
+{
+ "fetch_calls": [
+  "/institution/projects/188/milestones/${milestoneId}",
+  "/institution/projects/188/status"
+ ],
+ "fetch_methods": [
+  "POST",
+  "PUT",
+  "DELETE"
+ ],
+ "form_action_js": [
+  "/institution/projects/188/reports/${reportId}/approve",
+  "/institution/projects/188/reports/${reportId}/reject"
+ ],
+ "forms": {
+  "dialogs": [],
+  "fields": [
+   {
+    "form": null,
+    "id": "project-status",
+    "name": null,
+    "required": false,
+    "tag": "select",
+    "type": "select-one",
+    "value": null
+   },
+   {
+    "form": "http://127.0.0.1:8000/institution/projects/188/milestone",
+    "id": null,
+    "name": "title",
+    "required": true,
+    "tag": "input",
+    "type": "text",
+    "value": null
+   },
+   {
+    "form": "http://127.0.0.1:8000/institution/projects/188/milestone",
+    "id": null,
+    "name": "description",
+    "required": false,
+    "tag": "textarea",
+    "type": "textarea",
+    "value": null
+   },
+   {
+    "form": "http://127.0.0.1:8000/institution/projects/188/milestone",
+    "id": null,
+    "name": "target_date",
+    "required": true,
+    "tag": "input",
+    "type": "date",
+    "value": null
+   },
+   {
+    "form": "http://127.0.0.1:8000/institution/projects/188/milestone",
+    "id": null,
+    "name": "requires_report",
+    "required": false,
+    "tag": "input",
+    "type": "hidden",
+    "value": "0"
+   },
+   {
+    "form": "http://127.0.0.1:8000/institution/projects/188/milestone",
+    "id": null,
+    "name": "requires_report",
+    "required": false,
+    "tag": "input",
+    "type": "checkbox",
+    "value": "1"
+   },
+   {
+    "form": "approve-form",
+    "id": null,
+    "name": "feedback",
+    "required": false,
+    "tag": "textarea",
+    "type": "textarea",
+    "value": null
+   },
+   {
+    "form": "reject-form",
+    "id": null,
+    "name": "feedback",
+    "required": true,
+    "tag": "textarea",
+    "type": "textarea",
+    "value": null
+   },
+   {
+    "form": "edit-milestone-form",
+    "id": "edit-milestone-id",
+    "name": null,
+    "required": false,
+    "tag": "input",
+    "type": "hidden",
+    "value": ""
+   },
+   {
+    "form": "edit-milestone-form",
+    "id": "edit-milestone-title",
+    "name": "title",
+    "required": true,
+    "tag": "input",
+    "type": "text",
+    "value": null
+   },
+   {
+    "form": "edit-milestone-form",
+    "id": "edit-milestone-description",
+    "name": "description",
+    "required": false,
+    "tag": "textarea",
+    "type": "textarea",
+    "value": null
+   },
+   {
+    "form": "edit-milestone-form",
+    "id": "edit-milestone-target-date",
+    "name": "target_date",
+    "required": true,
+    "tag": "input",
+    "type": "date",
+    "value": null
+   },
+   {
+    "form": "edit-milestone-form",
+    "id": "edit-milestone-status",
+    "name": "status",
+    "required": false,
+    "tag": "select",
+    "type": "select-one",
+    "value": null
+   },
+   {
+    "form": "edit-milestone-form",
+    "id": "edit-milestone-requires-report",
+    "name": "requires_report",
+    "required": false,
+    "tag": "input",
+    "type": "checkbox",
+    "value": "1"
+   }
+  ],
+  "forms": [
+   {
+    "action": "http://127.0.0.1:8000/institution/projects/188/milestone",
+    "csrf": true,
+    "enctype": null,
+    "id": null,
+    "method": "POST",
+    "onsubmit": null,
+    "spoof": null
+   },
+   {
+    "action": null,
+    "csrf": true,
+    "enctype": null,
+    "id": "approve-form",
+    "method": "POST",
+    "onsubmit": null,
+    "spoof": null
+   },
+   {
+    "action": null,
+    "csrf": true,
+    "enctype": null,
+    "id": "reject-form",
+    "method": "POST",
+    "onsubmit": null,
+    "spoof": null
+   },
+   {
+    "action": null,
+    "csrf": false,
+    "enctype": null,
+    "id": "edit-milestone-form",
+    "method": null,
+    "onsubmit": "yes",
+    "spoof": null
+   }
+  ],
+  "selects": [
+   {
+    "id": "project-status",
+    "options": [
+     "planning",
+     "active",
+     "review",
+     "completed",
+     "cancelled"
+    ]
+   },
+   {
+    "id": "edit-milestone-status",
+    "options": [
+     "pending",
+     "in_progress",
+     "completed"
+    ]
+   }
+  ]
+ }
+}
+
+## before manage-217
+{
+ "fetch_calls": [
+  "/institution/projects/217/milestones/${milestoneId}",
+  "/institution/projects/217/status"
+ ],
+ "fetch_methods": [
+  "POST",
+  "PUT",
+  "DELETE"
+ ],
+ "form_action_js": [
+  "/institution/projects/217/reports/${reportId}/approve",
+  "/institution/projects/217/reports/${reportId}/reject"
+ ],
+ "forms": {
+  "dialogs": [],
+  "fields": [
+   {
+    "form": null,
+    "id": "project-status",
+    "name": null,
+    "required": false,
+    "tag": "select",
+    "type": "select-one",
+    "value": null
+   },
+   {
+    "form": "http://127.0.0.1:8000/institution/projects/217/milestone",
+    "id": null,
+    "name": "title",
+    "required": true,
+    "tag": "input",
+    "type": "text",
+    "value": null
+   },
+   {
+    "form": "http://127.0.0.1:8000/institution/projects/217/milestone",
+    "id": null,
+    "name": "description",
+    "required": false,
+    "tag": "textarea",
+    "type": "textarea",
+    "value": null
+   },
+   {
+    "form": "http://127.0.0.1:8000/institution/projects/217/milestone",
+    "id": null,
+    "name": "target_date",
+    "required": true,
+    "tag": "input",
+    "type": "date",
+    "value": null
+   },
+   {
+    "form": "http://127.0.0.1:8000/institution/projects/217/milestone",
+    "id": null,
+    "name": "requires_report",
+    "required": false,
+    "tag": "input",
+    "type": "hidden",
+    "value": "0"
+   },
+   {
+    "form": "http://127.0.0.1:8000/institution/projects/217/milestone",
+    "id": null,
+    "name": "requires_report",
+    "required": false,
+    "tag": "input",
+    "type": "checkbox",
+    "value": "1"
+   },
+   {
+    "form": "approve-form",
+    "id": null,
+    "name": "feedback",
+    "required": false,
+    "tag": "textarea",
+    "type": "textarea",
+    "value": null
+   },
+   {
+    "form": "reject-form",
+    "id": null,
+    "name": "feedback",
+    "required": true,
+    "tag": "textarea",
+    "type": "textarea",
+    "value": null
+   },
+   {
+    "form": "edit-milestone-form",
+    "id": "edit-milestone-id",
+    "name": null,
+    "required": false,
+    "tag": "input",
+    "type": "hidden",
+    "value": ""
+   },
+   {
+    "form": "edit-milestone-form",
+    "id": "edit-milestone-title",
+    "name": "title",
+    "required": true,
+    "tag": "input",
+    "type": "text",
+    "value": null
+   },
+   {
+    "form": "edit-milestone-form",
+    "id": "edit-milestone-description",
+    "name": "description",
+    "required": false,
+    "tag": "textarea",
+    "type": "textarea",
+    "value": null
+   },
+   {
+    "form": "edit-milestone-form",
+    "id": "edit-milestone-target-date",
+    "name": "target_date",
+    "required": true,
+    "tag": "input",
+    "type": "date",
+    "value": null
+   },
+   {
+    "form": "edit-milestone-form",
+    "id": "edit-milestone-status",
+    "name": "status",
+    "required": false,
+    "tag": "select",
+    "type": "select-one",
+    "value": null
+   },
+   {
+    "form": "edit-milestone-form",
+    "id": "edit-milestone-requires-report",
+    "name": "requires_report",
+    "required": false,
+    "tag": "input",
+    "type": "checkbox",
+    "value": "1"
+   }
+  ],
+  "forms": [
+   {
+    "action": "http://127.0.0.1:8000/institution/projects/217/milestone",
+    "csrf": true,
+    "enctype": null,
+    "id": null,
+    "method": "POST",
+    "onsubmit": null,
+    "spoof": null
+   },
+   {
+    "action": null,
+    "csrf": true,
+    "enctype": null,
+    "id": "approve-form",
+    "method": "POST",
+    "onsubmit": null,
+    "spoof": null
+   },
+   {
+    "action": null,
+    "csrf": true,
+    "enctype": null,
+    "id": "reject-form",
+    "method": "POST",
+    "onsubmit": null,
+    "spoof": null
+   },
+   {
+    "action": null,
+    "csrf": false,
+    "enctype": null,
+    "id": "edit-milestone-form",
+    "method": null,
+    "onsubmit": "yes",
+    "spoof": null
+   }
+  ],
+  "selects": [
+   {
+    "id": "project-status",
+    "options": [
+     "planning",
+     "active",
+     "review",
+     "completed",
+     "cancelled"
+    ]
+   },
+   {
+    "id": "edit-milestone-status",
+    "options": [
+     "pending",
+     "in_progress",
+     "completed"
+    ]
+   }
+  ]
+ }
+}
+
+## before verification-status
+{
+ "fetch_calls": [],
+ "fetch_methods": [],
+ "form_action_js": [],
+ "forms": {
+  "dialogs": [],
+  "fields": [],
+  "forms": [],
+  "selects": []
+ }
+}
+
+## after manage-118
+{
+ "fetch_calls": [
+  "/institution/projects/118/milestones/${milestoneId}",
+  "/institution/projects/118/status"
+ ],
+ "fetch_methods": [
+  "POST",
+  "PUT",
+  "DELETE"
+ ],
+ "form_action_js": [
+  "/institution/projects/118/reports/${reportId}/approve",
+  "/institution/projects/118/reports/${reportId}/reject"
+ ],
+ "forms": {
+  "dialogs": [],
+  "fields": [
+   {
+    "form": null,
+    "id": "project-status",
+    "name": null,
+    "required": false,
+    "tag": "select",
+    "type": "select-one",
+    "value": null
+   },
+   {
+    "form": "http://127.0.0.1:8000/institution/projects/118/milestone",
+    "id": null,
+    "name": "title",
+    "required": true,
+    "tag": "input",
+    "type": "text",
+    "value": null
+   },
+   {
+    "form": "http://127.0.0.1:8000/institution/projects/118/milestone",
+    "id": null,
+    "name": "description",
+    "required": false,
+    "tag": "textarea",
+    "type": "textarea",
+    "value": null
+   },
+   {
+    "form": "http://127.0.0.1:8000/institution/projects/118/milestone",
+    "id": null,
+    "name": "target_date",
+    "required": true,
+    "tag": "input",
+    "type": "date",
+    "value": null
+   },
+   {
+    "form": "http://127.0.0.1:8000/institution/projects/118/milestone",
+    "id": null,
+    "name": "requires_report",
+    "required": false,
+    "tag": "input",
+    "type": "hidden",
+    "value": "0"
+   },
+   {
+    "form": "http://127.0.0.1:8000/institution/projects/118/milestone",
+    "id": null,
+    "name": "requires_report",
+    "required": false,
+    "tag": "input",
+    "type": "checkbox",
+    "value": "1"
+   },
+   {
+    "form": "approve-form",
+    "id": null,
+    "name": "feedback",
+    "required": false,
+    "tag": "textarea",
+    "type": "textarea",
+    "value": null
+   },
+   {
+    "form": "reject-form",
+    "id": null,
+    "name": "feedback",
+    "required": true,
+    "tag": "textarea",
+    "type": "textarea",
+    "value": null
+   },
+   {
+    "form": "edit-milestone-form",
+    "id": "edit-milestone-id",
+    "name": null,
+    "required": false,
+    "tag": "input",
+    "type": "hidden",
+    "value": ""
+   },
+   {
+    "form": "edit-milestone-form",
+    "id": "edit-milestone-title",
+    "name": "title",
+    "required": true,
+    "tag": "input",
+    "type": "text",
+    "value": null
+   },
+   {
+    "form": "edit-milestone-form",
+    "id": "edit-milestone-description",
+    "name": "description",
+    "required": false,
+    "tag": "textarea",
+    "type": "textarea",
+    "value": null
+   },
+   {
+    "form": "edit-milestone-form",
+    "id": "edit-milestone-target-date",
+    "name": "target_date",
+    "required": true,
+    "tag": "input",
+    "type": "date",
+    "value": null
+   },
+   {
+    "form": "edit-milestone-form",
+    "id": "edit-milestone-status",
+    "name": "status",
+    "required": false,
+    "tag": "select",
+    "type": "select-one",
+    "value": null
+   },
+   {
+    "form": "edit-milestone-form",
+    "id": "edit-milestone-requires-report",
+    "name": "requires_report",
+    "required": false,
+    "tag": "input",
+    "type": "checkbox",
+    "value": "1"
+   }
+  ],
+  "forms": [
+   {
+    "action": "http://127.0.0.1:8000/institution/projects/118/milestone",
+    "csrf": true,
+    "enctype": null,
+    "id": null,
+    "method": "POST",
+    "onsubmit": null,
+    "spoof": null
+   },
+   {
+    "action": null,
+    "csrf": true,
+    "enctype": null,
+    "id": "approve-form",
+    "method": "POST",
+    "onsubmit": null,
+    "spoof": null
+   },
+   {
+    "action": null,
+    "csrf": true,
+    "enctype": null,
+    "id": "reject-form",
+    "method": "POST",
+    "onsubmit": null,
+    "spoof": null
+   },
+   {
+    "action": null,
+    "csrf": false,
+    "enctype": null,
+    "id": "edit-milestone-form",
+    "method": null,
+    "onsubmit": "yes",
+    "spoof": null
+   }
+  ],
+  "selects": [
+   {
+    "id": "project-status",
+    "options": [
+     "planning",
+     "active",
+     "review",
+     "completed",
+     "cancelled"
+    ]
+   },
+   {
+    "id": "edit-milestone-status",
+    "options": [
+     "pending",
+     "in_progress",
+     "completed"
+    ]
+   }
+  ]
+ }
+}
+
+## after manage-188
+{
+ "fetch_calls": [
+  "/institution/projects/188/milestones/${milestoneId}",
+  "/institution/projects/188/status"
+ ],
+ "fetch_methods": [
+  "POST",
+  "PUT",
+  "DELETE"
+ ],
+ "form_action_js": [
+  "/institution/projects/188/reports/${reportId}/approve",
+  "/institution/projects/188/reports/${reportId}/reject"
+ ],
+ "forms": {
+  "dialogs": [],
+  "fields": [
+   {
+    "form": null,
+    "id": "project-status",
+    "name": null,
+    "required": false,
+    "tag": "select",
+    "type": "select-one",
+    "value": null
+   },
+   {
+    "form": "http://127.0.0.1:8000/institution/projects/188/milestone",
+    "id": null,
+    "name": "title",
+    "required": true,
+    "tag": "input",
+    "type": "text",
+    "value": null
+   },
+   {
+    "form": "http://127.0.0.1:8000/institution/projects/188/milestone",
+    "id": null,
+    "name": "description",
+    "required": false,
+    "tag": "textarea",
+    "type": "textarea",
+    "value": null
+   },
+   {
+    "form": "http://127.0.0.1:8000/institution/projects/188/milestone",
+    "id": null,
+    "name": "target_date",
+    "required": true,
+    "tag": "input",
+    "type": "date",
+    "value": null
+   },
+   {
+    "form": "http://127.0.0.1:8000/institution/projects/188/milestone",
+    "id": null,
+    "name": "requires_report",
+    "required": false,
+    "tag": "input",
+    "type": "hidden",
+    "value": "0"
+   },
+   {
+    "form": "http://127.0.0.1:8000/institution/projects/188/milestone",
+    "id": null,
+    "name": "requires_report",
+    "required": false,
+    "tag": "input",
+    "type": "checkbox",
+    "value": "1"
+   },
+   {
+    "form": "approve-form",
+    "id": null,
+    "name": "feedback",
+    "required": false,
+    "tag": "textarea",
+    "type": "textarea",
+    "value": null
+   },
+   {
+    "form": "reject-form",
+    "id": null,
+    "name": "feedback",
+    "required": true,
+    "tag": "textarea",
+    "type": "textarea",
+    "value": null
+   },
+   {
+    "form": "edit-milestone-form",
+    "id": "edit-milestone-id",
+    "name": null,
+    "required": false,
+    "tag": "input",
+    "type": "hidden",
+    "value": "749"
+   },
+   {
+    "form": "edit-milestone-form",
+    "id": "edit-milestone-title",
+    "name": "title",
+    "required": true,
+    "tag": "input",
+    "type": "text",
+    "value": null
+   },
+   {
+    "form": "edit-milestone-form",
+    "id": "edit-milestone-description",
+    "name": "description",
+    "required": false,
+    "tag": "textarea",
+    "type": "textarea",
+    "value": null
+   },
+   {
+    "form": "edit-milestone-form",
+    "id": "edit-milestone-target-date",
+    "name": "target_date",
+    "required": true,
+    "tag": "input",
+    "type": "date",
+    "value": null
+   },
+   {
+    "form": "edit-milestone-form",
+    "id": "edit-milestone-status",
+    "name": "status",
+    "required": false,
+    "tag": "select",
+    "type": "select-one",
+    "value": null
+   },
+   {
+    "form": "edit-milestone-form",
+    "id": "edit-milestone-requires-report",
+    "name": "requires_report",
+    "required": false,
+    "tag": "input",
+    "type": "checkbox",
+    "value": "1"
+   }
+  ],
+  "forms": [
+   {
+    "action": "http://127.0.0.1:8000/institution/projects/188/milestone",
+    "csrf": true,
+    "enctype": null,
+    "id": null,
+    "method": "POST",
+    "onsubmit": null,
+    "spoof": null
+   },
+   {
+    "action": null,
+    "csrf": true,
+    "enctype": null,
+    "id": "approve-form",
+    "method": "POST",
+    "onsubmit": null,
+    "spoof": null
+   },
+   {
+    "action": null,
+    "csrf": true,
+    "enctype": null,
+    "id": "reject-form",
+    "method": "POST",
+    "onsubmit": null,
+    "spoof": null
+   },
+   {
+    "action": null,
+    "csrf": false,
+    "enctype": null,
+    "id": "edit-milestone-form",
+    "method": null,
+    "onsubmit": "yes",
+    "spoof": null
+   }
+  ],
+  "selects": [
+   {
+    "id": "project-status",
+    "options": [
+     "planning",
+     "active",
+     "review",
+     "completed",
+     "cancelled"
+    ]
+   },
+   {
+    "id": "edit-milestone-status",
+    "options": [
+     "pending",
+     "in_progress",
+     "completed"
+    ]
+   }
+  ]
+ }
+}
+
+## after manage-217
+{
+ "fetch_calls": [
+  "/institution/projects/217/milestones/${milestoneId}",
+  "/institution/projects/217/status"
+ ],
+ "fetch_methods": [
+  "POST",
+  "PUT",
+  "DELETE"
+ ],
+ "form_action_js": [
+  "/institution/projects/217/reports/${reportId}/approve",
+  "/institution/projects/217/reports/${reportId}/reject"
+ ],
+ "forms": {
+  "dialogs": [],
+  "fields": [
+   {
+    "form": null,
+    "id": "project-status",
+    "name": null,
+    "required": false,
+    "tag": "select",
+    "type": "select-one",
+    "value": null
+   },
+   {
+    "form": "http://127.0.0.1:8000/institution/projects/217/milestone",
+    "id": null,
+    "name": "title",
+    "required": true,
+    "tag": "input",
+    "type": "text",
+    "value": null
+   },
+   {
+    "form": "http://127.0.0.1:8000/institution/projects/217/milestone",
+    "id": null,
+    "name": "description",
+    "required": false,
+    "tag": "textarea",
+    "type": "textarea",
+    "value": null
+   },
+   {
+    "form": "http://127.0.0.1:8000/institution/projects/217/milestone",
+    "id": null,
+    "name": "target_date",
+    "required": true,
+    "tag": "input",
+    "type": "date",
+    "value": null
+   },
+   {
+    "form": "http://127.0.0.1:8000/institution/projects/217/milestone",
+    "id": null,
+    "name": "requires_report",
+    "required": false,
+    "tag": "input",
+    "type": "hidden",
+    "value": "0"
+   },
+   {
+    "form": "http://127.0.0.1:8000/institution/projects/217/milestone",
+    "id": null,
+    "name": "requires_report",
+    "required": false,
+    "tag": "input",
+    "type": "checkbox",
+    "value": "1"
+   },
+   {
+    "form": "approve-form",
+    "id": null,
+    "name": "feedback",
+    "required": false,
+    "tag": "textarea",
+    "type": "textarea",
+    "value": null
+   },
+   {
+    "form": "reject-form",
+    "id": null,
+    "name": "feedback",
+    "required": true,
+    "tag": "textarea",
+    "type": "textarea",
+    "value": null
+   },
+   {
+    "form": "edit-milestone-form",
+    "id": "edit-milestone-id",
+    "name": null,
+    "required": false,
+    "tag": "input",
+    "type": "hidden",
+    "value": ""
+   },
+   {
+    "form": "edit-milestone-form",
+    "id": "edit-milestone-title",
+    "name": "title",
+    "required": true,
+    "tag": "input",
+    "type": "text",
+    "value": null
+   },
+   {
+    "form": "edit-milestone-form",
+    "id": "edit-milestone-description",
+    "name": "description",
+    "required": false,
+    "tag": "textarea",
+    "type": "textarea",
+    "value": null
+   },
+   {
+    "form": "edit-milestone-form",
+    "id": "edit-milestone-target-date",
+    "name": "target_date",
+    "required": true,
+    "tag": "input",
+    "type": "date",
+    "value": null
+   },
+   {
+    "form": "edit-milestone-form",
+    "id": "edit-milestone-status",
+    "name": "status",
+    "required": false,
+    "tag": "select",
+    "type": "select-one",
+    "value": null
+   },
+   {
+    "form": "edit-milestone-form",
+    "id": "edit-milestone-requires-report",
+    "name": "requires_report",
+    "required": false,
+    "tag": "input",
+    "type": "checkbox",
+    "value": "1"
+   }
+  ],
+  "forms": [
+   {
+    "action": "http://127.0.0.1:8000/institution/projects/217/milestone",
+    "csrf": true,
+    "enctype": null,
+    "id": null,
+    "method": "POST",
+    "onsubmit": null,
+    "spoof": null
+   },
+   {
+    "action": null,
+    "csrf": true,
+    "enctype": null,
+    "id": "approve-form",
+    "method": "POST",
+    "onsubmit": null,
+    "spoof": null
+   },
+   {
+    "action": null,
+    "csrf": true,
+    "enctype": null,
+    "id": "reject-form",
+    "method": "POST",
+    "onsubmit": null,
+    "spoof": null
+   },
+   {
+    "action": null,
+    "csrf": false,
+    "enctype": null,
+    "id": "edit-milestone-form",
+    "method": null,
+    "onsubmit": "yes",
+    "spoof": null
+   }
+  ],
+  "selects": [
+   {
+    "id": "project-status",
+    "options": [
+     "planning",
+     "active",
+     "review",
+     "completed",
+     "cancelled"
+    ]
+   },
+   {
+    "id": "edit-milestone-status",
+    "options": [
+     "pending",
+     "in_progress",
+     "completed"
+    ]
+   }
+  ]
+ }
+}
+
+## after verification-status
+{
+ "fetch_calls": [],
+ "fetch_methods": [],
+ "form_action_js": [],
+ "forms": {
+  "dialogs": [],
+  "fields": [],
+  "forms": [],
+  "selects": []
+ }
+}

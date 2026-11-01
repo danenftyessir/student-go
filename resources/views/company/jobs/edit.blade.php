@@ -1,446 +1,280 @@
 @extends('layouts.app')
 
-@section('title', 'Edit Lowongan Pekerjaan')
+@section('title', 'Ubah Lowongan')
 
 @section('content')
-<div class="min-h-screen bg-gray-50" x-data="jobEditWizard()">
+@php
+    // phase 29 paket E: form ubah = wizard create phase 23 (5 langkah yang sama, stepper bersama, validasi per langkah sesuai
+    // aturan server update, galat server dipetakan ke langkahnya, rail pratinjau bersama). tanpa foto hero lama.
+    // payload tetap: _token, _method=PUT, title … success_criteria, status, skills[], sdg_alignment[] ke company.jobs.update.
+    $stepNames = ['Detail Lowongan', 'Deskripsi', 'Keahlian', 'SDG Alignment', 'Kriteria Dampak'];
+    $asArray = fn ($value) => is_array($value) ? $value : (is_string($value) ? (json_decode($value, true) ?: []) : []);
+    $storedSkills = array_values(array_filter($asArray($jobPosting->skills), fn ($skill) => is_string($skill) && $skill !== ''));
 
-    {{-- hero section --}}
-    <div class="relative h-48 bg-cover bg-center" style="background-image: url('{{ asset('company3.jpg') }}');">
-        <div class="absolute inset-0 bg-black/50"></div>
-        <div class="relative z-10 flex flex-col items-center justify-center h-full text-center text-white px-4">
-            <h1 class="text-2xl md:text-3xl font-bold mb-2 text-white fade-in-up" style="font-family: 'Outfit', sans-serif; color: white !important;">
-                Edit Lowongan Pekerjaan
-            </h1>
-            <p class="text-sm md:text-base text-gray-300 max-w-xl fade-in-up" style="animation-delay: 0.1s;">
-                Perbarui informasi lowongan pekerjaan Anda
-            </p>
-        </div>
-    </div>
+    // gaji tersimpan (tidak diubah lewat form ini), format sama dengan halaman rekaman lowongan
+    $fmt = fn ($n) => number_format((float) $n, 0, ',', '.');
+    $money = fn ($amount) => ($jobPosting->salary_currency === 'USD' ? 'US$ ' : 'Rp ') . $fmt($amount);
+    $salary = null;
+    if ($jobPosting->salary_min || $jobPosting->salary_max) {
+        $salary = $jobPosting->salary_min && $jobPosting->salary_max && (float) $jobPosting->salary_min !== (float) $jobPosting->salary_max
+            ? $money($jobPosting->salary_min) . ' – ' . $money($jobPosting->salary_max)
+            : $money($jobPosting->salary_min ?: $jobPosting->salary_max);
+        $salary .= ['monthly' => ' per bulan', 'project' => ' per proyek'][$jobPosting->salary_period] ?? '';
+    }
 
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    $hasOld = session()->hasOldInput();
+    $value = fn ($key, $stored) => $hasOld ? old($key, '') : $stored;
+    $formData = [
+        'title' => (string) $value('title', $jobPosting->title), 'department' => (string) $value('department', $jobPosting->department),
+        'location' => (string) $value('location', $jobPosting->location), 'job_type' => (string) $value('job_type', $jobPosting->job_type),
+        'status' => (string) $value('status', $jobPosting->status ?? 'draft'), 'job_category_id' => (string) $value('job_category_id', $jobPosting->job_category_id),
+        // kunci salary_range tetap dikirim seperti sebelumnya; update() tidak memakainya (gaji tersimpan tidak berubah).
+        // nilainya teks gaji bahasa indonesia untuk pratinjau, bukan accessor model ('Negotiable', 'IDR2000000.00 - …')
+        'salary_range' => (string) $value('salary_range', $salary ?? ''),
+        'description' => (string) $value('description', $jobPosting->description), 'responsibilities' => (string) $value('responsibilities', $jobPosting->responsibilities),
+        'qualifications' => (string) $value('qualifications', $jobPosting->qualifications),
+        'skills' => $hasOld ? array_values((array) old('skills', [])) : $storedSkills,
+        'sdg_alignment' => array_values(array_map('strval', $hasOld ? (array) old('sdg_alignment', []) : $asArray($jobPosting->sdg_alignment))),
+        'impact_metrics' => (string) $value('impact_metrics', $jobPosting->impact_metrics), 'success_criteria' => (string) $value('success_criteria', $jobPosting->success_criteria),
+    ];
+    $initial = [
+        'formData' => $formData,
+        // galat server: kunci 'skills.0' -> 'skills'
+        'errors' => collect($errors->getMessages())->mapWithKeys(fn ($messages, $key) => [\Illuminate\Support\Str::before($key, '.') => $messages[0]])->all(),
+    ];
 
-        {{-- step indicator --}}
-        <div class="mb-8 fade-in-up" style="animation-delay: 0.15s;">
-            <div class="flex items-center justify-center">
-                <template x-for="(step, index) in steps" :key="index">
-                    <div class="flex items-center">
-                        {{-- step circle --}}
-                        <div class="flex flex-col items-center">
-                            <div class="w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold transition-all duration-300"
-                                 :class="currentStep > index ? 'bg-violet-600 text-white' :
-                                         currentStep === index ? 'bg-violet-600 text-white ring-4 ring-violet-200' :
-                                         'bg-gray-200 text-gray-500'">
-                                <span x-text="index + 1"></span>
-                            </div>
-                            <span class="mt-2 text-xs font-medium text-center max-w-[80px]"
-                                  :class="currentStep >= index ? 'text-violet-600' : 'text-gray-400'"
-                                  x-text="step.name"></span>
-                        </div>
-                        {{-- connector line --}}
-                        <div x-show="index < steps.length - 1"
-                             class="w-16 md:w-24 h-0.5 mx-2 transition-all duration-300"
-                             :class="currentStep > index ? 'bg-violet-600' : 'bg-gray-200'">
-                        </div>
-                    </div>
-                </template>
-            </div>
-        </div>
+    // nilai tipe tersimpan di luar daftar (mis. 'internship') tetap menjadi pilihan dengan label yang cocok
+    $typeOptions = $jobTypes;
+    if ($formData['job_type'] !== '' && ! array_key_exists($formData['job_type'], $typeOptions)) {
+        $match = collect($jobTypes)->first(fn ($label, $key) => strcasecmp($key, $formData['job_type']) === 0);
+        $typeOptions = [$formData['job_type'] => $match ?? $formData['job_type']] + $typeOptions;
+    }
 
-        {{-- form container --}}
-        <form @submit.prevent="submitForm" class="bg-white rounded-xl shadow-sm border border-gray-100 p-6 md:p-8 fade-in-up gpu-accelerate" style="animation-delay: 0.2s;">
+    // status: nilai yang diterima server; label dari StatusVocabulary 'job_posting'
+    $statusValues = ['draft', 'posted', 'closed'];
+    if (! in_array($formData['status'], $statusValues, true) && $formData['status'] !== '') {
+        $statusValues[] = $formData['status'];
+    }
+    $statusOptions = collect($statusValues)->mapWithKeys(fn ($status) => [$status => \App\Support\StatusVocabulary::label('job_posting', $status)])->all();
+
+    // keahlian tersimpan yang tidak ada di daftar tetap tampil (dan tetap terkirim) di depan daftar
+    $skillOptions = array_values(array_unique(array_merge(array_diff($formData['skills'], $availableSkills), $availableSkills)));
+
+    $sdgLabels = collect($sdgOptions)->pluck('name', 'id')->all();
+@endphp
+
+<div class="sg-container sg-co-wizard" x-data="jobEditWizard(@js($initial), @js($typeOptions), @js($sdgLabels), @js($categories))">
+    <x-ui.page-header title="Ubah lowongan" :description="$jobPosting->title"
+                      :back="route('company.jobs.show', $jobPosting->id)" back-label="Kembali ke rekaman lowongan">
+        <x-slot:actions>
+            <x-ui.button variant="tertiary" icon="eye" data-sg-open="job-preview" class="sg-co-wizard__preview-btn">Pratinjau</x-ui.button>
+        </x-slot:actions>
+    </x-ui.page-header>
+
+    <div class="sg-co-wizard__layout">
+        <form class="sg-co-wizard__form" novalidate @submit.prevent="submitForm()">
             @csrf
             @method('PUT')
+            <x-ui.stepper :steps="$stepNames" model="currentStep + 1" label="Langkah pengubahan lowongan" class="sg-co-wizard__stepper" />
 
-            {{-- step 1: job details --}}
-            <div x-show="currentStep === 0" x-transition:enter="transition ease-out duration-300"
-                 x-transition:enter-start="opacity-0 transform translate-x-4"
-                 x-transition:enter-end="opacity-100 transform translate-x-0">
-                <h2 class="text-xl font-bold text-gray-900 mb-6">1. Detail Lowongan</h2>
-
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Judul Lowongan</label>
-                        <input type="text" x-model="formData.title"
-                               placeholder="cth: Senior Software Engineer"
-                               class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent transition-all">
-                        <p x-show="errors.title" class="mt-1 text-sm text-red-500" x-text="errors.title"></p>
-                    </div>
-
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Departemen</label>
-                        <input type="text" x-model="formData.department"
-                               placeholder="cth: Engineering"
-                               list="departments"
-                               class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent transition-all">
-                        <datalist id="departments">
-                            @foreach($departments as $dept)
-                            <option value="{{ $dept }}">
-                            @endforeach
-                        </datalist>
-                    </div>
-
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Lokasi</label>
-                        <input type="text" x-model="formData.location"
-                               placeholder="cth: Remote, Berlin, Germany"
-                               class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent transition-all">
-                    </div>
-
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Tipe Pekerjaan</label>
-                        <select x-model="formData.job_type"
-                                class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent transition-all">
-                            <option value="">Pilih tipe pekerjaan</option>
-                            @foreach($jobTypes as $type)
-                            <option value="{{ $type }}">{{ $type }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Status</label>
-                        <select x-model="formData.status"
-                                class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent transition-all">
-                            <option value="draft">Draft</option>
-                            <option value="published">Dipublikasikan</option>
-                            <option value="closed">Ditutup</option>
-                        </select>
-                    </div>
-
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Kategori</label>
-                        <select x-model="formData.job_category_id"
-                                class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent transition-all">
-                            <option value="">Pilih kategori</option>
-                            @foreach($categories as $category)
-                            <option value="{{ $category->id }}">{{ $category->name }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-
-                    <div class="md:col-span-2">
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Rentang Gaji <span class="text-xs text-gray-400">(opsional)</span></label>
-                        <input type="text" x-model="formData.salary_range"
-                               placeholder="cth: Rp 15.000.000 - Rp 25.000.000 per bulan"
-                               class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent transition-all">
-                    </div>
-                </div>
+            {{-- status galat per langkah (sama dengan wizard create) --}}
+            <div class="sg-co-wizard__issues" role="alert" x-show="invalidSteps().length" x-cloak>
+                <x-icon name="circle-alert" size="sm" />
+                <p>Perlu diperbaiki:
+                    <template x-for="(s, i) in invalidSteps()" :key="s">
+                        <span><button type="button" class="sg-co-wizard__issue-link" @click="goTo(s)" x-text="'Langkah ' + (s + 1) + ' · ' + steps[s]"></button><span x-show="i < invalidSteps().length - 1">, </span></span>
+                    </template>
+                </p>
             </div>
 
-            {{-- step 2: description --}}
-            <div x-show="currentStep === 1" x-transition:enter="transition ease-out duration-300"
-                 x-transition:enter-start="opacity-0 transform translate-x-4"
-                 x-transition:enter-end="opacity-100 transform translate-x-0">
-                <h2 class="text-xl font-bold text-gray-900 mb-6">2. Deskripsi</h2>
+            @include('company.jobs.components.wizard-steps', ['jobTypes' => $typeOptions, 'availableSkills' => $skillOptions, 'statusOptions' => $statusOptions,
+                'editing' => true, 'salaryText' => $salary, 'finalNote' => 'Perubahan disimpan setelah Anda menekan "Simpan perubahan".'])
 
-                <div class="space-y-6">
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Deskripsi Pekerjaan</label>
-                        <textarea x-model="formData.description" rows="4"
-                                  placeholder="Jelaskan tentang posisi ini dan apa yang akan dikerjakan..."
-                                  class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent transition-all resize-none"></textarea>
-                    </div>
-
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Tanggung Jawab</label>
-                        <textarea x-model="formData.responsibilities" rows="4"
-                                  placeholder="- Mengembangkan fitur baru&#10;- Melakukan code review&#10;- Berkolaborasi dengan tim"
-                                  class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent transition-all resize-none"></textarea>
-                    </div>
-
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Kualifikasi</label>
-                        <textarea x-model="formData.qualifications" rows="4"
-                                  placeholder="- Mahasiswa aktif minimal semester 5&#10;- Berpengalaman dalam kegiatan lapangan/kemasyarakatan&#10;- Komunikatif dan dapat bekerja dengan masyarakat desa"
-                                  class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent transition-all resize-none"></textarea>
-                    </div>
-                </div>
-            </div>
-
-            {{-- step 3: skills --}}
-            <div x-show="currentStep === 2" x-transition:enter="transition ease-out duration-300"
-                 x-transition:enter-start="opacity-0 transform translate-x-4"
-                 x-transition:enter-end="opacity-100 transform translate-x-0">
-                <h2 class="text-xl font-bold text-gray-900 mb-6">3. Keahlian</h2>
-
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-3">Pilih Keahlian Yang Dibutuhkan</label>
-                    <div class="grid grid-cols-2 md:grid-cols-4 gap-3 max-h-64 overflow-y-auto pr-2 custom-scrollbar">
-                        @foreach($availableSkills as $skill)
-                        <label class="flex items-center gap-2 cursor-pointer p-2 rounded-lg hover:bg-gray-50 transition-colors">
-                            <input type="checkbox"
-                                   value="{{ $skill }}"
-                                   x-model="formData.skills"
-                                   class="w-4 h-4 text-violet-600 border-gray-300 rounded focus:ring-violet-500">
-                            <span class="text-sm text-gray-700">{{ $skill }}</span>
-                        </label>
-                        @endforeach
-                    </div>
-
-                    {{-- selected skills preview --}}
-                    <div x-show="formData.skills.length > 0" class="mt-4 pt-4 border-t border-gray-100">
-                        <p class="text-sm text-gray-500 mb-2">Keahlian Terpilih:</p>
-                        <div class="flex flex-wrap gap-2">
-                            <template x-for="skill in formData.skills" :key="skill">
-                                <span class="inline-flex items-center gap-1 px-3 py-1 bg-violet-100 text-violet-700 text-sm rounded-full">
-                                    <span x-text="skill"></span>
-                                    <button type="button" @click="formData.skills = formData.skills.filter(s => s !== skill)"
-                                            class="hover:text-violet-900">
-                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
-                                        </svg>
-                                    </button>
-                                </span>
-                            </template>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            {{-- step 4: SDG alignment --}}
-            <div x-show="currentStep === 3" x-transition:enter="transition ease-out duration-300"
-                 x-transition:enter-start="opacity-0 transform translate-x-4"
-                 x-transition:enter-end="opacity-100 transform translate-x-0">
-                <h2 class="text-xl font-bold text-gray-900 mb-6">4. SDG Alignment</h2>
-
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-3">Pilih SDG Yang Relevan Dengan Posisi Ini</label>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3 max-h-80 overflow-y-auto pr-2 custom-scrollbar">
-                        @foreach($sdgOptions as $sdg)
-                        <label class="flex items-start gap-3 cursor-pointer p-3 rounded-lg border border-gray-200 hover:border-violet-300 hover:bg-violet-50 transition-all">
-                            <input type="checkbox"
-                                   value="{{ $sdg['id'] }}"
-                                   x-model="formData.sdg_alignment"
-                                   class="w-4 h-4 mt-0.5 text-violet-600 border-gray-300 rounded focus:ring-violet-500">
-                            <span class="text-sm text-gray-700">{{ $sdg['name'] }}</span>
-                        </label>
-                        @endforeach
-                    </div>
-                </div>
-            </div>
-
-            {{-- step 5: impact criteria --}}
-            <div x-show="currentStep === 4" x-transition:enter="transition ease-out duration-300"
-                 x-transition:enter-start="opacity-0 transform translate-x-4"
-                 x-transition:enter-end="opacity-100 transform translate-x-0">
-                <h2 class="text-xl font-bold text-gray-900 mb-6">5. Kriteria Dampak</h2>
-
-                <div class="space-y-6">
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Metrik Dampak</label>
-                        <textarea x-model="formData.impact_metrics" rows="4"
-                                  placeholder="Jelaskan bagaimana keberhasilan posisi ini akan diukur...&#10;cth: Peningkatan efisiensi sistem sebesar 20%"
-                                  class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent transition-all resize-none"></textarea>
-                    </div>
-
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Kriteria Keberhasilan</label>
-                        <textarea x-model="formData.success_criteria" rows="4"
-                                  placeholder="Apa yang menandakan kandidat berhasil dalam posisi ini...&#10;cth: Mampu deliver minimal 2 fitur utama dalam 3 bulan pertama"
-                                  class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent transition-all resize-none"></textarea>
-                    </div>
-                </div>
-            </div>
-
-            {{-- navigation buttons --}}
-            <div class="flex items-center justify-between mt-8 pt-6 border-t border-gray-100">
-                <a href="{{ route('company.jobs.index') }}"
-                   class="px-6 py-2.5 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 font-medium transition-colors">
-                    Batal
-                </a>
-
-                <div class="flex items-center gap-3">
-                    <button type="button"
-                            x-show="currentStep > 0"
-                            @click="prevStep()"
-                            class="px-6 py-2.5 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 font-medium transition-colors">
-                        Langkah Sebelumnya
-                    </button>
-
-                    <button type="button"
-                            x-show="currentStep < steps.length - 1"
-                            @click="nextStep()"
-                            class="px-6 py-2.5 bg-violet-600 text-white rounded-lg hover:bg-violet-700 font-medium transition-colors">
-                        Langkah Berikutnya
-                    </button>
-
-                    <button type="submit"
-                            x-show="currentStep === steps.length - 1"
-                            class="px-6 py-2.5 bg-violet-600 text-white rounded-lg hover:bg-violet-700 font-medium transition-colors">
-                        Perbarui Lowongan
-                    </button>
-                </div>
+            <div class="sg-co-wizard__nav">
+                <x-ui.button variant="tertiary" :href="route('company.jobs.index')" class="sg-co-wizard__cancel">Batal</x-ui.button>
+                <x-ui.button variant="secondary" icon="arrow-left" x-show="currentStep > 0" x-cloak @click="prevStep()">Sebelumnya</x-ui.button>
+                <x-ui.button icon-end="arrow-right" x-show="currentStep < steps.length - 1" @click="nextStep()">Berikutnya</x-ui.button>
+                <x-ui.button type="submit" icon="check" x-show="currentStep === steps.length - 1" x-cloak x-bind:disabled="submitting">Simpan perubahan</x-ui.button>
             </div>
         </form>
+
+        {{-- rail pratinjau bersama (D-26): hanya dari data formulir di peramban --}}
+        <aside class="sg-co-wizard__rail" aria-label="Pratinjau lowongan">
+            @include('company.jobs.components.preview', ['companyName' => $company->name ?? '', 'note' => 'Disusun dari isian formulir di peramban ini. Lowongan tersimpan tidak berubah sampai Anda menekan "Simpan perubahan".'])
+        </aside>
     </div>
+
+    {{-- pratinjau pada layar < 1024px --}}
+    <x-ui.modal id="job-preview" title="Pratinjau lowongan">
+        @include('company.jobs.components.preview', ['companyName' => $company->name ?? '', 'note' => 'Disusun dari isian formulir di peramban ini. Lowongan tersimpan tidak berubah sampai Anda menekan "Simpan perubahan".'])
+    </x-ui.modal>
 </div>
-
-<style>
-/* animasi fade in up */
-.fade-in-up {
-    animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-    opacity: 0;
-}
-
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translate3d(0, 20px, 0);
-    }
-    to {
-        opacity: 1;
-        transform: translate3d(0, 0, 0);
-    }
-}
-
-/* GPU acceleration untuk performa smooth */
-.gpu-accelerate {
-    transform: translateZ(0);
-    will-change: transform, opacity;
-    backface-visibility: hidden;
-}
-
-/* custom scrollbar */
-.custom-scrollbar::-webkit-scrollbar {
-    width: 4px;
-}
-
-.custom-scrollbar::-webkit-scrollbar-track {
-    background: #F3F4F6;
-    border-radius: 2px;
-}
-
-.custom-scrollbar::-webkit-scrollbar-thumb {
-    background: #D1D5DB;
-    border-radius: 2px;
-}
-
-.custom-scrollbar::-webkit-scrollbar-thumb:hover {
-    background: #9CA3AF;
-}
-
-/* reduced motion support untuk aksesibilitas */
-@media (prefers-reduced-motion: reduce) {
-    .fade-in-up {
-        animation: none;
-        opacity: 1;
-    }
-}
-</style>
 @endsection
 
 @push('scripts')
 <script>
-function jobEditWizard() {
+function jobEditWizard(initial, jobTypes, sdgLabels, categories) {
+    const EMPTY = () => ({
+        title: '', department: '', location: '', job_type: '', status: '', job_category_id: '', salary_range: '',
+        description: '', responsibilities: '', qualifications: '',
+        skills: [], sdg_alignment: [], impact_metrics: '', success_criteria: '',
+    });
+    const required = (label) => (v) => String(v || '').trim() ? '' : label + ' wajib diisi.';
+    const max = (n) => (v) => String(v || '').length > n ? 'Maksimal ' + n + ' karakter.' : '';
+    // aturan sama dengan validasi server JobPostingController::update
+    const RULES = {
+        title: [required('Judul lowongan'), max(255)],
+        department: [required('Departemen'), max(100)],
+        location: [required('Lokasi'), max(255)],
+        job_type: [(v) => v ? '' : 'Pilih tipe pekerjaan.', max(50)],
+        status: [(v) => !v || ['draft', 'posted', 'closed', 'archived'].includes(v) ? '' : 'Pilih status dari daftar.'],
+        job_category_id: [(v) => !v || categories[v] ? '' : 'Pilih kategori dari daftar.'],
+        description: [required('Deskripsi pekerjaan')],
+        responsibilities: [required('Tanggung jawab')],
+        qualifications: [required('Kualifikasi')],
+        skills: [(v) => (v && v.length) ? '' : 'Pilih minimal satu keahlian.'],
+    };
+    const STEP_FIELDS = [
+        ['title', 'department', 'job_type', 'status', 'job_category_id', 'location', 'salary_range'],
+        ['description', 'responsibilities', 'qualifications'],
+        ['skills'],
+        ['sdg_alignment'],
+        ['impact_metrics', 'success_criteria'],
+    ];
+    // field -> elemen yang menerima fokus saat galat
+    const FIELD_TARGETS = {
+        title: '#job-title', department: '#job-department', job_type: '#job-type', status: '#job-status', job_category_id: '#job-category',
+        location: '#job-location', description: '#job-description', responsibilities: '#job-responsibilities',
+        qualifications: '#job-qualifications', skills: '.sg-co-wizard__checks--skills input',
+    };
+
     return {
         currentStep: 0,
-        steps: [
-            { name: 'Detail Lowongan' },
-            { name: 'Deskripsi' },
-            { name: 'Keahlian' },
-            { name: 'SDG Alignment' },
-            { name: 'Kriteria Dampak' }
-        ],
-        formData: {
-            title: '{{ $jobPosting->title ?? "" }}',
-            department: '{{ $jobPosting->department ?? "" }}',
-            location: '{{ $jobPosting->location ?? "" }}',
-            job_type: '{{ $jobPosting->job_type ?? "" }}',
-            status: '{{ $jobPosting->status ?? "draft" }}',
-            job_category_id: '{{ $jobPosting->job_category_id ?? "" }}',
-            salary_range: '{{ $jobPosting->salary_range ?? "" }}',
-            description: `{{ $jobPosting->description ?? "" }}`,
-            responsibilities: `{{ $jobPosting->responsibilities ?? "" }}`,
-            qualifications: `{{ $jobPosting->qualifications ?? "" }}`,
-            skills: @json($jobPosting->skills ?? []),
-            sdg_alignment: @json($jobPosting->sdg_alignment ?? []),
-            impact_metrics: `{{ $jobPosting->impact_metrics ?? "" }}`,
-            success_criteria: `{{ $jobPosting->success_criteria ?? "" }}`
-        },
+        steps: ['Detail Lowongan', 'Deskripsi', 'Keahlian', 'SDG Alignment', 'Kriteria Dampak'],
+        formData: Object.assign(EMPTY(), initial.formData),
         errors: {},
+        jobTypes,
+        sdgLabels,
+        categories,
+        submitting: false,
+
+        init() {
+            // kembali dari validasi server: galat dipetakan ke langkahnya
+            Object.keys(initial.errors || {}).forEach((field) => {
+                this.errors[field] = this.check(field) || initial.errors[field];
+            });
+            const first = this.invalidSteps()[0];
+            if (first !== undefined) this.currentStep = first;
+
+            this.$watch('formData', () => {
+                // galat hilang hanya bila isian sudah benar; galat langkah lain tetap tersimpan
+                Object.keys(this.errors).forEach((field) => { if (!this.check(field)) delete this.errors[field]; });
+            }, { deep: true });
+        },
+
+        check(field) {
+            for (const rule of RULES[field] || []) {
+                const message = rule(this.formData[field]);
+                if (message) return message;
+            }
+            return '';
+        },
+
+        touch(field) {
+            const message = this.check(field);
+            if (message) this.errors[field] = message; else delete this.errors[field];
+        },
+
+        validateStep(step) {
+            let ok = true;
+            STEP_FIELDS[step].forEach((field) => {
+                const message = this.check(field);
+                if (message) { this.errors[field] = message; ok = false; } else delete this.errors[field];
+            });
+            return ok;
+        },
+
+        invalidSteps() {
+            return STEP_FIELDS.map((fields, i) => fields.some((f) => this.errors[f]) ? i : null).filter((i) => i !== null);
+        },
+
+        focusStep(step, field = null) {
+            this.$nextTick(() => {
+                const target = field && FIELD_TARGETS[field] ? this.$root.querySelector(FIELD_TARGETS[field]) : null;
+                (target || document.getElementById('langkah-' + (step + 1)))?.focus();
+            });
+        },
+
+        goTo(step) {
+            this.currentStep = step;
+            const field = STEP_FIELDS[step].find((f) => this.errors[f]);
+            this.focusStep(step, field);
+        },
 
         nextStep() {
-            if (this.validateCurrentStep()) {
-                if (this.currentStep < this.steps.length - 1) {
-                    this.currentStep++;
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                }
+            if (!this.validateStep(this.currentStep)) {
+                this.focusStep(this.currentStep, STEP_FIELDS[this.currentStep].find((f) => this.errors[f]));
+                return;
+            }
+            if (this.currentStep < this.steps.length - 1) {
+                this.currentStep++;
+                this.focusStep(this.currentStep);
             }
         },
 
         prevStep() {
             if (this.currentStep > 0) {
                 this.currentStep--;
-                window.scrollTo({ top: 0, behavior: 'smooth' });
+                this.focusStep(this.currentStep);
             }
         },
 
-        validateCurrentStep() {
-            this.errors = {};
+        categoryLabel() {
+            return this.categories[this.formData.job_category_id] || '';
+        },
 
-            if (this.currentStep === 0) {
-                if (!this.formData.title.trim()) {
-                    this.errors.title = 'Judul lowongan wajib diisi';
-                    return false;
-                }
-            }
+        jobTypeLabel() {
+            return this.jobTypes[this.formData.job_type] || this.formData.job_type;
+        },
 
-            if (this.currentStep === 2) {
-                if (this.formData.skills.length === 0) {
-                    alert('Pilih minimal satu keahlian');
-                    return false;
-                }
-            }
-
-            return true;
+        previewParts() {
+            return [
+                ['Deskripsi', this.formData.description], ['Tanggung jawab', this.formData.responsibilities],
+                ['Kualifikasi', this.formData.qualifications], ['Metrik dampak', this.formData.impact_metrics],
+                ['Kriteria keberhasilan', this.formData.success_criteria],
+            ].filter(([, text]) => String(text).trim()).map(([label, text]) => ({ label, text }));
         },
 
         submitForm() {
-            if (!this.validateCurrentStep()) return;
+            // semua langkah diperiksa; langkah pertama yang bermasalah dibuka
+            const bad = [0, 1, 2, 3, 4].filter((step) => !this.validateStep(step));
+            if (bad.length) {
+                this.goTo(bad[0]);
+                return;
+            }
+            this.submitting = true;
 
-            // kirim data ke server via form submit
+            // payload sama dengan sebelumnya: _token, _method=PUT + setiap kunci formData (array -> key[])
             const form = document.createElement('form');
             form.method = 'POST';
-            form.action = '{{ route("company.jobs.update", $jobPosting->id) }}';
-
-            // CSRF token
-            const csrfInput = document.createElement('input');
-            csrfInput.type = 'hidden';
-            csrfInput.name = '_token';
-            csrfInput.value = '{{ csrf_token() }}';
-            form.appendChild(csrfInput);
-
-            // method spoofing untuk PUT
-            const methodInput = document.createElement('input');
-            methodInput.type = 'hidden';
-            methodInput.name = '_method';
-            methodInput.value = 'PUT';
-            form.appendChild(methodInput);
-
-            // append form data
+            form.action = @js(route('company.jobs.update', $jobPosting->id));
+            const add = (name, value) => {
+                const input = document.createElement('input');
+                input.type = 'hidden';
+                input.name = name;
+                input.value = value;
+                form.appendChild(input);
+            };
+            add('_token', document.querySelector('meta[name="csrf-token"]').content);
+            add('_method', 'PUT');
             for (const [key, value] of Object.entries(this.formData)) {
-                if (Array.isArray(value)) {
-                    value.forEach((v, i) => {
-                        const input = document.createElement('input');
-                        input.type = 'hidden';
-                        input.name = `${key}[]`;
-                        input.value = v;
-                        form.appendChild(input);
-                    });
-                } else {
-                    const input = document.createElement('input');
-                    input.type = 'hidden';
-                    input.name = key;
-                    input.value = value;
-                    form.appendChild(input);
-                }
+                if (Array.isArray(value)) value.forEach((v) => add(`${key}[]`, v));
+                else add(key, value);
             }
-
             document.body.appendChild(form);
             form.submit();
-        }
-    }
+        },
+    };
 }
 </script>
 @endpush
