@@ -5,13 +5,8 @@
 @section('content')
 {{-- profile header dengan background --}}
 <div class="relative bg-white">
-    {{-- cover photo --}}
-    <div class="h-64 relative overflow-hidden">
-        <img src="{{ asset('placeholder-profile-cover.jpg') }}" 
-             alt="Cover Photo" 
-             class="w-full h-full object-cover">
-        <div class="absolute inset-0 bg-gradient-to-b from-transparent to-black/30"></div>
-    </div>
+    {{-- sampul tanpa gambar: berkas placeholder tidak ada (C6) --}}
+    <div class="h-64 relative overflow-hidden bg-gray-100" aria-hidden="true"></div>
 
     {{-- profile info section --}}
     <div class="container mx-auto px-6">
