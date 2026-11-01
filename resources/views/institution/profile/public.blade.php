@@ -129,6 +129,8 @@
                     </div>
                 @endif
             </x-ui.dl>
+
+            @include('institution.profile.components.region-map', ['regions' => $regions])
         </aside>
     </div>
 </div>
