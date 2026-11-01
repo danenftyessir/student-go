@@ -94,7 +94,7 @@
                                 <a href="{{ route('student.applications.show', $application->id) }}" class="sg-table__primary">{{ $problem?->title ?? 'Masalah tidak tersedia' }}</a>
                                 @if ($place)<span class="sg-table__meta">{{ $place }}</span>@endif
                                 @if ($note)
-                                    <p class="mt-2 mb-0 max-w-prose border-l-2 pl-2 text-xs leading-4 wrap-break-word {{ $application->status === 'rejected' ? 'border-danger-600' : 'border-success-600' }}">
+                                    <p class="mt-2 mb-0 max-w-prose rounded-sm bg-gray-50 px-2.5 py-1.5 text-xs leading-4 wrap-break-word">
                                         <span class="font-semibold text-gray-900">{{ $application->status === 'rejected' ? 'Alasan penolakan:' : 'Catatan instansi:' }}</span>
                                         <span class="text-gray-600">{{ $note }}</span>
                                     </p>

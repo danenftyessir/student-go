@@ -201,7 +201,7 @@
                     </h2>
                     <div class="space-y-6">
                         @foreach($student->projects()->where('status', 'completed')->limit(5)->get() as $project)
-                        <div class="border-l-4 border-blue-500 pl-4">
+                        <div>
                             <h3 class="font-semibold text-gray-900 text-lg mb-1">
                                 {{ $project->problem->title }}
                             </h3>

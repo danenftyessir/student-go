@@ -82,8 +82,7 @@ class SupabaseStorageService
 
             // upload ke supabase menggunakan POST method
             $response = Http::timeout(30)
-                ->withHeaders([
-                    'Authorization' => 'Bearer ' . $this->serviceKey,
+                ->withHeaders($this->authHeaders() + [
                     'Content-Type' => $mimeType,
                     'x-upsert' => 'true', // allow overwrite jika file sudah ada
                 ])
@@ -161,6 +160,21 @@ class SupabaseStorageService
             ]);
             return false;
         }
+    }
+
+    /**
+     * header auth storage: kunci baru (sb_secret_...) bukan JWT, jadi wajib lewat header apikey;
+     * Bearer hanya dikirim untuk kunci JWT lama (service_role)
+     */
+    protected function authHeaders(): array
+    {
+        $headers = ['apikey' => $this->serviceKey];
+
+        if (str_starts_with((string) $this->serviceKey, 'eyJ')) {
+            $headers['Authorization'] = 'Bearer ' . $this->serviceKey;
+        }
+
+        return $headers;
     }
 
     /**
@@ -257,9 +271,7 @@ class SupabaseStorageService
             $encodedPath = $this->encodePath($path);
             
             $response = Http::timeout(10)
-                ->withHeaders([
-                    'Authorization' => 'Bearer ' . $this->serviceKey,
-                ])
+                ->withHeaders($this->authHeaders())
                 ->head("{$this->baseUrl}/object/{$this->bucketName}/{$encodedPath}");
 
             return $response->successful();
@@ -291,9 +303,7 @@ class SupabaseStorageService
             $encodedPath = $this->encodePath($path);
 
             $response = Http::timeout(10)
-                ->withHeaders([
-                    'Authorization' => 'Bearer ' . $this->serviceKey,
-                ])
+                ->withHeaders($this->authHeaders())
                 ->delete("{$this->baseUrl}/object/{$this->bucketName}/{$encodedPath}");
 
             if ($response->successful()) {
@@ -539,8 +549,7 @@ class SupabaseStorageService
 
             // upload ke supabase
             $response = Http::timeout(30)
-                ->withHeaders([
-                    'Authorization' => 'Bearer ' . $this->serviceKey,
+                ->withHeaders($this->authHeaders() + [
                     'Content-Type' => $mimeType,
                     'x-upsert' => 'true',
                 ])
