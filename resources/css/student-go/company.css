@@ -220,7 +220,7 @@
 /* phase 29 paket E: profil perusahaan publik (pola .sg-org; kontak berikon di rel kanan) */
 .sg-co-public .sg-org__meta { align-items: center; }
 .sg-co-public__h2 { margin-top: 1.75rem; padding-top: 1rem; border-top: 1px solid var(--sg-border-default); font-size: 1rem; line-height: 1.5rem; }
-.sg-co-public__contact { display: grid; gap: .5rem; margin: 0; padding: 0; list-style: none; font-size: .9375rem; line-height: 1.375rem; color: var(--sg-text-primary); }
+.sg-co-public__contact { display: grid; gap: .5rem; margin: 0; padding: 0; list-style: none; font-size: .875rem; line-height: 1.25rem; color: var(--sg-text-primary); }
 .sg-co-public__contact li { display: flex; align-items: flex-start; gap: .5rem; min-width: 0; overflow-wrap: anywhere; }
 .sg-co-public__contact li > .sg-icon { flex: none; margin-top: .1875rem; color: var(--sg-text-tertiary); }
 .sg-co-public__contact a { min-width: 0; }
@@ -397,7 +397,7 @@ dialog .sg-co-preview__part p { display: block; -webkit-line-clamp: none; }
 .sg-co-facts > div { display: grid; gap: .125rem; min-width: 0; }
 .sg-co-facts__wide { grid-column: 1 / -1; }
 .sg-co-facts dt { font-size: .75rem; line-height: 1rem; color: var(--sg-text-tertiary); }
-.sg-co-facts dd { margin: 0; font-size: .9375rem; line-height: 1.375rem; color: var(--sg-text-primary); overflow-wrap: anywhere; }
+.sg-co-facts dd { margin: 0; font-size: .875rem; line-height: 1.25rem; color: var(--sg-text-primary); overflow-wrap: anywhere; }
 .sg-co-facts dd a { color: var(--sg-text-link); text-decoration: underline; text-underline-offset: 2px; }
 .sg-co-facts__empty { color: var(--sg-text-tertiary); }
 
@@ -407,7 +407,7 @@ dialog .sg-co-preview__part p { display: block; -webkit-line-clamp: none; }
 .sg-co-section { display: grid; gap: 1.25rem; padding-block: 1.5rem 2rem; border-top: 1px solid var(--sg-border-default); }
 .sg-co-section:first-of-type { border-top: 0; padding-top: 0; }
 .sg-co-section > h2 { display: flex; align-items: center; gap: .625rem; margin: 0; font-size: 1.125rem; line-height: 1.75rem; font-weight: 600; color: var(--sg-text-primary); }
-.sg-co-section__num { display: inline-flex; align-items: center; justify-content: center; flex: none; width: 1.75rem; height: 1.75rem; border: 1px solid var(--sg-border-strong); border-radius: 999px; font-size: .8125rem; font-variant-numeric: tabular-nums; color: var(--sg-text-secondary); }
+.sg-co-section__num { display: inline-flex; align-items: center; justify-content: center; flex: none; width: 1.75rem; height: 1.75rem; border: 1px solid var(--sg-border-strong); border-radius: 999px; font-size: .75rem; font-variant-numeric: tabular-nums; color: var(--sg-text-secondary); }
 .sg-co-section__opt { font-size: .75rem; font-weight: 500; color: var(--sg-text-tertiary); }
 .sg-co-section .sg-field { max-width: 46rem; min-width: 0; }
 .sg-co-grid-2 { display: grid; gap: 1.25rem; max-width: 46rem; align-items: start; }

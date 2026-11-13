@@ -136,8 +136,8 @@
 .sg-browse-popup .leaflet-popup-content-wrapper { border-radius: var(--sg-radius-panel); box-shadow: var(--shadow-overlay); }
 .sg-browse-popup .leaflet-popup-content { margin: .75rem .875rem; font-family: var(--font-sans); }
 .sg-browse-popup__body { display: grid; gap: .25rem; }
-.sg-browse-popup__title { margin: 0; font: 600 .9375rem/1.375rem var(--font-sans); color: var(--sg-text-primary); overflow-wrap: anywhere; }
-.sg-browse-popup__meta { margin: 0; font-size: .8125rem; line-height: 1.25rem; color: var(--sg-text-secondary); overflow-wrap: anywhere; }
+.sg-browse-popup__title { margin: 0; font: 600 .875rem/1.25rem var(--font-sans); color: var(--sg-text-primary); overflow-wrap: anywhere; }
+.sg-browse-popup__meta { margin: 0; font-size: .75rem; line-height: 1.25rem; color: var(--sg-text-secondary); overflow-wrap: anywhere; }
 .sg-browse-popup .sg-btn { margin-top: .5rem; color: var(--sg-text-primary); }
 
 /* ── Empty states and pager ── */
