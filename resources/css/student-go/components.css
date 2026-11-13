@@ -71,7 +71,7 @@
 .sg-error { font-size: .875rem; line-height: 1.25rem; color: var(--color-danger-700); display: flex; gap: .375rem; align-items: flex-start; }
 
 .sg-input, .sg-select, .sg-textarea {
-  width: 100%; min-height: 2.5rem; padding: .5rem .75rem;
+  width: 100%; min-height: 2.5rem; padding: .4375rem .75rem;   /* 24 + 14 + 2 = tepat 40px, sejajar dengan sg-btn--lg */
   font: 400 1rem/1.5rem var(--font-sans); color: var(--sg-text-primary);
   background: var(--sg-surface-raised);
   border: 1px solid var(--sg-border-control);            /* >= 3:1 against white */
@@ -127,14 +127,15 @@
 .sg-table-wrap { overflow-x: auto; border: 1px solid var(--sg-border-default); border-radius: var(--sg-radius-panel); }   /* at most one scroll container */
 .sg-table { width: 100%; border-collapse: collapse; font-size: .875rem; line-height: 1.25rem; }
 .sg-table thead th { position: sticky; top: 0; background: var(--color-gray-50); text-align: left; font-weight: 500; font-size: .75rem; line-height: 1rem; color: var(--sg-text-secondary); padding: .625rem .75rem; border-bottom: 1px solid var(--sg-border-default); }
-.sg-table td { padding: .75rem; border-bottom: 1px solid var(--sg-border-default); vertical-align: top; overflow-wrap: anywhere; }   /* long emails / 76-char names */
+.sg-table td { padding: .75rem; border-bottom: 1px solid var(--sg-border-default); vertical-align: top; overflow-wrap: break-word; }   /* email/nama panjang tetap patah bila meluap; kata biasa tidak dipenggal di tablet */
 .sg-table tbody tr:last-child td { border-bottom: 0; }
 .sg-table tbody tr:hover { background: var(--color-gray-50); }
 .sg-table .sg-num { text-align: right; white-space: nowrap; }
 .sg-table a { color: var(--sg-text-link); font-weight: 500; text-decoration: none; }
 .sg-table a:hover { text-decoration: underline; }
 .sg-table__primary { font-weight: 600; color: var(--sg-text-primary); }
-.sg-table__meta { display: block; font-size: .75rem; line-height: 1rem; color: var(--sg-text-tertiary); }
+.sg-table__meta { display: block; font-size: .75rem; line-height: 1rem; color: var(--sg-text-tertiary); overflow-wrap: anywhere; }   /* email tanpa titik patah tidak melebarkan kolom */
+@media (min-width: 640px) and (max-width: 1023px) { .sg-table thead th, .sg-table td { padding-inline: .5rem; } }   /* tablet: tabel lebar muat tanpa gulir */
 @media (max-width: 639px) {
   .sg-table-wrap { border: 0; overflow: visible; }
   .sg-table--stack thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
@@ -143,6 +144,11 @@
   .sg-table--stack td::before { content: attr(data-label); grid-column: 1; grid-row: 1; font-size: .75rem; line-height: 1.25rem; color: var(--sg-text-tertiary); }
   .sg-table--stack td > * { grid-column: 2; }   /* every child (link, meta line, badge) stays in the content column */
   .sg-table--stack .sg-num { text-align: left; }
+  /* td data-sg-stack: bare = tanpa label (judul baris, aksi), hide = tidak ditampilkan saat ditumpuk */
+  .sg-table--stack td[data-sg-stack="bare"] { grid-template-columns: minmax(0, 1fr); }
+  .sg-table--stack td[data-sg-stack="bare"]::before { content: none; }
+  .sg-table--stack td[data-sg-stack="bare"] > * { grid-column: 1; }
+  .sg-table--stack td[data-sg-stack="hide"] { display: none; }
 }
 
 /* ── Record list (people, notifications): divider-separated rows, not cards ── */
