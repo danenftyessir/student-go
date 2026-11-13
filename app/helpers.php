@@ -524,3 +524,27 @@ if (!function_exists('safe_error_message')) {
         return rtrim(preg_replace('/\s*Error:\s*$/', '', $prefix), ' :.') . '.';
     }
 }
+
+if (!function_exists('status_counts')) {
+    /**
+     * jumlah baris per status dalam SATU query berkelompok (menggantikan satu count() per status)
+     *
+     * @param \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Query\Builder $query query dasar (filter pemilik, dll.)
+     * @param array $statuses status yang ingin dibaca; status lain tetap ikut dihitung di 'total'
+     * @return array ['total' => int, '<status>' => int, ...] (status tanpa baris = 0)
+     *
+     * usage:
+     * status_counts(Problem::where('institution_id', $id), ['open', 'closed']) // ['total' => 7, 'open' => 3, 'closed' => 1]
+     */
+    function status_counts($query, array $statuses): array
+    {
+        $counts = (clone $query)->selectRaw('status, count(*) as total')->groupBy('status')->pluck('total', 'status');
+
+        $result = ['total' => (int) $counts->sum()];
+        foreach ($statuses as $status) {
+            $result[$status] = (int) ($counts[$status] ?? 0);
+        }
+
+        return $result;
+    }
+}

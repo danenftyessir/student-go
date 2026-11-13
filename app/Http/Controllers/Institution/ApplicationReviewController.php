@@ -70,13 +70,15 @@ class ApplicationReviewController extends Controller
             $q->where('institution_id', $institution->id);
         });
 
+        // satu query berkelompok, bukan satu query per status
+        $counts = status_counts($baseQuery, ['pending', 'reviewed', 'accepted', 'rejected']);
         $stats = [
-            'total' => (clone $baseQuery)->count(),
-            'pending' => (clone $baseQuery)->where('status', 'pending')->count(),
+            'total' => $counts['total'],
+            'pending' => $counts['pending'],
             // key lama 'under_review' dipertahankan untuk view; status yang tersimpan di database adalah 'reviewed'
-            'under_review' => (clone $baseQuery)->where('status', 'reviewed')->count(),
-            'accepted' => (clone $baseQuery)->where('status', 'accepted')->count(),
-            'rejected' => (clone $baseQuery)->where('status', 'rejected')->count(),
+            'under_review' => $counts['reviewed'],
+            'accepted' => $counts['accepted'],
+            'rejected' => $counts['rejected'],
         ];
 
         // daftar problems untuk filter dropdown

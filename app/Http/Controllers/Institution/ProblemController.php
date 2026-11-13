@@ -73,15 +73,8 @@ class ProblemController extends Controller
         
         $problems = $query->paginate(12)->withQueryString();
         
-        // statistik
-        $stats = [
-            'total' => Problem::where('institution_id', $institution->id)->count(),
-            'draft' => Problem::where('institution_id', $institution->id)->where('status', 'draft')->count(),
-            'open' => Problem::where('institution_id', $institution->id)->where('status', 'open')->count(),
-            'in_progress' => Problem::where('institution_id', $institution->id)->where('status', 'in_progress')->count(),
-            'completed' => Problem::where('institution_id', $institution->id)->where('status', 'completed')->count(),
-            'closed' => Problem::where('institution_id', $institution->id)->where('status', 'closed')->count(),
-        ];
+        // statistik (satu query berkelompok, bukan satu query per status)
+        $stats = status_counts(Problem::where('institution_id', $institution->id), ['draft', 'open', 'in_progress', 'completed', 'closed']);
         
         return view('institution.problems.index', compact('problems', 'stats'));
     }

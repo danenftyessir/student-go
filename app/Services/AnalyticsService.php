@@ -42,10 +42,12 @@ class AnalyticsService
     {
         $problems = Problem::where('institution_id', $institutionId);
 
-        $total = $problems->count();
-        $open = (clone $problems)->where('status', 'open')->count();
-        $closed = (clone $problems)->where('status', 'closed')->count();
-        $completed = (clone $problems)->where('status', 'completed')->count();
+        // satu query berkelompok, bukan satu count() per status
+        $counts = status_counts($problems, ['open', 'closed', 'completed']);
+        $total = $counts['total'];
+        $open = $counts['open'];
+        $closed = $counts['closed'];
+        $completed = $counts['completed'];
 
         // rata-rata aplikasi per problem
         $totalApplications = Application::whereHas('problem', function($q) use ($institutionId) {
@@ -85,14 +87,16 @@ class AnalyticsService
             $q->where('institution_id', $institutionId);
         });
 
-        $total = $applications->count();
-        $pending = (clone $applications)->where('status', 'pending')->count();
-        
+        // satu query berkelompok, bukan satu count() per status
+        $counts = status_counts($applications, ['pending', 'reviewed', 'accepted', 'rejected']);
+        $total = $counts['total'];
+        $pending = $counts['pending'];
+
         // status di database adalah 'reviewed' (enum applications); key hasil tetap 'under_review'
-        $underReview = (clone $applications)->where('status', 'reviewed')->count();
-        
-        $accepted = (clone $applications)->where('status', 'accepted')->count();
-        $rejected = (clone $applications)->where('status', 'rejected')->count();
+        $underReview = $counts['reviewed'];
+
+        $accepted = $counts['accepted'];
+        $rejected = $counts['rejected'];
 
         // acceptance rate
         $acceptanceRate = $total > 0 ? ($accepted / $total) * 100 : 0;
@@ -126,11 +130,13 @@ class AnalyticsService
     {
         $projects = Project::where('institution_id', $institutionId);
 
-        $total = $projects->count();
-        $planning = (clone $projects)->where('status', 'planning')->count();
-        $active = (clone $projects)->where('status', 'active')->count();
-        $review = (clone $projects)->where('status', 'review')->count();
-        $completed = (clone $projects)->where('status', 'completed')->count();
+        // satu query berkelompok, bukan satu count() per status
+        $counts = status_counts($projects, ['planning', 'active', 'review', 'completed']);
+        $total = $counts['total'];
+        $planning = $counts['planning'];
+        $active = $counts['active'];
+        $review = $counts['review'];
+        $completed = $counts['completed'];
 
         // rata-rata progress dari semua project aktif
         $activeProjects = Project::where('institution_id', $institutionId)
