@@ -330,6 +330,45 @@ class Student extends Model
             })
             ->first();
 
+        return $this->statusFromFriendship($friendship);
+    }
+
+    /**
+     * status pertemanan untuk banyak student sekaligus: satu query, bukan satu query per student
+     * hasil: [student_id => none|friends|request_sent|request_received]
+     */
+    public function friendshipStatusesWith(array $studentIds): array
+    {
+        $statuses = array_fill_keys($studentIds, 'none');
+        if (empty($studentIds)) {
+            return $statuses;
+        }
+
+        $friendships = Friend::where(function($query) use ($studentIds) {
+                $query->where('requester_id', $this->id)->whereIn('receiver_id', $studentIds);
+            })
+            ->orWhere(function($query) use ($studentIds) {
+                $query->where('receiver_id', $this->id)->whereIn('requester_id', $studentIds);
+            })
+            ->orderBy('id')
+            ->get();
+
+        $seen = [];
+        foreach ($friendships as $friendship) {
+            $otherId = $friendship->requester_id === $this->id ? $friendship->receiver_id : $friendship->requester_id;
+            // seperti first(): bila ada lebih dari satu baris untuk pasangan yang sama, baris pertama yang dipakai
+            if (isset($seen[$otherId])) {
+                continue;
+            }
+            $seen[$otherId] = true;
+            $statuses[$otherId] = $this->statusFromFriendship($friendship);
+        }
+
+        return $statuses;
+    }
+
+    private function statusFromFriendship(?Friend $friendship): string
+    {
         if (!$friendship) {
             return 'none'; // tidak ada relasi
         }
