@@ -4,7 +4,7 @@
     <div {{ $attributes->class('grid gap-2') }} role="status" aria-label="{{ $label }}">
         <span class="sg-skeleton sg-skeleton--title"></span>
         @for ($i = 0; $i < $lines; $i++)
-            <span class="sg-skeleton" @style(['width: '.(100 - ($i % 3) * 15).'%'])></span>
+            <span class="sg-skeleton"></span>
         @endfor
     </div>
 @else
