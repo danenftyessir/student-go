@@ -9,9 +9,8 @@
     // di 360px (C3), bagian isi bergaris, rel kanan mulai 1024px (lamar, perusahaan, lowongan serupa).
     // kontrak tetap: POST student.jobs.apply (cover_letter, resume_url, portfolio_url), DELETE student.jobs.withdraw.
     $company = $job->company;
-    // jenis lowongan: pemetaan yang sama dengan daftar lowongan (student/jobs/components/job-row.blade.php)
-    $typeLabels = ['internship' => 'Magang', 'magang' => 'Magang', 'contract' => 'Kontrak', 'full_time' => 'Penuh waktu', 'part_time' => 'Paruh waktu', 'freelance' => 'Lepas'];
-    $typeLabel = $job->job_type ? ($typeLabels[strtolower($job->job_type)] ?? $job->job_type) : null;
+    // jenis lowongan: helper yang sama dengan daftar dan halaman bandingkan (app/helpers.php)
+    $typeLabel = job_type_label($job->job_type);
     $tanggal = fn ($date) => $date ? $date->locale('id')->translatedFormat('j M Y') : null;
     $relatif = fn ($date) => $date ? $date->locale('id')->diffForHumans() : null;
     $skills = collect((array) $job->skills)->filter(fn ($s) => filled($s))->values();

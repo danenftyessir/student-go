@@ -4,24 +4,10 @@
      semua nilai dari kolom/relasi job_postings; tenggat = expires_at. $saved (SavedJob) hanya di halaman tersimpan. --}}
 @php
     $saved = $saved ?? null;
-    $typeLabels = ['internship' => 'Magang', 'magang' => 'Magang', 'contract' => 'Kontrak', 'full_time' => 'Penuh waktu', 'part_time' => 'Paruh waktu', 'freelance' => 'Lepas'];
-    $typeLabel = $job->job_type ? ($typeLabels[strtolower($job->job_type)] ?? $job->job_type) : null;
+    $typeLabel = job_type_label($job->job_type);
 
-    // gaji: rupiah dalam juta (1–2 juta); mata uang lain apa adanya
-    $salary = null;
-    if ($job->salary_min || $job->salary_max) {
-        if (($job->salary_currency ?? 'IDR') === 'IDR') {
-            $juta = fn ($v) => rtrim(rtrim(number_format((float) $v / 1000000, 1, ',', '.'), '0'), ',');
-            $salary = 'Rp ' . ($job->salary_min && $job->salary_max
-                ? $juta($job->salary_min) . '–' . $juta($job->salary_max)
-                : $juta($job->salary_min ?: $job->salary_max)) . ' juta';
-        } else {
-            $num = fn ($v) => number_format((float) $v, 0, ',', '.');
-            $salary = $job->salary_currency . ' ' . ($job->salary_min && $job->salary_max
-                ? $num($job->salary_min) . '–' . $num($job->salary_max)
-                : $num($job->salary_min ?: $job->salary_max));
-        }
-    }
+    // gaji: rupiah dalam juta (1–2 juta); mata uang lain apa adanya (app/helpers.php)
+    $salary = job_salary_label($job);
 
     $sdgs = array_values(array_unique(array_filter(array_map('intval', (array) $job->sdg_alignment), fn ($n) => $n >= 1 && $n <= 17)));
     $deadline = $job->expires_at;
