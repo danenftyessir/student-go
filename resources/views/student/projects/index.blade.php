@@ -169,7 +169,7 @@ function togglePortfolio(projectId, button) {
     button.setAttribute('aria-busy', 'true');
     button.setAttribute('aria-disabled', 'true');
 
-    fetch(`/student/projects/${projectId}/toggle-portfolio`, {
+    fetch(@js(route('student.projects.toggle-portfolio', '__ID__')).replace('__ID__', projectId), {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',

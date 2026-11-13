@@ -62,7 +62,7 @@ document.addEventListener('alpine:init', () => {
         toggle(event) {
             if (this.busy) return;
             this.busy = true;
-            fetch(`/student/profile/project/${projectId}/toggle-visibility`, {
+            fetch(@js(route('student.profile.project.toggle-visibility', '__ID__')).replace('__ID__', projectId), {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

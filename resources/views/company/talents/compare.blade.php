@@ -84,7 +84,7 @@
 <script>
 async function saveTalent(talentId) {
     try {
-        const response = await fetch(`/company/talents/${talentId}/toggle-save`, {
+        const response = await fetch(@js(route('company.talents.toggle-save', '__ID__')).replace('__ID__', talentId), {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
