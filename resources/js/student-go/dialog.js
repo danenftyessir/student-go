@@ -79,3 +79,47 @@ export function initConfirm() {
         });
     }, true);
 }
+
+// form POST: tombol pengirim menampilkan status proses dan submit kedua ditahan (cegah data ganda).
+// submit yang sudah dibatalkan (fetch/alpine .prevent, konfirmasi belum dijawab) tidak disentuh.
+// <form data-sg-no-busy> untuk keluar dari perilaku ini.
+function resetBusy(form) {
+    delete form.dataset.sgBusy;
+    form.querySelectorAll('[data-sg-busy-btn]').forEach((btn) => {
+        btn.disabled = false;
+        btn.removeAttribute('aria-busy');
+        btn.removeAttribute('data-loading');
+        btn.removeAttribute('data-sg-busy-btn');
+        btn.querySelector(':scope > .sg-spinner[data-sg-busy-spinner]')?.remove();
+        btn.querySelectorAll(':scope > [data-sg-busy-hidden]').forEach((el) => { el.removeAttribute('hidden'); el.removeAttribute('data-sg-busy-hidden'); });
+    });
+}
+
+export function initSubmitFeedback() {
+    document.addEventListener('submit', (e) => {
+        const form = e.target;
+        if (!(form instanceof HTMLFormElement) || e.defaultPrevented) return;
+        if (form.method.toLowerCase() !== 'post' || form.hasAttribute('data-sg-no-busy')) return;
+        if (form.dataset.sgBusy) {
+            e.preventDefault();
+            return;
+        }
+        form.dataset.sgBusy = '1';
+        const btn = e.submitter instanceof HTMLButtonElement ? e.submitter : null;
+        if (!btn) return;
+        btn.setAttribute('data-sg-busy-btn', '');
+        btn.setAttribute('aria-busy', 'true');
+        if (btn.classList.contains('sg-btn')) {
+            btn.setAttribute('data-loading', '');
+            const icon = btn.querySelector(':scope > .sg-icon:not([hidden])');
+            if (icon) { icon.setAttribute('hidden', ''); icon.setAttribute('data-sg-busy-hidden', ''); }
+            btn.insertAdjacentHTML('afterbegin', '<span class="sg-spinner" data-sg-busy-spinner aria-hidden="true"></span>');
+        }
+        // dinonaktifkan setelah submit berjalan agar name/value tombol tetap ikut terkirim
+        setTimeout(() => { btn.disabled = true; }, 0);
+    });
+    // kembali lewat tombol back (bfcache): form bisa dipakai lagi
+    window.addEventListener('pageshow', (e) => {
+        if (e.persisted) document.querySelectorAll('form[data-sg-busy]').forEach(resetBusy);
+    });
+}
