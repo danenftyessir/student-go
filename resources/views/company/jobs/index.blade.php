@@ -87,7 +87,7 @@
                               data-sg-confirm-title="Hapus lowongan?" data-sg-confirm-label="Hapus">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="sg-icon-btn sg-co-jobs__danger" aria-label="Hapus {{ $job->title }}"><x-icon name="trash-2" /></button>
+                            <button type="submit" class="sg-icon-btn sg-co-jobs__danger" aria-label="Hapus {{ $job->title }}" title="Hapus {{ $job->title }}"><x-icon name="trash-2" /></button>
                         </form>
                     </span>
                 </td>

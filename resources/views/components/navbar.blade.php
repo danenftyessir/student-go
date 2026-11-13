@@ -198,4 +198,6 @@
             </div>
         @endauth
     </div>
+    {{-- latar menu mobile: meredupkan halaman di bawahnya, klik untuk menutup --}}
+    <div class="sg-mobile-nav__backdrop" x-show="open" x-cloak @click="close()" aria-hidden="true"></div>
 </header>

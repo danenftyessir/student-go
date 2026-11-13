@@ -297,8 +297,9 @@
 }
 
 /* ── Mobile menu (below 1024px) ── */
-.sg-mobile-nav { border-top: 1px solid var(--sg-border-default); background: var(--sg-surface-raised); max-height: calc(100vh - 4rem); overflow-y: auto; }
-@media (min-width: 1024px) { .sg-mobile-nav { display: none !important; } }
+.sg-mobile-nav { position: relative; z-index: 1; border-top: 1px solid var(--sg-border-default); background: var(--sg-surface-raised); max-height: calc(100vh - 4rem); overflow-y: auto; }
+.sg-mobile-nav__backdrop { position: fixed; inset: 4rem 0 0; background: color-mix(in srgb, var(--color-gray-900) 45%, transparent); }
+@media (min-width: 1024px) { .sg-mobile-nav, .sg-mobile-nav__backdrop { display: none !important; } }
 .sg-mobile-nav__section { margin: 0; padding: .5rem 0; list-style: none; }
 .sg-mobile-nav__section + .sg-mobile-nav__section { border-top: 1px solid var(--sg-border-default); }
 .sg-mobile-nav__link { display: flex; align-items: center; gap: .75rem; width: 100%; min-height: 2.75rem; padding: .5rem var(--sg-gutter); font: 500 1rem/1.5rem var(--font-sans); color: var(--sg-text-primary); text-align: left; text-decoration: none; background: none; border: 0; cursor: pointer; }
