@@ -56,7 +56,7 @@
                     $overdue = $project->status === 'active' && $project->end_date && $project->end_date->isPast();
                 @endphp
                 <tr>
-                    <td data-label="Proyek">
+                    <td data-label="Proyek" data-sg-stack="bare">
                         <a href="{{ route('institution.projects.show', $project->id) }}" class="sg-table__primary">{{ $project->title }}</a>
                         @if ($project->problem && $project->problem->title !== $project->title)
                             <span class="sg-table__meta">{{ $project->problem->title }}</span>
@@ -82,7 +82,7 @@
                         <span>{{ $tanggal($project->start_date) }} – {{ $tanggal($project->end_date) }}</span>
                         @if ($overdue)<span class="sg-table__meta sg-inst-warn">Melewati tanggal selesai</span>@endif
                     </td>
-                    <td data-label="Aksi">
+                    <td data-label="Aksi" data-sg-stack="bare">
                         <span class="sg-inst-actions">
                             <a href="{{ route('institution.projects.show', $project->id) }}">Detail<span class="sr-only"> {{ $project->title }}, {{ $project->student?->display_name }}</span></a>
                             <a href="{{ route('institution.projects.manage', $project->id) }}">Kelola<span class="sr-only"> {{ $project->title }}, {{ $project->student?->display_name }}</span></a>
