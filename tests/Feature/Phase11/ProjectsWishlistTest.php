@@ -192,7 +192,8 @@ class ProjectsWishlistTest extends TestCase
         $this->assertStringContainsString('Catatan saya:', $main);
         $this->assertSame(4, substr_count($main, 'class="sg-btn sg-btn--tertiary whitespace-nowrap"'));
         $html = $this->actingAs($this->student->user)->get('/student/wishlist')->getContent();
-        $this->assertStringContainsString('/student/wishlist/${wishlistId}/remove', $html);
+        // audit F-39: endpoint sama, kini dari route() (dirender @js, garis miring di-escape)
+        $this->assertStringContainsString(str_replace('/', '\/', route('student.wishlist.remove', '__ID__'))."'.replace('__ID__', wishlistId)", $html);
         $this->assertStringContainsString("method: 'DELETE'", $html);
         $this->assertStringContainsString('window.sgConfirm(', $html);
         $this->assertStringNotContainsString('if (!confirm(', $html);

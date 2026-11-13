@@ -102,9 +102,12 @@ class InstitutionPackageDTest extends TestCase
         $this->assertSame(['pending', 'in_progress', 'completed'], $values[1]);
         // endpoint fetch dan verb tetap
         $base = '/institution/projects/'.$project->id;
-        $this->assertStringContainsString("fetch(`{$base}/status`", $html);
-        $this->assertSame(3, substr_count($html, "fetch(`{$base}/milestones/\${milestoneId}`"));
-        $this->assertStringContainsString("fetch(`{$base}/milestones/\${milestoneId}`)", $html);
+        // audit F-39: url fetch dari route() (dirender @js, garis miring di-escape); endpoint sama
+        $js = fn (string $url) => str_replace('/', '\/', $url);
+        $this->assertStringContainsString("fetch('".$js(route('institution.projects.update-status', $project->id))."', {", $html);
+        $milestone = $js(route('institution.projects.get-milestone', [$project->id, '__ID__']))."'.replace('__ID__', milestoneId)";
+        $this->assertSame(3, substr_count($html, "fetch('".$milestone));
+        $this->assertStringContainsString("fetch('".$milestone.')', $html);
         foreach (["method: 'POST'", "method: 'PUT'", "method: 'DELETE'"] as $verb) {
             $this->assertStringContainsString($verb, $html);
         }
