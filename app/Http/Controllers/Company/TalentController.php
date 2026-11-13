@@ -218,25 +218,6 @@ class TalentController extends Controller
         ));
     }
 
-    public function show($id)
-    {
-        $user = Auth::user();
-        $company = $user->company;
-
-        // IMPLEMENTED: Ambil data talent dari Supabase berdasarkan id
-        $talent = User::where('user_type', 'student')
-            ->where('id', $id)
-            ->with(['student'])
-            ->firstOrFail();
-
-        // Check if talent is saved by company
-        $isSaved = SavedTalent::where('company_id', $company->id)
-            ->where('user_id', $id)
-            ->exists();
-
-        return view('company.talents.show', compact('talent', 'company', 'isSaved'));
-    }
-
     public function saved(Request $request)
     {
         $user = Auth::user();
