@@ -107,7 +107,9 @@ export function registerAlpine(Alpine) {
         },
         async init() {
             await this.loadNotifications();
-            setInterval(() => this.loadNotifications(), 30000);
+            // tab yang tidak terlihat tidak ikut polling; saat terlihat lagi, muat ulang sekali
+            setInterval(() => { if (!document.hidden) this.loadNotifications(); }, 30000);
+            document.addEventListener('visibilitychange', () => { if (!document.hidden) this.loadNotifications(); });
         },
         async toggle() {
             if (this.open) {
