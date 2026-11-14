@@ -104,7 +104,7 @@
                                 @endif
                                 @if ($report->document_path)
                                     <p class="sg-inst-manage__text">
-                                        <a href="{{ document_url($report->document_path) }}" target="_blank" download class="sg-inst-link">Unduh dokumen<span class="sr-only"> {{ $report->title }}</span></a>
+                                        <a data-sg-file href="{{ document_url($report->document_path) }}" target="_blank" download class="sg-inst-link">Unduh dokumen<span class="sr-only"> {{ $report->title }}</span></a>
                                     </p>
                                 @endif
                                 <p class="sg-inst-manage__actions">

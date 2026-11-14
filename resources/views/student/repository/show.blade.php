@@ -33,7 +33,7 @@
                     <span class="download-text">Unduh{{ $fileType ? ' ' . $fileType : '' }}</span>
                 </button>
                 @if ($document->file_path)
-                    <a href="{{ document_url($document->file_path) }}" target="_blank" rel="noopener" class="sg-btn sg-btn--secondary">
+                    <a data-sg-file href="{{ document_url($document->file_path) }}" target="_blank" rel="noopener" class="sg-btn sg-btn--secondary">
                         <x-icon name="external-link" size="sm" />Buka di tab baru
                     </a>
                 @endif
@@ -116,7 +116,8 @@ async function downloadDocument(button) {
             headers: { 'Accept': 'application/octet-stream', 'X-Requested-With': 'XMLHttpRequest' }
         });
         if (!response.ok) {
-            throw new Error('Download failed');
+            // 400/404 dari storage: berkas belum diunggah, bukan gangguan sementara
+            throw new Error(response.status === 400 || response.status === 404 ? 'missing' : 'failed');
         }
 
         // nama file dari header Content-Disposition, cadangan: judul dokumen
@@ -140,7 +141,9 @@ async function downloadDocument(button) {
         window.showNotification?.('Dokumen berhasil diunduh.', 'success');
     } catch (error) {
         console.error('Download error:', error);
-        window.showNotification?.('Gagal mengunduh dokumen. Silakan coba lagi.', 'error');
+        window.showNotification?.(error.message === 'missing'
+            ? 'Berkas dokumen ini belum tersedia di penyimpanan.'
+            : 'Gagal mengunduh dokumen. Silakan coba lagi.', 'error');
     } finally {
         button.disabled = false;
         label.textContent = original;
