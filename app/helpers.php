@@ -548,3 +548,57 @@ if (!function_exists('status_counts')) {
         return $result;
     }
 }
+
+if (!function_exists('job_type_label')) {
+    /**
+     * label bahasa indonesia untuk job_type lowongan (nilai tersimpan campur huruf: "Internship", "internship")
+     *
+     * @param string|null $type nilai job_type dari database
+     * @return string|null label, nilai asli bila tidak dikenal, null bila kosong
+     *
+     * usage:
+     * job_type_label('Internship') // "Magang"
+     */
+    function job_type_label(?string $type): ?string
+    {
+        if (! $type) {
+            return null;
+        }
+
+        $labels = ['internship' => 'Magang', 'magang' => 'Magang', 'contract' => 'Kontrak', 'full_time' => 'Penuh waktu', 'part_time' => 'Paruh waktu', 'freelance' => 'Lepas'];
+
+        return $labels[strtolower($type)] ?? $type;
+    }
+}
+
+if (!function_exists('job_salary_label')) {
+    /**
+     * gaji lowongan untuk ditampilkan: rupiah dalam juta ("Rp 1–2 juta"); mata uang lain apa adanya
+     *
+     * @param object $job JobPosting (salary_min, salary_max, salary_currency)
+     * @return string|null null bila gaji tidak diisi
+     *
+     * usage:
+     * job_salary_label($job) // "Rp 1,5–2 juta"
+     */
+    function job_salary_label($job): ?string
+    {
+        if (! $job->salary_min && ! $job->salary_max) {
+            return null;
+        }
+
+        if (($job->salary_currency ?? 'IDR') === 'IDR') {
+            $juta = fn ($v) => rtrim(rtrim(number_format((float) $v / 1000000, 1, ',', '.'), '0'), ',');
+
+            return 'Rp ' . ($job->salary_min && $job->salary_max
+                ? $juta($job->salary_min) . '–' . $juta($job->salary_max)
+                : $juta($job->salary_min ?: $job->salary_max)) . ' juta';
+        }
+
+        $num = fn ($v) => number_format((float) $v, 0, ',', '.');
+
+        return $job->salary_currency . ' ' . ($job->salary_min && $job->salary_max
+            ? $num($job->salary_min) . '–' . $num($job->salary_max)
+            : $num($job->salary_min ?: $job->salary_max));
+    }
+}

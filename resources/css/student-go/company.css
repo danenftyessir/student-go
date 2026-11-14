@@ -148,16 +148,6 @@
 .sg-co-saved__note p { margin: 0; font-size: .875rem; line-height: 1.25rem; color: var(--sg-text-primary); overflow-wrap: anywhere; white-space: pre-line; }
 .sg-co-saved__note .sg-co-saved__note-label { font-size: .75rem; line-height: 1rem; font-weight: 600; color: var(--sg-text-tertiary); }
 
-/* compare page: one horizontal scroll container at every width (2-3 people + criteria do not stack) */
-.sg-co-compare { padding-bottom: 3rem; }
-.sg-co-compare__table.sg-table-wrap { position: relative; overflow-x: auto; border: 1px solid var(--sg-border-default); }   /* relative: sr-only labels stay inside the scroller */
-.sg-co-compare__table .sg-table { min-width: 36rem; }
-.sg-co-compare__table tbody th { padding: .75rem; text-align: left; vertical-align: top; white-space: nowrap; font-size: .875rem; line-height: 1.25rem; font-weight: 500; color: var(--sg-text-secondary); background: var(--color-gray-50); border-bottom: 1px solid var(--sg-border-default); }
-.sg-co-compare__table tbody tr:last-child th { border-bottom: 0; }
-.sg-co-compare__person { display: inline-flex; align-items: center; gap: .5rem; font-size: .875rem; line-height: 1.25rem; font-weight: 600; color: var(--sg-text-primary); }
-.sg-co-compare__ok { display: inline-flex; align-items: center; gap: .25rem; color: var(--color-success-700); }
-.sg-co-compare__bio { min-width: 12rem; white-space: pre-line; }
-.sg-co-compare__actions { display: flex; flex-wrap: wrap; gap: .5rem; }
 
 /* ─────────────────────────────────────────────────────────────────────────────
  * Phase 23 (2026-10-31): job table (/company/jobs), five-step wizard (/company/jobs/create)

@@ -8,16 +8,16 @@
     $fmt = fn ($n) => number_format((float) $n, 0, ',', '.');
 @endphp
 
-<div class="sg-container sg-co-compare">
+<div class="sg-container sg-compare">
     <x-ui.page-header title="Bandingkan Talenta" :description="'Membandingkan ' . $talents->count() . ' talenta berdampingan.'"
                       :back="route('company.talents.index')" back-label="Kembali ke Talenta" />
 
-    <x-ui.table caption="Perbandingan talenta" :stack="false" class="sg-co-compare__table">
+    <x-ui.table caption="Perbandingan talenta" :stack="false" class="sg-compare__table">
         <x-slot:head>
             <th scope="col">Kriteria</th>
             @foreach ($talents as $talent)
                 <th scope="col">
-                    <span class="sg-co-compare__person">
+                    <span class="sg-compare__person">
                         <x-ui.avatar :name="$talent->display_name" decorative />
                         <span>{{ $talent->display_name }}</span>
                     </span>
@@ -36,7 +36,7 @@
             @foreach ($talents as $talent)
                 <td>
                     @if ($talent->email_verified_at)
-                        <span class="sg-co-compare__ok"><x-icon name="badge-check" size="sm" />Email terverifikasi</span>
+                        <span class="sg-compare__ok"><x-icon name="badge-check" size="sm" />Email terverifikasi</span>
                     @else
                         Belum terverifikasi
                     @endif
@@ -58,14 +58,14 @@
         <tr>
             <th scope="row">Bio</th>
             @foreach ($talents as $talent)
-                <td class="sg-co-compare__bio">{{ $talent->profile?->bio ?: 'Belum ada bio.' }}</td>
+                <td class="sg-compare__bio">{{ $talent->profile?->bio ?: 'Belum ada bio.' }}</td>
             @endforeach
         </tr>
         <tr>
             <th scope="row">Aksi</th>
             @foreach ($talents as $talent)
                 <td>
-                    <span class="sg-co-compare__actions">
+                    <span class="sg-compare__actions">
                         <x-ui.button variant="secondary" :href="route('profile.public', $talent->username)">
                             Lihat profil<span class="sr-only"> {{ $talent->display_name }}</span>
                         </x-ui.button>
