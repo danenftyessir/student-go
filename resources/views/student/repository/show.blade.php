@@ -53,7 +53,7 @@
             @if (count($sdgs))
                 <ul class="sg-repo-doc__sdgs" aria-label="Tujuan SDG">
                     @foreach ($sdgs as $sdg)
-                        <li><span class="sg-chip sg-sdg" data-sdg="{{ $sdg['id'] }}"><span class="sg-chip__swatch" aria-hidden="true"></span>SDG {{ $sdg['id'] }} · {{ $sdg['name'] }}</span></li>
+                        <li><span class="sg-chip sg-sdg" data-sdg="{{ $sdg['id'] }}">SDG {{ $sdg['id'] }} · {{ $sdg['name'] }}</span></li>
                     @endforeach
                 </ul>
             @endif
