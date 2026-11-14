@@ -727,3 +727,7 @@ body:has(dialog.sg-dialog[open]) { overflow: hidden; }
 .sg-password__rules > li[data-met] { color: var(--color-success-700); }
 .sg-password__rules > li[data-met] .sg-password__met { display: inline-block; }
 .sg-password__rules > li[data-met] .sg-password__unmet { display: none; }
+
+/* lencana proyek yang sudah divalidasi instansi (kartu talenta, portofolio) */
+.sg-validated { display: inline-flex; align-items: center; gap: .25rem; color: var(--color-success-700); font-weight: 600; }
+.sg-validated .sg-icon, .sg-co-talents__facts .sg-validated .sg-icon { color: var(--color-success-600); }
