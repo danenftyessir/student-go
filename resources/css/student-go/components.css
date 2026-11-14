@@ -134,7 +134,7 @@
 .sg-table a { color: var(--sg-text-link); font-weight: 500; text-decoration: none; }
 .sg-table a:hover { text-decoration: underline; }
 .sg-table__primary { font-weight: 600; color: var(--sg-text-primary); }
-.sg-table__meta { display: block; font-size: .75rem; line-height: 1rem; color: var(--sg-text-tertiary); overflow-wrap: anywhere; }   /* email tanpa titik patah tidak melebarkan kolom */
+.sg-table__meta { display: block; font-size: .75rem; line-height: 1rem; color: var(--sg-text-tertiary); }
 @media (min-width: 640px) and (max-width: 1023px) { .sg-table thead th, .sg-table td { padding-inline: .5rem; } }   /* tablet: tabel lebar muat tanpa gulir */
 @media (max-width: 639px) {
   .sg-table-wrap { border: 0; overflow: visible; }

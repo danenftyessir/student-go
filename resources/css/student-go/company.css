@@ -323,6 +323,7 @@ dialog .sg-co-preview__part p { display: block; -webkit-line-clamp: none; }
 .sg-co-apps__rating-bars i { width: .5rem; height: .75rem; border-radius: 1px; background: var(--color-gray-200); }
 .sg-co-apps__rating-bars i.is-on { background: var(--color-gray-600); }
 .sg-co-apps__muted { color: var(--sg-text-tertiary); }
+.sg-co-apps__who .sg-table__meta { overflow-wrap: anywhere; }   /* email kandidat tanpa titik patah tidak melebarkan kolom; teks meta lain tidak dipenggal */
 @media (min-width: 640px) { .sg-co-apps__date { white-space: nowrap; } .sg-co-apps__table thead th:last-child { width: 1%; } }
 .sg-co-apps__actions { display: inline-flex; align-items: center; gap: .125rem; margin-inline-start: -.5rem; white-space: nowrap; }
 @media (max-width: 639px) {
