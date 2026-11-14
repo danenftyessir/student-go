@@ -254,7 +254,7 @@
             </div>
             <div class="sg-home-step">
                 <h3 class="sg-home-step__title">Kerjakan dan catat</h3>
-                <p>Status lamaran terlihat di halaman Aplikasi Saya. Proyek yang selesai dan ulasan instansi tampil di portofolio publik.</p>
+                <p>Status lamaran terlihat di halaman Lamaran Saya. Proyek yang selesai dan ulasan instansi tampil di portofolio publik.</p>
                 <div class="sg-home-step__sample sg-home-step__sample--numbered">
                     <span class="sg-home-step__num sg-home-step__num--beside" aria-hidden="true">3</span>
                     <span class="sg-home-step__sample-label">Status lamaran</span>

@@ -19,7 +19,7 @@
         ],
         [
             'q' => 'Bagaimana mahasiswa melamar?',
-            'a' => 'Buka detail masalah, tulis motivasi minimal 100 karakter, dan lampirkan berkas yang diminta. Status lamaran dapat dipantau di halaman Aplikasi Saya.',
+            'a' => 'Buka detail masalah, tulis motivasi minimal 100 karakter, dan lampirkan berkas yang diminta. Status lamaran dapat dipantau di halaman Lamaran Saya.',
         ],
         [
             'q' => 'Apakah masalah bisa dilihat tanpa akun?',

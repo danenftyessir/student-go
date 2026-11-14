@@ -3,7 +3,7 @@
 
 @extends('layouts.app')
 
-@section('title', 'Detail Aplikasi')
+@section('title', 'Detail Lamaran')
 
 @section('content')
 @php
@@ -37,7 +37,7 @@
 
 <div class="sg-container pb-16">
     <x-ui.page-header :title="$problem->title" :description="$institution->name"
-                      :back="route('student.applications.index')" back-label="Kembali ke Aplikasi Saya" class="[&_h1]:wrap-break-word">
+                      :back="route('student.applications.index')" back-label="Kembali ke Lamaran Saya" class="[&_h1]:wrap-break-word">
         <x-slot:actions>
             <x-ui.status domain="application" :value="$application->status" />
         </x-slot:actions>

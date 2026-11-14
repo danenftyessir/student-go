@@ -9,7 +9,7 @@
         $navItems = [
             ['Dashboard', 'student.dashboard', 'student.dashboard'],
             ['Telusuri Masalah', 'student.browse-problems.index', 'student.browse-problems.*'],
-            ['Aplikasi Saya', 'student.applications.index', 'student.applications.*'],
+            ['Lamaran Saya', 'student.applications.index', 'student.applications.*'],
             ['Proyek Saya', 'student.projects.index', 'student.projects.*'],
             ['Repositori', 'student.repository.index', 'student.repository.*'],
             ['Lowongan', 'student.jobs.index', 'student.jobs.*'],
@@ -18,7 +18,7 @@
         $navItems = [
             ['Dashboard', 'institution.dashboard', 'institution.dashboard'],
             ['Masalah', 'institution.problems.index', 'institution.problems.*'],
-            ['Aplikasi', 'institution.applications.index', 'institution.applications.*'],
+            ['Lamaran', 'institution.applications.index', 'institution.applications.*'],
             ['Proyek', 'institution.projects.index', 'institution.projects.*'],
             ['Ulasan', 'institution.reviews.index', 'institution.reviews.*'],
         ];

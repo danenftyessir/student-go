@@ -85,7 +85,7 @@ class InstitutionDataFixesTest extends TestCase
 
         $this->actingAs($this->institution->user)
             ->post(route('institution.applications.reject', $id), ['feedback' => 'x', 'rejection_reason' => 'y'])
-            ->assertSessionHas('error', 'aplikasi ini sudah diproses');
+            ->assertSessionHas('error', 'lamaran ini sudah diproses');
 
         $this->assertSame('accepted', DB::table('applications')->where('id', $id)->value('status'));
     }

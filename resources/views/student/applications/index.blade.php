@@ -1,7 +1,7 @@
 {{-- resources/views/student/applications/index.blade.php --}}
 @extends('layouts.app')
 
-@section('title', 'Aplikasi Saya')
+@section('title', 'Lamaran Saya')
 
 @section('content')
 @php
@@ -21,7 +21,7 @@
 @endphp
 
 <div class="sg-container pb-16">
-    <x-ui.page-header title="Aplikasi Saya" description="Pantau lamaran proyek KKN dan lowongan yang sudah Anda kirim.">
+    <x-ui.page-header title="Lamaran Saya" description="Pantau lamaran proyek KKN dan lowongan yang sudah Anda kirim.">
         <x-slot:actions>
             <x-ui.button variant="secondary" icon="search" :href="$tab === 'jobs' ? route('student.jobs.index') : route('student.browse-problems.index')">
                 {{ $tab === 'jobs' ? 'Cari lowongan' : 'Telusuri masalah' }}

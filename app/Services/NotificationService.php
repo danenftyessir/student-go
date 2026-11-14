@@ -278,8 +278,8 @@ class NotificationService
         return $this->create(
             $institution->user_id,
             'application_submitted',
-            'Aplikasi Baru Diterima',
-            "{$application->student->display_name} telah mengajukan aplikasi untuk proyek {$application->problem->title}",
+            'Lamaran Baru Masuk',
+            "{$application->student->display_name} telah mengajukan lamaran untuk proyek {$application->problem->title}",
             [
                 'application_id' => $application->id,
                 'student_name' => $application->student->display_name,
@@ -297,8 +297,8 @@ class NotificationService
         return $this->create(
             $application->student->user_id,
             'application_accepted',
-            'Aplikasi Diterima! 🎉',
-            "Selamat! Aplikasi Anda untuk proyek {$application->problem->title} telah diterima oleh {$application->problem->institution->name}",
+            'Lamaran Diterima! 🎉',
+            "Selamat! Lamaran Anda untuk proyek {$application->problem->title} telah diterima oleh {$application->problem->institution->name}",
             [
                 'application_id' => $application->id,
                 'problem_title' => $application->problem->title,
@@ -313,7 +313,7 @@ class NotificationService
      */
     public function applicationRejected($application, $feedback = null)
     {
-        $message = "Aplikasi Anda untuk proyek {$application->problem->title} belum dapat diterima saat ini.";
+        $message = "Lamaran Anda untuk proyek {$application->problem->title} belum dapat diterima saat ini.";
         if ($feedback) {
             $message .= " Feedback: {$feedback}";
         }
@@ -321,7 +321,7 @@ class NotificationService
         return $this->create(
             $application->student->user_id,
             'application_rejected',
-            'Aplikasi Ditolak',
+            'Lamaran Ditolak',
             $message,
             [
                 'application_id' => $application->id,
