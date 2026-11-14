@@ -111,6 +111,7 @@
 .sg-co-talents__chips .sg-chip { overflow-wrap: anywhere; }
 .sg-co-talents__list .sg-list__end { gap: .75rem; }
 .sg-co-talents__pick { align-items: center; white-space: nowrap; }
+.sg-co-talents__save { min-width: 8.5rem; justify-content: center; }   /* simpan/tersimpan sama lebar: "bandingkan" tidak bergeser */
 .sg-co-talents__save[aria-pressed="true"] { color: var(--sg-text-link); border-color: var(--color-brand-300); background: var(--sg-brand-tint); }
 .sg-co-talents__pager { margin-top: 1.5rem; }
 
@@ -148,16 +149,6 @@
 .sg-co-saved__note p { margin: 0; font-size: .875rem; line-height: 1.25rem; color: var(--sg-text-primary); overflow-wrap: anywhere; white-space: pre-line; }
 .sg-co-saved__note .sg-co-saved__note-label { font-size: .75rem; line-height: 1rem; font-weight: 600; color: var(--sg-text-tertiary); }
 
-/* compare page: one horizontal scroll container at every width (2-3 people + criteria do not stack) */
-.sg-co-compare { padding-bottom: 3rem; }
-.sg-co-compare__table.sg-table-wrap { position: relative; overflow-x: auto; border: 1px solid var(--sg-border-default); }   /* relative: sr-only labels stay inside the scroller */
-.sg-co-compare__table .sg-table { min-width: 36rem; }
-.sg-co-compare__table tbody th { padding: .75rem; text-align: left; vertical-align: top; white-space: nowrap; font-size: .875rem; line-height: 1.25rem; font-weight: 500; color: var(--sg-text-secondary); background: var(--color-gray-50); border-bottom: 1px solid var(--sg-border-default); }
-.sg-co-compare__table tbody tr:last-child th { border-bottom: 0; }
-.sg-co-compare__person { display: inline-flex; align-items: center; gap: .5rem; font-size: .875rem; line-height: 1.25rem; font-weight: 600; color: var(--sg-text-primary); }
-.sg-co-compare__ok { display: inline-flex; align-items: center; gap: .25rem; color: var(--color-success-700); }
-.sg-co-compare__bio { min-width: 12rem; white-space: pre-line; }
-.sg-co-compare__actions { display: flex; flex-wrap: wrap; gap: .5rem; }
 
 /* ─────────────────────────────────────────────────────────────────────────────
  * Phase 23 (2026-10-31): job table (/company/jobs), five-step wizard (/company/jobs/create)
@@ -220,7 +211,7 @@
 /* phase 29 paket E: profil perusahaan publik (pola .sg-org; kontak berikon di rel kanan) */
 .sg-co-public .sg-org__meta { align-items: center; }
 .sg-co-public__h2 { margin-top: 1.75rem; padding-top: 1rem; border-top: 1px solid var(--sg-border-default); font-size: 1rem; line-height: 1.5rem; }
-.sg-co-public__contact { display: grid; gap: .5rem; margin: 0; padding: 0; list-style: none; font-size: .9375rem; line-height: 1.375rem; color: var(--sg-text-primary); }
+.sg-co-public__contact { display: grid; gap: .5rem; margin: 0; padding: 0; list-style: none; font-size: .875rem; line-height: 1.25rem; color: var(--sg-text-primary); }
 .sg-co-public__contact li { display: flex; align-items: flex-start; gap: .5rem; min-width: 0; overflow-wrap: anywhere; }
 .sg-co-public__contact li > .sg-icon { flex: none; margin-top: .1875rem; color: var(--sg-text-tertiary); }
 .sg-co-public__contact a { min-width: 0; }
@@ -323,6 +314,7 @@ dialog .sg-co-preview__part p { display: block; -webkit-line-clamp: none; }
 .sg-co-apps__rating-bars i { width: .5rem; height: .75rem; border-radius: 1px; background: var(--color-gray-200); }
 .sg-co-apps__rating-bars i.is-on { background: var(--color-gray-600); }
 .sg-co-apps__muted { color: var(--sg-text-tertiary); }
+.sg-co-apps__who .sg-table__meta { overflow-wrap: anywhere; }   /* email kandidat tanpa titik patah tidak melebarkan kolom; teks meta lain tidak dipenggal */
 @media (min-width: 640px) { .sg-co-apps__date { white-space: nowrap; } .sg-co-apps__table thead th:last-child { width: 1%; } }
 .sg-co-apps__actions { display: inline-flex; align-items: center; gap: .125rem; margin-inline-start: -.5rem; white-space: nowrap; }
 @media (max-width: 639px) {
@@ -397,7 +389,7 @@ dialog .sg-co-preview__part p { display: block; -webkit-line-clamp: none; }
 .sg-co-facts > div { display: grid; gap: .125rem; min-width: 0; }
 .sg-co-facts__wide { grid-column: 1 / -1; }
 .sg-co-facts dt { font-size: .75rem; line-height: 1rem; color: var(--sg-text-tertiary); }
-.sg-co-facts dd { margin: 0; font-size: .9375rem; line-height: 1.375rem; color: var(--sg-text-primary); overflow-wrap: anywhere; }
+.sg-co-facts dd { margin: 0; font-size: .875rem; line-height: 1.25rem; color: var(--sg-text-primary); overflow-wrap: anywhere; }
 .sg-co-facts dd a { color: var(--sg-text-link); text-decoration: underline; text-underline-offset: 2px; }
 .sg-co-facts__empty { color: var(--sg-text-tertiary); }
 
@@ -407,7 +399,7 @@ dialog .sg-co-preview__part p { display: block; -webkit-line-clamp: none; }
 .sg-co-section { display: grid; gap: 1.25rem; padding-block: 1.5rem 2rem; border-top: 1px solid var(--sg-border-default); }
 .sg-co-section:first-of-type { border-top: 0; padding-top: 0; }
 .sg-co-section > h2 { display: flex; align-items: center; gap: .625rem; margin: 0; font-size: 1.125rem; line-height: 1.75rem; font-weight: 600; color: var(--sg-text-primary); }
-.sg-co-section__num { display: inline-flex; align-items: center; justify-content: center; flex: none; width: 1.75rem; height: 1.75rem; border: 1px solid var(--sg-border-strong); border-radius: 999px; font-size: .8125rem; font-variant-numeric: tabular-nums; color: var(--sg-text-secondary); }
+.sg-co-section__num { display: inline-flex; align-items: center; justify-content: center; flex: none; width: 1.75rem; height: 1.75rem; border: 1px solid var(--sg-border-strong); border-radius: 999px; font-size: .75rem; font-variant-numeric: tabular-nums; color: var(--sg-text-secondary); }
 .sg-co-section__opt { font-size: .75rem; font-weight: 500; color: var(--sg-text-tertiary); }
 .sg-co-section .sg-field { max-width: 46rem; min-width: 0; }
 .sg-co-grid-2 { display: grid; gap: 1.25rem; max-width: 46rem; align-items: start; }

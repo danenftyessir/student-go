@@ -100,12 +100,13 @@
         </div>
 
         <aside class="sg-inst-app__aside" aria-label="Ringkasan lamaran">
+            {{-- reviewed_at juga terisi untuk status 'reviewed': label "Diputuskan" hanya untuk lamaran diterima/ditolak --}}
             <x-ui.dl :items="array_filter([
                 'Kampus' => $student?->university?->name,
                 'Jurusan' => $student?->major,
                 'Semester' => $student?->semester,
                 'Dikirim' => $tanggal($application->applied_at ?? $application->created_at),
-                'Diputuskan' => $tanggal($application->reviewed_at),
+                (in_array($application->status, ['accepted', 'rejected'], true) ? 'Diputuskan' : 'Ditinjau') => $tanggal($application->reviewed_at),
             ])" />
             @if ($student?->user?->username)
                 <a href="{{ route('profile.public', $student->user->username) }}" class="sg-inst-link">Lihat profil publik<span class="sr-only"> {{ $student->display_name }}</span></a>

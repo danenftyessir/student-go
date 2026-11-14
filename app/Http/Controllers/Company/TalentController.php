@@ -162,6 +162,8 @@ class TalentController extends Controller
                 'sdg_badges' => array_values($sdgBadges),
                 'skills' => is_array($student?->skills) ? array_values($student->skills) : [],
                 'projects_count' => $student?->projects?->count() ?? 0,
+                // proyek selesai = sudah divalidasi instansi (dasar lencana)
+                'validated_count' => ($student?->projects ?? collect())->where('status', 'completed')->count(),
             ];
         });
 
@@ -216,25 +218,6 @@ class TalentController extends Controller
             'activeFilters',
             'isFiltered'
         ));
-    }
-
-    public function show($id)
-    {
-        $user = Auth::user();
-        $company = $user->company;
-
-        // IMPLEMENTED: Ambil data talent dari Supabase berdasarkan id
-        $talent = User::where('user_type', 'student')
-            ->where('id', $id)
-            ->with(['student'])
-            ->firstOrFail();
-
-        // Check if talent is saved by company
-        $isSaved = SavedTalent::where('company_id', $company->id)
-            ->where('user_id', $id)
-            ->exists();
-
-        return view('company.talents.show', compact('talent', 'company', 'isSaved'));
     }
 
     public function saved(Request $request)
@@ -390,7 +373,12 @@ class TalentController extends Controller
                 ->with('error', 'Talenta tidak ditemukan');
         }
 
-        return view('company.talents.compare', compact('talents', 'company'));
+        // status simpan awal untuk tombol simpan/tersimpan (satu query)
+        $savedIds = SavedTalent::where('company_id', $company->id)
+            ->whereIn('user_id', $talents->pluck('id'))
+            ->pluck('user_id')->map(fn ($id) => (int) $id)->values()->all();
+
+        return view('company.talents.compare', compact('talents', 'company', 'savedIds'));
     }
 
     /**

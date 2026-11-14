@@ -73,15 +73,8 @@ class ProblemController extends Controller
         
         $problems = $query->paginate(12)->withQueryString();
         
-        // statistik
-        $stats = [
-            'total' => Problem::where('institution_id', $institution->id)->count(),
-            'draft' => Problem::where('institution_id', $institution->id)->where('status', 'draft')->count(),
-            'open' => Problem::where('institution_id', $institution->id)->where('status', 'open')->count(),
-            'in_progress' => Problem::where('institution_id', $institution->id)->where('status', 'in_progress')->count(),
-            'completed' => Problem::where('institution_id', $institution->id)->where('status', 'completed')->count(),
-            'closed' => Problem::where('institution_id', $institution->id)->where('status', 'closed')->count(),
-        ];
+        // statistik (satu query berkelompok, bukan satu query per status)
+        $stats = status_counts(Problem::where('institution_id', $institution->id), ['draft', 'open', 'in_progress', 'completed', 'closed']);
         
         return view('institution.problems.index', compact('problems', 'stats'));
     }
@@ -190,8 +183,8 @@ class ProblemController extends Controller
                 'images.*' => 'image|mimes:jpeg,png,jpg|max:5120',
             ], [
                 'start_date.after_or_equal' => 'Tanggal mulai proyek tidak boleh di masa lalu.',
-                'application_deadline.after_or_equal' => 'Deadline aplikasi tidak boleh di masa lalu.',
-                'application_deadline.before' => 'Deadline aplikasi harus sebelum tanggal mulai proyek.',
+                'application_deadline.after_or_equal' => 'Tenggat lamaran tidak boleh di masa lalu.',
+                'application_deadline.before' => 'Tenggat lamaran harus sebelum tanggal mulai proyek.',
                 'end_date.after' => 'Tanggal selesai proyek harus setelah tanggal mulai.',
             ]);
 
@@ -421,8 +414,8 @@ class ProblemController extends Controller
                 'delete_images.*' => 'exists:problem_images,id',
             ], [
                 'start_date.after_or_equal' => 'Tanggal mulai proyek tidak boleh di masa lalu.',
-                'application_deadline.after_or_equal' => 'Deadline aplikasi tidak boleh di masa lalu.',
-                'application_deadline.before' => 'Deadline aplikasi harus sebelum tanggal mulai proyek.',
+                'application_deadline.after_or_equal' => 'Tenggat lamaran tidak boleh di masa lalu.',
+                'application_deadline.before' => 'Tenggat lamaran harus sebelum tanggal mulai proyek.',
                 'end_date.after' => 'Tanggal selesai proyek harus setelah tanggal mulai.',
             ]);
 
@@ -588,7 +581,7 @@ class ProblemController extends Controller
 
         // cek apakah ada aplikasi yang sudah diterima
         if ($problem->applications()->where('status', 'accepted')->exists()) {
-            return back()->with('error', 'Tidak Dapat Menghapus Problem yang Sudah Memiliki Aplikasi Diterima!');
+            return back()->with('error', 'Tidak Dapat Menghapus Problem yang Sudah Memiliki Lamaran Diterima!');
         }
 
         // hapus semua gambar (support public dan supabase disk)

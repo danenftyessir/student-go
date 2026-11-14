@@ -137,7 +137,8 @@ class ProjectsWishlistTest extends TestCase
 
         $this->assertStringContainsString('Sertifikat No. 007/KKN/MHS/STUDENTGO/XI/2026', $main);
         // href dari document_url(); di tes konfigurasi supabase kosong, jadi yang diuji elemen dan atributnya
-        $this->assertMatchesRegularExpression('/<a href="[^"]*" target="_blank" download class="sg-btn sg-btn--secondary whitespace-nowrap">/', $main);
+        // data-sg-file: berkas dicek dulu sebelum dibuka (berkas belum diunggah -> pesan, bukan json galat storage)
+        $this->assertMatchesRegularExpression('/<a data-sg-file href="[^"]*" target="_blank" download class="sg-btn sg-btn--secondary whitespace-nowrap">/', $main);
         $this->assertStringContainsString('Unduh sertifikat<span class="sr-only"> Pemberdayaan Ekonomi Desa</span>', $main);
         $this->assertStringContainsString('data-portfolio-toggle="'.$id.'"', $main);
     }
@@ -192,7 +193,8 @@ class ProjectsWishlistTest extends TestCase
         $this->assertStringContainsString('Catatan saya:', $main);
         $this->assertSame(4, substr_count($main, 'class="sg-btn sg-btn--tertiary whitespace-nowrap"'));
         $html = $this->actingAs($this->student->user)->get('/student/wishlist')->getContent();
-        $this->assertStringContainsString('/student/wishlist/${wishlistId}/remove', $html);
+        // audit F-39: endpoint sama, kini dari route() (dirender @js, garis miring di-escape)
+        $this->assertStringContainsString(str_replace('/', '\/', route('student.wishlist.remove', '__ID__'))."'.replace('__ID__', wishlistId)", $html);
         $this->assertStringContainsString("method: 'DELETE'", $html);
         $this->assertStringContainsString('window.sgConfirm(', $html);
         $this->assertStringNotContainsString('if (!confirm(', $html);

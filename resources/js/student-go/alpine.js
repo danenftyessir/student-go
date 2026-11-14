@@ -96,6 +96,7 @@ export function registerAlpine(Alpine) {
         notifications: [],
         unreadCount: 0,
         loaded: false,
+        failed: false,
         get label() {
             if (!this.loaded) return 'Notifikasi';
             return this.unreadCount > 0
@@ -107,7 +108,9 @@ export function registerAlpine(Alpine) {
         },
         async init() {
             await this.loadNotifications();
-            setInterval(() => this.loadNotifications(), 30000);
+            // tab yang tidak terlihat tidak ikut polling; saat terlihat lagi, muat ulang sekali
+            setInterval(() => { if (!document.hidden) this.loadNotifications(); }, 30000);
+            document.addEventListener('visibilitychange', () => { if (!document.hidden) this.loadNotifications(); });
         },
         async toggle() {
             if (this.open) {
@@ -134,8 +137,11 @@ export function registerAlpine(Alpine) {
                 this.notifications = data.notifications || [];
                 this.unreadCount = data.unread_count || 0;
                 this.loaded = true;
+                this.failed = false;
                 window.dispatchEvent(new CustomEvent('sg-notifications', { detail: { unread: this.unreadCount } }));
             } catch (error) {
+                // hanya relevan sebelum data pertama datang; data lama tetap tampil bila polling berikutnya gagal
+                this.failed = true;
                 console.error('gagal load notifikasi:', error);
             }
         },

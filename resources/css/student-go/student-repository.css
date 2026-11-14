@@ -38,26 +38,6 @@
   .sg-repo-table-wrap .sg-table--stack td:first-child::before { display: none; }
 }
 
-/* ── SDG swatch: warna resmi hanya sebagai kotak 8 px di samping nama ── */
-.sg-sdg[data-sdg="1"]  { --sg-swatch: #e5243b; }
-.sg-sdg[data-sdg="2"]  { --sg-swatch: #dda63a; }
-.sg-sdg[data-sdg="3"]  { --sg-swatch: #4c9f38; }
-.sg-sdg[data-sdg="4"]  { --sg-swatch: #c5192d; }
-.sg-sdg[data-sdg="5"]  { --sg-swatch: #ff3a21; }
-.sg-sdg[data-sdg="6"]  { --sg-swatch: #26bde2; }
-.sg-sdg[data-sdg="7"]  { --sg-swatch: #fcc30b; }
-.sg-sdg[data-sdg="8"]  { --sg-swatch: #a21942; }
-.sg-sdg[data-sdg="9"]  { --sg-swatch: #fd6925; }
-.sg-sdg[data-sdg="10"] { --sg-swatch: #dd1367; }
-.sg-sdg[data-sdg="11"] { --sg-swatch: #fd9d24; }
-.sg-sdg[data-sdg="12"] { --sg-swatch: #bf8b2e; }
-.sg-sdg[data-sdg="13"] { --sg-swatch: #3f7e44; }
-.sg-sdg[data-sdg="14"] { --sg-swatch: #0a97d9; }
-.sg-sdg[data-sdg="15"] { --sg-swatch: #56c02b; }
-.sg-sdg[data-sdg="16"] { --sg-swatch: #00689d; }
-.sg-sdg[data-sdg="17"] { --sg-swatch: #19486a; }
-.sg-sdg .sg-chip__swatch { flex: none; }
-
 /* ── Detail: catalogue page (abstract + related at left, record metadata at right from 1024 px) ── */
 .sg-repo-doc__head h1 { overflow-wrap: break-word; }
 .sg-repo-doc__head .sg-breadcrumb a { display: inline-block; min-height: 1.5rem; }

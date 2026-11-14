@@ -34,9 +34,9 @@
             {{ $slot }}
         </div>
         <div class="sg-filter-bar__foot">
-            <button type="submit" class="sg-btn sg-btn--primary">Terapkan</button>
+            <button type="submit" class="sg-btn sg-btn--primary sg-btn--lg">Terapkan</button>
             @if ($resetHref)
-                <a href="{{ $resetHref }}" class="sg-btn sg-btn--tertiary">Atur ulang</a>
+                <a href="{{ $resetHref }}" class="sg-btn sg-btn--tertiary sg-btn--lg">Atur ulang</a>
             @endif
         </div>
     </div>

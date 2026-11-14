@@ -60,7 +60,7 @@
 .sg-browse-filters__checks { display: grid; gap: .5rem; min-width: 0; margin: 0; padding: 0; border: 0; }
 .sg-browse-filters__details .sg-browse-filters__checks { padding-top: .25rem; }
 .sg-browse-filters__checks > legend.sg-label { margin-bottom: .5rem; padding: 0; }
-.sg-browse-filters__foot { display: none; }
+.sg-browse-filters__foot { display: flex; gap: .5rem; position: sticky; bottom: 0; padding: .75rem 1rem; background: var(--sg-surface-raised); border-top: 1px solid var(--sg-border-default); }
 .sg-browse-filters__backdrop { display: none; }
 
 @media (min-width: 1024px) {
@@ -69,11 +69,11 @@
 @media (max-width: 1023px) {
   .sg-browse-filters { display: none; position: fixed; z-index: 80; top: 0; right: 0; bottom: 0; width: min(22rem, 100%); flex-direction: column; border: 0; border-radius: 0; box-shadow: var(--shadow-overlay); }
   .sg-browse-filters[data-open] { display: flex; }
+  .sg-browse-filters[data-open] { animation: sg-slide-in-end 200ms var(--ease-standard); }
+  .sg-browse-filters__backdrop[data-open] { animation: sg-fade-in var(--duration-state) var(--ease-standard); }
   .sg-browse-filters__backdrop[data-open] { display: block; position: fixed; inset: 0; z-index: 79; background: color-mix(in srgb, var(--color-gray-900) 45%, transparent); }
   .sg-browse-filters__close { display: inline-flex; }
-  .sg-browse-filters__reset { display: none; }
   .sg-browse-filters__body { flex: 1; overflow-y: auto; }
-  .sg-browse-filters__foot { display: flex; gap: .5rem; position: sticky; bottom: 0; padding: .75rem 1rem; background: var(--sg-surface-raised); border-top: 1px solid var(--sg-border-default); }
   .sg-browse-filters__foot > .sg-btn { flex: 1; }
 }
 
@@ -136,8 +136,8 @@
 .sg-browse-popup .leaflet-popup-content-wrapper { border-radius: var(--sg-radius-panel); box-shadow: var(--shadow-overlay); }
 .sg-browse-popup .leaflet-popup-content { margin: .75rem .875rem; font-family: var(--font-sans); }
 .sg-browse-popup__body { display: grid; gap: .25rem; }
-.sg-browse-popup__title { margin: 0; font: 600 .9375rem/1.375rem var(--font-sans); color: var(--sg-text-primary); overflow-wrap: anywhere; }
-.sg-browse-popup__meta { margin: 0; font-size: .8125rem; line-height: 1.25rem; color: var(--sg-text-secondary); overflow-wrap: anywhere; }
+.sg-browse-popup__title { margin: 0; font: 600 .875rem/1.25rem var(--font-sans); color: var(--sg-text-primary); overflow-wrap: anywhere; }
+.sg-browse-popup__meta { margin: 0; font-size: .75rem; line-height: 1.25rem; color: var(--sg-text-secondary); overflow-wrap: anywhere; }
 .sg-browse-popup .sg-btn { margin-top: .5rem; color: var(--sg-text-primary); }
 
 /* ── Empty states and pager ── */

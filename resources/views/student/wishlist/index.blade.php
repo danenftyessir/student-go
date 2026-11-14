@@ -113,7 +113,7 @@ async function removeFromWishlist(button) {
 
     button.disabled = true;
     try {
-        const response = await fetch(`/student/wishlist/${wishlistId}/remove`, {
+        const response = await fetch(@js(route('student.wishlist.remove', '__ID__')).replace('__ID__', wishlistId), {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',

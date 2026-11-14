@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Aplikasi Mahasiswa')
+@section('title', 'Lamaran Mahasiswa')
 
 @section('content')
 @php
@@ -15,7 +15,7 @@
 @endphp
 
 <div class="sg-container sg-inst-page">
-    <x-ui.page-header title="Aplikasi" description="Tinjau lamaran mahasiswa untuk masalah instansi Anda, lalu terima atau tolak." />
+    <x-ui.page-header title="Lamaran" description="Tinjau lamaran mahasiswa untuk masalah instansi Anda, lalu terima atau tolak." />
 
     @if ($stats['total'] > 0)
         <x-ui.summary label="Ringkasan lamaran" class="sg-inst-page__summary" :items="[

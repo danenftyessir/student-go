@@ -224,9 +224,18 @@ class StudentJobsTest extends TestCase
         $b = $this->job('Pendamping UMKM', ['benefits' => null]);
 
         $html = $this->page('/student/jobs/compare?ids='.$a.','.$b);
-        $this->assertMatchesRegularExpression('/<\/svg>\s*Sertifikat KKN digital\s*<\/li>/', $html);
+        // audit F-23: tabel bandingkan memakai daftar polos (tanpa ikon centang)
+        $this->assertMatchesRegularExpression('/<li>\s*Sertifikat KKN digital\s*<\/li>/', $html);
         $this->assertStringContainsString('Pengalaman lapangan nyata', $html);
         $this->assertStringNotContainsString('- Sertifikat', $html);
+        // audit F-23: tanpa gaya inline, label indonesia, gaji terformat, nilai kosong tidak dikarang
+        $main = $this->main($html);
+        $this->assertStringNotContainsString('<style', $html);
+        $this->assertStringContainsString('<td>Magang</td>', $main);
+        $this->assertStringContainsString('Rp 1–2 juta', $main);
+        $this->assertStringNotContainsString('Entry Level', $main);
+        $this->assertStringNotContainsString('Remote / Flexible', $main);
+        $this->assertStringContainsString('class="sg-table-wrap sg-compare__table"', $main);
     }
 
     public function test_alerts_page_lists_criteria_with_switch_and_specific_empty_state(): void

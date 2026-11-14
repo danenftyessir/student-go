@@ -93,7 +93,7 @@
                                         <li><x-ui.chip icon="file-text" class="sg-repo-file">{{ $file }}</x-ui.chip></li>
                                     @endif
                                     @foreach ($sdgs as $sdg)
-                                        <li><span class="sg-chip sg-sdg" data-sdg="{{ $sdg['id'] }}"><span class="sg-chip__swatch" aria-hidden="true"></span>SDG {{ $sdg['id'] }} · {{ $sdg['name'] }}</span></li>
+                                        <li><span class="sg-chip sg-sdg" data-sdg="{{ $sdg['id'] }}">SDG {{ $sdg['id'] }} · {{ $sdg['name'] }}</span></li>
                                     @endforeach
                                 </ul>
                             @endif

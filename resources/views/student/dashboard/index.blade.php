@@ -46,7 +46,7 @@
         :description="collect([$student->major, $university])->filter()->implode(' · ')">
         <x-slot:actions>
             <x-ui.button :href="route('student.browse-problems.index')" icon="search">Telusuri Masalah</x-ui.button>
-            <x-ui.button variant="secondary" :href="route('student.applications.index')">Aplikasi Saya</x-ui.button>
+            <x-ui.button variant="secondary" :href="route('student.applications.index')">Lamaran Saya</x-ui.button>
         </x-slot:actions>
     </x-ui.page-header>
 
@@ -108,7 +108,7 @@
                             <span class="sg-dash-queue__icon"><x-icon name="hourglass" /></span>
                             <div class="sg-dash-queue__main">
                                 <p class="sg-dash-queue__title">{{ $stats['pending_applications'] }} lamaran menunggu keputusan instansi</p>
-                                <p class="sg-dash-queue__meta">Instansi akan meninjau lamaran Anda. Statusnya berubah di Aplikasi Saya.</p>
+                                <p class="sg-dash-queue__meta">Instansi akan meninjau lamaran Anda. Statusnya berubah di Lamaran Saya.</p>
                             </div>
                             <div class="sg-dash-queue__end">
                                 <x-ui.button variant="tertiary" :href="route('student.applications.index', ['status' => 'pending'])">Lihat lamaran</x-ui.button>

@@ -31,7 +31,7 @@
                     @endif
                 @endif
                 @if ($project->final_report_path)
-                    <a href="{{ asset('storage/' . $project->final_report_path) }}" target="_blank" class="sg-btn sg-btn--secondary">
+                    <a data-sg-file href="{{ asset('storage/' . $project->final_report_path) }}" target="_blank" class="sg-btn sg-btn--secondary">
                         <x-icon name="download" size="sm" />Unduh laporan akhir
                     </a>
                 @endif
@@ -122,7 +122,7 @@
                                 @endif
                                 @if ($report->document_path)
                                     <p class="sg-inst-review-item__foot">
-                                        <a href="{{ document_url($report->document_path) }}" class="sg-inst-link" target="_blank" download>Unduh dokumen<span class="sr-only"> {{ $report->title }}</span></a>
+                                        <a data-sg-file href="{{ document_url($report->document_path) }}" class="sg-inst-link" target="_blank" download>Unduh dokumen<span class="sr-only"> {{ $report->title }}</span></a>
                                     </p>
                                 @endif
                                 <x-slot:end><x-ui.status domain="report" :value="$report->status" /></x-slot:end>
@@ -223,7 +223,7 @@
 function updateMilestone(milestoneId, event) {
     const formData = new FormData(event.target);
 
-    fetch(`/student/projects/milestones/${milestoneId}/update`, {
+    fetch(@js(route('student.projects.milestones.update', '__ID__')).replace('__ID__', milestoneId), {
         method: 'PUT',
         headers: {
             'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,

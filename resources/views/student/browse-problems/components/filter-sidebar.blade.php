@@ -1,7 +1,7 @@
 {{-- resources/views/student/browse-problems/components/filter-sidebar.blade.php --}}
 {{-- panel filter (phase 8): satu form GET dengan nama parameter yang sama seperti sebelumnya.
-     >= 1024px: kolom kiri, setiap perubahan langsung diterapkan (tanpa tombol terapkan).
-     < 1024px: drawer (sgFilterBar dari komponen bersama: fokus terkunci, esc menutup) dengan tombol "Terapkan" yang lengket.
+     filter baru diterapkan lewat tombol "Terapkan" (permintaan pemilik 2026-11-14: tidak memuat ulang di setiap perubahan).
+     >= 1024px: kolom kiri dengan tombol terapkan menempel di dasar panel. < 1024px: drawer (sgFilterBar dari komponen bersama: fokus terkunci, esc menutup) dengan tombol "Terapkan" yang lengket.
      kolom cari dan urutan ada di bilah atas daftar dan ikut form ini lewat atribut form="browse-filters". --}}
 @php
     $sdgOptions = collect(range(1, 17))->mapWithKeys(fn ($n) => [$n => \App\Http\Controllers\HomeController::sdgName($n)]);
@@ -10,17 +10,13 @@
 <div class="sg-browse-filters__backdrop" :data-open="open ? '' : null" @click="close()" aria-hidden="true"></div>
 <form method="GET" action="{{ route('student.browse-problems.index') }}" id="browse-filters" class="sg-browse-filters"
       x-ref="panel" :data-open="open ? '' : null" :role="open ? 'dialog' : null" :aria-modal="open ? 'true' : null"
-      aria-labelledby="browse-filters-title"
-      x-on:change="if ($event.target.form === $el && window.matchMedia('(min-width: 1024px)').matches) $nextTick(() => $el.requestSubmit())">
+      aria-labelledby="browse-filters-title">
 
     {{-- tampilan aktif ikut terkirim (diisi oleh sgBrowseView) --}}
     <input type="hidden" name="view" id="browse-view-input" value="{{ request('view') }}" @disabled(! filled(request('view')))>
 
     <div class="sg-browse-filters__head">
         <h2 id="browse-filters-title">Filter</h2>
-        @if (count($activeFilters))
-            <a href="{{ $clearUrl }}" class="sg-browse__clear sg-browse-filters__reset">Atur ulang</a>
-        @endif
         <button type="button" class="sg-icon-btn sg-browse-filters__close" @click="close()" aria-label="Tutup filter"><x-icon name="x" /></button>
     </div>
 

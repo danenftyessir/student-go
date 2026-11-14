@@ -1132,3 +1132,23 @@ No asset added, downloaded or generated. `public/` check: the git blob hashes of
 | Problem uploads by institutions (rows whose path is not `problems/masalah-desa-NN`) | user upload | **Retain** | Not touched (seeder pattern excludes them; rows 221–225 created during this session by another session were left as they were) |
 
 No asset added, downloaded, generated, deleted, moved or renamed. Supabase Storage not written (92 objects read once by GET in stage 1 for matching only). `public/`: SHA-256 of the 228 files outside `public/build/` identical before and after.
+
+## Audit UI/UX — foto tim (2026-11-13)
+
+Bagian dari audit UI/UX terpisah dari roadmap (temuan F-15), disetujui pemilik pada 2026-11-13. Tiga file baru ditambahkan; tidak ada file yang dihapus, ditimpa, dipindah, atau diganti namanya. SHA-256 ketiga PNG tim diperiksa sebelum dan sesudah: tidak berubah.
+
+| Aset | Sumber | Keputusan | Dipakai di |
+|---|---|---|---|
+| `public/assets/photography/member/*_seragam.png` (3 file, RGBA 1200×1500) | Pemilik produk (2026-10-31) | **Retain** (fallback `<img>` di dalam `<picture>`; tes Phase 5 tetap membaca file ini) | `/about` bila browser tidak mendukung WebP |
+| `member/{m-abizzar-gamadrian,danendra-shafi-athallah,kenzie-raffa-ardhana}-480.webp` (480×600, transparansi tetap; 18.354 / 17.352 / 18.442 B) | Turunan dari PNG di atas (Pillow LANCZOS, WebP q85) | **Adapt** | `/about` "Tim pengembang" lewat `TeamMembers::all()['photo_webp']`. Transfer foto tim turun dari ±2 MB ke 54 KB; tampilan sama (bingkai, rasio, latar transparan) |
+## Audit UI/UX — penghapusan kode sumber mati (2026-11-13)
+
+Atas persetujuan pemilik (audit F-19/F-20), sumber kategori C berikut **dihapus** dari repositori karena tidak pernah dibangun Vite, di-`@include`, atau dirujuk `view()`. Tidak ada file di `public/` yang disentuh.
+
+| Sumber | Keputusan sebelumnya | Keputusan sekarang |
+|---|---|---|
+| `resources/css/{auth,auth-institution,auth-student,browse-problems,friends,navbar-dropdown}.css` | Retain, unused (§20 Phase 6 untuk `auth*.css`) | Dihapus (bukan input Vite) |
+| `resources/js/{pages/browse-problems.js,utils/wishlist.js,bootstrap.js}` | — (tidak dibangun) | Dihapus |
+| `resources/views/partials/{auth-navbar,pagination}.blade.php`, `welcome.blade.php`, view lama `institution/{create,index,show}`, `student/portfolio/{index,public}`, `student/repository/components/filter-sidebar`, `student/friends/profile`, `company/talents/show` | Retain, unused (`auth-navbar`) / tidak tercatat | Dihapus (tidak dirujuk; route terkait mengalihkan atau dikomentari) |
+
+`components/ui/dropdown.blade.php` tetap dipertahankan sebagai bagian pustaka komponen meskipun belum dipakai.

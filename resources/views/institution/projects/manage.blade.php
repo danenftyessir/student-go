@@ -104,7 +104,7 @@
                                 @endif
                                 @if ($report->document_path)
                                     <p class="sg-inst-manage__text">
-                                        <a href="{{ document_url($report->document_path) }}" target="_blank" download class="sg-inst-link">Unduh dokumen<span class="sr-only"> {{ $report->title }}</span></a>
+                                        <a data-sg-file href="{{ document_url($report->document_path) }}" target="_blank" download class="sg-inst-link">Unduh dokumen<span class="sr-only"> {{ $report->title }}</span></a>
                                     </p>
                                 @endif
                                 <p class="sg-inst-manage__actions">
@@ -292,7 +292,7 @@ function showRejectModal(reportId) {
 function updateProjectStatus() {
     const status = document.getElementById('project-status').value;
 
-    fetch(`/institution/projects/{{ $project->id }}/status`, {
+    fetch(@js(route('institution.projects.update-status', $project->id)), {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -317,7 +317,7 @@ function updateProjectStatus() {
 // edit milestone
 function editMilestone(milestoneId) {
     // ambil data milestone
-    fetch(`/institution/projects/{{ $project->id }}/milestones/${milestoneId}`)
+    fetch(@js(route('institution.projects.get-milestone', [$project->id, '__ID__'])).replace('__ID__', milestoneId))
         .then(response => response.json())
         .then(data => {
             if (data.success) {
@@ -353,7 +353,7 @@ function submitEditMilestone(event) {
         requires_report: document.getElementById('edit-milestone-requires-report').checked
     };
 
-    fetch(`/institution/projects/{{ $project->id }}/milestones/${milestoneId}`, {
+    fetch(@js(route('institution.projects.update-milestone', [$project->id, '__ID__'])).replace('__ID__', milestoneId), {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
@@ -383,7 +383,7 @@ async function deleteMilestone(milestoneId) {
     });
     if (!ok) return;
 
-    fetch(`/institution/projects/{{ $project->id }}/milestones/${milestoneId}`, {
+    fetch(@js(route('institution.projects.delete-milestone', [$project->id, '__ID__'])).replace('__ID__', milestoneId), {
         method: 'DELETE',
         headers: {
             'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content

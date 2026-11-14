@@ -72,7 +72,7 @@
                                     <p class="sg-inst-review-item__foot">Masukan instansi: {{ $report->institution_feedback }}</p>
                                 @endif
                                 @if ($report->document_path)
-                                    <p class="sg-inst-review-item__foot"><a href="{{ document_url($report->document_path) }}" class="sg-inst-link" target="_blank" rel="noopener">Buka dokumen<span class="sr-only"> {{ $report->title }}</span></a></p>
+                                    <p class="sg-inst-review-item__foot"><a data-sg-file href="{{ document_url($report->document_path) }}" class="sg-inst-link" target="_blank" rel="noopener">Buka dokumen<span class="sr-only"> {{ $report->title }}</span></a></p>
                                 @endif
                                 <x-slot:end><x-ui.status domain="report" :value="$report->status" /></x-slot:end>
                             </x-ui.list-item>

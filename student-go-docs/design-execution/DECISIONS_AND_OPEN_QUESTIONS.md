@@ -390,7 +390,7 @@ Every row was OPEN at planning time; Phase 0 (2026-10-30) recorded answers for D
 
 ### D-27 — Git workflow for phase execution
 
-- **Status:** ANSWERED (interim)
+- **Status:** ANSWERED (2026-11-13)
 - **Question:** Branch and commit policy per phase?
 - **Why it matters (evidence):** CLAUDE.md forbids committing unless asked. Phases are independent units.
 - **Options:**
@@ -400,6 +400,7 @@ Every row was OPEN at planning time; Phase 0 (2026-10-30) recorded answers for D
 - **Gates phases:** 0
 - **Source:** Brief, safety rules
 - ANSWER (2026-10-30): no new branch and no commits for now; work stays on `feat/students` uncommitted. The user will move the project to a **new GitHub repository** later and decide the branch policy then. Until then, never commit unless asked.
+- ANSWER (2026-11-13, supersedes the interim answer): every change on its own branch following the repository convention `feat/`, `fix/`, `docs/`, `chore/` + kebab description, cut from `main` (which contains all of `dev`). Commit locally with an Indonesian `jenis: deskripsi` subject; never add a `Co-Authored-By` trailer. Merge into `dev` (`merge: <branch> ke dev`) and push only when the user asks. Option (a)'s `design/phase-NN-slug` naming is not used.
 
 ### D-28 — Documentation root path
 

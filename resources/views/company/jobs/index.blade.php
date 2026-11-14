@@ -77,7 +77,7 @@
                     @endif
                 </td>
                 <td data-label="Dilihat" class="sg-num">{{ $fmt($job->views_count) }}</td>
-                <td data-label="Tanggal dibuat">{{ $tanggal($job->created_at) }}</td>
+                <td data-label="Tanggal dibuat" class="whitespace-nowrap tabular-nums">{{ $tanggal($job->created_at) }}</td>
                 <td data-label="Aksi">
                     <span class="sg-co-jobs__actions">
                         <x-ui.icon-button icon="eye" :label="'Lihat ' . $job->title" :href="route('company.jobs.show', $job->id)" />
@@ -87,7 +87,7 @@
                               data-sg-confirm-title="Hapus lowongan?" data-sg-confirm-label="Hapus">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="sg-icon-btn sg-co-jobs__danger" aria-label="Hapus {{ $job->title }}"><x-icon name="trash-2" /></button>
+                            <button type="submit" class="sg-icon-btn sg-co-jobs__danger" aria-label="Hapus {{ $job->title }}" title="Hapus {{ $job->title }}"><x-icon name="trash-2" /></button>
                         </form>
                     </span>
                 </td>

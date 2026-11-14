@@ -58,7 +58,7 @@ class ShellTest extends TestCase
         $html = $this->actingAs($student->user)->get('/notifications')->assertOk()->getContent();
 
         $this->assertShell($html);
-        $this->assertSame(['Dashboard', 'Telusuri Masalah', 'Aplikasi Saya', 'Proyek Saya', 'Repositori', 'Lowongan'], $this->navLabels($html));
+        $this->assertSame(['Dashboard', 'Telusuri Masalah', 'Lamaran Saya', 'Proyek Saya', 'Repositori', 'Lowongan'], $this->navLabels($html));
         $this->assertStringContainsString('Mahasiswa', $html);
         $this->assertStringContainsString(route('student.wishlist.index'), $html);
         $this->assertStringContainsString(route('student.friends.index'), $html);
@@ -73,7 +73,7 @@ class ShellTest extends TestCase
         $html = $this->actingAs($institution->user)->get('/notifications')->assertOk()->getContent();
 
         $this->assertShell($html);
-        $this->assertSame(['Dashboard', 'Masalah', 'Aplikasi', 'Proyek', 'Ulasan'], $this->navLabels($html));
+        $this->assertSame(['Dashboard', 'Masalah', 'Lamaran', 'Proyek', 'Ulasan'], $this->navLabels($html));
         $this->assertStringContainsString('Instansi', $html);
     }
 

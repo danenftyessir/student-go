@@ -45,6 +45,7 @@
                 <div class="sg-home-facts">
                     <p class="sg-home-facts__label">Saat ini di Student Go</p>
                     <x-ui.summary :items="$home['summary']" label="Data Student Go saat ini" />
+                    @if (config('app.demo_data'))<p class="sg-demo-note">Data uji coba (demo), bukan data pengguna sebenarnya.</p>@endif
                 </div>
             @endif
         </div>
@@ -155,7 +156,8 @@
                 <label class="sg-label" for="map-province">Provinsi</label>
                 <select id="map-province" class="sg-select">
                     <option value="">Semua provinsi ({{ $home['openTotal'] }})</option>
-                    @foreach ($home['provinceTotals'] as $province)
+                    {{-- urut abjad agar mudah dicari; jumlah tetap ditampilkan di dalam kurung --}}
+                    @foreach (collect($home['provinceTotals'])->sortBy('name', SORT_NATURAL | SORT_FLAG_CASE) as $province)
                         <option value="{{ $province['id'] }}">{{ $province['name'] }} ({{ $province['total'] }})</option>
                     @endforeach
                 </select>
@@ -164,7 +166,8 @@
                 <label class="sg-label" for="map-sdg">Bidang (SDG)</label>
                 <select id="map-sdg" class="sg-select">
                     <option value="">Semua bidang</option>
-                    @foreach ($home['sdgs'] as $sdg)
+                    {{-- urut nomor SDG agar mudah dicari; data sumbernya tetap urut jumlah untuk grafik di atas --}}
+                    @foreach (collect($home['sdgs'])->sortBy('id') as $sdg)
                         <option value="{{ $sdg['id'] }}">SDG {{ $sdg['id'] }} · {{ $sdg['label'] }} ({{ $sdg['total'] }})</option>
                     @endforeach
                 </select>
@@ -173,7 +176,9 @@
         </div>
 
         <div class="sg-home-explore__grid">
-            <div id="map" class="sg-home-map" role="region" aria-label="Peta lokasi masalah KKN yang dibuka"></div>
+            <div id="map" class="sg-home-map" role="region" aria-label="Peta lokasi masalah KKN yang dibuka">
+                <x-ui.loading label="Memuat peta…" class="sg-home-map__loading" />
+            </div>
             <aside class="sg-home-panel" id="map-panel" aria-live="polite" aria-labelledby="map-panel-title">
                 <h3 id="map-panel-title" class="sg-home-panel__title" tabindex="-1">Pilih lokasi</h3>
                 <p class="sg-home-panel__meta">Pilih penanda di peta untuk melihat masalah di lokasi itu.</p>
@@ -230,6 +235,7 @@
         </div>
         <div class="sg-home-steps">
             <div class="sg-home-step">
+                <span class="sg-home-step__num" aria-hidden="true">1</span>
                 <h3 class="sg-home-step__title">Pilih masalah</h3>
                 <p>Saring menurut provinsi, bidang SDG, tingkat kesulitan, dan durasi.</p>
                 @if ($example)
@@ -240,10 +246,9 @@
                         <span>{{ $example->required_students }} mahasiswa · {{ $example->duration_months }} bulan</span>
                     </div>
                 @endif
-                <span class="sg-home-step__num sg-home-step__num--below" aria-hidden="true">1</span>
             </div>
             <div class="sg-home-step">
-                <span class="sg-home-step__num sg-home-step__num--above" aria-hidden="true">2</span>
+                <span class="sg-home-step__num" aria-hidden="true">2</span>
                 <h3 class="sg-home-step__title">Kirim lamaran</h3>
                 <p>Satu formulir per masalah. Instansi meninjau lamaran yang masuk.</p>
                 <dl class="sg-home-step__sample">
@@ -253,10 +258,10 @@
                 </dl>
             </div>
             <div class="sg-home-step">
+                <span class="sg-home-step__num" aria-hidden="true">3</span>
                 <h3 class="sg-home-step__title">Kerjakan dan catat</h3>
-                <p>Status lamaran terlihat di halaman Aplikasi Saya. Proyek yang selesai dan ulasan instansi tampil di portofolio publik.</p>
-                <div class="sg-home-step__sample sg-home-step__sample--numbered">
-                    <span class="sg-home-step__num sg-home-step__num--beside" aria-hidden="true">3</span>
+                <p>Status lamaran terlihat di halaman Lamaran Saya. Proyek yang selesai dan ulasan instansi tampil di portofolio publik.</p>
+                <div class="sg-home-step__sample">
                     <span class="sg-home-step__sample-label">Status lamaran</span>
                     <span class="sg-home-step__statuses">
                         <x-ui.status domain="application" value="pending" />
@@ -324,6 +329,7 @@
             @endforeach
         </dl>
         <p class="sg-home-note">Dihitung langsung dari data proyek di Student Go saat halaman dibuka.</p>
+        @if (config('app.demo_data'))<p class="sg-demo-note">Data uji coba (demo), bukan data pengguna sebenarnya.</p>@endif
     </div>
 </section>
 @endif
@@ -380,7 +386,14 @@
 // dan dipecah per kabupaten/kota di zoom dekat. angka = jumlah masalah dibuka sesuai filter.
 document.addEventListener('DOMContentLoaded', function () {
     const el = document.getElementById('map');
-    if (!el || typeof L === 'undefined') return;
+    if (!el) return;
+    const loading = el.querySelector('.sg-home-map__loading');
+    if (typeof L === 'undefined') {
+        // leaflet (cdn) gagal dimuat: jelaskan, jangan biarkan area kosong
+        if (loading) loading.textContent = 'Peta belum bisa dimuat. Muat ulang halaman untuk mencoba lagi.';
+        return;
+    }
+    loading?.remove();
 
     const points = @json($home['points']);
     const problems = @json($home['mapProblems']);

@@ -8,16 +8,16 @@
     $fmt = fn ($n) => number_format((float) $n, 0, ',', '.');
 @endphp
 
-<div class="sg-container sg-co-compare">
+<div class="sg-container sg-compare" x-data="sgTalentCompare(@js($savedIds))">
     <x-ui.page-header title="Bandingkan Talenta" :description="'Membandingkan ' . $talents->count() . ' talenta berdampingan.'"
                       :back="route('company.talents.index')" back-label="Kembali ke Talenta" />
 
-    <x-ui.table caption="Perbandingan talenta" :stack="false" class="sg-co-compare__table">
+    <x-ui.table caption="Perbandingan talenta" :stack="false" class="sg-compare__table">
         <x-slot:head>
             <th scope="col">Kriteria</th>
             @foreach ($talents as $talent)
                 <th scope="col">
-                    <span class="sg-co-compare__person">
+                    <span class="sg-compare__person">
                         <x-ui.avatar :name="$talent->display_name" decorative />
                         <span>{{ $talent->display_name }}</span>
                     </span>
@@ -36,7 +36,7 @@
             @foreach ($talents as $talent)
                 <td>
                     @if ($talent->email_verified_at)
-                        <span class="sg-co-compare__ok"><x-icon name="badge-check" size="sm" />Email terverifikasi</span>
+                        <span class="sg-compare__ok"><x-icon name="badge-check" size="sm" />Email terverifikasi</span>
                     @else
                         Belum terverifikasi
                     @endif
@@ -52,26 +52,33 @@
         <tr>
             <th scope="row">Jumlah proyek</th>
             @foreach ($talents as $talent)
-                <td class="sg-num">{{ $fmt($talent->profile?->projects?->count() ?? 0) }}</td>
+                <td class="tabular-nums">{{ $fmt($talent->profile?->projects?->count() ?? 0) }}</td>
             @endforeach
         </tr>
         <tr>
             <th scope="row">Bio</th>
             @foreach ($talents as $talent)
-                <td class="sg-co-compare__bio">{{ $talent->profile?->bio ?: 'Belum ada bio.' }}</td>
+                <td class="sg-compare__bio">{{ $talent->profile?->bio ?: 'Belum ada bio.' }}</td>
             @endforeach
         </tr>
         <tr>
             <th scope="row">Aksi</th>
             @foreach ($talents as $talent)
                 <td>
-                    <span class="sg-co-compare__actions">
+                    <span class="sg-compare__actions">
                         <x-ui.button variant="secondary" :href="route('profile.public', $talent->username)">
                             Lihat profil<span class="sr-only"> {{ $talent->display_name }}</span>
                         </x-ui.button>
-                        <x-ui.button variant="tertiary" icon="bookmark" onclick="saveTalent({{ $talent->id }})">
-                            Simpan<span class="sr-only"> {{ $talent->display_name }}</span>
-                        </x-ui.button>
+                        {{-- pola sama dengan daftar talenta: aria-pressed + teks simpan/tersimpan mengikuti status --}}
+                        <button type="button" class="sg-btn sg-btn--secondary sg-co-talents__save"
+                                :aria-pressed="isSaved({{ $talent->id }}).toString()"
+                                aria-pressed="{{ in_array($talent->id, $savedIds, true) ? 'true' : 'false' }}"
+                                :disabled="busy === {{ $talent->id }}"
+                                @click="toggleSave({{ $talent->id }}, @js($talent->display_name))">
+                            <x-icon name="bookmark" size="sm" />
+                            <span x-text="isSaved({{ $talent->id }}) ? 'Tersimpan' : 'Simpan'">{{ in_array($talent->id, $savedIds, true) ? 'Tersimpan' : 'Simpan' }}</span>
+                            <span class="sr-only"> {{ $talent->display_name }}</span>
+                        </button>
                     </span>
                 </td>
             @endforeach
@@ -82,26 +89,43 @@
 
 @push('scripts')
 <script>
-async function saveTalent(talentId) {
-    try {
-        const response = await fetch(`/company/talents/${talentId}/toggle-save`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+// simpan/tersimpan di halaman bandingkan: status awal dari server, berganti mengikuti respons toggle-save
+function sgTalentCompare(saved) {
+    return {
+        saved,
+        busy: null,
+        isSaved(id) {
+            return this.saved.includes(id);
+        },
+        async toggleSave(id, name) {
+            if (this.busy) return;
+            this.busy = id;
+            try {
+                const response = await fetch(@js(route('company.talents.toggle-save', '__ID__')).replace('__ID__', id), {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json',
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
+                    },
+                });
+                const data = await response.json();
+                if (!response.ok || !data.success) throw new Error('gagal');
+
+                if (data.action === 'saved') {
+                    if (!this.isSaved(id)) this.saved.push(id);
+                    window.showNotification(name + ' disimpan ke Talenta Tersimpan', 'success');
+                } else {
+                    this.saved = this.saved.filter((savedId) => savedId !== id);
+                    window.showNotification(name + ' dihapus dari Talenta Tersimpan', 'info');
+                }
+            } catch (error) {
+                window.showNotification('Gagal menyimpan talenta. Coba lagi.', 'error');
+            } finally {
+                this.busy = null;
             }
-        });
-
-        const data = await response.json();
-
-        if (data.success) {
-            // pesan server berbahasa inggris; tampilkan versi indonesia (D-02)
-            window.showNotification(data.action === 'saved' ? 'Talenta disimpan ke Talenta Tersimpan' : 'Talenta dihapus dari Talenta Tersimpan', data.action === 'saved' ? 'success' : 'info');
-        }
-    } catch (error) {
-        console.error('Error toggling save:', error);
-        window.showNotification('Terjadi kesalahan', 'error');
-    }
+        },
+    };
 }
 </script>
 @endpush

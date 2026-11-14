@@ -24,7 +24,7 @@
         </div>
 
         <p class="sg-footer__legal">
-            Hak cipta © {{ date('Y') }}. Seluruh hak cipta dilindungi undang-undang dan terdaftar pada Direktorat Jendral Kekayaan Intelektual Republik Indonesia.
+            Hak cipta © {{ date('Y') }}. Seluruh hak cipta dilindungi undang-undang dan terdaftar pada Direktorat Jenderal Kekayaan Intelektual Republik Indonesia.
         </p>
     </div>
 </footer>

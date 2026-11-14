@@ -3,8 +3,8 @@
 // sehingga pendaftaran alpine:init selalu terpasang lebih dulu.
 import { registerAlpine } from './student-go/alpine';
 import { NotificationManager } from './student-go/toast';
-import { initConfirm, initDialogs } from './student-go/dialog';
-import { initAvatars, initScrollTop } from './student-go/misc';
+import { initConfirm, initDialogs, initSubmitFeedback } from './student-go/dialog';
+import { initAvatars, initFileLinks, initScrollTop } from './student-go/misc';
 import { initHeroVideo } from './student-go/hero-video';
 import { registerAuth } from './student-go/auth';
 
@@ -24,7 +24,9 @@ ready(() => {
 
     initDialogs();
     initConfirm();
+    initSubmitFeedback();
     initAvatars();
+    initFileLinks();
     initScrollTop();
     initHeroVideo();
 

@@ -89,6 +89,7 @@
 @media (min-width: 640px) { .sg-about__team { gap: 1.5rem; } }
 /* transparent cut-outs on a light field, bottom-aligned like a studio portrait */
 .sg-about__portrait { display: flex; align-items: flex-end; justify-content: center; aspect-ratio: 4 / 5; overflow: hidden; background: var(--color-brand-50); border: 1px solid var(--sg-border-default); border-radius: var(--sg-radius-panel); }
+.sg-about__portrait picture { display: contents; }
 .sg-about__portrait img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 50% 0; }
 .sg-about__team p { margin: .5rem 0 0; font-size: .875rem; line-height: 1.25rem; font-weight: 600; color: var(--sg-text-primary); overflow-wrap: anywhere; }
 
@@ -180,3 +181,11 @@
 .sg-region-map__list > li { display: flex; align-items: center; gap: .5rem; padding-block: .25rem; }
 .sg-region-map__key { flex: none; width: .75rem; height: .75rem; border-radius: 2px; background: var(--sg-brand); }
 .sg-region-map__home { color: var(--sg-text-secondary); }
+
+/* ── Verifikasi proyek KKN (/verifikasi/{kode}, masukan juri 2026-11-14): satu kolom baca, bagian dipisah garis ── */
+.sg-verify { max-width: 48rem; padding-bottom: 3rem; }
+.sg-verify .sg-alert { margin-top: 1.5rem; }
+.sg-verify__section { margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--sg-border-default); }
+.sg-verify__section h2 { margin: 0 0 1rem; font-size: 1.25rem; line-height: 1.75rem; font-weight: 600; color: var(--sg-text-primary); overflow-wrap: break-word; }
+.sg-verify__link { margin: 1rem 0 0; }
+.sg-verify__quote { margin: 1rem 0 0; padding: .75rem 1rem; border-left: 2px solid var(--sg-border-strong); background: var(--color-gray-50); font-size: .875rem; line-height: 1.5rem; color: var(--sg-text-secondary); overflow-wrap: break-word; }

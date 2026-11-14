@@ -124,9 +124,10 @@ class FriendController extends Controller
             ->paginate(20)
             ->withQueryString();
 
-        // tambahkan status pertemanan untuk setiap hasil
+        // tambahkan status pertemanan untuk setiap hasil (satu query untuk satu halaman hasil)
+        $statuses = $student->friendshipStatusesWith($results->pluck('id')->all());
         foreach ($results as $result) {
-            $result->friendship_status = $student->friendshipStatusWith($result->id);
+            $result->friendship_status = $statuses[$result->id] ?? 'none';
         }
 
         // untuk ajax request

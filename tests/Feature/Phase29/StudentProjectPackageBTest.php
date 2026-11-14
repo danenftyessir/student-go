@@ -119,7 +119,8 @@ class StudentProjectPackageBTest extends TestCase
         $this->assertStringContainsString('href="'.route('student.projects.create-report', $id).'"', $main);
         $this->assertStringContainsString('href="'.route('student.projects.create-final-report', $id).'"', $main);
         $html = $this->actingAs($this->student->user)->get("/student/projects/{$id}")->getContent();
-        $this->assertStringContainsString('/student/projects/milestones/${milestoneId}/update', $html);
+        // audit F-39: endpoint sama, kini dari route() (dirender @js, garis miring di-escape)
+        $this->assertStringContainsString(str_replace('/', '\/', route('student.projects.milestones.update', '__ID__'))."'.replace('__ID__', milestoneId)", $html);
 
         // di bawah 80 % tombol laporan akhir tidak muncul (syarat lama tetap)
         DB::table('projects')->where('id', $id)->update(['progress_percentage' => 75]);

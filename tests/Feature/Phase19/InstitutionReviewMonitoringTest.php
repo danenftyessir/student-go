@@ -189,7 +189,7 @@ class InstitutionReviewMonitoringTest extends TestCase
         $this->assertStringContainsString('Kuota bidang ini sudah terisi', $notification->message);
 
         // sudah diputuskan: tidak bisa diputuskan lagi
-        $this->post(route('institution.applications.accept', $id))->assertSessionHas('error', 'aplikasi ini sudah diproses');
+        $this->post(route('institution.applications.accept', $id))->assertSessionHas('error', 'lamaran ini sudah diproses');
     }
 
     public function test_applications_of_another_institution_are_not_reachable(): void

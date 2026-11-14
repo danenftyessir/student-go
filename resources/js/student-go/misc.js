@@ -1,4 +1,4 @@
-// avatar: foto gagal dimuat -> inisial; tombol kembali ke atas
+// avatar: foto gagal dimuat -> inisial; tautan berkas storage dicek dulu; tombol kembali ke atas
 import { prefersReducedMotion } from './util';
 
 function fallbackToInitials(img) {
@@ -19,6 +19,31 @@ export function initAvatars() {
     document.addEventListener('error', (e) => {
         if (e.target instanceof HTMLImageElement && e.target.closest('.sg-avatar')) fallbackToInitials(e.target);
     }, true);
+}
+
+// tautan berkas di storage (<a data-sg-file>): dicek dulu sebelum dibuka di tab baru.
+// berkas yang belum diunggah menampilkan pesan, bukan halaman json galat dari supabase.
+export function initFileLinks() {
+    document.addEventListener('click', async (e) => {
+        const link = e.target.closest('a[data-sg-file]');
+        if (!link || e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+        e.preventDefault();
+        // tab dibuka langsung pada klik agar tidak diblokir sebagai popup
+        const tab = window.open('', '_blank');
+        try {
+            const response = await fetch(link.href, { method: 'HEAD' });
+            if (!response.ok) throw new Error(String(response.status));
+            if (tab) {
+                tab.opener = null;
+                tab.location.href = link.href;
+            } else {
+                window.location.href = link.href;
+            }
+        } catch (error) {
+            tab?.close();
+            window.showNotification?.('Berkas ini belum tersedia di penyimpanan.', 'error');
+        }
+    });
 }
 
 export function initScrollTop() {
