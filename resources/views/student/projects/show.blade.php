@@ -223,7 +223,7 @@
 function updateMilestone(milestoneId, event) {
     const formData = new FormData(event.target);
 
-    fetch(`/student/projects/milestones/${milestoneId}/update`, {
+    fetch(@js(route('student.projects.milestones.update', '__ID__')).replace('__ID__', milestoneId), {
         method: 'PUT',
         headers: {
             'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
