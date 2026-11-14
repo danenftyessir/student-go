@@ -155,7 +155,8 @@
                 <label class="sg-label" for="map-province">Provinsi</label>
                 <select id="map-province" class="sg-select">
                     <option value="">Semua provinsi ({{ $home['openTotal'] }})</option>
-                    @foreach ($home['provinceTotals'] as $province)
+                    {{-- urut abjad agar mudah dicari; jumlah tetap ditampilkan di dalam kurung --}}
+                    @foreach (collect($home['provinceTotals'])->sortBy('name', SORT_NATURAL | SORT_FLAG_CASE) as $province)
                         <option value="{{ $province['id'] }}">{{ $province['name'] }} ({{ $province['total'] }})</option>
                     @endforeach
                 </select>
@@ -164,7 +165,8 @@
                 <label class="sg-label" for="map-sdg">Bidang (SDG)</label>
                 <select id="map-sdg" class="sg-select">
                     <option value="">Semua bidang</option>
-                    @foreach ($home['sdgs'] as $sdg)
+                    {{-- urut nomor SDG agar mudah dicari; data sumbernya tetap urut jumlah untuk grafik di atas --}}
+                    @foreach (collect($home['sdgs'])->sortBy('id') as $sdg)
                         <option value="{{ $sdg['id'] }}">SDG {{ $sdg['id'] }} · {{ $sdg['label'] }} ({{ $sdg['total'] }})</option>
                     @endforeach
                 </select>
