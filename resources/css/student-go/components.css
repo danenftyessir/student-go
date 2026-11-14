@@ -658,7 +658,7 @@ body:has(dialog.sg-dialog[open]) { overflow: hidden; }
 
 /* ── 6. Recorded outcomes: plain numbers from the projects table ── */
 .sg-home-outcomes__list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.5rem; margin: 1.75rem 0 0; }
-@media (min-width: 1024px) { .sg-home-outcomes__list { grid-template-columns: 2fr 1fr 1fr 1fr; gap: 2.5rem; align-items: start; } .sg-home-outcomes__list > div:first-child dd { font-size: 4rem; line-height: 4.5rem; } }
+@media (min-width: 1024px) { .sg-home-outcomes__list { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 2.5rem; align-items: start; } }   /* empat angka setara: lebar dan ukuran sama */
 .sg-home-outcomes__list > div { display: flex; flex-direction: column; gap: .25rem; padding-top: 1rem; border-top: 2px solid var(--sg-text-primary); }
 .sg-home-outcomes__list dd { order: -1; }
 .sg-home-outcomes__list dt { font-size: 1rem; line-height: 1.5rem; color: var(--sg-text-secondary); }
