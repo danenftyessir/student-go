@@ -5,14 +5,16 @@
     $sdgs = array_values(array_filter(array_map('intval', (array) $problem->sdg_categories)));
     $deadline = $problem->application_deadline;
     $applied = $applicationStatuses[$problem->id] ?? null;
+    $closed = $deadline && today()->gt($deadline->copy()->startOfDay());
     $image = optional($problem->images->first())->image_path;
 @endphp
 <x-ui.card :title="$problem->title" :href="route('student.browse-problems.show', $problem->id)"
            :image="$image ? supabase_url($image) : null" image-alt="" class="sg-browse-card" data-problem-card="{{ $problem->id }}">
     <p class="sg-browse-card__by">{{ optional($problem->institution)->name }}</p>
-    @if ($applied || $problem->is_urgent || $problem->is_featured)
+    @if ($applied || $closed || $problem->is_urgent || $problem->is_featured)
         <p class="sg-browse-row__flags">
             @if ($applied)<x-ui.status domain="application" :value="$applied" />@endif
+            @if ($closed)<span class="sg-browse-flag"><x-icon name="lock" size="sm" />Pendaftaran ditutup</span>@endif
             @if ($problem->is_urgent)<span class="sg-browse-flag"><x-icon name="clock" size="sm" />Mendesak</span>@endif
             @if ($problem->is_featured)<span class="sg-browse-flag"><x-icon name="award" size="sm" />Unggulan</span>@endif
         </p>

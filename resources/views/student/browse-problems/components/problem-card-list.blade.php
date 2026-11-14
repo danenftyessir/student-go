@@ -5,14 +5,17 @@
     $deadline = $problem->application_deadline;
     $daysLeft = $deadline ? (int) today()->diffInDays($deadline, false) : null;
     $applied = $applicationStatuses[$problem->id] ?? null;
+    // tenggat sudah lewat: masih berstatus open di data, tetapi lamaran tidak lagi diterima (sama dengan detail masalah)
+    $closed = $daysLeft !== null && $daysLeft < 0;
 @endphp
 <tr data-problem-id="{{ $problem->id }}">
     <td data-label="Masalah">
         <div class="sg-browse-row">
             <a href="{{ route('student.browse-problems.show', $problem->id) }}" class="sg-browse-row__title">{{ $problem->title }}</a>
-            @if ($applied || $problem->is_urgent || $problem->is_featured)
+            @if ($applied || $closed || $problem->is_urgent || $problem->is_featured)
                 <p class="sg-browse-row__flags">
                     @if ($applied)<x-ui.status domain="application" :value="$applied" />@endif
+                    @if ($closed)<span class="sg-browse-flag"><x-icon name="lock" size="sm" />Pendaftaran ditutup</span>@endif
                     @if ($problem->is_urgent)<span class="sg-browse-flag"><x-icon name="clock" size="sm" />Mendesak</span>@endif
                     @if ($problem->is_featured)<span class="sg-browse-flag"><x-icon name="award" size="sm" />Unggulan</span>@endif
                 </p>
@@ -35,7 +38,7 @@
         @if ($deadline)
             <span>
                 <time datetime="{{ $deadline->toDateString() }}" class="sg-browse-num">{{ $deadline->locale('id')->translatedFormat('j M Y') }}</time>
-                <span class="sg-table__meta">{{ $daysLeft > 1 ? $daysLeft . ' hari lagi' : ($daysLeft === 1 ? 'besok' : ($daysLeft === 0 ? 'hari ini' : 'sudah lewat')) }}</span>
+                <span class="sg-table__meta">{{ $daysLeft > 1 ? $daysLeft . ' hari lagi' : ($daysLeft === 1 ? 'besok' : ($daysLeft === 0 ? 'hari ini' : 'pendaftaran ditutup')) }}</span>
             </span>
         @else
             <span>—</span>
