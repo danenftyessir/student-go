@@ -60,7 +60,7 @@
 .sg-browse-filters__checks { display: grid; gap: .5rem; min-width: 0; margin: 0; padding: 0; border: 0; }
 .sg-browse-filters__details .sg-browse-filters__checks { padding-top: .25rem; }
 .sg-browse-filters__checks > legend.sg-label { margin-bottom: .5rem; padding: 0; }
-.sg-browse-filters__foot { display: none; }
+.sg-browse-filters__foot { display: flex; gap: .5rem; position: sticky; bottom: 0; padding: .75rem 1rem; background: var(--sg-surface-raised); border-top: 1px solid var(--sg-border-default); }
 .sg-browse-filters__backdrop { display: none; }
 
 @media (min-width: 1024px) {
@@ -71,9 +71,7 @@
   .sg-browse-filters[data-open] { display: flex; }
   .sg-browse-filters__backdrop[data-open] { display: block; position: fixed; inset: 0; z-index: 79; background: color-mix(in srgb, var(--color-gray-900) 45%, transparent); }
   .sg-browse-filters__close { display: inline-flex; }
-  .sg-browse-filters__reset { display: none; }
   .sg-browse-filters__body { flex: 1; overflow-y: auto; }
-  .sg-browse-filters__foot { display: flex; gap: .5rem; position: sticky; bottom: 0; padding: .75rem 1rem; background: var(--sg-surface-raised); border-top: 1px solid var(--sg-border-default); }
   .sg-browse-filters__foot > .sg-btn { flex: 1; }
 }
 
