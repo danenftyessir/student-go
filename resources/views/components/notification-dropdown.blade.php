@@ -28,6 +28,14 @@
             </button>
         </div>
 
+        {{-- pemuatan pertama: kerangka statis; gagal sebelum ada data: pesan, bukan kerangka tanpa akhir --}}
+        <template x-if="! loaded && ! failed">
+            <x-ui.loading label="Memuat notifikasi…" :lines="3" class="sg-notif__loading" />
+        </template>
+        <template x-if="! loaded && failed">
+            <p class="sg-notif__empty">Notifikasi belum bisa dimuat. Coba buka lagi sebentar lagi.</p>
+        </template>
+
         <template x-if="loaded && notifications.length === 0">
             <div class="sg-notif__empty">
                 <img src="{{ asset('assets/illustrations/empty-states/no-notifications.svg') }}" alt="" width="96" height="72">

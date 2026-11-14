@@ -173,7 +173,9 @@
         </div>
 
         <div class="sg-home-explore__grid">
-            <div id="map" class="sg-home-map" role="region" aria-label="Peta lokasi masalah KKN yang dibuka"></div>
+            <div id="map" class="sg-home-map" role="region" aria-label="Peta lokasi masalah KKN yang dibuka">
+                <x-ui.loading label="Memuat peta…" class="sg-home-map__loading" />
+            </div>
             <aside class="sg-home-panel" id="map-panel" aria-live="polite" aria-labelledby="map-panel-title">
                 <h3 id="map-panel-title" class="sg-home-panel__title" tabindex="-1">Pilih lokasi</h3>
                 <p class="sg-home-panel__meta">Pilih penanda di peta untuk melihat masalah di lokasi itu.</p>
@@ -380,7 +382,14 @@
 // dan dipecah per kabupaten/kota di zoom dekat. angka = jumlah masalah dibuka sesuai filter.
 document.addEventListener('DOMContentLoaded', function () {
     const el = document.getElementById('map');
-    if (!el || typeof L === 'undefined') return;
+    if (!el) return;
+    const loading = el.querySelector('.sg-home-map__loading');
+    if (typeof L === 'undefined') {
+        // leaflet (cdn) gagal dimuat: jelaskan, jangan biarkan area kosong
+        if (loading) loading.textContent = 'Peta belum bisa dimuat. Muat ulang halaman untuk mencoba lagi.';
+        return;
+    }
+    loading?.remove();
 
     const points = @json($home['points']);
     const problems = @json($home['mapProblems']);
