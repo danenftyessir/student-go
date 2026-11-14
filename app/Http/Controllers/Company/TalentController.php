@@ -390,7 +390,12 @@ class TalentController extends Controller
                 ->with('error', 'Talenta tidak ditemukan');
         }
 
-        return view('company.talents.compare', compact('talents', 'company'));
+        // status simpan awal untuk tombol simpan/tersimpan (satu query)
+        $savedIds = SavedTalent::where('company_id', $company->id)
+            ->whereIn('user_id', $talents->pluck('id'))
+            ->pluck('user_id')->map(fn ($id) => (int) $id)->values()->all();
+
+        return view('company.talents.compare', compact('talents', 'company', 'savedIds'));
     }
 
     /**
