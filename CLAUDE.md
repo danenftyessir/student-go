@@ -96,7 +96,7 @@ Rules for design code (planning decisions, unchanged):
 - No inline `<style>` blocks in new or rewritten views; no inline colour or font values; no new CDN tags; no `outline-none` without a replacement focus style.
 - New fonts, icons and images are local files (`public/assets/**`, never inside `public/assets/certificate/`); icons come from the Lucide sprite. Photographs come from the existing `public/` library first (once rights are confirmed, D-30) and from the catalogue only for gaps (D-33). Existing assets are reconciled, not discarded (AD-09).
 - UI copy is Indonesian first, in the words of the approved copy deck (D-02). Status words come from one mapping (status enums: `DISCOVERY_REPORT.md` S1-20).
-- Small, reviewable changes. Branch/commit policy: D-27 (for now: stay on the current branch, never commit unless asked). No drive-by refactors, no dependency bumps.
+- Small, reviewable changes. Branch/commit policy: D-27 (since 2026-11-13: every change on its own branch named `feat/`, `fix/`, `docs/` or `chore/` + kebab description, cut from `main`; commit locally with an Indonesian `jenis: deskripsi` subject and **no** `Co-Authored-By` trailer; merge into `dev` and push only when the user asks). No drive-by refactors, no dependency bumps.
 
 ## 6. Design principles (approved by the user)
 
@@ -136,7 +136,7 @@ The design is presentation. These rules apply to every phase and are repeated by
 7. Set only that phase's row in the tracker to IN_PROGRESS.
 8. Execute the tasks in section F in order. Stay inside the phase's scope. If a task needs a file or behaviour outside it, stop and ask.
 9. Test: run section K and check every box in section L, collecting evidence (command output, screenshots, diffs).
-10. Update the tracker: COMPLETE only if every acceptance criterion is met; PARTIAL (list what failed) or BLOCKED (state what unblocks it) otherwise. Add the date and, only if the user asked for a commit, the commit hash.
+10. Update the tracker: COMPLETE only if every acceptance criterion is met; PARTIAL (list what failed) or BLOCKED (state what unblocks it) otherwise. Add the date and the commit hash.
 11. Report to the user: files changed, evidence for each acceptance criterion, deviations, decisions needed, and which phases the roadmap now allows.
 12. Stop. Do not begin another phase. Never run multiple phases automatically.
 
@@ -154,7 +154,7 @@ The design is presentation. These rules apply to every phase and are repeated by
 
 ## 10. Safety rules
 
-- Run `git status` before and after every phase. Never overwrite, revert or stash changes you did not make. Never commit unless the user asks; never commit `.env`, credentials, `vendor/` or `node_modules/`.
+- Run `git status` before and after every phase. Never overwrite, revert or stash changes you did not make. Commit only as D-27 allows (local commits on a change branch; never merge or push unless the user asks); never commit `.env`, credentials, `vendor/` or `node_modules/`.
 - No destructive changes: no data deletion, no `migrate:fresh`/reseed on data you did not create, no removal, renaming, moving or overwriting of files you did not add (this includes every file under `public/`), no force-push.
 - Do not invent data: no fake statistics, testimonials, names, statuses, images or quotes. A number on screen must come from a real query.
 - No unnecessary dependencies. Any new composer or npm package needs the user's explicit approval, with the reason.
