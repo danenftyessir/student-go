@@ -155,7 +155,8 @@
                 <label class="sg-label" for="map-province">Provinsi</label>
                 <select id="map-province" class="sg-select">
                     <option value="">Semua provinsi ({{ $home['openTotal'] }})</option>
-                    @foreach ($home['provinceTotals'] as $province)
+                    {{-- urut abjad agar mudah dicari; jumlah tetap ditampilkan di dalam kurung --}}
+                    @foreach (collect($home['provinceTotals'])->sortBy('name', SORT_NATURAL | SORT_FLAG_CASE) as $province)
                         <option value="{{ $province['id'] }}">{{ $province['name'] }} ({{ $province['total'] }})</option>
                     @endforeach
                 </select>
