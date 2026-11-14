@@ -52,7 +52,7 @@
         <tr>
             <th scope="row">Jumlah proyek</th>
             @foreach ($talents as $talent)
-                <td class="sg-num">{{ $fmt($talent->profile?->projects?->count() ?? 0) }}</td>
+                <td class="tabular-nums">{{ $fmt($talent->profile?->projects?->count() ?? 0) }}</td>
             @endforeach
         </tr>
         <tr>
