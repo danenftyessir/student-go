@@ -111,6 +111,7 @@
 .sg-co-talents__chips .sg-chip { overflow-wrap: anywhere; }
 .sg-co-talents__list .sg-list__end { gap: .75rem; }
 .sg-co-talents__pick { align-items: center; white-space: nowrap; }
+.sg-co-talents__save { min-width: 8.5rem; justify-content: center; }   /* simpan/tersimpan sama lebar: "bandingkan" tidak bergeser */
 .sg-co-talents__save[aria-pressed="true"] { color: var(--sg-text-link); border-color: var(--color-brand-300); background: var(--sg-brand-tint); }
 .sg-co-talents__pager { margin-top: 1.5rem; }
 
