@@ -72,14 +72,8 @@ class ApplicationController extends Controller
 
         $applications = $projectQuery->paginate(10, ['*'], 'project_page')->withQueryString();
 
-        // statistik proyek
-        $stats = [
-            'total' => Application::where('student_id', $student->id)->count(),
-            'pending' => Application::where('student_id', $student->id)->where('status', 'pending')->count(),
-            'reviewed' => Application::where('student_id', $student->id)->where('status', 'reviewed')->count(),
-            'accepted' => Application::where('student_id', $student->id)->where('status', 'accepted')->count(),
-            'rejected' => Application::where('student_id', $student->id)->where('status', 'rejected')->count(),
-        ];
+        // statistik proyek (satu query berkelompok)
+        $stats = status_counts(Application::where('student_id', $student->id), ['pending', 'reviewed', 'accepted', 'rejected']);
 
         // === APLIKASI LOWONGAN KERJA/MAGANG ===
         $jobQuery = JobApplication::with(['jobPosting.company'])
@@ -108,16 +102,8 @@ class ApplicationController extends Controller
 
         $jobApplications = $jobQuery->paginate(10, ['*'], 'job_page')->withQueryString();
 
-        // statistik lowongan
-        $jobStats = [
-            'total' => JobApplication::where('user_id', $user->id)->count(),
-            'new' => JobApplication::where('user_id', $user->id)->where('status', 'new')->count(),
-            'reviewed' => JobApplication::where('user_id', $user->id)->where('status', 'reviewed')->count(),
-            'shortlisted' => JobApplication::where('user_id', $user->id)->where('status', 'shortlisted')->count(),
-            'interview' => JobApplication::where('user_id', $user->id)->where('status', 'interview')->count(),
-            'hired' => JobApplication::where('user_id', $user->id)->where('status', 'hired')->count(),
-            'rejected' => JobApplication::where('user_id', $user->id)->where('status', 'rejected')->count(),
-        ];
+        // statistik lowongan (satu query berkelompok)
+        $jobStats = status_counts(JobApplication::where('user_id', $user->id), ['new', 'reviewed', 'shortlisted', 'interview', 'hired', 'rejected']);
 
         // active tab
         $activeTab = $request->get('tab', 'projects');

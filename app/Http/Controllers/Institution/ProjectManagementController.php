@@ -63,15 +63,16 @@ class ProjectManagementController extends Controller
         // hitung jumlah project berdasarkan status untuk summary cards
         $baseQuery = Project::where('institution_id', $institution->id);
 
-        // statistik untuk summary cards
+        // statistik untuk summary cards (satu query berkelompok)
+        $counts = status_counts($baseQuery, ['active', 'on_hold', 'completed', 'cancelled']);
         $stats = [
-            'total' => (clone $baseQuery)->count(),
+            'total' => $counts['total'],
             'planning' => 0, // key 'planning' dengan value 0 karena tidak ada status planning di database
-            'active' => (clone $baseQuery)->where('status', 'active')->count(),
+            'active' => $counts['active'],
             'review' => 0, // key 'review' dengan value 0 karena tidak ada status review di database
-            'on_hold' => (clone $baseQuery)->where('status', 'on_hold')->count(),
-            'completed' => (clone $baseQuery)->where('status', 'completed')->count(),
-            'cancelled' => (clone $baseQuery)->where('status', 'cancelled')->count(),
+            'on_hold' => $counts['on_hold'],
+            'completed' => $counts['completed'],
+            'cancelled' => $counts['cancelled'],
         ];
 
         // daftar problems untuk filter dropdown
