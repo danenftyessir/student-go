@@ -164,7 +164,8 @@
                 <label class="sg-label" for="map-sdg">Bidang (SDG)</label>
                 <select id="map-sdg" class="sg-select">
                     <option value="">Semua bidang</option>
-                    @foreach ($home['sdgs'] as $sdg)
+                    {{-- urut nomor SDG agar mudah dicari; data sumbernya tetap urut jumlah untuk grafik di atas --}}
+                    @foreach (collect($home['sdgs'])->sortBy('id') as $sdg)
                         <option value="{{ $sdg['id'] }}">SDG {{ $sdg['id'] }} · {{ $sdg['label'] }} ({{ $sdg['total'] }})</option>
                     @endforeach
                 </select>
