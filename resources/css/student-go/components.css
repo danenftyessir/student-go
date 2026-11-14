@@ -627,11 +627,6 @@ body:has(dialog.sg-dialog[open]) { overflow: hidden; }
 .sg-home-steps { display: grid; gap: 2.5rem; }
 @media (min-width: 1024px) { .sg-home-steps { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0 2.5rem; } }
 .sg-home-step { display: flex; flex-direction: column; gap: .5rem; padding-top: 1.25rem; border-top: 1px solid var(--sg-border-strong); }
-@media (min-width: 1024px) {
-  .sg-home-steps { grid-template-columns: minmax(0, 5fr) minmax(0, 4fr) minmax(0, 3fr); align-items: start; gap: 0 3rem; }
-  .sg-home-step:nth-child(2) { margin-top: 3rem; }
-  .sg-home-step:nth-child(3) { margin-top: 1.5rem; }
-}
 .sg-home-step__title { margin: 0; font-size: 1.25rem; line-height: 1.75rem; font-weight: 600; color: var(--sg-text-primary); }
 .sg-home-step > p { margin: 0; font-size: 1rem; line-height: 1.5rem; color: var(--sg-text-secondary); }
 .sg-home-step__sample { display: grid; align-content: start; gap: .25rem; margin: .75rem 0 0; padding: 0; font-size: .875rem; line-height: 1.25rem; color: var(--sg-text-secondary); }
@@ -641,20 +636,8 @@ body:has(dialog.sg-dialog[open]) { overflow: hidden; }
 .sg-home-step__sample dt { color: var(--sg-text-secondary); }
 .sg-home-step__sample dd { margin: 0; color: var(--sg-text-primary); font-weight: 500; }
 .sg-home-step__statuses, .sg-home-cell-status { display: flex; flex-wrap: wrap; gap: .375rem; }
-/* angka tahap besar: hanya mengisi ruang kosong, posisi absolut agar tinggi bagian tidak bertambah */
-.sg-home-step { position: relative; }
-.sg-home-step__num { position: absolute; font-family: var(--font-serif); font-size: 2.75rem; line-height: .8; font-weight: 600; font-variant-numeric: lining-nums tabular-nums; color: var(--color-brand-200); pointer-events: none; user-select: none; }
-/* layar kecil: angka 1 dan 2 di kanan atas, sejajar judul */
-.sg-home-step__num--below, .sg-home-step__num--above { top: .875rem; right: 0; }
-/* angka 3 di samping daftar status */
-.sg-home-step__sample--numbered { position: relative; padding-right: 3rem; }
-.sg-home-step__num--beside { right: 0; bottom: 0; }
-@media (min-width: 1024px) {
-  /* angka 1 di bawah teks, angka 2 di celah atas garis tahap 2 */
-  .sg-home-step__num { font-size: 3.5rem; }
-  .sg-home-step__num--below { top: 100%; right: auto; left: 0; margin-top: 1rem; }
-  .sg-home-step__num--above { top: auto; bottom: calc(100% + .5rem); right: auto; left: 0; }
-}
+/* angka tahap: format sama di ketiga tahap, selalu di atas judul (kolom sama lebar, garis atas sejajar) */
+.sg-home-step__num { font-family: var(--font-serif); font-size: 2.25rem; line-height: 1; font-weight: 600; font-variant-numeric: lining-nums tabular-nums; color: var(--color-brand-200); user-select: none; }
 .sg-home-cell-muted { color: var(--sg-text-secondary); }
 
 /* ── 5b. Institution workspace: table, not a second timeline ── */
