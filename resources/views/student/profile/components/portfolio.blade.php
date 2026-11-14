@@ -156,7 +156,7 @@
                                                         @if ($project->certificate_number)
                                                             <span class="text-gray-600 tabular-nums">No. {{ $project->certificate_number }}</span>
                                                         @endif
-                                                        <a href="{{ document_url($project->certificate_path) }}" target="_blank" download
+                                                        <a data-sg-file href="{{ document_url($project->certificate_path) }}" target="_blank" download
                                                            class="inline-flex items-center gap-1 text-brand-700 underline">
                                                             <x-icon name="download" size="sm" />Unduh sertifikat<span class="sr-only"> {{ $title }}</span>
                                                         </a>

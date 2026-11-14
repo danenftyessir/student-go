@@ -133,7 +133,7 @@
                             @elseif ($project->status === 'completed')
                                 {{-- sertifikat dibuat otomatis saat instansi menyelesaikan proyek (CertificateService); tampil hanya bila ada --}}
                                 @if ($project->certificate_path)
-                                    <a href="{{ document_url($project->certificate_path) }}" target="_blank" download class="sg-btn sg-btn--secondary whitespace-nowrap">
+                                    <a data-sg-file href="{{ document_url($project->certificate_path) }}" target="_blank" download class="sg-btn sg-btn--secondary whitespace-nowrap">
                                         <x-icon name="download" size="sm" />Unduh sertifikat<span class="sr-only"> {{ $judul }}</span>
                                     </a>
                                 @endif
