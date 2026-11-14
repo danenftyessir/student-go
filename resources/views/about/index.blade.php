@@ -195,8 +195,11 @@
                 @foreach ($team as $member)
                     <li>
                         <div class="sg-about__portrait">
-                            <img src="{{ asset($member['photo']) }}" alt="Foto {{ $member['name'] }}"
-                                 width="480" height="600" loading="lazy" decoding="async">
+                            <picture>
+                                <source srcset="{{ asset($member['photo_webp']) }}" type="image/webp">
+                                <img src="{{ asset($member['photo']) }}" alt="Foto {{ $member['name'] }}"
+                                     width="480" height="600" loading="lazy" decoding="async">
+                            </picture>
                         </div>
                         <p>{{ $member['name'] }}</p>
                     </li>

@@ -89,6 +89,7 @@
 @media (min-width: 640px) { .sg-about__team { gap: 1.5rem; } }
 /* transparent cut-outs on a light field, bottom-aligned like a studio portrait */
 .sg-about__portrait { display: flex; align-items: flex-end; justify-content: center; aspect-ratio: 4 / 5; overflow: hidden; background: var(--color-brand-50); border: 1px solid var(--sg-border-default); border-radius: var(--sg-radius-panel); }
+.sg-about__portrait picture { display: contents; }
 .sg-about__portrait img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 50% 0; }
 .sg-about__team p { margin: .5rem 0 0; font-size: .875rem; line-height: 1.25rem; font-weight: 600; color: var(--sg-text-primary); overflow-wrap: anywhere; }
 
