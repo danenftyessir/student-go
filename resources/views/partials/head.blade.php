@@ -3,6 +3,8 @@
     // akhiran merek lama yang ditulis halaman sendiri (" - Laravel", " - " . app.name) dibuang di sini, bukan di tiap view
     $sgPageTitle = trim($__env->yieldContent('title'));
     $sgPageTitle = trim(preg_replace('/\s*[-–—|]\s*(Laravel|Student Go|'.preg_quote((string) config('app.name'), '/').')\s*$/iu', '', $sgPageTitle));
+    // @section('title', '...') sudah di-escape blade; decode sekali agar {{ }} di bawah tidak menghasilkan &amp;amp;
+    $sgPageTitle = html_entity_decode($sgPageTitle, ENT_QUOTES | ENT_HTML5, 'UTF-8');
 @endphp
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">

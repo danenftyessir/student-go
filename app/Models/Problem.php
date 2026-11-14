@@ -291,7 +291,7 @@ class Problem extends Model
     /**
      * scope: filter by duration range
      */
-    public function scopeByDuration($query, int $minMonths, int $maxMonths = null)
+    public function scopeByDuration($query, int $minMonths, ?int $maxMonths = null)
     {
         if ($maxMonths) {
             return $query->whereBetween('duration_months', [$minMonths, $maxMonths]);
