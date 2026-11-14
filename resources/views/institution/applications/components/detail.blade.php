@@ -100,12 +100,12 @@
         </div>
 
         <aside class="sg-inst-app__aside" aria-label="Ringkasan lamaran">
+            {{-- reviewed_at juga terisi untuk status 'reviewed': label "Diputuskan" hanya untuk lamaran diterima/ditolak --}}
             <x-ui.dl :items="array_filter([
                 'Kampus' => $student?->university?->name,
                 'Jurusan' => $student?->major,
                 'Semester' => $student?->semester,
                 'Dikirim' => $tanggal($application->applied_at ?? $application->created_at),
-                // reviewed_at juga terisi untuk status 'reviewed': label mengikuti status, "Diputuskan" hanya untuk diterima/ditolak
                 (in_array($application->status, ['accepted', 'rejected'], true) ? 'Diputuskan' : 'Ditinjau') => $tanggal($application->reviewed_at),
             ])" />
             @if ($student?->user?->username)
