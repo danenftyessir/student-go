@@ -109,7 +109,8 @@ export function initSubmitFeedback() {
         if (!btn) return;
         btn.setAttribute('data-sg-busy-btn', '');
         btn.setAttribute('aria-busy', 'true');
-        if (btn.classList.contains('sg-btn')) {
+        // tombol yang sudah punya spinner sendiri (form auth, unggah, dll.) tidak diberi spinner kedua
+        if (btn.classList.contains('sg-btn') && !btn.querySelector(':scope > .sg-spinner')) {
             btn.setAttribute('data-loading', '');
             const icon = btn.querySelector(':scope > .sg-icon:not([hidden])');
             if (icon) { icon.setAttribute('hidden', ''); icon.setAttribute('data-sg-busy-hidden', ''); }
