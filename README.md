@@ -23,10 +23,14 @@ Dokumen acuan: [docs/Proposal_StudentGo.pdf](docs/Proposal_StudentGo.pdf)
 4. [Pendekatan Teknologi dan AI](#pendekatan-teknologi-dan-ai)
 5. [Arsitektur dan Tech Stack](#arsitektur-dan-tech-stack)
 6. [Menjalankan Secara Lokal](#menjalankan-secara-lokal)
-7. [Fitur MVP dan Roadmap](#fitur-mvp-dan-roadmap)
-8. [AI Use Declaration](#ai-use-declaration)
-9. [Third-Party Declaration](#third-party-declaration)
-10. [Referensi](#referensi)
+7. [Demo dan Cara Menggunakan](#demo-dan-cara-menggunakan)
+8. [Fitur MVP dan Roadmap](#fitur-mvp-dan-roadmap)
+9. [Known Limitations](#known-limitations)
+10. [Kontribusi Tim](#kontribusi-tim)
+11. [AI Use Declaration](#ai-use-declaration)
+12. [Third-Party Declaration](#third-party-declaration)
+13. [Changelog](#changelog)
+14. [Referensi](#referensi)
 
 ## Problem Statement
 
@@ -126,6 +130,19 @@ Tes: `php artisan test` (memakai SQLite in-memory dan memblokir panggilan HTTP k
 
 Jangan memasukkan `.env` atau kunci API ke repositori.
 
+## Demo dan Cara Menggunakan
+
+**Deployment:** https://student-go-production.up.railway.app
+
+Akun uji untuk ketiga peran (mahasiswa, instansi, perusahaan) tercantum di [AUDIT.md](AUDIT.md) bagian 2.2. Seluruh data di deployment adalah data demo sintetis; beranda menandainya dengan keterangan "Data uji coba (demo)".
+
+Alur demo yang disarankan:
+
+1. **Mahasiswa:** buka Telusuri Masalah, filter menurut SDG dan lokasi lalu tekan Terapkan, buka detail masalah, lihat status di Lamaran Saya, lalu buka Repositori untuk membaca laporan KKN dan bertanya kepada asisten SAGO.
+2. **Instansi:** buka menu Masalah, tinjau lamaran di menu Lamaran, pantau Proyek berjalan, dan beri Ulasan setelah proyek selesai.
+3. **Perusahaan:** buka Talenta, saring menurut skill dan lokasi, lihat lencana "divalidasi instansi", simpan dan bandingkan kandidat, lalu kelola Lowongan dan Lamaran yang masuk.
+4. **Bukti validasi:** buka profil publik mahasiswa yang punya proyek selesai, tekan "Cek keaslian" pada portofolio, dan halaman `/verifikasi/{kode}` menampilkan siapa, di mana, kapan, dan instansi yang memvalidasi. Kode yang diubah satu karakter pun menghasilkan 404.
+
 ## Fitur MVP dan Roadmap
 
 **MVP (target Hacking Day 24 jam):**
@@ -145,6 +162,24 @@ Jangan memasukkan `.env` atau kunci API ke repositori.
 | 2 | 2027 | 50 universitas, 200 instansi, 20 perusahaan mitra |
 | 3 | 2028 dan seterusnya | Integrasi API pemerintah (Kemendesa), aplikasi mobile Android/iOS, ekspansi nasional; AI matching score masalah-kompetensi; dashboard analitik untuk universitas dan Kemendikbud |
 
+## Known Limitations
+
+- **Data demo.** Seluruh mahasiswa, instansi, perusahaan, masalah, dan laporan di deployment adalah data sintetis dari seeder, bukan data pengguna sebenarnya.
+- **Berkas storage belum lengkap.** Sebagian laporan PDF dan gambar masalah dari data seeder tidak ada di bucket Supabase Storage yang dipakai deployment. Tautannya menampilkan pesan "Berkas ini belum tersedia di penyimpanan" alih-alih galat.
+- **Nomor sertifikat.** Belum ada proyek demo yang sudah diterbitkan sertifikatnya, sehingga halaman verifikasi memakai kode proyek bertanda tangan (HMAC), bukan nomor sertifikat.
+- **Area admin** ada di kode (9 route) tetapi belum diuji menyeluruh dan tidak memiliki akun demo.
+- **Akun uji berbagi satu kata sandi** agar mudah dipakai juri; jangan menyimpan data sensitif di akun tersebut.
+- **Jawaban AI** bergantung pada kunci API Cohere dan Anthropic serta dokumen yang terindeks; bila dokumen tidak relevan, asisten menjawab bahwa informasi tidak tersedia.
+- **Desain responsif** sudah diperiksa di desktop, tablet, dan mobile untuk halaman utama, tetapi belum di semua kombinasi perangkat dan browser.
+
+## Kontribusi Tim
+
+| Anggota | Kontribusi utama |
+|---|---|
+| Danendra Shafi Athallah (ketua) | Arsitektur dan backend Laravel, integrasi Supabase Storage, design system dan paket aset visual, dokumentasi desain dan rencana fase |
+| M. Abizzar Gamadrian | Skema database dan seeder data demo, halaman mahasiswa dan instansi, audit serta perbaikan UI/UX dan performa tahap final, halaman verifikasi proyek |
+| Kenzie Raffa Ardhana | Profil publik mahasiswa dan instansi, notifikasi, halaman perusahaan dan lowongan, komponen bersama, penanganan galat yang aman, desain sertifikat |
+
 ## AI Use Declaration
 
 - **AI sebagai fitur produk:** Cohere untuk embedding dan semantic search; Claude (Anthropic) untuk menghasilkan jawaban chatbot, saran proyek, dan bantuan verifikasi dokumen institusi. Hasil verifikasi dokumen oleh AI tetap memerlukan konfirmasi manusia.
@@ -162,7 +197,11 @@ Jangan memasukkan `.env` atau kunci API ke repositori.
 | Poppins, Pinyon Script | SIL OFL | Hanya untuk sertifikat |
 | Cohere API, Anthropic API, Supabase | Layanan pihak ketiga, tunduk pada ketentuan masing-masing | Memerlukan kunci API sendiri |
 
-Status hak atas sebagian foto di `public/` masih dikonfirmasi tim; lihat `student-go-docs/redesign-execution/ASSET_INVENTORY.md`.
+Status hak atas sebagian foto di `public/` masih dikonfirmasi tim; lihat `student-go-docs/design-execution/ASSET_INVENTORY.md`.
+
+## Changelog
+
+Perubahan dari `submission-24h` menuju `finalist-release` ada di [CHANGELOG.md](CHANGELOG.md).
 
 ## Referensi
 
