@@ -6,7 +6,7 @@
 @section('content')
 @php
     // phase 29 paket A: pelacak sebagai ringkasan + dua tabel (5 lamaran terbaru per jenis), status dari StatusVocabulary
-    // (kata sama dengan dashboard dan Aplikasi Saya). angka hanya dari variabel controller (guardrail 2);
+    // (kata sama dengan dashboard dan Lamaran Saya). angka hanya dari variabel controller (guardrail 2);
     // grafik 'Aktivitas Minggu Ini', persentase keberhasilan dan kartu 'Aksi Cepat' dihapus.
     $tanggal = fn ($date) => $date ? $date->locale('id')->translatedFormat('j M Y') : '—';
     $relatif = fn ($date) => $date ? $date->locale('id')->diffForHumans() : null;
@@ -15,7 +15,7 @@
 <div class="sg-container pb-16">
     <x-ui.page-header title="Pelacak lamaran" description="Pantau perkembangan lamaran proyek KKN dan lowongan Anda di satu tempat.">
         <x-slot:actions>
-            <x-ui.button variant="secondary" icon-end="arrow-right" :href="route('student.applications.index')">Lihat semua aplikasi</x-ui.button>
+            <x-ui.button variant="secondary" icon-end="arrow-right" :href="route('student.applications.index')">Lihat semua lamaran</x-ui.button>
         </x-slot:actions>
     </x-ui.page-header>
 

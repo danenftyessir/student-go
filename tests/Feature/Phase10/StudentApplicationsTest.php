@@ -259,7 +259,7 @@ class StudentApplicationsTest extends TestCase
 
         $id = DB::table('applications')->value('id');
         $response->assertRedirect(route('student.applications.show', $id))
-            ->assertSessionHas('success', 'Aplikasi berhasil dikirim! Instansi akan meninjau aplikasi Anda.');
+            ->assertSessionHas('success', 'Lamaran berhasil dikirim! Instansi akan meninjau lamaran Anda.');
 
         $main = $this->get200('/student/applications/'.$id);
         $this->assertStringContainsString('proposal-kkn.pdf', $main);
@@ -267,7 +267,7 @@ class StudentApplicationsTest extends TestCase
 
         $this->actingAs($user)->delete('/student/applications/'.$id)
             ->assertRedirect(route('student.applications.index'))
-            ->assertSessionHas('success', 'Aplikasi berhasil dibatalkan.');
+            ->assertSessionHas('success', 'Lamaran berhasil dibatalkan.');
         $this->assertDatabaseMissing('applications', ['id' => $id]);
     }
 }

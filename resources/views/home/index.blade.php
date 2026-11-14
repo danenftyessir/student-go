@@ -45,6 +45,7 @@
                 <div class="sg-home-facts">
                     <p class="sg-home-facts__label">Saat ini di Student Go</p>
                     <x-ui.summary :items="$home['summary']" label="Data Student Go saat ini" />
+                    @if (config('app.demo_data'))<p class="sg-demo-note">Data uji coba (demo), bukan data pengguna sebenarnya.</p>@endif
                 </div>
             @endif
         </div>
@@ -259,7 +260,7 @@
             <div class="sg-home-step">
                 <span class="sg-home-step__num" aria-hidden="true">3</span>
                 <h3 class="sg-home-step__title">Kerjakan dan catat</h3>
-                <p>Status lamaran terlihat di halaman Aplikasi Saya. Proyek yang selesai dan ulasan instansi tampil di portofolio publik.</p>
+                <p>Status lamaran terlihat di halaman Lamaran Saya. Proyek yang selesai dan ulasan instansi tampil di portofolio publik.</p>
                 <div class="sg-home-step__sample">
                     <span class="sg-home-step__sample-label">Status lamaran</span>
                     <span class="sg-home-step__statuses">
@@ -328,6 +329,7 @@
             @endforeach
         </dl>
         <p class="sg-home-note">Dihitung langsung dari data proyek di Student Go saat halaman dibuka.</p>
+        @if (config('app.demo_data'))<p class="sg-demo-note">Data uji coba (demo), bukan data pengguna sebenarnya.</p>@endif
     </div>
 </section>
 @endif

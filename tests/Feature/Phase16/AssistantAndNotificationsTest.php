@@ -230,7 +230,7 @@ class AssistantAndNotificationsTest extends TestCase
         $this->assertStringNotContainsString('name="search"', $main);
         $this->assertStringContainsString('name="status" id="filter-status"', $main);
         $this->assertStringContainsString('name="type" id="filter-type"', $main);
-        $this->assertStringContainsString('<option value="application_rejected" >Aplikasi ditolak</option>', $main);
+        $this->assertStringContainsString('<option value="application_rejected" >Lamaran ditolak</option>', $main);
         $this->assertStringContainsString('<option value="friend_request" >Permintaan pertemanan</option>', $main);
         $this->assertStringNotContainsString('value="review_received"', $main);
         $this->assertStringContainsString('action="' . route('notifications.index') . '"', $main);
@@ -327,7 +327,7 @@ class AssistantAndNotificationsTest extends TestCase
         $this->assertSame('Skor #1 © 2026', NotificationTypes::cleanTitle('Skor #1 © 2026'));
         $this->assertSame('bell', NotificationTypes::icon('tipe_tidak_dikenal'));
         $this->assertSame('Lainnya', NotificationTypes::label(null));
-        $this->assertSame(['application_submitted' => 'Aplikasi masuk', 'zzz_custom' => 'Lainnya'],
+        $this->assertSame(['application_submitted' => 'Lamaran masuk', 'zzz_custom' => 'Lainnya'],
             NotificationTypes::options(['zzz_custom', 'application_submitted', 'application_submitted']));
     }
 

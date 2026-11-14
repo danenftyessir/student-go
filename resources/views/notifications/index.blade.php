@@ -43,19 +43,19 @@
 
     $role = auth()->user()->user_type;
     $emptyText = [
-        'student' => 'Notifikasi muncul saat aplikasi Anda diputuskan, proyek dimulai, atau ada permintaan pertemanan.',
-        'institution' => 'Notifikasi muncul saat mahasiswa mengirim aplikasi atau laporan proyek.',
+        'student' => 'Notifikasi muncul saat lamaran Anda diputuskan, proyek dimulai, atau ada permintaan pertemanan.',
+        'institution' => 'Notifikasi muncul saat mahasiswa mengirim lamaran atau laporan proyek.',
     ][$role] ?? 'Notifikasi untuk akun Anda akan muncul di halaman ini.';
     $emptyAction = [
         'student' => [route('student.browse-problems.index'), 'Telusuri masalah'],
-        'institution' => [route('institution.applications.index'), 'Lihat aplikasi'],
+        'institution' => [route('institution.applications.index'), 'Lihat lamaran'],
         'company' => [route('company.dashboard'), 'Ke dashboard'],
     ][$role] ?? null;
 @endphp
 
 @section('content')
 <div class="sg-container sg-inbox">
-    <x-ui.page-header title="Notifikasi" description="Pembaruan tentang aplikasi, proyek dan akun Anda. Notifikasi baru tetap belum dibaca sampai Anda membukanya.">
+    <x-ui.page-header title="Notifikasi" description="Pembaruan tentang lamaran, proyek dan akun Anda. Notifikasi baru tetap belum dibaca sampai Anda membukanya.">
         @if ($stats['unread'] > 0 || $stats['read'] > 0)
             <x-slot:actions>
                 @if ($stats['unread'] > 0)

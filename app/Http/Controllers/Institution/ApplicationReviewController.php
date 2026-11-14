@@ -129,7 +129,7 @@ class ApplicationReviewController extends Controller
 
         if (!in_array($application->status, ['pending', 'reviewed'])) {
             return redirect()->route('institution.applications.show', $application->id)
-                           ->with('error', 'aplikasi ini sudah diproses');
+                           ->with('error', 'lamaran ini sudah diproses');
         }
 
         return view('institution.applications.review', compact('application'));
@@ -149,7 +149,7 @@ class ApplicationReviewController extends Controller
             ->findOrFail($id);
 
         if (!in_array($application->status, ['pending', 'reviewed'])) {
-            return back()->with('error', 'aplikasi ini sudah diproses');
+            return back()->with('error', 'lamaran ini sudah diproses');
         }
 
         // validasi slot mahasiswa
@@ -201,7 +201,7 @@ class ApplicationReviewController extends Controller
             $this->notifyStudent(fn (NotificationService $notifications) => $notifications->applicationAccepted($application));
 
             return redirect()->route('institution.applications.show', $application->id)
-                           ->with('success', 'aplikasi berhasil diterima dan proyek telah dibuat');
+                           ->with('success', 'lamaran berhasil diterima dan proyek telah dibuat');
 
         } catch (\Exception $e) {
             DB::rollBack();
@@ -224,7 +224,7 @@ class ApplicationReviewController extends Controller
             ->findOrFail($id);
 
         if (!in_array($application->status, ['pending', 'reviewed'])) {
-            return back()->with('error', 'aplikasi ini sudah diproses');
+            return back()->with('error', 'lamaran ini sudah diproses');
         }
 
         $validated = $request->validate([
@@ -248,7 +248,7 @@ class ApplicationReviewController extends Controller
             $this->notifyStudent(fn (NotificationService $notifications) => $notifications->applicationRejected($application, $validated['feedback']));
 
             return redirect()->route('institution.applications.show', $application->id)
-                           ->with('success', 'aplikasi telah ditolak');
+                           ->with('success', 'lamaran telah ditolak');
 
         } catch (\Exception $e) {
             DB::rollBack();
@@ -285,7 +285,7 @@ class ApplicationReviewController extends Controller
 
         // hanya bisa cancel jika rejected atau accepted (dan belum ada project yang aktif)
         if (!in_array($application->status, ['rejected', 'accepted'])) {
-            return back()->with('error', 'tidak dapat membatalkan review untuk aplikasi ini');
+            return back()->with('error', 'tidak dapat membatalkan review untuk lamaran ini');
         }
 
         // jika accepted, cek apakah sudah ada project
@@ -443,7 +443,7 @@ class ApplicationReviewController extends Controller
                                 $application->update([
                                     'status' => 'rejected',
                                     'reviewed_at' => now(),
-                                    'feedback' => $validated['feedback'] ?? 'aplikasi ditolak',
+                                    'feedback' => $validated['feedback'] ?? 'lamaran ditolak',
                                     'rejection_reason' => $validated['rejection_reason'] ?? 'tidak sesuai kriteria',
                                 ]);
                                 $successCount++;
@@ -470,9 +470,9 @@ class ApplicationReviewController extends Controller
 
             DB::commit();
 
-            $message = "{$successCount} aplikasi berhasil diproses";
+            $message = "{$successCount} lamaran berhasil diproses";
             if ($errorCount > 0) {
-                $message .= ", {$errorCount} aplikasi gagal diproses";
+                $message .= ", {$errorCount} lamaran gagal diproses";
             }
 
             return redirect()->route('institution.applications.index')

@@ -129,14 +129,14 @@ class ApplicationController extends Controller
         if ($problem->status !== 'open') {
             return redirect()
                 ->route('student.browse-problems.index')
-                ->with('error', 'Maaf, proyek ini sudah tidak menerima aplikasi');
+                ->with('error', 'Maaf, proyek ini sudah tidak menerima lamaran');
         }
         
         // validasi deadline belum lewat
         if ($problem->application_deadline < now()) {
             return redirect()
                 ->route('student.browse-problems.show', $problem->id)
-                ->with('error', 'Maaf, deadline aplikasi sudah berakhir');
+                ->with('error', 'Maaf, tenggat lamaran sudah berakhir');
         }
         
         // cek apakah sudah pernah apply
@@ -148,7 +148,7 @@ class ApplicationController extends Controller
         if ($hasApplied) {
             return redirect()
                 ->route('student.browse-problems.show', $problem->id)
-                ->with('info', 'Anda sudah mengajukan aplikasi untuk proyek ini');
+                ->with('info', 'Anda sudah mengajukan lamaran untuk proyek ini');
         }
         
         return view('student.applications.create', compact('problem'));
@@ -207,7 +207,7 @@ class ApplicationController extends Controller
                 'status' => $problem->status,
                 'deadline' => $problem->application_deadline,
             ]);
-            return back()->with('error', 'Proyek sudah tidak menerima aplikasi');
+            return back()->with('error', 'Proyek sudah tidak menerima lamaran');
         }
         
         // cek apakah sudah pernah apply
@@ -220,7 +220,7 @@ class ApplicationController extends Controller
                 'student_id' => $student->id,
                 'problem_id' => $problem->id,
             ]);
-            return back()->with('error', 'Anda sudah mengajukan aplikasi untuk proyek ini');
+            return back()->with('error', 'Anda sudah mengajukan lamaran untuk proyek ini');
         }
         
         try {
@@ -285,7 +285,7 @@ class ApplicationController extends Controller
                     'error' => $e->getMessage(),
                     'sql_error' => $e->getMessage(),
                 ]);
-                throw new \Exception('Gagal menyimpan aplikasi ke database: ' . $e->getMessage());
+                throw new \Exception('Gagal menyimpan lamaran ke database: ' . $e->getMessage());
             }
             
             // increment counter aplikasi di problem
@@ -325,7 +325,7 @@ class ApplicationController extends Controller
             
             return redirect()
                 ->route('student.applications.show', $application->id)
-                ->with('success', 'Aplikasi berhasil dikirim! Instansi akan meninjau aplikasi Anda.');
+                ->with('success', 'Lamaran berhasil dikirim! Instansi akan meninjau lamaran Anda.');
             
         } catch (\Exception $e) {
             DB::rollBack();
@@ -337,7 +337,7 @@ class ApplicationController extends Controller
             Log::error("=== END Application Store (FAILED) ===");
             
             // return error message yang jelas
-            $errorMessage = safe_error_message('Terjadi kesalahan saat mengirim aplikasi: ', $e);
+            $errorMessage = safe_error_message('Terjadi kesalahan saat mengirim lamaran: ', $e);
             
             return back()
                 ->withInput()
@@ -469,7 +469,7 @@ class ApplicationController extends Controller
         
         // hanya bisa withdraw jika status masih pending
         if ($application->status !== 'pending') {
-            return back()->with('error', 'Aplikasi tidak dapat dibatalkan karena sudah diproses.');
+            return back()->with('error', 'Lamaran tidak dapat dibatalkan karena sudah diproses.');
         }
         
         try {
@@ -487,17 +487,17 @@ class ApplicationController extends Controller
             
             return redirect()
                 ->route('student.applications.index')
-                ->with('success', 'Aplikasi berhasil dibatalkan.');
+                ->with('success', 'Lamaran berhasil dibatalkan.');
             
         } catch (\Exception $e) {
             DB::rollBack();
             
-            Log::error("❌ Error saat membatalkan aplikasi", [
+            Log::error("❌ Error saat membatalkan lamaran", [
                 'application_id' => $id,
                 'error' => $e->getMessage(),
             ]);
             
-            return back()->with('error', 'Terjadi kesalahan saat membatalkan aplikasi.');
+            return back()->with('error', 'Terjadi kesalahan saat membatalkan lamaran.');
         }
     }
 }

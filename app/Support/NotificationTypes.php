@@ -11,9 +11,9 @@ namespace App\Support;
 class NotificationTypes
 {
     private const MAP = [
-        'application_submitted' => ['Aplikasi masuk', 'send'],
-        'application_accepted' => ['Aplikasi diterima', 'circle-check'],
-        'application_rejected' => ['Aplikasi ditolak', 'circle-x'],
+        'application_submitted' => ['Lamaran masuk', 'send'],
+        'application_accepted' => ['Lamaran diterima', 'circle-check'],
+        'application_rejected' => ['Lamaran ditolak', 'circle-x'],
         'project_started' => ['Proyek dimulai', 'clipboard-list'],
         'project_milestone' => ['Milestone proyek', 'clipboard-list'],
         'report_submitted' => ['Laporan masuk', 'file-text'],

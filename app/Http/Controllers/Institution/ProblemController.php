@@ -183,8 +183,8 @@ class ProblemController extends Controller
                 'images.*' => 'image|mimes:jpeg,png,jpg|max:5120',
             ], [
                 'start_date.after_or_equal' => 'Tanggal mulai proyek tidak boleh di masa lalu.',
-                'application_deadline.after_or_equal' => 'Deadline aplikasi tidak boleh di masa lalu.',
-                'application_deadline.before' => 'Deadline aplikasi harus sebelum tanggal mulai proyek.',
+                'application_deadline.after_or_equal' => 'Tenggat lamaran tidak boleh di masa lalu.',
+                'application_deadline.before' => 'Tenggat lamaran harus sebelum tanggal mulai proyek.',
                 'end_date.after' => 'Tanggal selesai proyek harus setelah tanggal mulai.',
             ]);
 
@@ -414,8 +414,8 @@ class ProblemController extends Controller
                 'delete_images.*' => 'exists:problem_images,id',
             ], [
                 'start_date.after_or_equal' => 'Tanggal mulai proyek tidak boleh di masa lalu.',
-                'application_deadline.after_or_equal' => 'Deadline aplikasi tidak boleh di masa lalu.',
-                'application_deadline.before' => 'Deadline aplikasi harus sebelum tanggal mulai proyek.',
+                'application_deadline.after_or_equal' => 'Tenggat lamaran tidak boleh di masa lalu.',
+                'application_deadline.before' => 'Tenggat lamaran harus sebelum tanggal mulai proyek.',
                 'end_date.after' => 'Tanggal selesai proyek harus setelah tanggal mulai.',
             ]);
 
@@ -581,7 +581,7 @@ class ProblemController extends Controller
 
         // cek apakah ada aplikasi yang sudah diterima
         if ($problem->applications()->where('status', 'accepted')->exists()) {
-            return back()->with('error', 'Tidak Dapat Menghapus Problem yang Sudah Memiliki Aplikasi Diterima!');
+            return back()->with('error', 'Tidak Dapat Menghapus Problem yang Sudah Memiliki Lamaran Diterima!');
         }
 
         // hapus semua gambar (support public dan supabase disk)

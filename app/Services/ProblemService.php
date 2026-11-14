@@ -68,7 +68,7 @@ class ProblemService
     {
         // validasi: tidak bisa update jika sudah ada accepted applications
         if ($problem->applications()->where('status', 'accepted')->exists()) {
-            throw new \Exception('Tidak dapat mengupdate masalah yang sudah memiliki aplikasi yang diterima.');
+            throw new \Exception('Tidak dapat mengupdate masalah yang sudah memiliki lamaran yang diterima.');
         }
 
         try {
@@ -120,7 +120,7 @@ class ProblemService
     {
         // validasi: tidak bisa hapus jika sudah ada applications
         if ($problem->applications()->exists()) {
-            throw new \Exception('Tidak dapat menghapus masalah yang sudah memiliki aplikasi.');
+            throw new \Exception('Tidak dapat menghapus masalah yang sudah memiliki lamaran.');
         }
 
         try {

@@ -17,7 +17,7 @@
             'steps' => [
                 ['Telusuri masalah', 'Saring menurut provinsi, SDG, tingkat kesulitan, dan durasi, atau buka peta.'],
                 ['Kirim lamaran', 'Tulis motivasi minimal 100 karakter dan lampirkan berkas yang diminta.'],
-                ['Pantau tinjauan', 'Lihat status lamaran dan linimasanya di halaman Aplikasi Saya.'],
+                ['Pantau tinjauan', 'Lihat status lamaran dan linimasanya di halaman Lamaran Saya.'],
                 ['Jalankan proyek', 'Lamaran yang diterima tampil di halaman Proyek Saya.'],
                 ['Bangun portofolio', 'Hasil dan penilaian instansi tampil di profil dan portofolio publik.'],
             ],
