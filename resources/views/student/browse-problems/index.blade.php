@@ -84,7 +84,7 @@
             <div class="sg-browse__toolbar">
                 <div class="sg-browse__search">
                     <x-ui.search name="search" label="Cari masalah" placeholder="Cari judul atau deskripsi masalah" form="browse-filters" />
-                    <button type="submit" form="browse-filters" class="sg-btn sg-btn--secondary">Cari</button>
+                    <button type="submit" form="browse-filters" class="sg-btn sg-btn--secondary sg-btn--lg">Cari</button>
                 </div>
                 <div class="sg-browse__sort">
                     <label for="browse-sort" class="sg-label">Urutkan</label>

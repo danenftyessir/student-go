@@ -125,10 +125,10 @@
                     @php($app = $item['app'])
                     @php($name = $app->user->name ?? 'Tanpa nama')
                     <tr data-application-id="{{ $app->id }}" x-show="shows({{ $app->id }})" :class="{ 'is-selected': isSelected({{ $app->id }}) }">
-                        <td data-label="Pilih" class="sg-co-apps__pick">
+                        <td data-label="Pilih" data-sg-stack="bare" class="sg-co-apps__pick">
                             <input type="checkbox" value="{{ $app->id }}" x-model="selected" aria-label="Pilih {{ $name }}">
                         </td>
-                        <td data-label="Kandidat">
+                        <td data-label="Kandidat" data-sg-stack="bare">
                             <span class="sg-co-apps__person">
                                 <x-ui.avatar :name="$name" size="sm" decorative />
                                 <span class="sg-co-apps__who">
@@ -138,7 +138,7 @@
                             </span>
                         </td>
                         <td data-label="Posisi">{{ $app->jobPosting->title ?? '—' }}</td>
-                        <td data-label="Rating">
+                        <td data-label="Rating" @if (! $app->rating) data-sg-stack="hide" @endif>
                             @if ($app->rating)
                                 <span class="sg-co-apps__rating" role="img" aria-label="Rating {{ $app->rating }} dari 5">
                                     <span class="sg-co-apps__rating-bars" aria-hidden="true">@for ($i = 1; $i <= 5; $i++)<i @class(['is-on' => $i <= $app->rating])></i>@endfor</span>
@@ -151,7 +151,7 @@
                         <td data-label="Tanggal melamar" class="sg-co-apps__date">{{ $tanggal($app->created_at) }}</td>
                         {{-- badge dari tahap (nilai lama accepted = Direkrut, sama dengan tabnya) --}}
                         <td data-label="Status"><x-ui.status domain="job_application" :value="$item['stage']" /></td>
-                        <td data-label="Aksi">
+                        <td data-label="Aksi" data-sg-stack="bare">
                             <span class="sg-co-apps__actions">
                                 <x-ui.icon-button icon="eye" :label="'Lihat lamaran ' . $name" :href="route('company.applications.show', $app->id)" />
                                 <x-ui.button variant="tertiary" icon="clipboard-check" @click="openActions({{ $app->id }})" aria-label="Ubah tahap, rating atau catatan {{ $name }}">Tindak lanjut</x-ui.button>

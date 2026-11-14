@@ -143,8 +143,8 @@
                                         0
                                     @endif
                                 </td>
-                                <td data-label="Ditayangkan">{{ $tanggal($job->published_at) }}</td>
-                                <td data-label="Berakhir">{{ $tanggal($job->expires_at) ?? '—' }}</td>
+                                <td data-label="Ditayangkan" class="whitespace-nowrap tabular-nums">{{ $tanggal($job->published_at) }}</td>
+                                <td data-label="Berakhir" class="whitespace-nowrap tabular-nums">{{ $tanggal($job->expires_at) ?? '—' }}</td>
                             </tr>
                         @endforeach
                     </x-ui.table>
