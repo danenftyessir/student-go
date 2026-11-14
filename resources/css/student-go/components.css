@@ -639,11 +639,6 @@ body:has(dialog.sg-dialog[open]) { overflow: hidden; }
 .sg-home-steps { display: grid; gap: 2.5rem; }
 @media (min-width: 1024px) { .sg-home-steps { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0 2.5rem; } }
 .sg-home-step { display: flex; flex-direction: column; gap: .5rem; padding-top: 1.25rem; border-top: 1px solid var(--sg-border-strong); }
-@media (min-width: 1024px) {
-  .sg-home-steps { grid-template-columns: minmax(0, 5fr) minmax(0, 4fr) minmax(0, 3fr); align-items: start; gap: 0 3rem; }
-  .sg-home-step:nth-child(2) { margin-top: 3rem; }
-  .sg-home-step:nth-child(3) { margin-top: 1.5rem; }
-}
 .sg-home-step__title { margin: 0; font-size: 1.25rem; line-height: 1.75rem; font-weight: 600; color: var(--sg-text-primary); }
 .sg-home-step > p { margin: 0; font-size: 1rem; line-height: 1.5rem; color: var(--sg-text-secondary); }
 .sg-home-step__sample { display: grid; align-content: start; gap: .25rem; margin: .75rem 0 0; padding: 0; font-size: .875rem; line-height: 1.25rem; color: var(--sg-text-secondary); }
@@ -653,20 +648,8 @@ body:has(dialog.sg-dialog[open]) { overflow: hidden; }
 .sg-home-step__sample dt { color: var(--sg-text-secondary); }
 .sg-home-step__sample dd { margin: 0; color: var(--sg-text-primary); font-weight: 500; }
 .sg-home-step__statuses, .sg-home-cell-status { display: flex; flex-wrap: wrap; gap: .375rem; }
-/* angka tahap besar: hanya mengisi ruang kosong, posisi absolut agar tinggi bagian tidak bertambah */
-.sg-home-step { position: relative; }
-.sg-home-step__num { position: absolute; font-family: var(--font-serif); font-size: 2.75rem; line-height: .8; font-weight: 600; font-variant-numeric: lining-nums tabular-nums; color: var(--color-brand-200); pointer-events: none; user-select: none; }
-/* layar kecil: angka 1 dan 2 di kanan atas, sejajar judul */
-.sg-home-step__num--below, .sg-home-step__num--above { top: .875rem; right: 0; }
-/* angka 3 di samping daftar status */
-.sg-home-step__sample--numbered { position: relative; padding-right: 3rem; }
-.sg-home-step__num--beside { right: 0; bottom: 0; }
-@media (min-width: 1024px) {
-  /* angka 1 di bawah teks, angka 2 di celah atas garis tahap 2 */
-  .sg-home-step__num { font-size: 3.5rem; }
-  .sg-home-step__num--below { top: 100%; right: auto; left: 0; margin-top: 1rem; }
-  .sg-home-step__num--above { top: auto; bottom: calc(100% + .5rem); right: auto; left: 0; }
-}
+/* angka tahap: format sama di ketiga tahap, selalu di atas judul (kolom sama lebar, garis atas sejajar) */
+.sg-home-step__num { font-family: var(--font-serif); font-size: 2.25rem; line-height: 1; font-weight: 600; font-variant-numeric: lining-nums tabular-nums; color: var(--color-brand-200); user-select: none; }
 .sg-home-cell-muted { color: var(--sg-text-secondary); }
 
 /* ── 5b. Institution workspace: table, not a second timeline ── */
@@ -687,7 +670,7 @@ body:has(dialog.sg-dialog[open]) { overflow: hidden; }
 
 /* ── 6. Recorded outcomes: plain numbers from the projects table ── */
 .sg-home-outcomes__list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.5rem; margin: 1.75rem 0 0; }
-@media (min-width: 1024px) { .sg-home-outcomes__list { grid-template-columns: 2fr 1fr 1fr 1fr; gap: 2.5rem; align-items: start; } .sg-home-outcomes__list > div:first-child dd { font-size: 4rem; line-height: 4.5rem; } }
+@media (min-width: 1024px) { .sg-home-outcomes__list { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 2.5rem; align-items: start; } }   /* empat angka setara: lebar dan ukuran sama */
 .sg-home-outcomes__list > div { display: flex; flex-direction: column; gap: .25rem; padding-top: 1rem; border-top: 2px solid var(--sg-text-primary); }
 .sg-home-outcomes__list dd { order: -1; }
 .sg-home-outcomes__list dt { font-size: 1rem; line-height: 1.5rem; color: var(--sg-text-secondary); }
@@ -696,17 +679,13 @@ body:has(dialog.sg-dialog[open]) { overflow: hidden; }
 /* ── 7. Role choice: different value per role; student first and wider ── */
 .sg-home-close { background: var(--sg-surface-sunken); }
 .sg-home-roles { display: grid; gap: 2.5rem; margin-top: 2rem; }
-@media (min-width: 1024px) { .sg-home-roles { grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr) minmax(0, 1fr); gap: 0 3rem; align-items: start; } }
-/* a stepped rhythm: each column starts a little lower; one button style for all */
+@media (min-width: 1024px) { .sg-home-roles { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0 3rem; } }   /* tiga peran setara: lebar sama, garis atas sejajar */
 .sg-home-role-col { display: flex; flex-direction: column; gap: .75rem; padding-top: 1.25rem; border-top: 1px solid var(--sg-border-strong); }
-@media (min-width: 1024px) { .sg-home-role-col:nth-child(2) { margin-top: 2.5rem; } .sg-home-role-col:nth-child(3) { margin-top: 5rem; } }
-.sg-home-role-col:first-child { border-top: 2px solid var(--sg-text-primary); }
-.sg-home-role-col:first-child .sg-home-h3 { font-size: 1.5rem; line-height: 2rem; }
 .sg-home-role-col .sg-home-kicker { margin: 0; }
-.sg-home-role-col ul { margin: 0; padding: 0; list-style: none; font-size: 1rem; line-height: 1.5rem; color: var(--sg-text-secondary); }
+.sg-home-role-col ul { margin: 0 0 .5rem; padding: 0; list-style: none; font-size: 1rem; line-height: 1.5rem; color: var(--sg-text-secondary); }
 .sg-home-role-col li { padding-block: .5rem; border-top: 1px solid var(--sg-border-default); }
 .sg-home-role-col li:last-child { border-bottom: 1px solid var(--sg-border-default); }
-.sg-home-role-col .sg-btn { align-self: flex-start; margin-top: .5rem; }
+.sg-home-role-col .sg-btn { align-self: flex-start; margin-top: auto; }   /* tombol sejajar di dasar kolom */
 
 /* ── Small screens: shorter page without dropping a section (the full list is one link away) ── */
 @media (max-width: 639px) {

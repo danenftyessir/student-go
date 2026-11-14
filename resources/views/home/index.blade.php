@@ -232,6 +232,7 @@
         </div>
         <div class="sg-home-steps">
             <div class="sg-home-step">
+                <span class="sg-home-step__num" aria-hidden="true">1</span>
                 <h3 class="sg-home-step__title">Pilih masalah</h3>
                 <p>Saring menurut provinsi, bidang SDG, tingkat kesulitan, dan durasi.</p>
                 @if ($example)
@@ -242,10 +243,9 @@
                         <span>{{ $example->required_students }} mahasiswa · {{ $example->duration_months }} bulan</span>
                     </div>
                 @endif
-                <span class="sg-home-step__num sg-home-step__num--below" aria-hidden="true">1</span>
             </div>
             <div class="sg-home-step">
-                <span class="sg-home-step__num sg-home-step__num--above" aria-hidden="true">2</span>
+                <span class="sg-home-step__num" aria-hidden="true">2</span>
                 <h3 class="sg-home-step__title">Kirim lamaran</h3>
                 <p>Satu formulir per masalah. Instansi meninjau lamaran yang masuk.</p>
                 <dl class="sg-home-step__sample">
@@ -255,10 +255,10 @@
                 </dl>
             </div>
             <div class="sg-home-step">
+                <span class="sg-home-step__num" aria-hidden="true">3</span>
                 <h3 class="sg-home-step__title">Kerjakan dan catat</h3>
                 <p>Status lamaran terlihat di halaman Aplikasi Saya. Proyek yang selesai dan ulasan instansi tampil di portofolio publik.</p>
-                <div class="sg-home-step__sample sg-home-step__sample--numbered">
-                    <span class="sg-home-step__num sg-home-step__num--beside" aria-hidden="true">3</span>
+                <div class="sg-home-step__sample">
                     <span class="sg-home-step__sample-label">Status lamaran</span>
                     <span class="sg-home-step__statuses">
                         <x-ui.status domain="application" value="pending" />
