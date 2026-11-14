@@ -553,6 +553,7 @@ body:has(dialog.sg-dialog[open]) { overflow: hidden; }
 .sg-home-facts { padding-top: 1rem; border-top: 1px solid var(--sg-border-default); }
 .sg-home-facts__label { margin: 0 0 .25rem; font-size: .875rem; line-height: 1.25rem; color: var(--sg-text-secondary); }
 .sg-home-facts .sg-summary { font-size: 1rem; line-height: 1.5rem; }
+.sg-demo-note { margin: .375rem 0 0; font-size: .75rem; line-height: 1rem; color: var(--sg-text-tertiary); }   /* keterangan data demo: kecil tapi terbaca */
 
 .sg-home-needs { padding-top: 1.25rem; border-top: 2px solid var(--sg-text-primary); }
 .sg-home-needs__title { margin: 0; font-size: 1rem; line-height: 1.5rem; font-weight: 600; color: var(--sg-text-primary); }
@@ -730,3 +731,27 @@ body:has(dialog.sg-dialog[open]) { overflow: hidden; }
 .sg-compare__actions { display: flex; flex-wrap: wrap; gap: .5rem; }
 .sg-compare__list { display: grid; gap: .25rem; margin: 0; padding-left: 1.125rem; list-style: disc; }
 .sg-compare__chips { display: flex; flex-wrap: wrap; gap: .375rem; margin: 0; padding: 0; list-style: none; }
+/* ── Gerak halus (audit ui/ux, 2026-11-14): hanya saat sesuatu muncul atau ditekan, 150–200 ms.
+   aturan prefers-reduced-motion global (legacy-overrides.css) mematikan semuanya. ── */
+@keyframes sg-pop-in { from { opacity: 0; transform: translateY(-4px); } }
+@keyframes sg-fade-in { from { opacity: 0; } }
+@keyframes sg-slide-in-end { from { opacity: 0; transform: translateX(1rem); } }
+@keyframes sg-pulse { 50% { opacity: .5; } }
+/* menu akun, panel notifikasi, menu mobile */
+.sg-menu, .sg-mobile-nav { animation: sg-pop-in var(--duration-state) var(--ease-standard); }
+.sg-mobile-nav__backdrop, .sg-filter-bar__backdrop[data-open] { animation: sg-fade-in var(--duration-state) var(--ease-standard); }
+/* dialog dan latarnya; drawer masuk dari kanan */
+.sg-dialog[open] { animation: sg-pop-in 200ms var(--ease-standard); }
+.sg-dialog[open]::backdrop { animation: sg-fade-in 200ms var(--ease-standard); }
+.sg-dialog.sg-drawer[open], .sg-filter-bar__panel[data-open] { animation-name: sg-slide-in-end; animation-duration: 200ms; animation-timing-function: var(--ease-standard); }
+/* toast masuk dari kanan (keluarnya sudah memudar lewat [data-leaving]) */
+.sg-toast { animation: sg-slide-in-end 200ms var(--ease-standard); }
+/* isi <details> (filter sdg, faq) muncul halus saat dibuka */
+details[open] > :not(summary) { animation: sg-pop-in var(--duration-state) var(--ease-standard); }
+/* kerangka pemuatan berdenyut pelan agar terbaca sebagai "sedang memuat" */
+.sg-skeleton { animation: sg-pulse 1.6s ease-in-out infinite; }
+/* tombol sedikit turun saat ditekan */
+.sg-btn:not(:disabled):not([aria-disabled="true"]):active { transform: translateY(1px); }
+/* lencana proyek yang sudah divalidasi instansi (kartu talenta, portofolio) */
+.sg-validated { display: inline-flex; align-items: center; gap: .25rem; color: var(--color-success-700); font-weight: 600; }
+.sg-validated .sg-icon, .sg-co-talents__facts .sg-validated .sg-icon { color: var(--color-success-600); }
