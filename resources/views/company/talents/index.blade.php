@@ -131,6 +131,9 @@
                                     <span><x-icon name="map-pin" size="sm" /><span class="sr-only">Lokasi kampus: </span>{{ $talent['location'] }}</span>
                                 @endif
                                 <span>{{ $fmt($talent['projects_count']) }} proyek KKN</span>
+                                @if (($talent['validated_count'] ?? 0) > 0)
+                                    <span class="sg-validated"><x-icon name="badge-check" size="sm" />{{ $fmt($talent['validated_count']) }} divalidasi instansi</span>
+                                @endif
                             </p>
 
                             @if (count($talent['sdg_badges']))

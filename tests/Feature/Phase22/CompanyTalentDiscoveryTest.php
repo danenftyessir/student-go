@@ -266,6 +266,17 @@ class CompanyTalentDiscoveryTest extends TestCase
         $this->assertSame('Name,Email,Title,Location,Category,Notes,"Saved At"', strtok($saved->streamedContent(), "\n"));
     }
 
+    public function test_validated_badge_counts_only_completed_projects(): void
+    {
+        $this->poolStudent('Rina', 'Selesai');
+        $this->poolStudent('Budi', 'Berjalan', [], false);
+
+        $html = $this->page();
+        // hanya proyek selesai (divalidasi instansi) yang dihitung; proyek berjalan tanpa lencana
+        $this->assertSame(1, substr_count($html, 'class="sg-validated"'));
+        $this->assertStringContainsString('1 divalidasi instansi', $html);
+    }
+
     public function test_role_access_is_unchanged(): void
     {
         $this->get(route('company.talents.index'))->assertRedirect(route('login'));

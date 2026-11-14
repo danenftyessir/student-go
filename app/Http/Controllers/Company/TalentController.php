@@ -162,6 +162,8 @@ class TalentController extends Controller
                 'sdg_badges' => array_values($sdgBadges),
                 'skills' => is_array($student?->skills) ? array_values($student->skills) : [],
                 'projects_count' => $student?->projects?->count() ?? 0,
+                // proyek selesai = sudah divalidasi instansi (dasar lencana)
+                'validated_count' => ($student?->projects ?? collect())->where('status', 'completed')->count(),
             ];
         });
 
