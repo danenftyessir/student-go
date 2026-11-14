@@ -81,7 +81,7 @@
         @if (count($sdgs))
             <ul class="sg-browse-row__sdgs" aria-label="Tujuan SDG">
                 @foreach ($sdgs as $sdg)
-                    <li><span class="sg-chip sg-sdg" data-sdg="{{ $sdg }}"><span class="sg-chip__swatch" aria-hidden="true"></span>SDG {{ $sdg }} · {{ \App\Http\Controllers\HomeController::sdgName($sdg) }}</span></li>
+                    <li><span class="sg-chip sg-sdg" data-sdg="{{ $sdg }}">SDG {{ $sdg }} · {{ \App\Http\Controllers\HomeController::sdgName($sdg) }}</span></li>
                 @endforeach
             </ul>
         @else

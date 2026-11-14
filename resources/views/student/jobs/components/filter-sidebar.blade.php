@@ -49,7 +49,6 @@
                     @foreach ($sdgOptions as $value => $label)
                         <label class="sg-check sg-sdg py-1.5" data-sdg="{{ $value }}" for="filter-sdg-{{ $value }}">
                             <input type="checkbox" name="sdg[]" id="filter-sdg-{{ $value }}" value="{{ $value }}" @checked(in_array($value, $selectedSdgs, true))>
-                            <span class="sg-chip__swatch mt-1.5" aria-hidden="true"></span>
                             <span>{{ $value }}. {{ $label }}</span>
                         </label>
                     @endforeach

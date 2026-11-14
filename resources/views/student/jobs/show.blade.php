@@ -82,7 +82,7 @@
                     <h2 id="tujuan-sdg" class="mt-0 mb-3 text-lg font-semibold text-gray-900">Tujuan SDG</h2>
                     <ul class="m-0 flex list-none flex-wrap gap-2 p-0">
                         @foreach ($sdgs as $sdg)
-                            <li><span class="sg-chip sg-sdg" data-sdg="{{ $sdg }}"><span class="sg-chip__swatch" aria-hidden="true"></span>SDG {{ $sdg }} · {{ \App\Http\Controllers\HomeController::sdgName($sdg) }}</span></li>
+                            <li><span class="sg-chip sg-sdg" data-sdg="{{ $sdg }}">SDG {{ $sdg }} · {{ \App\Http\Controllers\HomeController::sdgName($sdg) }}</span></li>
                         @endforeach
                     </ul>
                 </section>
