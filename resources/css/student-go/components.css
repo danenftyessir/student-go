@@ -667,17 +667,13 @@ body:has(dialog.sg-dialog[open]) { overflow: hidden; }
 /* ── 7. Role choice: different value per role; student first and wider ── */
 .sg-home-close { background: var(--sg-surface-sunken); }
 .sg-home-roles { display: grid; gap: 2.5rem; margin-top: 2rem; }
-@media (min-width: 1024px) { .sg-home-roles { grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr) minmax(0, 1fr); gap: 0 3rem; align-items: start; } }
-/* a stepped rhythm: each column starts a little lower; one button style for all */
+@media (min-width: 1024px) { .sg-home-roles { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0 3rem; } }   /* tiga peran setara: lebar sama, garis atas sejajar */
 .sg-home-role-col { display: flex; flex-direction: column; gap: .75rem; padding-top: 1.25rem; border-top: 1px solid var(--sg-border-strong); }
-@media (min-width: 1024px) { .sg-home-role-col:nth-child(2) { margin-top: 2.5rem; } .sg-home-role-col:nth-child(3) { margin-top: 5rem; } }
-.sg-home-role-col:first-child { border-top: 2px solid var(--sg-text-primary); }
-.sg-home-role-col:first-child .sg-home-h3 { font-size: 1.5rem; line-height: 2rem; }
 .sg-home-role-col .sg-home-kicker { margin: 0; }
-.sg-home-role-col ul { margin: 0; padding: 0; list-style: none; font-size: 1rem; line-height: 1.5rem; color: var(--sg-text-secondary); }
+.sg-home-role-col ul { margin: 0 0 .5rem; padding: 0; list-style: none; font-size: 1rem; line-height: 1.5rem; color: var(--sg-text-secondary); }
 .sg-home-role-col li { padding-block: .5rem; border-top: 1px solid var(--sg-border-default); }
 .sg-home-role-col li:last-child { border-bottom: 1px solid var(--sg-border-default); }
-.sg-home-role-col .sg-btn { align-self: flex-start; margin-top: .5rem; }
+.sg-home-role-col .sg-btn { align-self: flex-start; margin-top: auto; }   /* tombol sejajar di dasar kolom */
 
 /* ── Small screens: shorter page without dropping a section (the full list is one link away) ── */
 @media (max-width: 639px) {
