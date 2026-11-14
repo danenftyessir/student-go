@@ -81,6 +81,9 @@ return [
 
     'locale' => env('APP_LOCALE', 'en'),
 
+    // angka di beranda berasal dari data uji coba: tampilkan keterangan kecil "data demo" (APP_DEMO_DATA=false bila data sudah nyata)
+    'demo_data' => (bool) env('APP_DEMO_DATA', true),
+
     'fallback_locale' => env('APP_FALLBACK_LOCALE', 'en'),
 
     'faker_locale' => env('APP_FAKER_LOCALE', 'en_US'),

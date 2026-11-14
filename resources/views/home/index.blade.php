@@ -45,6 +45,7 @@
                 <div class="sg-home-facts">
                     <p class="sg-home-facts__label">Saat ini di Student Go</p>
                     <x-ui.summary :items="$home['summary']" label="Data Student Go saat ini" />
+                    @if (config('app.demo_data'))<p class="sg-demo-note">Data uji coba (demo), bukan data pengguna sebenarnya.</p>@endif
                 </div>
             @endif
         </div>
@@ -324,6 +325,7 @@
             @endforeach
         </dl>
         <p class="sg-home-note">Dihitung langsung dari data proyek di Student Go saat halaman dibuka.</p>
+        @if (config('app.demo_data'))<p class="sg-demo-note">Data uji coba (demo), bukan data pengguna sebenarnya.</p>@endif
     </div>
 </section>
 @endif

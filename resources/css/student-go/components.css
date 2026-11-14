@@ -543,6 +543,7 @@ body:has(dialog.sg-dialog[open]) { overflow: hidden; }
 .sg-home-facts { padding-top: 1rem; border-top: 1px solid var(--sg-border-default); }
 .sg-home-facts__label { margin: 0 0 .25rem; font-size: .875rem; line-height: 1.25rem; color: var(--sg-text-secondary); }
 .sg-home-facts .sg-summary { font-size: 1rem; line-height: 1.5rem; }
+.sg-demo-note { margin: .375rem 0 0; font-size: .75rem; line-height: 1rem; color: var(--sg-text-tertiary); }   /* keterangan data demo: kecil tapi terbaca */
 
 .sg-home-needs { padding-top: 1.25rem; border-top: 2px solid var(--sg-text-primary); }
 .sg-home-needs__title { margin: 0; font-size: 1rem; line-height: 1.5rem; font-weight: 600; color: var(--sg-text-primary); }
