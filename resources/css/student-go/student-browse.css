@@ -69,6 +69,8 @@
 @media (max-width: 1023px) {
   .sg-browse-filters { display: none; position: fixed; z-index: 80; top: 0; right: 0; bottom: 0; width: min(22rem, 100%); flex-direction: column; border: 0; border-radius: 0; box-shadow: var(--shadow-overlay); }
   .sg-browse-filters[data-open] { display: flex; }
+  .sg-browse-filters[data-open] { animation: sg-slide-in-end 200ms var(--ease-standard); }
+  .sg-browse-filters__backdrop[data-open] { animation: sg-fade-in var(--duration-state) var(--ease-standard); }
   .sg-browse-filters__backdrop[data-open] { display: block; position: fixed; inset: 0; z-index: 79; background: color-mix(in srgb, var(--color-gray-900) 45%, transparent); }
   .sg-browse-filters__close { display: inline-flex; }
   .sg-browse-filters__reset { display: none; }

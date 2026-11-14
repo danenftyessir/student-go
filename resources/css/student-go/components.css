@@ -727,3 +727,25 @@ body:has(dialog.sg-dialog[open]) { overflow: hidden; }
 .sg-password__rules > li[data-met] { color: var(--color-success-700); }
 .sg-password__rules > li[data-met] .sg-password__met { display: inline-block; }
 .sg-password__rules > li[data-met] .sg-password__unmet { display: none; }
+
+/* ── Gerak halus (audit ui/ux, 2026-11-14): hanya saat sesuatu muncul atau ditekan, 150–200 ms.
+   aturan prefers-reduced-motion global (legacy-overrides.css) mematikan semuanya. ── */
+@keyframes sg-pop-in { from { opacity: 0; transform: translateY(-4px); } }
+@keyframes sg-fade-in { from { opacity: 0; } }
+@keyframes sg-slide-in-end { from { opacity: 0; transform: translateX(1rem); } }
+@keyframes sg-pulse { 50% { opacity: .5; } }
+/* menu akun, panel notifikasi, menu mobile */
+.sg-menu, .sg-mobile-nav { animation: sg-pop-in var(--duration-state) var(--ease-standard); }
+.sg-mobile-nav__backdrop, .sg-filter-bar__backdrop[data-open] { animation: sg-fade-in var(--duration-state) var(--ease-standard); }
+/* dialog dan latarnya; drawer masuk dari kanan */
+.sg-dialog[open] { animation: sg-pop-in 200ms var(--ease-standard); }
+.sg-dialog[open]::backdrop { animation: sg-fade-in 200ms var(--ease-standard); }
+.sg-dialog.sg-drawer[open], .sg-filter-bar__panel[data-open] { animation-name: sg-slide-in-end; animation-duration: 200ms; animation-timing-function: var(--ease-standard); }
+/* toast masuk dari kanan (keluarnya sudah memudar lewat [data-leaving]) */
+.sg-toast { animation: sg-slide-in-end 200ms var(--ease-standard); }
+/* isi <details> (filter sdg, faq) muncul halus saat dibuka */
+details[open] > :not(summary) { animation: sg-pop-in var(--duration-state) var(--ease-standard); }
+/* kerangka pemuatan berdenyut pelan agar terbaca sebagai "sedang memuat" */
+.sg-skeleton { animation: sg-pulse 1.6s ease-in-out infinite; }
+/* tombol sedikit turun saat ditekan */
+.sg-btn:not(:disabled):not([aria-disabled="true"]):active { transform: translateY(1px); }
