@@ -136,6 +136,14 @@
                                             </p>
                                         @endif
 
+                                        {{-- bukti validasi (masukan juri 2026-11-14): proyek di daftar ini selesai; siapa pun bisa mengecek kodenya di /verifikasi --}}
+                                        <p class="mt-3 mb-0 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-gray-800">
+                                            <span class="inline-flex items-center gap-1.5 font-semibold text-success-700"><x-icon name="badge-check" size="sm" class="flex-none text-success-600" />Selesai dan divalidasi{{ $problem?->institution ? ' oleh '.$problem->institution->name : '' }}</span>
+                                            <a href="{{ route('project.verify', \App\Support\ProjectVerification::code($project)) }}" class="inline-flex items-center gap-1 text-brand-700 underline">
+                                                <x-icon name="external-link" size="sm" />Cek keaslian<span class="sr-only"> {{ $title }}</span>
+                                            </a>
+                                        </p>
+
                                         {{-- bukti dari instansi: ulasan dan sertifikat (hanya bila benar-benar ada) --}}
                                         @if ($review || $project->certificate_path)
                                             <div class="mt-3 space-y-2">

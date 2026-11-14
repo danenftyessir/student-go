@@ -60,6 +60,10 @@ Route::get('/contact', [ContactController::class, 'index'])->name('contact');
 // public student profile/portfolio (dapat diakses tanpa login)
 Route::get('/profile/{username}', [StudentProfileController::class, 'publicView'])->name('profile.public');
 
+// verifikasi publik proyek KKN yang selesai dan divalidasi instansi (masukan juri, 2026-11-14)
+Route::get('/verifikasi/{kode}', [\App\Http\Controllers\ProjectVerificationController::class, 'show'])
+    ->middleware('throttle:60,1')->name('project.verify');
+
 // redirect portfolio ke profile untuk backward compatibility
 Route::get('/portfolio/{username}', function($username) {
     return redirect()->route('profile.public', $username);
